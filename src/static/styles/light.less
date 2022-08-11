@@ -1,0 +1,120 @@
+/**
+ * Available vars: https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+ */
+
+@import '~antd/dist/antd.less';
+@import './common/vars.less';
+@import './common/polyfill.less';
+@import './common/typography.less';
+@import './common/scrollbar.less';
+
+// Colors
+@primary-color: @PRIMARY;
+@info-color: @INFO;
+@success-color: @SUCCESS;
+@warning-color: @WARNING;
+@error-color: @ERROR;
+@popover-background: @NEUTRAL100;
+@body-background: @NEUTRAL05;
+@component-background: @NEUTRAL05;
+@disabled-bg: @NEUTRAL10;
+
+// Typography
+@font-family: 'Nunito', sans-serif;
+@text-color: #f3f3f3;
+@text-color-secondary: #a1a1a1;
+@heading-color: #f3f3f3;
+@disabled-color: @NEUTRAL40;
+@typography-title-margin-top: 0px;
+@typography-title-margin-bottom: 0px;
+
+// Border
+@btn-primary-color: #141413;
+@btn-default-color: @PRIMARY;
+@border-radius-base: 8px;
+@border-color-base: @NEUTRAL20;
+@border-width-base: 1px;
+@popover-customize-border-color: @border-color-base;
+@border-color-split: @border-color-base;
+
+//CollapsePanel
+@collapse-panel-border-radius: @border-radius-base * 2;
+
+//Collapse
+@collapse-header-padding: 12px 0px;
+@collapse-content-padding: 0px;
+
+// Card
+@card-radius: @border-radius-base + 4;
+@card-actions-background: @NEUTRAL05;
+@card-background: #232423;
+@card-shadow: @LIGHT_SHADOW2;
+
+// Modal
+@modal-header-bg: @NEUTRAL05;
+@modal-content-bg: @NEUTRAL05;
+@modal-footer-bg: @NEUTRAL05;
+@modal-footer-padding-horizontal: 24px;
+
+// Drawer
+@drawer-bg: @NEUTRAL05;
+
+// Button
+@btn-font-weight: 700;
+@btn-shadow: unset;
+@btn-primary-shadow: unset;
+@btn-text-shadow: unset;
+@btn-default-border: @NEUTRAL20;
+@btn-default-ghost-color: @PRIMARY;
+@btn-default-ghost-border: #f3f3f3;
+@btn-disable-color: #727272;
+@btn-disable-bg: #232423;
+@btn-disable-border: #434342;
+
+// Input
+@input-placeholder-color: @NEUTRAL60;
+@input-bg: #080807;
+@input-height-lg: @height-lg + 2;
+@input-border-color: transparent;
+// Divider
+@divider-color: @NEUTRAL10;
+@divider-orientation-margin: 0;
+
+// Checkbox
+@checkbox-border-radius: @border-radius-base - 4;
+
+//Segment
+@segmented-hover-bg: transparent;
+@segmented-bg: transparent;
+@segmented-label-color: #7a7b85;
+@segmented-label-hover-color: #7a7b85;
+
+//Table
+@table-row-hover-bg: transparent;
+
+//Tag
+@tag-default-color: @NEUTRAL100;
+
+// Patch
+.@{ant-prefix}-layout {
+  background: unset;
+}
+
+.account-item {
+  background-color: #fff !important;
+}
+
+.close-account {
+  background: #ededeb;
+}
+
+.card-cleanup {
+  background: #ffffff !important;
+}
+
+.nft-element-collapse-custom-collapse {
+  .sen_assets-collapse-header {
+    background: white;
+    border-radius: 12px !important;
+  }
+}
