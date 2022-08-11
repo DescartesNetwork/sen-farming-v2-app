@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-import { useDebt } from 'hooks/useDebt'
+import { useDebt } from 'hooks/farmInfos/useDebt'
 // import calculateReward from 'helper/calculateReward'
 
 export const useReward = (farmAddress: string): number => {
