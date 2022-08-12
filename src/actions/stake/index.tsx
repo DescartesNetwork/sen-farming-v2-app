@@ -1,7 +1,13 @@
-import { Row } from 'antd'
+import React from 'react'
+
+import { Col, Row } from 'antd'
 
 const Stake = () => {
-  return <Row></Row>
+  return (
+    <Row>
+      <Col>Stake</Col>
+    </Row>
+  )
 }
 
 export default Stake
