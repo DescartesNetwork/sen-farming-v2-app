@@ -1,8 +1,8 @@
 import { Col, Row, Space, Typography, Tooltip } from 'antd'
 import { MintAvatar, MintSymbol } from '@sen-use/components'
 import IonIcon from '@sentre/antd-ionicon'
-import Harvest from 'actions/harvest'
 import SpaceBetween from 'components/spaceBetween'
+import HarvestButton from 'actions/harvest/harvestButton'
 
 import { MINTS } from './index'
 
@@ -28,7 +28,7 @@ const Explain = () => (
       </Space>
     </Col>
     <Col span={24}>
-      <Harvest farmAddress="farm address" />
+      <HarvestButton farmAddress="farm address" />
     </Col>
   </Row>
 )

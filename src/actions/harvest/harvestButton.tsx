@@ -6,12 +6,7 @@ const HarvestButton = ({ farmAddress }: HarvestButtonProps) => {
   const { loading, onHarvest } = useHarvest()
 
   return (
-    <Button
-      loading={loading}
-      onClick={() => onHarvest(farmAddress)}
-      block
-      type="primary"
-    >
+    <Button loading={loading} onClick={() => onHarvest()} block type="primary">
       Harvest
     </Button>
   )
