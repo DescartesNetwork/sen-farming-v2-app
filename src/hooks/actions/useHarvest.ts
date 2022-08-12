@@ -3,15 +3,13 @@ import { useCallback, useState } from 'react'
 import { useFarming } from 'hooks/useFarming'
 import { notifyError, notifySuccess } from 'helper'
 
-type HavestProps = { _: string }
-
-export const useHavest = () => {
+export const useHarvest = () => {
   // To-do: Get data from redux
   const { farming } = useFarming()
   console.log(farming)
   const [loading, setLoading] = useState(false)
 
-  const havest = useCallback(async ({ _ }: HavestProps) => {
+  const onHarvest = useCallback(async () => {
     try {
       setLoading(true)
       // To-do: Process input
@@ -28,5 +26,5 @@ export const useHavest = () => {
     }
   }, [])
 
-  return { havest, loading }
+  return { onHarvest, loading }
 }

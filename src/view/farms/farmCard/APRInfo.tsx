@@ -2,9 +2,9 @@ import moment from 'moment'
 
 import { Col, Row, Space, Typography, Tooltip, Divider } from 'antd'
 import SpaceBetween from 'components/spaceBetween'
-import { MintAvatar } from '@sen-use/components'
+import { MintAvatar, MintSymbol } from '@sen-use/components'
 
-import { MINTS } from './farmCard'
+import { MINTS } from './index'
 import { DATE_FORMAT } from 'constant'
 import IonIcon from '@sentre/antd-ionicon'
 
@@ -21,6 +21,7 @@ const Explain = () => (
             lefValue={
               <Space>
                 <MintAvatar mintAddress={mintAddress} />
+                <MintSymbol mintAddress={mintAddress} />
               </Space>
             }
             rightValue={

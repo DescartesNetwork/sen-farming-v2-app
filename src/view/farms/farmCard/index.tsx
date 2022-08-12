@@ -1,7 +1,8 @@
 import { Button, Card, Col, Row, Space, Tag, Typography } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
-import RewardInfo from './APRInfo'
 import { MintAvatar, MintSymbol } from '@sen-use/components'
+import RewardInfo from './rewardInfo'
+import APRInfo from './APRInfo'
 
 export const MINTS = [
   'zbLcPeHWQ7yQXT7fEYHeNBKGM3wdGhNYL9jryVpys5J',
@@ -14,7 +15,7 @@ type FarmCardProps = {
 
 const FarmCard = ({ farmAddress }: FarmCardProps) => {
   return (
-    <Card bodyStyle={{ padding: '20px 16px' }} bordered={false}>
+    <Card bodyStyle={{ padding: '20px 16px' }} hoverable bordered={false}>
       <Row gutter={[20, 20]}>
         <Col span={24}>
           <Row gutter={[8, 8]} align="middle">
@@ -59,7 +60,7 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
               <Space direction="vertical">
                 <Space>
                   <Typography.Text type="secondary">APR</Typography.Text>
-                  <RewardInfo />
+                  <APRInfo />
                 </Space>
                 <Typography.Title level={5}>5.05%</Typography.Title>
                 <Space size={4}>
@@ -77,7 +78,12 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
             </Col>
             <Col>
               <Space direction="vertical">
-                <Typography.Text type="secondary">Your reward</Typography.Text>
+                <Space>
+                  <Typography.Text type="secondary">
+                    Your reward
+                  </Typography.Text>
+                  <RewardInfo />
+                </Space>
                 <Typography.Title level={5} style={{ color: '#a0e86f' }}>
                   $2.9
                 </Typography.Title>
