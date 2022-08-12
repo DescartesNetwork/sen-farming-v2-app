@@ -1,12 +1,9 @@
 import { useCallback, useState } from 'react'
 
-import { useFarming } from 'hooks/useFarming'
 import { notifyError, notifySuccess } from 'helper'
 
 export const useHarvest = () => {
   // To-do: Get data from redux
-  const { farming } = useFarming()
-  console.log(farming)
   const [loading, setLoading] = useState(false)
 
   const onHarvest = useCallback(async () => {
@@ -18,7 +15,7 @@ export const useHarvest = () => {
       // To-do: Call transaction
       const txId = ''
 
-      notifySuccess('Havest', txId)
+      notifySuccess('Harvested', txId)
     } catch (error: any) {
       notifyError(error)
     } finally {

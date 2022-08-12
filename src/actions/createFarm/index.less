@@ -1,8 +1,53 @@
-.mint-selection {
-  padding: 8px 12px !important;
+.date-option {
   width: 100% !important;
-  text-align: left !important;
-  background: #ebeded !important;
-  height: 40px !important;
-  color: #7a7b85 !important;
+  border: none !important;
+  background-color: #0a0a0a !important ;
+  padding: 0px 12px !important;
+  input {
+    padding: 0px !important;
+    height: 38px !important;
+  }
+}
+
+.sen_farming_v2-picker-panel-container {
+  background: #0a0a0a !important;
+  .sen_farming_v2-picker-cell-inner:hover {
+    background: #a0e86f !important;
+  }
+  .sen_farming_v2-picker-time-panel-cell-inner {
+    &:hover {
+      background: #a0e86f !important;
+    }
+  }
+  .sen_farming_v2-picker-time-panel-column
+    > li.sen_farming_v2-picker-time-panel-cell-selected
+    .sen_farming_v2-picker-time-panel-cell-inner {
+    background: #a0e86f !important;
+  }
+}
+.btn-nft {
+  background: #0a0a0a !important;
+  color: #a1a1a1 !important;
+}
+
+.sen_farming_v2-input-number {
+  width: 100% !important;
+  border: none !important;
+  &-input {
+    height: 40px !important;
+  }
+  .sen_farming_v2-input-number-handler-wrap {
+    display: none !important;
+  }
+}
+
+.boost-nft {
+  position: relative;
+  &::before {
+    content: '%';
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    z-index: 1;
+  }
 }

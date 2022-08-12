@@ -18,28 +18,26 @@ const Explain = () => (
         {MINTS.map((mintAddress) => (
           <SpaceBetween
             key={mintAddress}
-            lefValue={
+            title={
               <Space>
                 <MintAvatar mintAddress={mintAddress} />
                 <MintSymbol mintAddress={mintAddress} />
               </Space>
             }
-            rightValue={
-              <Typography.Title level={5}>1000/Week</Typography.Title>
-            }
-          />
+          >
+            <Typography.Title level={5}>1000/Week</Typography.Title>
+          </SpaceBetween>
         ))}
       </Space>
     </Col>
     <Col span={24}>
       <SpaceBetween
-        lefValue={<Typography.Text className="caption">End at</Typography.Text>}
-        rightValue={
-          <Typography.Title level={5}>
-            {moment(Date.now()).format(DATE_FORMAT)}
-          </Typography.Title>
-        }
-      />
+        title={<Typography.Text className="caption">End at</Typography.Text>}
+      >
+        <Typography.Title level={5}>
+          {moment(Date.now()).format(DATE_FORMAT)}
+        </Typography.Title>
+      </SpaceBetween>
     </Col>
     <Col span={24}>
       <Divider style={{ margin: 4 }} />

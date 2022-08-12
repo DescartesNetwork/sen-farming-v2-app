@@ -4,6 +4,7 @@ import { useUI } from '@sentre/senhub'
 
 import Farms from './farms'
 import CreateFarm from 'actions/createFarm'
+import FarmDetails from './farms/farmDetails'
 
 import { useAppRouter } from 'hooks/useAppRouter'
 
@@ -18,8 +19,9 @@ const View = () => {
 
   return (
     <Switch>
-      <Route path={`${appRoute}/farms`} component={Farms} />
-      <Route path={`${appRoute}/create-farm`} component={CreateFarm} />
+      <Route exact path={`${appRoute}/farms`} component={Farms} />
+      <Route exact path={`${appRoute}/create-farm`} component={CreateFarm} />
+      <Route path={`${appRoute}/:farmAddress`} component={FarmDetails} />
       <Route path="*">
         <Redirect to={`${appRoute}/farms`} />
       </Route>

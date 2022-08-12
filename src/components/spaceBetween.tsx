@@ -2,12 +2,12 @@ import { ReactNode } from 'react'
 
 import { Col, Row } from 'antd'
 
-type SpaceBetweenProps = { lefValue: ReactNode; rightValue: ReactNode }
+type SpaceBetweenProps = { title: ReactNode; children?: ReactNode }
 
-const SpaceBetween = ({ lefValue, rightValue }: SpaceBetweenProps) => (
-  <Row>
-    <Col flex="auto">{lefValue}</Col>
-    <Col>{rightValue}</Col>
+const SpaceBetween = ({ title, children }: SpaceBetweenProps) => (
+  <Row align="middle">
+    <Col flex="auto">{title}</Col>
+    <Col>{children}</Col>
   </Row>
 )
 
