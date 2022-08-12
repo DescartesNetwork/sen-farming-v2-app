@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { Address } from '@project-serum/anchor'
 
 import { useFarming } from 'hooks/useFarming'
 import { notifyError, notifySuccess } from 'helper'
@@ -8,7 +9,7 @@ export const useHarvest = (farmAddress: string) => {
   const { farming } = useFarming()
   const [loading, setLoading] = useState(false)
 
-  const onHarvest = useCallback(async () => {
+  const harvest = useCallback(async (address: Address) => {
     try {
       console.log(farming, farmAddress)
       setLoading(true)
@@ -27,5 +28,5 @@ export const useHarvest = (farmAddress: string) => {
     }
   }, [farmAddress, farming])
 
-  return { onHarvest, loading }
+  return { harvest, loading }
 }
