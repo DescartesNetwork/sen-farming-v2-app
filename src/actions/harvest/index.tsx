@@ -9,14 +9,14 @@ type HarvestProps = {
   farmAddress: Address
 }
 const Harvest = ({ farmAddress }: HarvestProps) => {
-  const { harvest } = useHarvest()
+  const { onHarvest } = useHarvest()
   return (
     <Row gutter={[16, 16]}>
       <Col>
         <Element farmAddress={farmAddress} />
       </Col>
       <Col>
-        <Button onClick={() => harvest(farmAddress)} type="primary">
+        <Button onClick={onHarvest} type="primary">
           Harvest
         </Button>
       </Col>

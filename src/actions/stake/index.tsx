@@ -1,4 +1,4 @@
-import React from 'react'
+import { Row } from 'antd'
 
 const Stake = () => {
   return <Row></Row>

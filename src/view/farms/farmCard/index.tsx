@@ -62,7 +62,9 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
                   <Typography.Text type="secondary">APR</Typography.Text>
                   <APRInfo />
                 </Space>
-                <Typography.Title level={5}>5.05%</Typography.Title>
+                <Typography.Title level={5} style={{ color: '#a0e86f' }}>
+                  5.05%
+                </Typography.Title>
                 <Space size={4}>
                   {MINTS.map((mintAddress) => (
                     <MintAvatar key={mintAddress} mintAddress={mintAddress} />
@@ -84,9 +86,7 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
                   </Typography.Text>
                   <RewardInfo />
                 </Space>
-                <Typography.Title level={5} style={{ color: '#a0e86f' }}>
-                  $2.9
-                </Typography.Title>
+                <Typography.Title level={5}>$2.9</Typography.Title>
               </Space>
             </Col>
           </Row>
