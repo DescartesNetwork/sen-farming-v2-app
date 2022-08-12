@@ -1,12 +1,31 @@
+import { useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
-import { Row, Col, Typography, Button, Space, Card } from 'antd'
+import { Row, Col, Typography, Button, Space, Card, Modal } from 'antd'
 import CardNumbericInput from '../cardNumbericInput'
 import ExtraTypography from '../extraTypography'
+
+import {
+  AvatarNFT,
+  SearchNFT as ModalContentListNFTs,
+} from '@sen-use/components'
 
 import './index.less'
 
 const Stake = () => {
+  const [visible, setVisible] = useState(false)
+  const [selectedNFTs, setNftsSelected] = useState<string[]>([])
+
+  const onSelect = (nftAddress: string) => {
+    setVisible(false)
+    if (!selectedNFTs.includes(nftAddress))
+      setNftsSelected([...selectedNFTs, nftAddress])
+  }
+
+  const onDelete = (nftAddress: string) => {
+    setNftsSelected(selectedNFTs.filter((nft) => nft !== nftAddress))
+  }
+
   return (
     <Row gutter={[16, 16]} style={{ height: '100%' }}>
       <Col span={24}>
@@ -27,21 +46,45 @@ const Stake = () => {
         </Space>
       </Col>
       <Col span={24}>
-        <Card
-          className="upload-box card-nft-image-only"
-          bodyStyle={{ padding: 0 }}
-        >
-          <Button
-            type="text"
-            className="icon-add-nft"
-            icon={<IonIcon name="add-outline" style={{ color: '#a0e86f' }} />}
-          />
-          <Button
-            type="text"
-            className="icon-delete-nft"
-            icon={<IonIcon name="trash-outline" />}
-          />
-        </Card>
+        <Row gutter={[16, 16]}>
+          {selectedNFTs.map((nftAddress) => (
+            <Col key={nftAddress}>
+              <Card
+                className="upload-box card-nft-image-only"
+                bodyStyle={{ padding: 0 }}
+              >
+                <div className="nft-image">
+                  <AvatarNFT
+                    mintAddress={nftAddress}
+                    size={64}
+                    style={{ borderRadius: 8, marginTop: -1 }}
+                  />
+                </div>
+                <Button
+                  type="text"
+                  className="icon-delete-nft"
+                  icon={<IonIcon name="trash-outline" />}
+                  onClick={() => onDelete(nftAddress)}
+                />
+              </Card>
+            </Col>
+          ))}
+          <Col>
+            <Card
+              className="upload-box card-nft-image-only"
+              bodyStyle={{ padding: 0 }}
+              onClick={() => setVisible(true)}
+            >
+              <Button
+                type="text"
+                className="icon-add-nft"
+                icon={
+                  <IonIcon name="add-outline" style={{ color: '#a0e86f' }} />
+                }
+              />
+            </Card>
+          </Col>
+        </Row>
       </Col>
       <Col span={24}>
         <Card
@@ -66,6 +109,27 @@ const Stake = () => {
           Get BTC - SNTR LP
         </Button>
       </Col>
+      <Modal
+        visible={visible}
+        closeIcon={<IonIcon name="close-outline" />}
+        onCancel={() => setVisible(false)}
+        footer={null}
+        className="modal-nft-selection"
+        style={{ paddingBottom: 0 }}
+      >
+        <Row gutter={[24, 24]} style={{ maxHeight: 400 }}>
+          <Col span={24}>
+            <Typography.Title level={4}>Select a NFT</Typography.Title>
+          </Col>
+          <Col span={24}>
+            <ModalContentListNFTs
+              onSelect={onSelect}
+              selectedNFTs={selectedNFTs}
+              // collectionAddress={acceptedCollections}
+            />
+          </Col>
+        </Row>
+      </Modal>
     </Row>
   )
 }

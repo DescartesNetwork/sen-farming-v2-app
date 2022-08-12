@@ -15,7 +15,7 @@ const NumericInput = () => {
         />
       </Col>
       <Col>
-        <Button type="text" style={{ marginRight: -15 }}>
+        <Button type="text" style={{ marginRight: -15, color: '#C6F1A9' }}>
           MAX
         </Button>
       </Col>

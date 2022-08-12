@@ -11,16 +11,12 @@ const CardNumbericInput = () => {
       <Space style={{ width: '100%' }} direction="vertical">
         <Row wrap={false}>
           <Col flex="auto">
-            <Typography.Text style={{ color: '#C6F1A9' }}>
-              Amount
-            </Typography.Text>
+            <Typography.Text>Amount</Typography.Text>
           </Col>
           <Col>
             <Space size={6}>
-              <Typography.Text style={{ color: '#C6F1A9' }}>
-                Available:
-              </Typography.Text>
-              <Typography.Text style={{ color: '#C6F1A9' }}>
+              <Typography.Text>Available:</Typography.Text>
+              <Typography.Text>
                 {/* {util.numeric(available).format('0,0.[00]')} */}
                 588.05 LPT
               </Typography.Text>

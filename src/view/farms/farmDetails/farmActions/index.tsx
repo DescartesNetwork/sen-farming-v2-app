@@ -12,11 +12,7 @@ const FarmActions = () => {
   const [farmAction, setFarmAction] = useState(FARM_ACTIONS.Stake)
 
   return (
-    <Card
-      bordered={false}
-      style={{ height: '100%' }}
-      //   bodyStyle={{ height: '100%' }}
-    >
+    <Card bordered={false} style={{ height: '100%' }}>
       <Row gutter={[16, 16]} style={{ height: '100%' }}>
         <Col span={24}>
           <Segmented
