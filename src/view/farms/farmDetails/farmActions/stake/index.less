@@ -1,0 +1,36 @@
+.card-nft-image-only {
+  border-radius: 8px !important;
+  cursor: pointer;
+  height: 64px;
+  width: 64px;
+
+  .icon-add-nft {
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px !important;
+  }
+
+  .icon-delete-nft {
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    font-size: 20px !important;
+  }
+
+  &:hover {
+    .icon-delete-nft {
+      opacity: 1 !important;
+    }
+    .nft-image {
+      opacity: 0.2;
+    }
+  }
+
+  .nft-image {
+    transition: 0.5s ease;
+  }
+}
