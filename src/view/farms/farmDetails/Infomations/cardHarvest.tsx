@@ -1,6 +1,6 @@
 import { Card, Col, Row } from 'antd'
-import Harvest from 'actions/harvest'
 import HarvestInfos from 'actions/harvest/harvestInfos'
+import HarvestButton from 'actions/harvest/harvestButton'
 
 const CardHarvest = () => {
   return (
@@ -15,7 +15,7 @@ const CardHarvest = () => {
           <HarvestInfos />
         </Col>
         <Col span={24}>
-          <Harvest farmAddress="7EgNqh13vcDSP8q3qYDHa6thA1fk7PkCDvJviJieq9dR" />
+          <HarvestButton farmAddress="7EgNqh13vcDSP8q3qYDHa6thA1fk7PkCDvJviJieq9dR" />
         </Col>
       </Row>
     </Card>

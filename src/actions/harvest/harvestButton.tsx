@@ -1,8 +1,8 @@
 import { Button } from 'antd'
 import { useHarvest } from 'hooks/actions/useHarvest'
 
-type HarvestProps = { farmAddress: string }
-const Harvest = ({ farmAddress }: HarvestProps) => {
+type HarvestButtonProps = { farmAddress: string }
+const HarvestButton = ({ farmAddress }: HarvestButtonProps) => {
   const { loading, onHarvest } = useHarvest()
 
   return (
@@ -17,4 +17,4 @@ const Harvest = ({ farmAddress }: HarvestProps) => {
   )
 }
 
-export default Harvest
+export default HarvestButton
