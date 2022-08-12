@@ -5,6 +5,7 @@ import View from 'view'
 
 import model from 'model'
 import configs from 'configs'
+import { AppLoader } from 'appLoader'
 
 import './static/styles/dark.less'
 import './static/styles/light.less'
@@ -21,7 +22,9 @@ export const Page = () => {
       style={{ paddingBottom: 24 }}
     >
       <Provider store={model}>
-        <View />
+        <AppLoader>
+          <View />
+        </AppLoader>
       </Provider>
     </UIProvider>
   )

@@ -5,6 +5,7 @@ import { Net } from '@sentre/senhub'
  */
 type Conf = {
   node: string
+  senFarmingProgram: string
 }
 
 const conf: Record<Net, Conf> = {
@@ -13,6 +14,7 @@ const conf: Record<Net, Conf> = {
    */
   devnet: {
     node: 'https://api.devnet.solana.com',
+    senFarmingProgram: '',
   },
 
   /**
@@ -20,6 +22,7 @@ const conf: Record<Net, Conf> = {
    */
   testnet: {
     node: 'https://api.testnet.solana.com',
+    senFarmingProgram: '',
   },
 
   /**
@@ -27,6 +30,7 @@ const conf: Record<Net, Conf> = {
    */
   mainnet: {
     node: 'https://api.mainnet-beta.solana.com',
+    senFarmingProgram: '',
   },
 }
 

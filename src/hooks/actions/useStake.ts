@@ -1,25 +1,25 @@
 import { useCallback, useState } from 'react'
-
-import { useFarming } from 'hooks/useFarming'
+import BN from 'bn.js'
 import { notifyError, notifySuccess } from 'helper'
 
-type StakeProps = { _: string }
+type StakeProps = {
+  farm: string
+  inAmount: BN
+  nfts: string[]
+}
 
 export const useStake = () => {
   // To-do: Get data from redux
-  const { farming } = useFarming()
-  console.log(farming)
   const [loading, setLoading] = useState(false)
 
-  const stake = useCallback(async ({ _ }: StakeProps) => {
+  const stake = useCallback(async ({ farm, inAmount, nfts }: StakeProps) => {
     try {
       setLoading(true)
-      // To-do: Process input
-      // ...
-
-      // To-do: Call transaction
-      const txId = ''
-
+      const { txId } = await window.senFarming.fullyStake({
+        farm,
+        inAmount,
+        nfts,
+      })
       notifySuccess('Stake', txId)
     } catch (error: any) {
       notifyError(error)

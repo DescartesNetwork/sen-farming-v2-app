@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { account, FarmData } from '@senswap/sen-js'
+import { util } from '@sentre/senhub'
+import { FarmData } from '@sentre/farming'
 
 export type FarmState = Record<string, FarmData>
 
@@ -22,7 +23,7 @@ export const upsetFarm = createAsyncThunk<
   { address: string; data: FarmData },
   { state: any }
 >(`${NAME}/upsetFarm`, async ({ address, data }) => {
-  if (!account.isAddress(address)) throw new Error('Invalid farm address')
+  if (!util.isAddress(address)) throw new Error('Invalid farm address')
   if (!data) throw new Error('Data is empty')
   return { [address]: data }
 })
