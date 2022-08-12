@@ -3,10 +3,10 @@ import { useHarvest } from 'hooks/actions/useHarvest'
 
 type HarvestButtonProps = { farmAddress: string }
 const HarvestButton = ({ farmAddress }: HarvestButtonProps) => {
-  const { loading, onHarvest } = useHarvest()
+  const { loading, harvest } = useHarvest()
 
   return (
-    <Button loading={loading} onClick={() => onHarvest()} block type="primary">
+    <Button loading={loading} onClick={() => harvest('')} block type="primary">
       Harvest
     </Button>
   )

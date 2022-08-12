@@ -6,7 +6,7 @@ export const useHarvest = () => {
   // To-do: Get data from redux
   const [loading, setLoading] = useState(false)
 
-  const onHarvest = useCallback(async () => {
+  const harvest = useCallback(async (mintAddress: string) => {
     try {
       setLoading(true)
       // To-do: Process input
@@ -23,5 +23,5 @@ export const useHarvest = () => {
     }
   }, [])
 
-  return { onHarvest, loading }
+  return { harvest, loading }
 }
