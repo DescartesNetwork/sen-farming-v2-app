@@ -2090,6 +2090,13 @@
     util "^0.12.4"
     webpack-bundle-analyzer "^4.5.0"
 
+"@sentre/farming@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@sentre/farming/-/farming-1.0.1.tgz#3dfeb7c4ab0a7bc5bb98bd0039126760a34120ee"
+  integrity sha512-dlcEaOH7+iZ5AFZIf56FYArjOWYs9pgYqWMi5CYJQAldixjmHygxr7dsiG1V94F5N7YEdGgZw8LbmOhIVwzxNA==
+  dependencies:
+    "@project-serum/anchor" "^0.24.2"
+
 "@sentre/react-dynamic-remote-component@^0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@sentre/react-dynamic-remote-component/-/react-dynamic-remote-component-0.0.6.tgz#9b5f0ef953091f5afeb48ae9075c0359416aa143"
@@ -2102,10 +2109,10 @@
   resolved "https://registry.yarnpkg.com/@sentre/react-lazyload/-/react-lazyload-3.2.2.tgz#f3d921327a2b14b9b3a9e906d01034f11387097a"
   integrity sha512-NKJhz9G8pModoZJaLMziRJtd582pFHbIydNXwRI72ECkjqbc7XIgBX+8kssrUtRxK2rW9VVQnGKDpmyZ8iSIyw==
 
-"@sentre/senhub@^3.2.5":
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/@sentre/senhub/-/senhub-3.2.5.tgz#24b4916e0bf7f83a5b73762f52c8bc0626e96010"
-  integrity sha512-BbQUc7IAlZYylTNOW0pqA4OAknaRqg9ZenpY81t8wBgUKzJrmcu3+hiKIfclytQs7RleVaWrbd7T0YiSMCSgPA==
+"@sentre/senhub@^3.2.8":
+  version "3.2.8"
+  resolved "https://registry.yarnpkg.com/@sentre/senhub/-/senhub-3.2.8.tgz#1866aa10ef955dae0b743decef085dc72231dafa"
+  integrity sha512-cJ1YXpn7NyxC6bmm9RzekohtLhxT0cHPuwaPceMoyYqoWlQcV57L7V2MBrTLQiqvvVZDn7Ut78g0jTtW1A9SjQ==
   dependencies:
     "@dnd-kit/core" "^4.0.1"
     "@dnd-kit/sortable" "^5.0.0"
