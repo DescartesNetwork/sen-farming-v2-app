@@ -6,7 +6,7 @@ import { Space, SpaceProps, Typography } from 'antd'
 
 type SpaceVerticalProps = {
   label: string
-  value?: ReactNode
+  children?: ReactNode
   mintAddress?: string
   size?: number
   align?: SpaceProps['align']
@@ -14,7 +14,7 @@ type SpaceVerticalProps = {
 
 const SpaceVertical = ({
   label,
-  value,
+  children,
   mintAddress = '',
   size = 8,
   align = 'start',
@@ -26,7 +26,7 @@ const SpaceVertical = ({
       <Typography.Text className="caption" type="secondary">
         {label}
       </Typography.Text>
-      {value}
+      {children}
     </Space>
   )
 }

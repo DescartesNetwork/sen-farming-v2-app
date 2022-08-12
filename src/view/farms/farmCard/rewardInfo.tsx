@@ -13,23 +13,22 @@ const Explain = () => (
         {MINTS.map((mintAddress) => (
           <SpaceBetween
             key={mintAddress}
-            lefValue={
+            title={
               <Space>
                 <MintAvatar mintAddress={mintAddress} />
                 <MintSymbol mintAddress={mintAddress} />
               </Space>
             }
-            rightValue={
-              <Typography.Title level={5}>
-                195 <span style={{ color: '#A1A1A1' }}>($1.9)</span>
-              </Typography.Title>
-            }
-          />
+          >
+            <Typography.Title level={5}>
+              195 <span style={{ color: '#A1A1A1' }}>($1.9)</span>
+            </Typography.Title>
+          </SpaceBetween>
         ))}
       </Space>
     </Col>
     <Col span={24}>
-      <Harvest />
+      <Harvest farmAddress="farm address" />
     </Col>
   </Row>
 )
