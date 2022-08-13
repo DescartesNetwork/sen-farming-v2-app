@@ -2,22 +2,22 @@ import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { web3 } from '@project-serum/anchor'
 
-import { initDebt, upsetDebt } from 'model/debts.controller'
+import { initReward, upsetReward } from 'model/reward.controller'
 import Watcher from './watcher'
 
 // TODO: Config
-const NAME = 'debt'
+const NAME = 'boosting'
 const FILTER: web3.GetProgramAccountsFilter[] = []
 
-const VouchersWatcher = () => {
+const RewardsWatcher = () => {
   const dispatch = useDispatch()
 
   // TODO: init all account data
-  const init = useCallback((data) => dispatch(initDebt(data)), [dispatch])
+  const init = useCallback((data) => dispatch(initReward(data)), [dispatch])
   // TODO: upset account data
   const upset = useCallback(
     (key: string, value: any) =>
-      dispatch(upsetDebt({ address: key, data: value })),
+      dispatch(upsetReward({ address: key, data: value })),
     [dispatch],
   )
 
@@ -31,4 +31,4 @@ const VouchersWatcher = () => {
     />
   )
 }
-export default VouchersWatcher
+export default RewardsWatcher
