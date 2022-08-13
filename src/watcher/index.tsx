@@ -3,6 +3,7 @@ import { Fragment, useMemo } from 'react'
 import { useWatcherLoading } from './watcher'
 
 import Loading from 'components/loading'
+import FarmsWatcher from './farms.watcher'
 
 export const AppWatcher: React.FC = ({ children }) => {
   const [loadingInfo] = useWatcherLoading()
@@ -14,5 +15,10 @@ export const AppWatcher: React.FC = ({ children }) => {
     [loadingInfo],
   )
 
-  return <Fragment>{loading ? <Loading /> : children}</Fragment>
+  return (
+    <Fragment>
+      <FarmsWatcher />
+      {loading ? <Loading /> : children}
+    </Fragment>
+  )
 }

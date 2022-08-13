@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { web3 } from '@project-serum/anchor'
 
-import { initDebt, upsetDebt } from 'model/debt.controller'
+import { initDebt, upsetDebt } from 'model/debts.controller'
 import Watcher from './watcher'
 
 // TODO: Config
