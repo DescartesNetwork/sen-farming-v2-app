@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import { useMintUsd } from '../useMintUsd'
+// import { useMintUsd } from '../useMintUsd'
 
 export const useLiquidity = (farmAddress: string) => {
   // To-do: Get data from redux
   // const {
   //   farms: { [farmAddress]: farmData },
   // } = useSelector((state: AppState) => state)
-  const { getTotalValue } = useMintUsd()
-  console.log(getTotalValue)
+  // const { getTotalValue } = useMintUsd()
   const [liquidity, setLiquidity] = useState(0)
 
   const calcLiquidity = useCallback(async () => {

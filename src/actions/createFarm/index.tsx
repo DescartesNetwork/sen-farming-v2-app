@@ -7,6 +7,7 @@ import AddTime, { Time } from './addTime'
 import BoostNFT, { BoostData } from './boostNFT'
 
 import { useAppRouter } from 'hooks/useAppRouter'
+import { useNewFarm } from 'hooks/actions/useNewFarm'
 
 import './index.less'
 
@@ -39,10 +40,15 @@ const CreateFarm = () => {
     startAt: 0,
     endAt: 0,
   })
+  const { initializeFarm } = useNewFarm()
   const { pushHistory } = useAppRouter()
 
   const onChangeTime = (name: keyof Time, value: number) => {
     return setTime({ ...time, [name]: value })
+  }
+
+  const addFarm = async () => {
+    await initializeFarm()
   }
 
   return (
@@ -87,7 +93,7 @@ const CreateFarm = () => {
               </Button>
             </Col>
             <Col span={12}>
-              <Button size="large" type="primary" block>
+              <Button size="large" type="primary" onClick={addFarm} block>
                 Add
               </Button>
             </Col>

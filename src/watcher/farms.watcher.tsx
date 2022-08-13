@@ -9,7 +9,7 @@ import Watcher from './watcher'
 const NAME = 'farm'
 const FILTER: web3.GetProgramAccountsFilter[] = []
 
-const VouchersWatcher = () => {
+const FarmsWatcher = () => {
   const dispatch = useDispatch()
 
   // TODO: init all account data
@@ -31,4 +31,4 @@ const VouchersWatcher = () => {
     />
   )
 }
-export default VouchersWatcher
+export default FarmsWatcher
