@@ -4,6 +4,8 @@ import { devTools, bigintSerializationMiddleware } from 'model/devTools'
 import main from 'model/main.controller'
 import farms from 'model/farms.controller'
 import debts from 'model/debts.controller'
+import boosting from 'model/boosting.controller'
+import reward from 'model/reward.controller'
 
 /**
  * Isolated store
@@ -16,6 +18,8 @@ const model = configureStore({
     main,
     farms,
     debts,
+    boosting,
+    reward,
   },
 })
 

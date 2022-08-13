@@ -48,7 +48,11 @@ const CreateFarm = () => {
   }
 
   const addFarm = async () => {
-    await initializeFarm()
+    await initializeFarm({
+      inputMint: mintFarm,
+      startAfter: time.startAt,
+      endAfter: time.endAt,
+    })
   }
 
   return (
