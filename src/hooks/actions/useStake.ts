@@ -3,7 +3,7 @@ import { useMintDecimals } from '@sentre/senhub'
 import { web3 } from '@project-serum/anchor'
 
 import { notifyError, notifySuccess } from 'helper'
-import { useDebtData } from 'hooks/useDebt'
+import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { utilsBN } from '@sen-use/web3/dist'
 
@@ -54,6 +54,11 @@ export const useStake = (farmAddress: string) => {
         })
         transaction.add(txDeposit)
         // TODO: Stake
+        const { tx: txStake } = await window.senFarming.stake({
+          farm: farmAddress,
+          sendAndConfirm: false,
+        })
+        transaction.add(txStake)
 
         const provider = window.senFarming.provider
         const txId = await provider.sendAndConfirm(transaction)

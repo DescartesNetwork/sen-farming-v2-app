@@ -6,7 +6,11 @@ import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
 
+import { useStakedData } from 'hooks/debt/useStakedData'
+
 const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
+  const stakedData = useStakedData(farmAddress)
+
   return (
     <Row gutter={[24, 24]}>
       <Col>
@@ -45,16 +49,18 @@ const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
             <Space direction="vertical" size={0}>
               <SpaceVertical label="Your staked">
                 <Typography.Title level={4}>
-                  {util.numeric(1.5112132).format('0,0.[00]')}LP
+                  {util.numeric(stakedData.amount).format('0,0.[00]')}LP
                 </Typography.Title>
               </SpaceVertical>
-              <Typography.Text type="secondary">$198.5</Typography.Text>
+              <Typography.Text type="secondary">
+                {util.numeric(stakedData.totalValue).format('$0,0.[00]')}
+              </Typography.Text>
             </Space>
           </Col>
           <Col>
             <SpaceVertical label="Your pool share">
               <Typography.Title level={4}>
-                {util.numeric(1.5112132).format('0,0.[00]')}LP
+                {util.numeric(stakedData.ratio).format('0,0.[00]%')}
               </Typography.Title>
             </SpaceVertical>
           </Col>
