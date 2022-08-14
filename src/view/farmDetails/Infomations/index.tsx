@@ -4,18 +4,18 @@ import CardHarvest from './cardHarvest'
 import CardRewards from './cardRewards'
 import FarmHeader from './header'
 
-const FarmInfomations = () => {
+const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Card bordered={false}>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <FarmHeader />
+          <FarmHeader farmAddress={farmAddress} />
         </Col>
         <Col xs={24} md={12}>
-          <CardHarvest />
+          <CardHarvest farmAddress={farmAddress} />
         </Col>
         <Col xs={24} md={12}>
-          <CardRewards />
+          <CardRewards farmAddress={farmAddress} />
         </Col>
         <Col span={24}>
           <Divider style={{ margin: 0 }} />

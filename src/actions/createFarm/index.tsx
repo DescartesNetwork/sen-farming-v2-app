@@ -45,7 +45,7 @@ const CreateFarm = () => {
     return setTime({ ...time, [name]: value })
   }
 
-  const addFarm = async () => {
+  const onCreateFarm = async () => {
     await initializeFarm({
       inputMint: mintFarm,
       startAfter: time.startAt,
@@ -97,7 +97,7 @@ const CreateFarm = () => {
               </Button>
             </Col>
             <Col span={12}>
-              <Button size="large" type="primary" onClick={addFarm} block>
+              <Button size="large" type="primary" onClick={onCreateFarm} block>
                 Add
               </Button>
             </Col>

@@ -5,14 +5,14 @@ import FarmAvatar from 'components/farmAvatar'
 import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
 
-const FarmHeader = () => {
+const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[24, 24]}>
       {/* Farm avatar, name , end time */}
       <Col>
         <Space direction="vertical" size={12}>
           <FarmAvatar
-            farmAddress={'7EgNqh13vcDSP8q3qYDHa6thA1fk7PkCDvJviJieq9dR'}
+            farmAddress={farmAddress}
             textStyle={{ fontSize: 30, fontWeight: 700 }}
           />
           <Space size={6}>

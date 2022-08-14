@@ -4,7 +4,7 @@ import { Card, Col, Row, Typography } from 'antd'
 import FarmAvatar from 'components/farmAvatar'
 import SpaceBetween from 'components/spaceBetween'
 
-const CardRewards = () => {
+const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Card bordered={false} style={{ background: '#2D2E2D', height: '100%' }}>
       <Row gutter={[24, 24]}>
@@ -14,12 +14,7 @@ const CardRewards = () => {
         {/* Rewards mint a */}
         <Col span={24}>
           <SpaceBetween
-            title={
-              <FarmAvatar
-                size={24}
-                farmAddress="5YwUkPdXLoujGkZuo9B4LsLKj3hdkDcfP4derpspifSJ"
-              />
-            }
+            title={<FarmAvatar size={24} farmAddress={farmAddress} />}
           >
             <Typography.Title level={5}>
               {util.numeric(1000).format('0,0.[0000]')}/Week
@@ -29,12 +24,7 @@ const CardRewards = () => {
         {/* Rewards mint b */}
         <Col span={24}>
           <SpaceBetween
-            title={
-              <FarmAvatar
-                size={24}
-                farmAddress="5YwUkPdXLoujGkZuo9B4LsLKj3hdkDcfP4derpspifSJ"
-              />
-            }
+            title={<FarmAvatar size={24} farmAddress={farmAddress} />}
           >
             <Typography.Title level={5}>
               {util.numeric(1000).format('0,0.[0000]')}/Week

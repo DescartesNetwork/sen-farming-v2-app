@@ -1,5 +1,6 @@
 import LazyLoad from '@sentre/react-lazyload'
 import { useSelector } from 'react-redux'
+import { useCallback, useEffect, useState } from 'react'
 
 import { Button, Col, Input, Row } from 'antd'
 import FarmCard from './farmCard'
@@ -12,8 +13,26 @@ import { AppState } from 'model'
 
 const Farms = () => {
   const farms = useSelector((state: AppState) => state.farms)
+  const rewards = useSelector((state: AppState) => state.rewards)
+  const [filteredFarms, setFilteredFarms] = useState<string[]>([])
   const { pushHistory } = useAppRouter()
 
+  // Filter farms has rewards
+  const filterFarms = useCallback(() => {
+    const filteredFarms: string[] = []
+    for (const reward of Object.values(rewards)) {
+      const farmAddr = reward.farm.toBase58()
+      if (filteredFarms.includes(farmAddr) || !farms[farmAddr]) continue
+      filteredFarms.push(farmAddr)
+    }
+    return setFilteredFarms(filteredFarms)
+  }, [farms, rewards])
+
+  useEffect(() => {
+    filterFarms()
+  }, [filterFarms])
+
+  console.log('filteredFarms', filteredFarms)
   return (
     <Layout>
       <Row gutter={[24, 24]}>
@@ -38,7 +57,7 @@ const Farms = () => {
         {/* List Farms */}
         <Col span={24}>
           <Row gutter={[12, 12]}>
-            {Object.keys(farms).map((farmAddress) => (
+            {filteredFarms.map((farmAddress) => (
               <Col xs={24} lg={12} key={farmAddress}>
                 <LazyLoad height={196}>
                   <FarmCard farmAddress={farmAddress} />

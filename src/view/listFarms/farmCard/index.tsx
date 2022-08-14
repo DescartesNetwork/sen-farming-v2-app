@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 
 import { Button, Card, Col, Row, Space, Tag, Typography } from 'antd'
@@ -89,4 +90,4 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   )
 }
 
-export default FarmCard
+export default memo(FarmCard)

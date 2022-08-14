@@ -4,7 +4,7 @@ import { Col, Row, Space, Typography } from 'antd'
 import FarmAvatar from 'components/farmAvatar'
 import SpaceBetween from 'components/spaceBetween'
 
-const HarvestInfos = () => {
+const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
@@ -17,13 +17,7 @@ const HarvestInfos = () => {
       {/* Mint a */}
       <Col span={24}>
         <SpaceBetween
-          title={
-            <FarmAvatar
-              farmAddress="5YwUkPdXLoujGkZuo9B4LsLKj3hdkDcfP4derpspifSJ"
-              showPrice
-              size={32}
-            />
-          }
+          title={<FarmAvatar farmAddress={farmAddress} showPrice size={32} />}
         >
           <Space direction="vertical" size={0}>
             <Typography.Title level={4}>195</Typography.Title>
@@ -36,13 +30,7 @@ const HarvestInfos = () => {
       {/* Mint b */}
       <Col span={24}>
         <SpaceBetween
-          title={
-            <FarmAvatar
-              farmAddress="5YwUkPdXLoujGkZuo9B4LsLKj3hdkDcfP4derpspifSJ"
-              showPrice
-              size={32}
-            />
-          }
+          title={<FarmAvatar farmAddress={farmAddress} showPrice size={32} />}
         >
           <Space direction="vertical" size={0}>
             <Typography.Title level={4}>195</Typography.Title>

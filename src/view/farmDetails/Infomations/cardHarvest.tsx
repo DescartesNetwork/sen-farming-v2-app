@@ -2,7 +2,7 @@ import { Card, Col, Row } from 'antd'
 import HarvestInfos from 'actions/harvest/harvestInfos'
 import HarvestButton from 'actions/harvest/harvestButton'
 
-const CardHarvest = () => {
+const CardHarvest = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Card
       style={{
@@ -12,7 +12,7 @@ const CardHarvest = () => {
     >
       <Row gutter={[12, 12]}>
         <Col span={24}>
-          <HarvestInfos />
+          <HarvestInfos farmAddress={farmAddress} />
         </Col>
         <Col span={24}>
           <HarvestButton farmAddress="7EgNqh13vcDSP8q3qYDHa6thA1fk7PkCDvJviJieq9dR" />
