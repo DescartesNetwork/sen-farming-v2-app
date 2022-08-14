@@ -2,7 +2,7 @@ import { useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button, Space, Card, Modal } from 'antd'
-import CardNumbericInput from '../cardNumbericInput'
+import CardNumbericInput from 'components/cardNumbericInput'
 import ExtraTypography from '../extraTypography'
 
 import {

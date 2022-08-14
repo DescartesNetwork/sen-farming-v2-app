@@ -1,58 +1,40 @@
 import { Fragment } from 'react'
 
 import IonIcon from '@sentre/antd-ionicon'
-import { Button, Card, Col, Modal, Row, Space, Typography } from 'antd'
-import FarmAvatar from 'components/farm/farmAvatar'
-import SpaceBetween from 'components/spaceBetween'
+import { Button, Col, Modal, Row, Space, Typography } from 'antd'
+import CardFarmInfos from './cardFarmInfos'
 
 import useManageFarm from 'hooks/actions/useManageFarm'
+import ActionManageFarm from './actionManage'
 
-type ManageProps = { farmAddress: string }
-const Manage = ({ farmAddress }: ManageProps) => {
-  const { visible, setVisible, liquidity, budget } = useManageFarm()
+type ManageFarmProps = { farmAddress: string }
+const ManageFarm = ({ farmAddress }: ManageFarmProps) => {
+  const { visible, setVisible } = useManageFarm()
+  // TODO: check permission - authority === walletAddress
 
   return (
     <Fragment>
-      <Button type="primary" onClick={() => {}}>
+      <Button ghost onClick={() => setVisible(true)}>
         Manage
       </Button>
       <Modal
         visible={visible}
         onCancel={() => setVisible(false)}
         footer={false}
-        closable={false}
+        closeIcon={<IonIcon name="close-outline" />}
+        title={
+          <Space>
+            <IonIcon name="leaf-outline" />
+            <Typography.Title level={4}>Farm Management</Typography.Title>
+          </Space>
+        }
       >
         <Row gutter={[24, 24]}>
-          <Col>
-            <Space>
-              <IonIcon name="leaf-outline" />
-              <Typography.Title level={4}>Farm Management</Typography.Title>
-            </Space>
+          <Col span={24}>
+            <CardFarmInfos farmAddress={farmAddress} />
           </Col>
           <Col span={24}>
-            <Card>
-              <Row gutter={[16, 16]}>
-                <Col span={24}>
-                  <SpaceBetween
-                    title={
-                      <FarmAvatar
-                        farmAddress={farmAddress}
-                        size={24}
-                        textStyle={{ fontSize: 16, fontWeight: 700 }}
-                      />
-                    }
-                  >
-                    {farmAddress}
-                  </SpaceBetween>
-                </Col>
-                <Col span={24}>
-                  <SpaceBetween title="Liquidity">{liquidity}</SpaceBetween>
-                </Col>
-                <Col span={24}>
-                  <SpaceBetween title="Budget">{budget}</SpaceBetween>
-                </Col>
-              </Row>
-            </Card>
+            <ActionManageFarm />
           </Col>
         </Row>
       </Modal>
@@ -60,4 +42,4 @@ const Manage = ({ farmAddress }: ManageProps) => {
   )
 }
 
-export default Manage
+export default ManageFarm

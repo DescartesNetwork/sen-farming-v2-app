@@ -1,7 +1,7 @@
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button } from 'antd'
-import CardNumbericInput from '../cardNumbericInput'
+import CardNumbericInput from 'components/cardNumbericInput'
 
 const UnStake = () => {
   return (

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 
 import configs from 'configs'
 
@@ -11,12 +11,32 @@ const APP_ROUTE = `/app/${appId}`
 export const useAppRouter = () => {
   const { search, pathname } = useLocation()
   const history = useHistory()
+  // getID from url
+  const params: Record<string, string> = useParams()
 
   const query = useMemo(() => {
     return new URLSearchParams(search)
   }, [search])
 
-  const getQuery = useCallback((queryId: string) => query.get(queryId), [query])
+  /**
+   * @param id id name
+   */
+  const getIdFromUrl = useCallback(
+    (id: string) => {
+      if (!params[id]) return ''
+      return params[id]
+    },
+    [params],
+  )
+
+  const getQuery = useCallback(
+    (queryId: string) => {
+      const result = query.get(queryId)
+      if (!result) return ''
+      return result
+    },
+    [query],
+  )
 
   const getAllQuery = useCallback(<T>() => {
     const queries: Record<string, string> = {}
@@ -48,5 +68,12 @@ export const useAppRouter = () => {
     [getAllQuery, history],
   )
 
-  return { getQuery, getAllQuery, pushHistory, appRoute: APP_ROUTE, pathname }
+  return {
+    getQuery,
+    getAllQuery,
+    pushHistory,
+    appRoute: APP_ROUTE,
+    pathname,
+    getIdFromUrl,
+  }
 }

@@ -20,7 +20,8 @@ const FarmAvatar = ({
   hoverable = false,
   spacing = 0,
 }: FarmAvatarProps) => {
-  const { inputMint } = useFarmData(farmAddress)
+  const { inputMint } = useFarmData(farmAddress) || {}
+
   return (
     <Space size={12}>
       <MintAvatar size={size} mintAddress={inputMint} />

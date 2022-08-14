@@ -6,7 +6,7 @@ import FarmHeader from './header'
 
 const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
   return (
-    <Card bordered={false}>
+    <Card bordered={false} style={{ height: '100%' }}>
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <FarmHeader farmAddress={farmAddress} />
