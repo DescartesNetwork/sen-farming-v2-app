@@ -89,7 +89,6 @@ const Watcher = (props: UseWatcherProps) => {
       ;(async () => {
         if (!watchId) return
         await connection.removeProgramAccountChangeListener(watchId)
-        setWatchId(0)
       })()
     }
   }, [connection, watchData, watchId])
