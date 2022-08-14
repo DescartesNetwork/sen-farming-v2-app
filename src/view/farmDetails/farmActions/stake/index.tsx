@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
-import { Row, Col, Typography, Button, Space, Card, Modal } from 'antd'
+import { Row, Col, Typography, Button, Space, Card, Modal, Tooltip } from 'antd'
 import ExtraTypography from '../extraTypography'
 import {
   AvatarNFT,
@@ -18,8 +18,10 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [visible, setVisible] = useState(false)
   const [selectedNFTs, setNftsSelected] = useState<string[]>([])
   const [inAmount, setInAmount] = useState<string>('')
+  const [boostAmount, setBoostAmount] = useState<number>(0)
   const farmData = useFarmData(farmAddress)
   const { stake, loading } = useStake(farmAddress)
+  console.log(setBoostAmount)
 
   const onSelect = (nftAddress: string) => {
     setVisible(false)
@@ -54,7 +56,12 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
         <Space size={6}>
           <Typography.Text>Use NFTs to increase LP</Typography.Text>
           <Typography.Text type="secondary">
-            <IonIcon name="alert-circle-outline" />
+            <Tooltip
+              placement="right"
+              title="Only farm owner-approved NFTs can be used for this farm. Each NFT collection will give a different boost rate depending on the settings of the farm owner."
+            >
+              <IonIcon name="alert-circle-outline" />
+            </Tooltip>
           </Typography.Text>
         </Space>
       </Col>
@@ -106,9 +113,18 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
           bordered={false}
         >
           <Space size={8} direction="vertical" style={{ width: '100%' }}>
-            <ExtraTypography label="Your stake" content={'0 LP'} />
-            <ExtraTypography label="Boost by NFT" content={'+ 0 LP'} />
-            <ExtraTypography label="Total" content={'0 LP'} />
+            <ExtraTypography
+              label="Your stake"
+              content={`${inAmount || 0} LP`}
+            />
+            <ExtraTypography
+              label="Boost by NFT"
+              content={`+ ${boostAmount} LP`}
+            />
+            <ExtraTypography
+              label="Total"
+              content={`${inAmount || 0 + boostAmount} LP`}
+            />
           </Space>
         </Card>
       </Col>

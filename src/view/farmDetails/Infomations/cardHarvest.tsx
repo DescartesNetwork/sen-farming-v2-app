@@ -15,7 +15,7 @@ const CardHarvest = ({ farmAddress }: { farmAddress: string }) => {
           <HarvestInfos farmAddress={farmAddress} />
         </Col>
         <Col span={24}>
-          <HarvestButton farmAddress="7EgNqh13vcDSP8q3qYDHa6thA1fk7PkCDvJviJieq9dR" />
+          <HarvestButton farmAddress={farmAddress} />
         </Col>
       </Row>
     </Card>
