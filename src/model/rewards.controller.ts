@@ -8,15 +8,15 @@ import { RewardData } from '@sentre/farming'
 
 export type RewardState = Record<string, RewardData>
 
-const NAME = 'reward'
+const NAME = 'rewards'
 const initialState: RewardState = {}
 
 /**
  * Actions
  */
 
-export const initReward = createAsyncThunk(
-  `${NAME}/initReward
+export const initRewards = createAsyncThunk(
+  `${NAME}/initRewards
   `,
   async (bulk: RewardState) => {
     return bulk
@@ -39,7 +39,7 @@ const slice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     void builder
-      .addCase(initReward.fulfilled, (state, { payload }) => payload)
+      .addCase(initRewards.fulfilled, (state, { payload }) => payload)
       .addCase(
         upsetReward.fulfilled,
         (state, { payload }) => void Object.assign(state, payload),

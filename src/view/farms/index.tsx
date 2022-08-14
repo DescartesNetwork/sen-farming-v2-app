@@ -5,9 +5,13 @@ import Layout from 'components/layout'
 import Banner from 'components/banner'
 
 import { useAppRouter } from 'hooks/useAppRouter'
+import { useSelector } from 'react-redux'
+import { AppState } from 'model'
 
 const Farms = () => {
+  const farms = useSelector((state: AppState) => state.farms)
   const { pushHistory } = useAppRouter()
+
   return (
     <Layout>
       <Row gutter={[24, 24]}>
@@ -31,7 +35,7 @@ const Farms = () => {
         </Col>
         <Col span={24}>
           <Row gutter={[12, 12]}>
-            {['1', '2', '3', '4'].map((farmAddress) => (
+            {Object.keys(farms).map((farmAddress) => (
               <Col xs={24} lg={12} key={farmAddress}>
                 <FarmCard farmAddress={farmAddress} />
               </Col>

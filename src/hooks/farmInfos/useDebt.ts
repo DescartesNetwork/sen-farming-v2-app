@@ -1,18 +1,27 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { util } from '@sentre/senhub'
-import { DebtData } from '@sentre/farming'
 
 import { AppState } from 'model'
 
-// To-do: Wait for config
-// const {
-//   sol: { farming },
-// } = configs
+export const useDebtAddress = (farmAddress: string) => {
+  const [debtAddress, setDebtAddress] = useState('')
 
-export const useDebt = (
-  farmAddress: string,
-): { address: string; data: DebtData } => {
+  const fetchDebtAddress = useCallback(async () => {
+    // To-do: Process data and fetching
+    if (!util.isAddress(farmAddress)) return setDebtAddress('')
+    // const debtAddr = await farming.deriveDebtAddress(walletAddress, farmAddress)
+    return setDebtAddress('')
+  }, [farmAddress])
+
+  useEffect(() => {
+    fetchDebtAddress()
+  }, [fetchDebtAddress])
+
+  return debtAddress
+}
+
+export const useDebt = (farmAddress: string) => {
   const [debtAddress, setDebtAddress] = useState('')
   const {
     debts: { [debtAddress]: debtData },
@@ -29,8 +38,5 @@ export const useDebt = (
     fetchDebtAddress()
   }, [fetchDebtAddress])
 
-  return {
-    address: debtAddress,
-    data: debtData,
-  }
+  return debtData
 }

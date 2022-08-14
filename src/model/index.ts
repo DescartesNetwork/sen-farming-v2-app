@@ -5,7 +5,7 @@ import main from 'model/main.controller'
 import farms from 'model/farms.controller'
 import debts from 'model/debts.controller'
 import boosting from 'model/boosting.controller'
-import reward from 'model/reward.controller'
+import rewards from 'model/rewards.controller'
 
 /**
  * Isolated store
@@ -19,7 +19,7 @@ const model = configureStore({
     farms,
     debts,
     boosting,
-    reward,
+    rewards,
   },
 })
 

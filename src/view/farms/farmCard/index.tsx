@@ -1,8 +1,9 @@
 import { Button, Card, Col, Row, Space, Tag, Typography } from 'antd'
-import { MintAvatar } from '@sen-use/components'
 import RewardInfo from './rewardInfo'
 import APRInfo from './APRInfo'
 import FarmAvatar from 'components/farmAvatar'
+import RewardAvatar from 'components/farm/rewardAvatar'
+import PendingReward from 'components/farm/pendingReward'
 
 export const MINTS = [
   'zbLcPeHWQ7yQXT7fEYHeNBKGM3wdGhNYL9jryVpys5J',
@@ -57,11 +58,7 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
                 <Typography.Title level={5} style={{ color: '#a0e86f' }}>
                   5.05%
                 </Typography.Title>
-                <Space size={4}>
-                  {MINTS.map((mintAddress) => (
-                    <MintAvatar key={mintAddress} mintAddress={mintAddress} />
-                  ))}
-                </Space>
+                <RewardAvatar farm={farmAddress} />
               </Space>
             </Col>
             <Col>
@@ -78,7 +75,9 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
                   </Typography.Text>
                   <RewardInfo />
                 </Space>
-                <Typography.Title level={5}>$2.9</Typography.Title>
+                <Typography.Title level={5}>
+                  <PendingReward farmAddress={farmAddress} />
+                </Typography.Title>
               </Space>
             </Col>
           </Row>
