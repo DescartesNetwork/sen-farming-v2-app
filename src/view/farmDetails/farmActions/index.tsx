@@ -8,7 +8,7 @@ export const FARM_ACTIONS: Record<string, string> = {
   Unstake: 'Unstake',
 }
 
-const FarmActions = () => {
+const FarmActions = ({ farmAddress }: { farmAddress: string }) => {
   const [farmAction, setFarmAction] = useState(FARM_ACTIONS.Stake)
 
   return (
@@ -25,7 +25,7 @@ const FarmActions = () => {
         </Col>
         <Col span={24}>
           <Tabs
-            defaultActiveKey={'stake'}
+            defaultActiveKey="stake"
             activeKey={farmAction}
             style={{ width: '100%', height: '100%' }}
             renderTabBar={() => <Fragment />}
@@ -35,13 +35,10 @@ const FarmActions = () => {
               key="Stake"
               style={{ width: '100%', height: '100%' }}
             >
-              <Stake />
+              <Stake farmAddress={farmAddress} />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Unstake" key="Unstake">
-              <UnStake />
-            </Tabs.TabPane>
-            <Tabs.TabPane tab="Exit" key="Exit">
-              Exit
+              <UnStake farmAddress={farmAddress} />
             </Tabs.TabPane>
           </Tabs>
         </Col>

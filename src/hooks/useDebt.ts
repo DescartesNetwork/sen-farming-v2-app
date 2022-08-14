@@ -21,17 +21,16 @@ export const useDebtAddress = (farmAddress: string) => {
   return debtAddress
 }
 
-export const useDebt = (farmAddress: string) => {
+export const useDebtData = (farmAddress: string) => {
   const [debtAddress, setDebtAddress] = useState('')
   const {
     debts: { [debtAddress]: debtData },
   } = useSelector((state: AppState) => state)
 
   const fetchDebtAddress = useCallback(async () => {
-    // To-do: Process data and fetching
     if (!util.isAddress(farmAddress)) return setDebtAddress('')
-    // const debtAddr = await farming.deriveDebtAddress(walletAddress, farmAddress)
-    return setDebtAddress('')
+    const PDAs = await window.senFarming.deriveAllPDAs({ farm: farmAddress })
+    return setDebtAddress(PDAs.debt.toBase58())
   }, [farmAddress])
 
   useEffect(() => {

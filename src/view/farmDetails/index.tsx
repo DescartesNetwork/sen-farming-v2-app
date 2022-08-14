@@ -15,7 +15,7 @@ const FarmDetails = () => {
           <FarmInfo farmAddress={farmAddress} />
         </Col>
         <Col span={10}>
-          <FarmActions />
+          <FarmActions farmAddress={farmAddress} />
         </Col>
       </Row>
     </Layout>

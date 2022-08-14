@@ -1995,27 +1995,27 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.4.tgz"
   integrity sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==
 
-"@sen-use/app@^2.0.11":
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/@sen-use/app/-/app-2.0.11.tgz"
-  integrity sha512-BFcBrF6saDSWn7ErZ8fKEiLPdD00r7xv6zOUvpYZH6K/iMbvEy8bbQ0rKMpFRs2qttC3e/Lvrs8nTggmmIg21w==
+"@sen-use/app@^2.0.12":
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/@sen-use/app/-/app-2.0.12.tgz#9eebacb3b4c39cb463182450e8618d010d8025c0"
+  integrity sha512-lCyyEdS+7AAGsjmxHDurT/RcTLNIPMTOLDb9892Xp29Gl5uSyX1qOxofzi3R10ISZ+R6jKbKgujDvWRBIXzdTg==
   dependencies:
     localforage "^1.10.0"
     web3.storage "^4.2.0"
 
-"@sen-use/components@^2.0.11":
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/@sen-use/components/-/components-2.0.11.tgz"
-  integrity sha512-v8DGDGmt4Z+JWAGflUjr6tLTLzi1Rl+y262jpO+c8UQ+OeLKR+GPb2aQmeOp/0mieQxbScN5oDtFNOiy338mbg==
+"@sen-use/components@^2.0.12":
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/@sen-use/components/-/components-2.0.12.tgz#841f792a46b88d74a7964fb072fd268d817a6f50"
+  integrity sha512-yErHEHkX1Iq8MPKkju8Un915lCh7BVCItK6bVtR8pdmyPWPtuXF5x2fI2nBb6GrMH6b/i/uhHO4UDi+bhhea9Q==
   dependencies:
     "@metaplex/js" "^4.12.0"
     lunr "^2.3.9"
     react-use "^17.4.0"
 
-"@sen-use/web3@^2.0.11":
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/@sen-use/web3/-/web3-2.0.11.tgz"
-  integrity sha512-YdGabQkrXH/zZzoL7GZkI5jzTeB+9BiG2emkEgvc3GM0IAwzbVz4JsGdWilF98Cs5EkfTKlwjRYJUluj127QBA==
+"@sen-use/web3@^2.0.12":
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/@sen-use/web3/-/web3-2.0.12.tgz#f5f5f634aafec9fc050d6666aa8dca6bf0847f22"
+  integrity sha512-ZPkWF/Tzbr+9O1zgIIygxoDT+adYZbeSLbJsmFaTHHKV5ZcjOkQgj0rAA0e75Q/mWctP4mnNoNnV6zGYTKiWTg==
   dependencies:
     "@project-serum/anchor" "^0.24.2"
     "@solana/web3.js" "^1.50.0"

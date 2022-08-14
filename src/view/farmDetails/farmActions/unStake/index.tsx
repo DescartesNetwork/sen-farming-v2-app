@@ -1,9 +1,15 @@
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button } from 'antd'
-import CardNumbericInput from '../cardNumbericInput'
+import MintNumberInput from 'components/mintNumberInput'
 
-const UnStake = () => {
+import { useFarmData } from 'hooks/farm/useFarmData'
+import { useState } from 'react'
+
+const UnStake = ({ farmAddress }: { farmAddress: string }) => {
+  const farmData = useFarmData(farmAddress)
+  const [outAmount, setOutAmount] = useState<string>('')
+
   return (
     <Row gutter={[16, 16]}>
       <Col span={24}>
@@ -13,7 +19,11 @@ const UnStake = () => {
         </Typography.Text>
       </Col>
       <Col span={24}>
-        <CardNumbericInput />
+        <MintNumberInput
+          mint={farmData.inputMint.toBase58()}
+          value={outAmount}
+          onChange={setOutAmount}
+        />
       </Col>
       <Col span={24}>
         <Button
