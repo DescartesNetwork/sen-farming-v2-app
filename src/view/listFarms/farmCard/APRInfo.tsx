@@ -6,7 +6,7 @@ import { MintAvatar, MintSymbol } from '@sen-use/components'
 
 import { DATE_FORMAT } from 'constant'
 import IonIcon from '@sentre/antd-ionicon'
-import { useFarmRewards } from 'hooks/farmInfos/useFarmRewards'
+import { useFarmRewards } from 'hooks/farm/useFarmRewards'
 
 const Explain = ({ farmAddress }: { farmAddress: string }) => {
   const farmRewards = useFarmRewards(farmAddress)

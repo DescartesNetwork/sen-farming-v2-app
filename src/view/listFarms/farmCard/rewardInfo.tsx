@@ -4,7 +4,7 @@ import IonIcon from '@sentre/antd-ionicon'
 import SpaceBetween from 'components/spaceBetween'
 import HarvestButton from 'actions/harvest/harvestButton'
 
-import { useFarmRewards } from 'hooks/farmInfos/useFarmRewards'
+import { useFarmRewards } from 'hooks/farm/useFarmRewards'
 
 const Explain = ({ farmAddress }: { farmAddress: string }) => {
   const farmRewards = useFarmRewards(farmAddress)
