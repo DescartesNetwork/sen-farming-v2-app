@@ -15,11 +15,12 @@ export const useStake = () => {
   const stake = useCallback(async ({ farm, inAmount, nfts }: StakeProps) => {
     try {
       setLoading(true)
-      const { txId } = await window.senFarming.fullyStake({
-        farm,
-        inAmount,
-        nfts,
-      })
+      // const { txId } = await window.senFarming.fullyStake({
+      //   farm,
+      //   inAmount,
+      //   nfts,
+      // })
+      const txId = ''
       notifySuccess('Stake', txId)
     } catch (error: any) {
       notifyError(error)

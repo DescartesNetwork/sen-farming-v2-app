@@ -32,9 +32,7 @@ const CreateFarm = () => {
   const [tokenRewards, setTokenRewards] = useState<Reward[]>([
     DEFAULT_REWARD_TOKEN,
   ])
-  const [boostsData, setBoostsData] = useState<BoostData[]>([
-    { collection: '', percentage: 0 },
-  ])
+  const [boostsData, setBoostsData] = useState<BoostData[]>([])
   const [mintFarm, setMintFarm] = useState('')
   const [time, setTime] = useState({
     startAt: 0,
@@ -52,6 +50,8 @@ const CreateFarm = () => {
       inputMint: mintFarm,
       startAfter: time.startAt,
       endAfter: time.endAt,
+      boostsData,
+      tokenRewards,
     })
   }
 
