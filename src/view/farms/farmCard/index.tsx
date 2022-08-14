@@ -1,3 +1,5 @@
+import { useAppRoute } from '@sentre/senhub'
+
 import { Button, Card, Col, Row, Space, Tag, Typography } from 'antd'
 import RewardInfo from './rewardInfo'
 import APRInfo from './APRInfo'
@@ -5,24 +7,24 @@ import FarmAvatar from 'components/farmAvatar'
 import RewardAvatar from 'components/farm/rewardAvatar'
 import PendingReward from 'components/farm/pendingReward'
 
-export const MINTS = [
-  'zbLcPeHWQ7yQXT7fEYHeNBKGM3wdGhNYL9jryVpys5J',
-  'So11111111111111111111111111111111111111112',
-]
+import configs from 'configs'
 
-type FarmCardProps = {
-  farmAddress: string
-}
+const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
+  const { to } = useAppRoute(configs.manifest.appId)
 
-const FarmCard = ({ farmAddress }: FarmCardProps) => {
   return (
-    <Card bodyStyle={{ padding: '20px 16px' }} hoverable bordered={false}>
+    <Card
+      bodyStyle={{ padding: '20px 16px' }}
+      hoverable
+      bordered={false}
+      onClick={() => to(`/${farmAddress}`)}
+    >
       <Row gutter={[20, 20]}>
         <Col span={24}>
           <Row gutter={[8, 8]} align="middle">
             <Col flex="auto">
               <FarmAvatar
-                farmAddress={'7EgNqh13vcDSP8q3qYDHa6thA1fk7PkCDvJviJieq9dR'}
+                farmAddress={farmAddress}
                 textStyle={{ fontSize: 20, fontWeight: 700 }}
                 hoverable
               />
@@ -53,12 +55,12 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
               <Space direction="vertical">
                 <Space>
                   <Typography.Text type="secondary">APR</Typography.Text>
-                  <APRInfo />
+                  <APRInfo farmAddress={farmAddress} />
                 </Space>
                 <Typography.Title level={5} style={{ color: '#a0e86f' }}>
                   5.05%
                 </Typography.Title>
-                <RewardAvatar farm={farmAddress} />
+                <RewardAvatar farmAddress={farmAddress} />
               </Space>
             </Col>
             <Col>
@@ -73,7 +75,7 @@ const FarmCard = ({ farmAddress }: FarmCardProps) => {
                   <Typography.Text type="secondary">
                     Your reward
                   </Typography.Text>
-                  <RewardInfo />
+                  <RewardInfo farmAddress={farmAddress} />
                 </Space>
                 <Typography.Title level={5}>
                   <PendingReward farmAddress={farmAddress} />

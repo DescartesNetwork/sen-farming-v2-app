@@ -1,21 +1,10 @@
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
-
 import { Space } from 'antd'
 import { MintAvatar } from '@sen-use/components'
 
-import { AppState } from 'model'
+import { useFarmRewards } from 'hooks/farmInfos/useFarmRewards'
 
-const RewardAvatar = ({ farm }: { farm: string }) => {
-  const rewards = useSelector((state: AppState) => state.rewards)
-
-  const farmRewards = useMemo(
-    () =>
-      Object.values(rewards).filter(
-        (reward) => reward.farm.toBase58() === farm,
-      ),
-    [farm, rewards],
-  )
+const RewardAvatar = ({ farmAddress }: { farmAddress: string }) => {
+  const farmRewards = useFarmRewards(farmAddress)
 
   return (
     <Space size={4}>
