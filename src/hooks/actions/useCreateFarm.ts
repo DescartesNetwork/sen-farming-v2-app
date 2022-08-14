@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { web3 } from '@project-serum/anchor'
 import BN from 'bn.js'
 
-import { useFarming } from 'hooks/useFarming'
 import { notifyError, notifySuccess } from 'helper'
 import { BoostData } from 'actions/createFarm/boostNFT'
 import { Reward } from 'actions/createFarm'
@@ -15,8 +14,10 @@ type InitializeFarmProps = {
   boostsData: BoostData[]
 }
 
-export const useNewFarm = () => {
-  const { farming, provider } = useFarming()
+const farming = window.senFarming
+const provider = window.senFarming.provider
+
+export const useCreateFarm = () => {
   const [loading, setLoading] = useState(false)
 
   const initializeFarm = useCallback(
@@ -73,7 +74,7 @@ export const useNewFarm = () => {
         setLoading(false)
       }
     },
-    [farming, provider],
+    [],
   )
 
   return { initializeFarm, loading }

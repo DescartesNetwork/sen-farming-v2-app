@@ -1,3 +1,4 @@
+import { BN } from '@project-serum/anchor'
 import { DataLoader, util } from '@sentre/senhub'
 import { account } from '@senswap/sen-js'
 import configs from 'configs'
@@ -34,4 +35,8 @@ export const getMetaData = async (mintAddress: string) => {
   } catch (error: any) {
     return undefined
   }
+}
+
+export const current_timestamp = async () => {
+  return new BN(new Date().getTime() / 1000)
 }
