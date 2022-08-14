@@ -1,3 +1,6 @@
+import LazyLoad from '@sentre/react-lazyload'
+import { useSelector } from 'react-redux'
+
 import { Button, Col, Input, Row } from 'antd'
 import FarmCard from './farmCard'
 import FilterFarms from './filterFarms'
@@ -5,7 +8,6 @@ import Layout from 'components/layout'
 import Banner from 'components/banner'
 
 import { useAppRouter } from 'hooks/useAppRouter'
-import { useSelector } from 'react-redux'
 import { AppState } from 'model'
 
 const Farms = () => {
@@ -33,11 +35,14 @@ const Farms = () => {
             </Col>
           </Row>
         </Col>
+        {/* List Farms */}
         <Col span={24}>
           <Row gutter={[12, 12]}>
             {Object.keys(farms).map((farmAddress) => (
               <Col xs={24} lg={12} key={farmAddress}>
-                <FarmCard farmAddress={farmAddress} />
+                <LazyLoad height={196}>
+                  <FarmCard farmAddress={farmAddress} />
+                </LazyLoad>
               </Col>
             ))}
           </Row>
