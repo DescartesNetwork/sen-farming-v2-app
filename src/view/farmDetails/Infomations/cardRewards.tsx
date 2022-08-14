@@ -1,7 +1,7 @@
 import { util } from '@sentre/senhub'
 
 import { Card, Col, Row, Typography } from 'antd'
-import FarmAvatar from 'components/farmAvatar'
+import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceBetween from 'components/spaceBetween'
 
 const CardRewards = ({ farmAddress }: { farmAddress: string }) => {

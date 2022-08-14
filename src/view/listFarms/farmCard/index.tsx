@@ -2,13 +2,13 @@ import { memo } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 
 import { Button, Card, Col, Row, Space, Tag, Typography } from 'antd'
+import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
+import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
 import APRInfo from './APRInfo'
-import FarmAvatar from 'components/farmAvatar'
-import RewardAvatar from 'components/farm/rewardAvatar'
-import PendingReward from 'components/farm/pendingReward'
 
 import configs from 'configs'
+import FarmLiquidity from 'components/farm/farmLiquidity'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
@@ -52,6 +52,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
         </Col>
         <Col span={24}>
           <Row justify="space-between">
+            {/* APR */}
             <Col>
               <Space direction="vertical">
                 <Space>
@@ -59,17 +60,21 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                   <APRInfo farmAddress={farmAddress} />
                 </Space>
                 <Typography.Title level={5} style={{ color: '#a0e86f' }}>
-                  5.05%
+                  <FarmApr farmAddress={farmAddress} />
                 </Typography.Title>
-                <RewardAvatar farmAddress={farmAddress} />
+                <RewardsAvatar farmAddress={farmAddress} />
               </Space>
             </Col>
+            {/* Liquidity */}
             <Col>
               <Space direction="vertical">
                 <Typography.Text type="secondary">Liquidity</Typography.Text>
-                <Typography.Text>$91,327.81</Typography.Text>
+                <Typography.Text>
+                  <FarmLiquidity farmAddress={farmAddress} />
+                </Typography.Text>
               </Space>
             </Col>
+            {/* Pending rewards */}
             <Col>
               <Space direction="vertical">
                 <Space>
@@ -79,7 +84,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                   <RewardInfo farmAddress={farmAddress} />
                 </Space>
                 <Typography.Title level={5}>
-                  <PendingReward farmAddress={farmAddress} />
+                  <TotalPendingReward farmAddress={farmAddress} />
                 </Typography.Title>
               </Space>
             </Col>

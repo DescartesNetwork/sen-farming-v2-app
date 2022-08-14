@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 
 import IonIcon from '@sentre/antd-ionicon'
 import { Button, Card, Col, Modal, Row, Space, Typography } from 'antd'
-import FarmAvatar from 'components/farmAvatar'
+import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceBetween from 'components/spaceBetween'
 
 import useManageFarm from 'hooks/actions/useManageFarm'

@@ -2,7 +2,7 @@ import { util } from '@sentre/senhub'
 
 import { useEffect, useState } from 'react'
 
-const PendingReward = ({ farmAddress }: { farmAddress: string }) => {
+const TotalPendingReward = ({ farmAddress }: { farmAddress: string }) => {
   const [totalReward, setTotalReward] = useState(0)
 
   useEffect(() => {
@@ -12,4 +12,4 @@ const PendingReward = ({ farmAddress }: { farmAddress: string }) => {
   return <span>{util.numeric(totalReward).format('$0,0.[00]')}</span>
 }
 
-export default PendingReward
+export default TotalPendingReward

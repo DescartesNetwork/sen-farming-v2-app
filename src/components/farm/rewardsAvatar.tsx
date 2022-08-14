@@ -3,7 +3,7 @@ import { MintAvatar } from '@sen-use/components'
 
 import { useFarmRewards } from 'hooks/farm/useFarmRewards'
 
-const RewardAvatar = ({ farmAddress }: { farmAddress: string }) => {
+const RewardsAvatar = ({ farmAddress }: { farmAddress: string }) => {
   const farmRewards = useFarmRewards(farmAddress)
 
   return (
@@ -18,4 +18,4 @@ const RewardAvatar = ({ farmAddress }: { farmAddress: string }) => {
   )
 }
 
-export default RewardAvatar
+export default RewardsAvatar

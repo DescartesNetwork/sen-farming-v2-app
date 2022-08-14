@@ -18,7 +18,6 @@ const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
           </Typography.Title>
         </SpaceBetween>
       </Col>
-      {/* Mint a */}
       {pendingRewards.map((reward) => (
         <Col span={24}>
           <SpaceBetween

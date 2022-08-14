@@ -1,7 +1,7 @@
 import { util } from '@sentre/senhub'
 
 import { Col, Row, Space, Typography } from 'antd'
-import FarmAvatar from 'components/farmAvatar'
+import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
 
