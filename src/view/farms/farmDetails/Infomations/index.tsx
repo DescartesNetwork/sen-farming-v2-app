@@ -1,4 +1,5 @@
 import { Card, Col, Divider, Row } from 'antd'
+import BoostingNFT from 'actions/boostingNFT'
 import CardHarvest from './cardHarvest'
 import CardRewards from './cardRewards'
 import FarmHeader from './header'
@@ -17,7 +18,10 @@ const FarmInfomations = () => {
           <CardRewards />
         </Col>
         <Col span={24}>
-          <Divider />
+          <Divider style={{ margin: 0 }} />
+        </Col>
+        <Col span={24}>
+          <BoostingNFT />
         </Col>
       </Row>
     </Card>
