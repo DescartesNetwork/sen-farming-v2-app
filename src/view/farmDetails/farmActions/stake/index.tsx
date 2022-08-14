@@ -2,7 +2,8 @@ import { useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button, Space, Card, Modal } from 'antd'
-import CardNumbericInput from 'components/cardNumbericInput'
+// import CardNumbericInput from 'components/cardNumbericInput'
+import MintNumberInput from 'components/mintNumberInput'
 import ExtraTypography from '../extraTypography'
 
 import {
@@ -11,10 +12,15 @@ import {
 } from '@sen-use/components'
 
 import './index.less'
+import { useFarmData } from 'hooks/farm/useFarmData'
+import { useStake } from 'hooks/actions/useStake'
 
-const Stake = () => {
+const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [visible, setVisible] = useState(false)
   const [selectedNFTs, setNftsSelected] = useState<string[]>([])
+  const [inAmount, setInAmount] = useState<string>('')
+  const farmData = useFarmData(farmAddress)
+  const { stake, loading } = useStake(farmAddress)
 
   const onSelect = (nftAddress: string) => {
     setVisible(false)
@@ -26,6 +32,10 @@ const Stake = () => {
     setNftsSelected(selectedNFTs.filter((nft) => nft !== nftAddress))
   }
 
+  const onFullyStake = () => {
+    stake({ farm: farmAddress, nfts: selectedNFTs, inAmount: Number(inAmount) })
+  }
+
   return (
     <Row gutter={[16, 16]} style={{ height: '100%' }}>
       <Col span={24}>
@@ -35,7 +45,11 @@ const Stake = () => {
         </Typography.Text>
       </Col>
       <Col span={24}>
-        <CardNumbericInput />
+        <MintNumberInput
+          mint={farmData.inputMint.toBase58()}
+          value={inAmount}
+          onChange={setInAmount}
+        />
       </Col>
       <Col span={24}>
         <Space size={6}>
@@ -100,8 +114,14 @@ const Stake = () => {
         </Card>
       </Col>
       <Col span={24}>
-        <Button type="primary" block>
-          Enter an amount
+        <Button
+          type="primary"
+          block
+          disabled={!Number(inAmount)}
+          loading={loading}
+          onClick={onFullyStake}
+        >
+          {!Number(inAmount) ? 'Enter an amount' : 'Stake'}
         </Button>
       </Col>
       <Col span={24}>
@@ -109,6 +129,7 @@ const Stake = () => {
           Get BTC - SNTR LP
         </Button>
       </Col>
+
       <Modal
         visible={visible}
         closeIcon={<IonIcon name="close-outline" />}

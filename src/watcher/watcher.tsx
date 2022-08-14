@@ -37,7 +37,7 @@ const Watcher = (props: UseWatcherProps) => {
       for (const info of accountInfos) {
         bulk[info.publicKey.toBase58()] = info.account
       }
-      init(bulk)
+      await init(bulk)
     } catch (error) {
       notifyError(error)
     } finally {

@@ -1,14 +1,18 @@
 import { util } from '@sentre/senhub'
 
 import { Col, Row, Space, Typography } from 'antd'
+import { FarmApr, FarmLiquidity } from 'components/farm'
 import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
 
+import { useStakedData } from 'hooks/debt/useStakedData'
+
 const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
+  const stakedData = useStakedData(farmAddress)
+
   return (
     <Row gutter={[24, 24]}>
-      {/* Farm avatar, name , end time */}
       <Col>
         <Space direction="vertical" size={12}>
           <FarmAvatar
@@ -22,37 +26,41 @@ const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
         </Space>
       </Col>
 
-      {/* Apr, liquidity, staked */}
       <Col span={24}>
         <Row justify="space-between">
+          {/* Farm APR */}
           <Col>
             <SpaceVertical label="APR">
               <Typography.Title style={{ color: '#A0E86F' }} level={4}>
-                50.5%
+                <FarmApr farmAddress={farmAddress} />
               </Typography.Title>
             </SpaceVertical>
           </Col>
+          {/* Farm Liquidity */}
           <Col>
             <SpaceVertical label="Liquidity">
               <Typography.Title level={4}>
-                ${util.numeric(91327.8112132).format('0,0.[00]')}
+                <FarmLiquidity farmAddress={farmAddress} />
               </Typography.Title>
             </SpaceVertical>
           </Col>
+          {/* Own Shares */}
           <Col>
             <Space direction="vertical" size={0}>
               <SpaceVertical label="Your staked">
                 <Typography.Title level={4}>
-                  {util.numeric(1.5112132).format('0,0.[00]')}LP
+                  {util.numeric(stakedData.amount).format('0,0.[00]')}LP
                 </Typography.Title>
               </SpaceVertical>
-              <Typography.Text type="secondary">$198.5</Typography.Text>
+              <Typography.Text type="secondary">
+                {util.numeric(stakedData.totalValue).format('$0,0.[00]')}
+              </Typography.Text>
             </Space>
           </Col>
           <Col>
             <SpaceVertical label="Your pool share">
               <Typography.Title level={4}>
-                {util.numeric(1.5112132).format('0,0.[00]')}LP
+                {util.numeric(stakedData.ratio).format('0,0.[00]%')}
               </Typography.Title>
             </SpaceVertical>
           </Col>
