@@ -32,7 +32,6 @@ const Farms = () => {
     filterFarms()
   }, [filterFarms])
 
-  console.log('filteredFarms', filteredFarms)
   return (
     <Layout>
       <Row gutter={[24, 24]}>
