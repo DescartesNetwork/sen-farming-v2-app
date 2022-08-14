@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { web3 } from '@project-serum/anchor'
 
-import { initReward, upsetReward } from 'model/reward.controller'
+import { initRewards, upsetReward } from 'model/rewards.controller'
 import Watcher from './watcher'
 
 // TODO: Config
@@ -13,7 +13,7 @@ const RewardsWatcher = () => {
   const dispatch = useDispatch()
 
   // TODO: init all account data
-  const init = useCallback((data) => dispatch(initReward(data)), [dispatch])
+  const init = useCallback((data) => dispatch(initRewards(data)), [dispatch])
   // TODO: upset account data
   const upset = useCallback(
     (key: string, value: any) =>

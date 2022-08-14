@@ -14,6 +14,7 @@ const {
 export const AppLoader: React.FC = ({ children }) => {
   const address = useWalletAddress()
   const [loaded, setLoaded] = useState(false)
+
   useEffect(() => {
     if (loaded) return
     const provider = getAnchorProvider(rpc, address, window.sentre.wallet)

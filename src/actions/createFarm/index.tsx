@@ -48,7 +48,7 @@ const CreateFarm = () => {
     return setTime({ ...time, [name]: value })
   }
 
-  const addFarm = async () => {
+  const onCreateFarm = async () => {
     return stake({
       farm: '2BmUH61rDwQ1rk3N422mL8UiRS9YPNJUy2bsApRKc26j',
       inAmount: 1,
@@ -105,7 +105,7 @@ const CreateFarm = () => {
               </Button>
             </Col>
             <Col span={12}>
-              <Button size="large" type="primary" onClick={addFarm} block>
+              <Button size="large" type="primary" onClick={onCreateFarm} block>
                 Add
               </Button>
             </Col>

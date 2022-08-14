@@ -19,7 +19,7 @@ export const useWatcherLoading = createGlobalState<Record<string, boolean>>({})
 const Watcher = (props: UseWatcherProps) => {
   const { program, name, filter, upset, init } = props
   const [watchId, setWatchId] = useState(0)
-  const [loadingInfo, setLoadingInfo] = useWatcherLoading()
+  const [, setLoadingInfo] = useWatcherLoading()
 
   const { accountClient, connection } = useMemo(() => {
     const accountClient = program?.account?.[name]
@@ -41,9 +41,10 @@ const Watcher = (props: UseWatcherProps) => {
     } catch (error) {
       notifyError(error)
     } finally {
-      setLoadingInfo({ ...loadingInfo, [name]: false })
+      GLOBAL_WATCHER[name] = false
+      setLoadingInfo({ ...GLOBAL_WATCHER, [name]: false })
     }
-  }, [accountClient, init, loadingInfo, name, setLoadingInfo])
+  }, [accountClient, init, name, setLoadingInfo])
 
   const watchData = useCallback(async () => {
     if (watchId) return
@@ -89,7 +90,6 @@ const Watcher = (props: UseWatcherProps) => {
       ;(async () => {
         if (!watchId) return
         await connection.removeProgramAccountChangeListener(watchId)
-        setWatchId(0)
       })()
     }
   }, [connection, watchData, watchId])

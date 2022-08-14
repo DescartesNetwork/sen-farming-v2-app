@@ -1,10 +1,14 @@
+import { MintAvatar } from '@sen-use/components/dist'
 import { util } from '@sentre/senhub'
 
 import { Col, Row, Space, Typography } from 'antd'
-import FarmAvatar from 'components/farmAvatar'
 import SpaceBetween from 'components/spaceBetween'
 
-const HarvestInfos = () => {
+import { usePendingRewards } from 'hooks/usePendingRewards'
+
+const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
+  const pendingRewards = usePendingRewards(farmAddress)
+
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
@@ -14,44 +18,20 @@ const HarvestInfos = () => {
           </Typography.Title>
         </SpaceBetween>
       </Col>
-      {/* Mint a */}
-      <Col span={24}>
-        <SpaceBetween
-          title={
-            <FarmAvatar
-              farmAddress="5YwUkPdXLoujGkZuo9B4LsLKj3hdkDcfP4derpspifSJ"
-              showPrice
-              size={32}
-            />
-          }
-        >
-          <Space direction="vertical" size={0}>
-            <Typography.Title level={4}>195</Typography.Title>
-            <Typography.Text type="secondary">
-              ${util.numeric(19.81).format('0,0.[00]')}
-            </Typography.Text>
-          </Space>
-        </SpaceBetween>
-      </Col>
-      {/* Mint b */}
-      <Col span={24}>
-        <SpaceBetween
-          title={
-            <FarmAvatar
-              farmAddress="5YwUkPdXLoujGkZuo9B4LsLKj3hdkDcfP4derpspifSJ"
-              showPrice
-              size={32}
-            />
-          }
-        >
-          <Space direction="vertical" size={0}>
-            <Typography.Title level={4}>195</Typography.Title>
-            <Typography.Text type="secondary">
-              ${util.numeric(19.81).format('0,0.[00]')}
-            </Typography.Text>
-          </Space>
-        </SpaceBetween>
-      </Col>
+      {pendingRewards.map((reward) => (
+        <Col span={24}>
+          <SpaceBetween
+            title={<MintAvatar mintAddress={reward.mint} size={32} />}
+          >
+            <Space direction="vertical" size={0}>
+              <Typography.Title level={4}>195</Typography.Title>
+              <Typography.Text type="secondary">
+                ${util.numeric(19.81).format('0,0.[00]')}
+              </Typography.Text>
+            </Space>
+          </SpaceBetween>
+        </Col>
+      ))}
     </Row>
   )
 }
