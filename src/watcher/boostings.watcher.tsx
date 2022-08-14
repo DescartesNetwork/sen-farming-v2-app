@@ -6,7 +6,7 @@ import { initBoosting, upsetBoosting } from 'model/boosting.controller'
 import Watcher from './watcher'
 
 // TODO: Config
-const NAME = 'boosting'
+const NAME = 'farmBoostingCollection'
 const FILTER: web3.GetProgramAccountsFilter[] = []
 
 const BoostingsWatcher = () => {

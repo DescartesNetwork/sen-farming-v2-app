@@ -6,7 +6,7 @@ import { initReward, upsetReward } from 'model/reward.controller'
 import Watcher from './watcher'
 
 // TODO: Config
-const NAME = 'boosting'
+const NAME = 'farmRewardMint'
 const FILTER: web3.GetProgramAccountsFilter[] = []
 
 const RewardsWatcher = () => {
