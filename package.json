@@ -8,7 +8,7 @@
     "@sen-use/components": "^2.0.12",
     "@sen-use/web3": "^2.0.12",
     "@sentre/antd-ionicon": "^1.0.37",
-    "@sentre/farming": "^1.1.4",
+    "@sentre/farming": "^1.1.5",
     "@sentre/react-lazyload": "^3.2.2",
     "@sentre/senhub": "^3.2.8",
     "antd": "^4.21.1",

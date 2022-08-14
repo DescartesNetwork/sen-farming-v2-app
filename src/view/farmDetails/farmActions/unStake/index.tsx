@@ -2,13 +2,15 @@ import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button } from 'antd'
 import MintNumberInput from 'components/mintNumberInput'
+import { useUnstake } from 'hooks/actions/useUnstake'
+import { useStakedData } from 'hooks/debt/useStakedData'
 
-import { useFarmData } from 'hooks/farm/useFarmData'
 import { useState } from 'react'
 
 const UnStake = ({ farmAddress }: { farmAddress: string }) => {
-  const farmData = useFarmData(farmAddress)
   const [outAmount, setOutAmount] = useState<string>('')
+  const stakedData = useStakedData(farmAddress)
+  const { unstake, loading } = useUnstake(farmAddress)
 
   return (
     <Row gutter={[16, 16]}>
@@ -20,7 +22,7 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
       </Col>
       <Col span={24}>
         <MintNumberInput
-          mint={farmData.inputMint.toBase58()}
+          available={stakedData.amount}
           value={outAmount}
           onChange={setOutAmount}
         />
@@ -30,6 +32,9 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
           type="primary"
           block
           style={{ background: '#FF666E', borderColor: '#FF666E' }}
+          disabled={!Number(outAmount)}
+          loading={loading}
+          onClick={() => unstake({ amount: Number(outAmount) })}
         >
           Unstake
         </Button>

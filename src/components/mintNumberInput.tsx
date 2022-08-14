@@ -1,15 +1,28 @@
-import { useAccountBalanceByMintAddress } from '@sen-use/app/dist'
-import { util } from '@sentre/senhub/dist'
+import { useMemo } from 'react'
+import { util } from '@sentre/senhub'
+import { useAccountBalanceByMintAddress } from '@sen-use/app'
+
 import { Card, Space, Row, Col, Typography, InputNumber, Button } from 'antd'
 
 type MintNumberInputProps = {
-  mint: string
+  mint?: string
   value: string
+  available?: number
   onChange: (value: string) => void
 }
 
-const MintNumberInput = ({ mint, value, onChange }: MintNumberInputProps) => {
+const MintNumberInput = ({
+  mint = '',
+  value,
+  onChange,
+  available,
+}: MintNumberInputProps) => {
   const { balance } = useAccountBalanceByMintAddress(mint)
+
+  const currentAvailable = useMemo(
+    () => available || balance,
+    [available, balance],
+  )
 
   return (
     <Card
@@ -27,7 +40,7 @@ const MintNumberInput = ({ mint, value, onChange }: MintNumberInputProps) => {
             <Space size={6}>
               <Typography.Text>Available:</Typography.Text>
               <Typography.Text>
-                {`${util.numeric(balance).format('0,0.[00]')} LPT`}
+                {`${util.numeric(currentAvailable).format('0,0.[00]')} LPT`}
               </Typography.Text>
             </Space>
           </Col>
@@ -50,13 +63,14 @@ const MintNumberInput = ({ mint, value, onChange }: MintNumberInputProps) => {
               }}
               value={value}
               onChange={onChange}
+              max={currentAvailable.toString()}
             />
           </Col>
           <Col>
             <Button
               type="text"
               style={{ marginRight: -15, color: '#C6F1A9' }}
-              onClick={() => onChange(balance.toString())}
+              onClick={() => onChange(currentAvailable.toString())}
             >
               MAX
             </Button>
