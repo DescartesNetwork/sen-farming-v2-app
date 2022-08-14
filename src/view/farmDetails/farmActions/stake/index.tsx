@@ -2,18 +2,17 @@ import { useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button, Space, Card, Modal } from 'antd'
-// import CardNumbericInput from 'components/cardNumbericInput'
-import MintNumberInput from 'components/mintNumberInput'
 import ExtraTypography from '../extraTypography'
-
 import {
   AvatarNFT,
   SearchNFT as ModalContentListNFTs,
 } from '@sen-use/components'
 
-import './index.less'
+import CardNumbericInput from 'components/cardNumbericInput'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useStake } from 'hooks/actions/useStake'
+
+import './index.less'
 
 const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [visible, setVisible] = useState(false)
@@ -45,7 +44,7 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
         </Typography.Text>
       </Col>
       <Col span={24}>
-        <MintNumberInput
+        <CardNumbericInput
           mint={farmData.inputMint.toBase58()}
           value={inAmount}
           onChange={setInAmount}

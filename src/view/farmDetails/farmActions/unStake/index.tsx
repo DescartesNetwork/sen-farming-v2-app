@@ -2,10 +2,9 @@ import { useState } from 'react'
 
 import IonIcon from '@sentre/antd-ionicon'
 import { Row, Col, Typography, Button } from 'antd'
-// import CardNumbericInput from 'components/cardNumbericInput'
-import MintNumberInput from 'components/mintNumberInput'
 import { useUnstake } from 'hooks/actions/useUnstake'
 import { useStakedData } from 'hooks/debt/useStakedData'
+import CardNumbericInput from 'components/cardNumbericInput'
 
 const UnStake = ({ farmAddress }: { farmAddress: string }) => {
   const [outAmount, setOutAmount] = useState<string>('')
@@ -21,7 +20,7 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
         </Typography.Text>
       </Col>
       <Col span={24}>
-        <MintNumberInput
+        <CardNumbericInput
           available={stakedData.amount}
           value={outAmount}
           onChange={setOutAmount}
