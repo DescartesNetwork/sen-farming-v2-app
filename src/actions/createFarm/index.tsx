@@ -8,6 +8,7 @@ import BoostNFT, { BoostData } from './boostNFT'
 
 import { useAppRouter } from 'hooks/useAppRouter'
 import { useNewFarm } from 'hooks/actions/useNewFarm'
+import { useStake } from 'hooks/actions/useStake'
 
 import './index.less'
 
@@ -39,6 +40,8 @@ const CreateFarm = () => {
     endAt: 0,
   })
   const { initializeFarm } = useNewFarm()
+  const { stake } = useStake()
+
   const { pushHistory } = useAppRouter()
 
   const onChangeTime = (name: keyof Time, value: number) => {
@@ -46,13 +49,18 @@ const CreateFarm = () => {
   }
 
   const addFarm = async () => {
-    await initializeFarm({
-      inputMint: mintFarm,
-      startAfter: time.startAt,
-      endAfter: time.endAt,
-      boostsData,
-      tokenRewards,
+    return stake({
+      farm: '2BmUH61rDwQ1rk3N422mL8UiRS9YPNJUy2bsApRKc26j',
+      inAmount: 1,
+      nfts: [],
     })
+    // await initializeFarm({
+    //   inputMint: mintFarm,
+    //   startAfter: time.startAt,
+    //   endAfter: time.endAt,
+    //   boostsData,
+    //   tokenRewards,
+    // })
   }
 
   return (

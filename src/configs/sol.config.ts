@@ -1,11 +1,12 @@
-import { Net } from '@sentre/senhub'
-
+import { Net, rpc } from '@sentre/senhub'
+import metaplexNFT from 'lib/metaplex'
 /**
  * Contructor
  */
 type Conf = {
   node: string
   senFarmingProgram: string
+  metaplexNFT: metaplexNFT
 }
 
 const conf: Record<Net, Conf> = {
@@ -15,6 +16,7 @@ const conf: Record<Net, Conf> = {
   devnet: {
     node: 'https://api.devnet.solana.com',
     senFarmingProgram: '4fPn4MWiAdAWd5vqjRnCxqEsFJgWoK3mim21G82ZHPD3',
+    metaplexNFT: new metaplexNFT(rpc),
   },
 
   /**
@@ -23,6 +25,7 @@ const conf: Record<Net, Conf> = {
   testnet: {
     node: 'https://api.testnet.solana.com',
     senFarmingProgram: '4fPn4MWiAdAWd5vqjRnCxqEsFJgWoK3mim21G82ZHPD3',
+    metaplexNFT: new metaplexNFT(rpc),
   },
 
   /**
@@ -31,6 +34,7 @@ const conf: Record<Net, Conf> = {
   mainnet: {
     node: 'https://api.mainnet-beta.solana.com',
     senFarmingProgram: '4fPn4MWiAdAWd5vqjRnCxqEsFJgWoK3mim21G82ZHPD3',
+    metaplexNFT: new metaplexNFT(rpc),
   },
 }
 
