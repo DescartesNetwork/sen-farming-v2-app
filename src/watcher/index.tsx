@@ -4,8 +4,9 @@ import { useWatcherLoading } from './watcher'
 
 import Loading from 'components/loading'
 import FarmsWatcher from './farms.watcher'
-import DebtWatcher from './debts.watcher'
-import BoostingWatcher from './boostings.watcher'
+import DebtsWatcher from './debts.watcher'
+import BoostingsWatcher from './boostings.watcher'
+import RewardsWatcher from './rewards.watcher'
 
 export const AppWatcher: React.FC = ({ children }) => {
   const [loadingInfo] = useWatcherLoading()
@@ -20,8 +21,9 @@ export const AppWatcher: React.FC = ({ children }) => {
   return (
     <Fragment>
       <FarmsWatcher />
-      <DebtWatcher />
-      <BoostingWatcher />
+      <DebtsWatcher />
+      <BoostingsWatcher />
+      <RewardsWatcher />
       {loading ? <Loading /> : children}
     </Fragment>
   )
