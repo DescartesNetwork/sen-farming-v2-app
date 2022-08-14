@@ -17,7 +17,6 @@ export const useGetDebtReward = (farmAddress: string) => {
     let current_shares = debData.shares
 
     let time_passed = await farmOracle.get_time_passed()
-    console.log('time_passed', time_passed.toNumber())
     let current_emission_rate = farmOracle.get_emission_rate(
       farmData.totalShares,
     )

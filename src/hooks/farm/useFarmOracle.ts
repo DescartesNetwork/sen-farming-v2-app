@@ -14,10 +14,7 @@ export const useFarmOracle = (farmAddress: string) => {
 
   const get_time_passed = useCallback(async () => {
     let current_date = await current_timestamp()
-    console.log('current_date', current_date.toNumber())
     let lifetime = get_lifetime()
-    console.log('lifetime', lifetime.toNumber())
-    console.log('self.startDate', self.startDate.toNumber())
     if (current_date.lte(self.startDate)) {
       return new BN(0)
     }
