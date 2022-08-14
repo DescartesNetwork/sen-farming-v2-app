@@ -12,7 +12,7 @@ export const useDebtOracle = (farmAddress: string) => {
       let mi_mint_out = input_mint_amount.mul(self.leverage).div(PRECISION)
       return mi_mint_out
     },
-    [self.leverage],
+    [self?.leverage],
   )
 
   const withdraw = useCallback(
@@ -20,7 +20,7 @@ export const useDebtOracle = (farmAddress: string) => {
       let input_mint_out = mi_mint_amount.mul(PRECISION).div(self.leverage)
       return input_mint_out
     },
-    [self.leverage],
+    [self?.leverage],
   )
 
   const next_debt_amount = useCallback(
@@ -69,7 +69,7 @@ export const useDebtOracle = (farmAddress: string) => {
         .sub(bi_debt_amount)
       return bi_rewards
     },
-    [self.debtAmount],
+    [self?.debtAmount],
   )
 
   return useMemo(() => {

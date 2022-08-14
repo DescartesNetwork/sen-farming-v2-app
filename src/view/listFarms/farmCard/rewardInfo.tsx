@@ -31,7 +31,7 @@ const Explain = ({ farmAddress }: { farmAddress: string }) => {
         </Space>
       </Col>
       <Col span={24}>
-        <HarvestButton farmAddress="farm address" />
+        <HarvestButton farmAddress={farmAddress} />
       </Col>
     </Row>
   )

@@ -8,14 +8,11 @@ import { Reward } from 'actions/createFarm'
 
 type InitializeFarmProps = {
   inputMint: string
-  startAfter: number
-  endAfter: number
+  startAt: number
+  endAt: number
   tokenRewards: Reward[]
   boostsData: BoostData[]
 }
-
-const farming = window.senFarming
-const provider = window.senFarming.provider
 
 export const useCreateFarm = () => {
   const [loading, setLoading] = useState(false)
@@ -23,24 +20,33 @@ export const useCreateFarm = () => {
   const initializeFarm = useCallback(
     async ({
       inputMint,
-      startAfter,
-      endAfter,
+      startAt,
+      endAt,
       tokenRewards,
       boostsData,
     }: InitializeFarmProps) => {
+      const currentTime = new Date().getTime()
+      const startAfter =
+        startAt > currentTime ? Math.floor((startAt - currentTime) / 1000) : 0
+      const endAfter = Math.floor((endAt - currentTime) / 1000)
+
       try {
         setLoading(true)
+        const farming = window.senFarming
+        const provider = window.senFarming.provider
         const mintPubKey = new web3.PublicKey(inputMint)
+
         let farm = web3.Keypair.generate()
         const transaction = new web3.Transaction()
         const { tx: txInitializeFarm } = await farming.initializeFarm({
           inputMint: mintPubKey,
-          startAfter: startAfter,
+          startAfter: startAfter + 10,
           endAfter: endAfter,
           sendAndConfirm: false,
           farmKeypair: farm,
         })
         transaction.add(txInitializeFarm)
+
         await Promise.all(
           boostsData.map(async ({ collection, percentage }) => {
             const { tx: txPushFarmBoostingCollection } =

@@ -49,8 +49,8 @@ const CreateFarm = () => {
   const onCreateFarm = async () => {
     await initializeFarm({
       inputMint: mintFarm,
-      startAfter: time.startAt,
-      endAfter: time.endAt,
+      startAt: time.startAt,
+      endAt: time.endAt,
       boostsData,
       tokenRewards,
     })
