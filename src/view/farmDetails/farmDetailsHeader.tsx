@@ -8,7 +8,7 @@ import RedirectSwap from 'actions/redirectSwap'
 const ID_NAME = 'farmAddress'
 
 const FarmDetailsHeader = () => {
-  const { getIdFromUrl } = useAppRouter()
+  const { getIdFromUrl, pushHistory } = useAppRouter()
   const farmAddress = getIdFromUrl(ID_NAME)
 
   return (
@@ -17,7 +17,9 @@ const FarmDetailsHeader = () => {
         <Button
           type="text"
           icon={<IonIcon name="arrow-back-outline" />}
-          onClick={() => {}}
+          onClick={() => {
+            pushHistory('/farms')
+          }}
           style={{ padding: 0, background: 'trasparent' }}
         >
           Back

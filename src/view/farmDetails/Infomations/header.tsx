@@ -7,9 +7,11 @@ import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
 
 import { useStakedData } from 'hooks/debt/useStakedData'
+import { useFarmData } from 'hooks/farm/useFarmData'
 
 const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
+  const { endDate } = useFarmData(farmAddress)
 
   return (
     <Row gutter={[24, 24]}>
@@ -21,7 +23,7 @@ const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
           />
           <Space size={6}>
             <Typography.Text type="secondary">End in</Typography.Text>
-            <TimeCountDown endTime={Date.now() / 1000 + 86900} />
+            <TimeCountDown endTime={endDate.toNumber() / 1000} />
           </Space>
         </Space>
       </Col>
