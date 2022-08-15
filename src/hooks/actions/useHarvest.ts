@@ -30,6 +30,12 @@ export const useHarvest = (farmAddress: string) => {
       })
       transaction.add(txClaim)
       // Convert
+      const { tx: txConvert } = await window.senFarming.convertRewards({
+        farm: farmAddress,
+        sendAndConfirm: false,
+      })
+      transaction.add(txConvert)
+
       const provider = window.senFarming.provider
       const txId = await provider.sendAndConfirm(transaction)
       notifySuccess('Harvested', txId)

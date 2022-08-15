@@ -44,6 +44,8 @@ export const useStake = (farmAddress: string) => {
           })
           transaction.add(tx)
         }
+        // TODO: lock/unlock nfts
+
         // Calc amountBN deposit
         const amountBN = utilsBN.decimalize(inAmount, decimals)
         // Deposit
