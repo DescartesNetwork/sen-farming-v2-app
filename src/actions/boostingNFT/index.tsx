@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import IonIcon from '@sentre/antd-ionicon'
 import { Button, Col, Modal, Row, Space, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
+import NftSelection from './nftSelection'
 
 import { useDebtTreasurerAddress } from 'hooks/debt/useDebtData'
 import { useNFTsByOwnerAndCollection } from '@sen-use/components'
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+
+import './index.less'
 
 const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)
@@ -15,10 +19,23 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
 
   const treasurerAddress = useDebtTreasurerAddress(farmAddress)
   const { nftsSortByCollection } = useNFTsByOwnerAndCollection(treasurerAddress)
+  const farmBoostingData = useFarmBoosting(farmAddress)
+
+  const acceptedCollections = useMemo(
+    () =>
+      farmBoostingData.map((boostingData) =>
+        boostingData.boostingCollection.toBase58(),
+      ),
+    [farmBoostingData],
+  )
 
   const onRemoveNFT = (mintAddress: string) => {
     setVisible(true)
     setUnstakeNFT(mintAddress)
+  }
+
+  const onSelect = (nftAddress: string) => {
+    console.log('StakeNFT: ', nftAddress)
   }
 
   const unstateNFT = () => {
@@ -37,7 +54,7 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
     <Row gutter={[16, 16]}>
       <Col span={24}>
         <SpaceBetween title="Your staked NFTs">
-          {nftsSortByCollection && (
+          {!!nftsSortByCollection?.length && (
             <Button type="text" onClick={() => setRemoveable(!removeable)}>
               {removeable ? 'Cancel' : 'Unstake'}
             </Button>
@@ -55,6 +72,12 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
               />
             </Col>
           ))}
+          <Col>
+            <NftSelection
+              acceptedCollections={acceptedCollections}
+              onSelect={onSelect}
+            />
+          </Col>
         </Row>
       </Col>
       <Modal
