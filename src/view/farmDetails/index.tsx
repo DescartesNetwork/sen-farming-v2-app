@@ -15,10 +15,10 @@ const FarmDetails = () => {
         <Col span={24}>
           <FarmDetailsHeader />
         </Col>
-        <Col span={14}>
+        <Col xs={24} lg={14}>
           <FarmInfo farmAddress={farmAddress} />
         </Col>
-        <Col span={10}>
+        <Col xs={24} lg={10}>
           <FarmActions farmAddress={farmAddress} />
         </Col>
       </Row>

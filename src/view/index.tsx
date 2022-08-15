@@ -14,7 +14,7 @@ const View = () => {
   const { appRoute } = useAppRouter()
 
   useEffect(() => {
-    setBackground({ light: '#1B1B1B', dark: '#1B1B1B' })
+    setBackground({ light: '#141413', dark: '#141413' })
   }, [setBackground])
 
   return (

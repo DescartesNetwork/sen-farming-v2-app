@@ -8,7 +8,7 @@ const Seed = () => {
         <CardNumbericInput value="" onChange={() => {}} selectMint />
       </Col>
       <Col span={24}>
-        <Button type="primary" block>
+        <Button size="large" type="primary" block>
           Seed
         </Button>
       </Col>
