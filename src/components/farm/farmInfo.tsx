@@ -80,9 +80,13 @@ const FarmInfo = ({ farmAddress = '', inputMint = '' }: FarmInfoProps) => {
           background: 'transparent',
         }}
         onClick={showFarmInfo}
-      >
-        <IonIcon name="information-circle-outline" className="icon-describe" />
-      </Button>
+        icon={
+          <IonIcon
+            name="information-circle-outline"
+            className="icon-describe"
+          />
+        }
+      />
       <Modal
         visible={visible}
         onCancel={onCloseModal}
