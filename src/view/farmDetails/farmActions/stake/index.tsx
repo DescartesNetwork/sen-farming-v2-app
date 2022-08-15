@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button, Space, Card, Modal, Tooltip } from 'antd'
@@ -19,11 +19,9 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [visible, setVisible] = useState(false)
   const [selectedNFTs, setNftsSelected] = useState<string[]>([])
   const [inAmount, setInAmount] = useState<string>('')
-  const [boostAmount, setBoostAmount] = useState<number>(0)
   const farmData = useFarmData(farmAddress)
   const farmBoostingData = useFarmBoosting(farmAddress)
   const { stake, loading } = useStake(farmAddress)
-  console.log(setBoostAmount)
 
   const onSelect = (nftAddress: string) => {
     setVisible(false)
@@ -35,9 +33,18 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
     setNftsSelected(selectedNFTs.filter((nft) => nft !== nftAddress))
   }
 
-  const onFullyStake = () => {
-    stake({ farm: farmAddress, nfts: selectedNFTs, inAmount: Number(inAmount) })
+  const onFullyStake = async () => {
+    await stake({
+      farm: farmAddress,
+      nfts: selectedNFTs,
+      inAmount: Number(inAmount),
+    })
+    setInAmount('')
   }
+
+  const boostAmount = useMemo(() => {
+    return 0
+  }, [])
 
   return (
     <Row gutter={[16, 16]} style={{ height: '100%' }}>
@@ -148,12 +155,11 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
           {!Number(inAmount) ? 'Enter an amount' : 'Stake'}
         </Button>
       </Col>
-      <Col span={24}>
+      {/* <Col span={24}>
         <Button type="text" style={{ color: '#a0e86f' }} block>
-          Get BTC - SNTR LP
+          Get <MintSymbol mintAddress={farmData.inputMint} />
         </Button>
-      </Col>
-
+      </Col> */}
       <Modal
         visible={visible}
         closeIcon={<IonIcon name="close-outline" />}
