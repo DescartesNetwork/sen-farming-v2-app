@@ -57,7 +57,7 @@ const Farms = () => {
         </Col>
         {/* List Farms */}
         <Col span={24}>
-          <Row gutter={[12, 12]}>
+          <Row gutter={[24, 24]}>
             {filteredFarms.map((farmAddress) => (
               <Col xs={24} lg={12} key={farmAddress}>
                 <LazyLoad height={196}>
