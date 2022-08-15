@@ -23,7 +23,7 @@ const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
           />
           <Space size={6}>
             <Typography.Text type="secondary">End in</Typography.Text>
-            <TimeCountDown endTime={endDate.toNumber() / 1000} />
+            <TimeCountDown endTime={Math.floor(endDate.toNumber())} />
           </Space>
         </Space>
       </Col>
