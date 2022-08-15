@@ -28,7 +28,7 @@ const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
               <Divider style={{ margin: 0 }} />
             </Col>
             <Col span={24}>
-              <BoostingNFT />
+              <BoostingNFT farmAddress={farmAddress} />
             </Col>
           </Fragment>
         )}

@@ -5,16 +5,16 @@ import { Button, Col, Modal, Row, Space, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
 
-const BoostingNFT = () => {
+import { useDebtTreasurerAddress } from 'hooks/debt/useDebtData'
+import { useNFTsByOwnerAndCollection } from '@sen-use/components'
+
+const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)
   const [visible, setVisible] = useState(false)
   const [unstakeNFT, setUnstakeNFT] = useState('')
 
-  const [stakedNFTs, setStakedNFTs] = useState<string[]>([
-    'E3XvnyR46WV3W3Sv7nXAzPoN4LJLNmL84aUinN39WsXX',
-    'FDbqKkB9P1crrmxFTiKFvYHKphrXzAyXLdfh77KetT6P',
-    'FeHKuGmqXS7BKQcC2hpX6as19unm7foUBrSgTsZLKTTs',
-  ])
+  const treasurerAddress = useDebtTreasurerAddress(farmAddress)
+  const { nftsSortByCollection } = useNFTsByOwnerAndCollection(treasurerAddress)
 
   const onRemoveNFT = (mintAddress: string) => {
     setVisible(true)
@@ -22,11 +22,10 @@ const BoostingNFT = () => {
   }
 
   const unstateNFT = () => {
-    const nextStakedNFTs = stakedNFTs.filter(
-      (nftAddress) => nftAddress !== unstakeNFT,
-    )
     setVisible(false)
-    setStakedNFTs(nextStakedNFTs)
+    if (!nftsSortByCollection) return
+    // Call function unstakeNFT
+    console.log('unstateNFT: ', unstakeNFT)
   }
 
   const onCloseModal = () => {
@@ -38,7 +37,7 @@ const BoostingNFT = () => {
     <Row gutter={[16, 16]}>
       <Col span={24}>
         <SpaceBetween title="Your staked NFTs">
-          {stakedNFTs.length > 0 && (
+          {nftsSortByCollection && (
             <Button type="text" onClick={() => setRemoveable(!removeable)}>
               {removeable ? 'Cancel' : 'Unstake'}
             </Button>
@@ -47,10 +46,10 @@ const BoostingNFT = () => {
       </Col>
       <Col span={24}>
         <Row gutter={[16, 16]}>
-          {stakedNFTs.map((nftAddress) => (
-            <Col key={nftAddress}>
+          {nftsSortByCollection?.map((nft) => (
+            <Col key={nft.mint}>
               <NFTAvatar
-                mintAddress={nftAddress}
+                mintAddress={nft.mint}
                 removeable={removeable}
                 onRemoveNFT={onRemoveNFT}
               />

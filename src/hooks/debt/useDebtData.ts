@@ -28,3 +28,19 @@ export const useDebtData = (farmAddress: string) => {
 
   return debtData
 }
+
+export const useDebtTreasurerAddress = (farmAddress: string) => {
+  const [treasurerAddress, setTreasurerAddress] = useState('')
+
+  const fetchTreasurerAddress = useCallback(async () => {
+    if (!util.isAddress(farmAddress)) return setTreasurerAddress('')
+    const PDAs = await window.senFarming.deriveAllPDAs({ farm: farmAddress })
+    return setTreasurerAddress(PDAs.debtTreasurer.toBase58())
+  }, [farmAddress])
+
+  useEffect(() => {
+    fetchTreasurerAddress()
+  }, [fetchTreasurerAddress])
+
+  return treasurerAddress
+}

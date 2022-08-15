@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button, Space, Card, Modal, Tooltip } from 'antd'
@@ -24,6 +24,14 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const farmBoostingData = useFarmBoosting(farmAddress)
   const { stake, loading } = useStake(farmAddress)
   console.log(setBoostAmount)
+
+  const acceptedCollections = useMemo(
+    () =>
+      farmBoostingData.map((boostingData) =>
+        boostingData.boostingCollection.toBase58(),
+      ),
+    [farmBoostingData],
+  )
 
   const onSelect = (nftAddress: string) => {
     setVisible(false)
@@ -170,7 +178,7 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
             <ModalContentListNFTs
               onSelect={onSelect}
               selectedNFTs={selectedNFTs}
-              // collectionAddress={acceptedCollections}
+              collectionAddress={acceptedCollections}
             />
           </Col>
         </Row>
