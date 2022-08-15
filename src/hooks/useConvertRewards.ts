@@ -13,7 +13,7 @@ export type PendingRewardData = {
 }
 export const useConvertRewards = (
   farmAddress: string,
-  intervalTime?: number,
+  intervalTime = 1000,
 ): PendingRewardData[] => {
   const [totalReward, setTotalReward] = useState(new BN(0))
   const getDebtReward = useGetDebtReward(farmAddress)
@@ -37,9 +37,6 @@ export const useConvertRewards = (
 
   const pendingConvertRewards = useMemo(() => {
     return rewards.map((reward) => {
-      console.log('totalReward', totalReward)
-      console.log('reward.totalRewards', reward.totalRewards)
-      console.log('farmData.totalRewards', farmData.totalRewards)
       return {
         mint: reward.rewardMint.toBase58(),
         amount: totalReward

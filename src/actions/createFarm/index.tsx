@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { Button, Card, Col, Row, Space, Typography } from 'antd'
 import { MintSelection } from '@sen-use/components'
@@ -10,6 +10,7 @@ import { useAppRouter } from 'hooks/useAppRouter'
 import { useCreateFarm } from 'hooks/actions/useCreateFarm'
 
 import './index.less'
+import { util } from '@sentre/senhub/dist'
 
 export const MINT_STYLE = {
   padding: '4px 12px',
@@ -38,7 +39,7 @@ const CreateFarm = () => {
     startAt: 0,
     endAt: 0,
   })
-  const { initializeFarm } = useCreateFarm()
+  const { initializeFarm, loading } = useCreateFarm()
 
   const { pushHistory } = useAppRouter()
 
@@ -55,6 +56,15 @@ const CreateFarm = () => {
       tokenRewards,
     })
   }
+
+  const errorMsg = useMemo(() => {
+    if (!util.isAddress(mintFarm)) return 'Select input mint'
+    if (!Number(time.endAt)) return 'Select end time'
+    for (const reward of tokenRewards) {
+      if (!util.isAddress(reward.mintAddress)) return 'Select reward mint'
+      if (!Number(reward.budget)) return 'Enter budget amount'
+    }
+  }, [mintFarm, time.endAt, tokenRewards])
 
   return (
     <Row justify="center">
@@ -98,8 +108,15 @@ const CreateFarm = () => {
               </Button>
             </Col>
             <Col span={12}>
-              <Button size="large" type="primary" onClick={onCreateFarm} block>
-                Add
+              <Button
+                size="large"
+                type="primary"
+                onClick={onCreateFarm}
+                block
+                disabled={!!errorMsg}
+                loading={loading}
+              >
+                {!!errorMsg ? errorMsg : 'Add'}
               </Button>
             </Col>
           </Row>

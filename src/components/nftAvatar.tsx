@@ -1,19 +1,22 @@
 import { CSSProperties } from 'react'
 
 import IonIcon from '@sentre/antd-ionicon'
-import { Button, Card, Image } from 'antd'
+import { Button, Card } from 'antd'
+import { AvatarNFT } from '@sen-use/components'
 
 type NFTAvatarProps = {
-  src: string
+  mintAddress: string
   size?: number
   style?: CSSProperties
   removeable?: boolean
+  onRemoveNFT: (mintAddress: string) => void
 }
 const NFTAvatar = ({
-  src,
+  mintAddress,
   size = 64,
   style,
   removeable = false,
+  onRemoveNFT,
 }: NFTAvatarProps) => {
   return (
     <div style={{ position: 'relative' }}>
@@ -26,15 +29,14 @@ const NFTAvatar = ({
         bodyStyle={{ padding: 0 }}
         bordered={false}
       >
-        <Image
+        <AvatarNFT
+          mintAddress={mintAddress}
           style={{
             width: size,
             height: size,
             objectFit: 'cover',
             ...style,
           }}
-          src={src}
-          preview={false}
         />
       </Card>
       {/* Button remove NFT */}
@@ -54,7 +56,7 @@ const NFTAvatar = ({
             padding: 0,
           }}
           icon={<IonIcon name="close-outline" />}
-          onClick={() => {}}
+          onClick={() => onRemoveNFT(mintAddress)}
         />
       )}
     </div>

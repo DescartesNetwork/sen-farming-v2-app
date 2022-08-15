@@ -9,9 +9,11 @@ import APRInfo from './APRInfo'
 
 import configs from 'configs'
 import FarmLiquidity from 'components/farm/farmLiquidity'
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
+  const farmBoostingData = useFarmBoosting(farmAddress)
 
   return (
     <Card
@@ -30,19 +32,21 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 hoverable
               />
             </Col>
-            <Col>
-              <Tag
-                style={{
-                  color: '#A0E86F',
-                  background: 'rgba(160, 232, 111, 0.1)',
-                  border: 'none',
-                  borderRadius: 8,
-                  padding: '1px 8px',
-                }}
-              >
-                ⚡ Boost
-              </Tag>
-            </Col>
+            {!!farmBoostingData.length && (
+              <Col>
+                <Tag
+                  style={{
+                    color: '#A0E86F',
+                    background: 'rgba(160, 232, 111, 0.1)',
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '1px 8px',
+                  }}
+                >
+                  ⚡ Boost
+                </Tag>
+              </Col>
+            )}
             <Col span={24}>
               <Button type="text" style={{ marginLeft: -15 }}>
                 Go pool
@@ -79,7 +83,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
               <Space direction="vertical">
                 <Space>
                   <Typography.Text type="secondary">
-                    Your reward
+                    Your rewards
                   </Typography.Text>
                   <RewardInfo farmAddress={farmAddress} />
                 </Space>

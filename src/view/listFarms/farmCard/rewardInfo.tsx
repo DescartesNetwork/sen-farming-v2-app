@@ -4,27 +4,32 @@ import IonIcon from '@sentre/antd-ionicon'
 import SpaceBetween from 'components/spaceBetween'
 import HarvestButton from 'actions/harvest/harvestButton'
 
-import { useFarmRewards } from 'hooks/farm/useFarmRewards'
+import MintAmount from 'components/mint/mintAmount'
+import { useConvertRewards } from 'hooks/useConvertRewards'
+import MintTotalValue from 'components/mint/mintTotalValue'
 
 const Explain = ({ farmAddress }: { farmAddress: string }) => {
-  const farmRewards = useFarmRewards(farmAddress)
+  const convertRewards = useConvertRewards(farmAddress)
 
   return (
     <Row gutter={[8, 8]}>
       <Col span={24}>
         <Space direction="vertical" style={{ width: '100%' }}>
-          {farmRewards.map((reward) => (
+          {convertRewards.map(({ mint, amount }) => (
             <SpaceBetween
-              key={reward.rewardMint.toBase58()}
+              key={mint}
               title={
                 <Space>
-                  <MintAvatar mintAddress={reward.rewardMint} />
-                  <MintSymbol mintAddress={reward.rewardMint} />
+                  <MintAvatar mintAddress={mint} />
+                  <MintSymbol mintAddress={mint} />
                 </Space>
               }
             >
               <Typography.Title level={5}>
-                195 <span style={{ color: '#A1A1A1' }}>($1.9)</span>
+                <MintAmount mintAddress={mint} amount={amount} />{' '}
+                <span style={{ color: '#A1A1A1' }}>
+                  (<MintTotalValue mintAddress={mint} amount={amount} />)
+                </span>
               </Typography.Title>
             </SpaceBetween>
           ))}
