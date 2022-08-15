@@ -3,12 +3,12 @@ import { utilsBN } from '@sen-use/web3'
 
 import { Space, Typography } from 'antd'
 
-import useMintCgk from 'hooks/useMintCgk'
+import { usePrice } from 'hooks/useGetPrice'
 import { PendingRewardData } from 'hooks/useConvertRewards'
 
 type HarvestAmountProps = { reward: PendingRewardData }
 const HarvestAmount = ({ reward }: HarvestAmountProps) => {
-  const { price } = useMintCgk(reward.mint)
+  const price = usePrice(reward.mint)
   const decimals = useMintDecimals({ mintAddress: reward.mint }) || 0
   const mintAmount = Number(utilsBN.undecimalize(reward.amount, decimals))
 

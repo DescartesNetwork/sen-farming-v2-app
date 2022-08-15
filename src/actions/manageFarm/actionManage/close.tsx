@@ -13,7 +13,7 @@ const Close = () => {
         </Space>
       </Col>
       <Col span={24}>
-        <Button type="primary" block>
+        <Button size="large" type="primary" block>
           Close
         </Button>
       </Col>

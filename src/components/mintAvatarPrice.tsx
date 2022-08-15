@@ -3,7 +3,7 @@ import { util } from '@sentre/senhub'
 
 import { Space, Typography } from 'antd'
 
-import useMintCgk from 'hooks/useMintCgk'
+import { usePrice } from 'hooks/useGetPrice'
 import { CSSProperties } from 'react'
 
 type MintAvatarPriceProps = {
@@ -16,7 +16,7 @@ const MintAvatarPrice = ({
   size = 32,
   style,
 }: MintAvatarPriceProps) => {
-  const { price } = useMintCgk(mintAddress)
+  const price = usePrice(mintAddress)
 
   return (
     <Space>

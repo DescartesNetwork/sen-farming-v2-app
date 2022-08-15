@@ -18,7 +18,7 @@ const FarmAvatar = ({
   size = 44,
   textStyle,
   hoverable = false,
-  spacing = 0,
+  spacing = 8,
 }: FarmAvatarProps) => {
   const { inputMint } = useFarmData(farmAddress) || {}
 
