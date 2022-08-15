@@ -1,16 +1,20 @@
+import { useGetTotalValue } from 'hooks/useGetPrice'
 import { useCallback, useEffect, useState } from 'react'
+import { useFarmData } from './useFarmData'
 
 export const useFarmLiquidity = (farmAddress: string) => {
   const [liquidity, setLiquidity] = useState(0)
+  const { inputMint, totalShares } = useFarmData(farmAddress)
+  const getTotalValue = useGetTotalValue()
 
-  const calcLiquidity = useCallback(async () => {
-    if (!farmAddress) return setLiquidity(0)
-    return setLiquidity(Math.random() * 1000)
-  }, [farmAddress])
+  const updateLiquidity = useCallback(async () => {
+    const liquidity = await getTotalValue(inputMint.toString(), totalShares)
+    return setLiquidity(liquidity)
+  }, [getTotalValue, inputMint, totalShares])
 
   useEffect(() => {
-    calcLiquidity()
-  }, [calcLiquidity])
+    updateLiquidity()
+  }, [updateLiquidity])
 
   return liquidity
 }
