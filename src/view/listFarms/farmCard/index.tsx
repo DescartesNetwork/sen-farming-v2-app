@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 
-import { Button, Card, Col, Row, Space, Tag, Typography } from 'antd'
+import { Card, Col, Row, Space, Tag, Typography } from 'antd'
 import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
 import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
@@ -13,7 +13,7 @@ import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
-  const farmBoostingData = useFarmBoosting(farmAddress) || []
+  const farmBoostingData = useFarmBoosting(farmAddress)
 
   return (
     <Card
@@ -32,7 +32,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 hoverable
               />
             </Col>
-            {farmBoostingData.length > 0 && (
+            {!!farmBoostingData.length && (
               <Col>
                 <Tag
                   style={{
@@ -47,11 +47,11 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 </Tag>
               </Col>
             )}
-            <Col span={24}>
+            {/* <Col span={24}>
               <Button type="text" style={{ marginLeft: -15 }}>
                 Go pool
               </Button>
-            </Col>
+            </Col> */}
           </Row>
         </Col>
         <Col span={24}>

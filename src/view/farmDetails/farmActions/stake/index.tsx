@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button, Space, Card, Modal, Tooltip } from 'antd'
@@ -11,6 +11,7 @@ import {
 import CardNumbericInput from 'components/cardNumbericInput'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useStake } from 'hooks/actions/useStake'
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 import './index.less'
 
@@ -20,6 +21,7 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [inAmount, setInAmount] = useState<string>('')
   const [boostAmount, setBoostAmount] = useState<number>(0)
   const farmData = useFarmData(farmAddress)
+  const farmBoostingData = useFarmBoosting(farmAddress)
   const { stake, loading } = useStake(farmAddress)
   console.log(setBoostAmount)
 
@@ -52,60 +54,67 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
           onChange={setInAmount}
         />
       </Col>
-      <Col span={24}>
-        <Space size={6}>
-          <Typography.Text>Use NFTs to increase LP</Typography.Text>
-          <Typography.Text type="secondary">
-            <Tooltip
-              placement="right"
-              title="Only farm owner-approved NFTs can be used for this farm. Each NFT collection will give a different boost rate depending on the settings of the farm owner."
-            >
-              <IonIcon name="alert-circle-outline" />
-            </Tooltip>
-          </Typography.Text>
-        </Space>
-      </Col>
-      <Col span={24}>
-        <Row gutter={[16, 16]}>
-          {selectedNFTs.map((nftAddress) => (
-            <Col key={nftAddress}>
-              <Card
-                className="upload-box card-nft-image-only"
-                bodyStyle={{ padding: 0 }}
-              >
-                <div className="nft-image">
-                  <AvatarNFT
-                    mintAddress={nftAddress}
-                    size={64}
-                    style={{ borderRadius: 8, marginTop: -1 }}
-                  />
-                </div>
-                <Button
-                  type="text"
-                  className="icon-delete-nft"
-                  icon={<IonIcon name="trash-outline" />}
-                  onClick={() => onDelete(nftAddress)}
-                />
-              </Card>
-            </Col>
-          ))}
-          <Col>
-            <Card
-              className="upload-box card-nft-image-only"
-              bodyStyle={{ padding: 0 }}
-              onClick={() => setVisible(true)}
-            >
-              <Button
-                type="text"
-                className="icon-add-nft"
-                icon={
-                  <IonIcon name="add-outline" style={{ color: '#a0e86f' }} />
-                }
-              />
-            </Card>
+      {!!farmBoostingData.length && (
+        <Fragment>
+          <Col span={24}>
+            <Space size={6}>
+              <Typography.Text>Use NFTs to increase LP</Typography.Text>
+              <Typography.Text type="secondary">
+                <Tooltip
+                  placement="right"
+                  title="Only farm owner-approved NFTs can be used for this farm. Each NFT collection will give a different boost rate depending on the settings of the farm owner."
+                >
+                  <IonIcon name="alert-circle-outline" />
+                </Tooltip>
+              </Typography.Text>
+            </Space>
           </Col>
-        </Row>
-      </Col>
+          <Col span={24}>
+            <Row gutter={[16, 16]}>
+              {selectedNFTs.map((nftAddress) => (
+                <Col key={nftAddress}>
+                  <Card
+                    className="upload-box card-nft-image-only"
+                    bodyStyle={{ padding: 0 }}
+                  >
+                    <div className="nft-image">
+                      <AvatarNFT
+                        mintAddress={nftAddress}
+                        size={64}
+                        style={{ borderRadius: 8, marginTop: -1 }}
+                      />
+                    </div>
+                    <Button
+                      type="text"
+                      className="icon-delete-nft"
+                      icon={<IonIcon name="trash-outline" />}
+                      onClick={() => onDelete(nftAddress)}
+                    />
+                  </Card>
+                </Col>
+              ))}
+              <Col>
+                <Card
+                  className="upload-box card-nft-image-only"
+                  bodyStyle={{ padding: 0 }}
+                  onClick={() => setVisible(true)}
+                >
+                  <Button
+                    type="text"
+                    className="icon-add-nft"
+                    icon={
+                      <IonIcon
+                        name="add-outline"
+                        style={{ color: '#a0e86f' }}
+                      />
+                    }
+                  />
+                </Card>
+              </Col>
+            </Row>
+          </Col>
+        </Fragment>
+      )}
       <Col span={24}>
         <Card
           bodyStyle={{ padding: 12 }}
