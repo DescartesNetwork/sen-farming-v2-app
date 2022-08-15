@@ -5,7 +5,7 @@ import { AppState } from 'model'
 import { BoostingData } from '@sentre/farming'
 
 export const useFarmBoosting = (farmAddress: string) => {
-  const [farmBoostingData, setFarmBoostingData] = useState<BoostingData[]>()
+  const [farmBoostingData, setFarmBoostingData] = useState<BoostingData[]>([])
   const farmBoosting = useSelector((state: AppState) => state.boosting)
 
   const getFarmBoostingData = useCallback(() => {
