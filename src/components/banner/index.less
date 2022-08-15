@@ -123,3 +123,30 @@
     }
   }
 }
+
+.wrap-animation {
+  position: absolute;
+  display: flex;
+  transform: translateX(-50%);
+  &.mining {
+    left: 38%;
+    .item-bounce {
+      position: relative;
+      &.bounce-1 {
+        top: -100px;
+        img {
+          max-width: 65px;
+          animation: shake 3s ease-in-out 0.9s infinite normal none running;
+        }
+      }
+      &.bounce-2 {
+        top: -105px;
+        left: 50px;
+        img {
+          max-width: 55px;
+          animation: shake 3s ease-in-out 0.4s infinite normal none running;
+        }
+      }
+    }
+  }
+}

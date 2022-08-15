@@ -48,7 +48,7 @@ const Farms = () => {
             childFlex={1}
           >
             <Button onClick={() => pushHistory('/create-farm')} ghost block>
-              Add farm
+              New Farm
             </Button>
           </SpaceBetween>
         </Col>

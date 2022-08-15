@@ -12,7 +12,10 @@ const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
-        <SpaceBetween title={<Typography.Text>Your rewards</Typography.Text>}>
+        <SpaceBetween
+          title={<Typography.Text>Your rewards</Typography.Text>}
+          align="top"
+        >
           <Typography.Title level={2}>
             <TotalPendingReward farmAddress={farmAddress} />
           </Typography.Title>

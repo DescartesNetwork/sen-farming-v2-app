@@ -4,7 +4,7 @@ import { Col, Row } from 'antd'
 import { Gutter } from 'antd/lib/grid/row'
 
 type SpaceBetweenProps = {
-  title: ReactNode
+  title?: ReactNode
   children?: ReactNode
   align?: 'top' | 'middle' | 'bottom' | 'stretch'
   wrap?: boolean
@@ -23,9 +23,11 @@ const SpaceBetween = ({
   childFlex,
 }: SpaceBetweenProps) => (
   <Row gutter={gutter} align={align} wrap={wrap}>
-    <Col flex="auto" style={{ ...style }}>
-      {title}
-    </Col>
+    {!!title && (
+      <Col flex="auto" style={{ ...style }}>
+        {title}
+      </Col>
+    )}
     <Col flex={childFlex}>{children}</Col>
   </Row>
 )
