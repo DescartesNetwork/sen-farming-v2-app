@@ -2012,7 +2012,7 @@
     lunr "^2.3.9"
     react-use "^17.4.0"
 
-"@sen-use/web3@^2.0.12":
+"@sen-use/web3@^2.0.11", "@sen-use/web3@^2.0.12":
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/@sen-use/web3/-/web3-2.0.12.tgz#f5f5f634aafec9fc050d6666aa8dca6bf0847f22"
   integrity sha512-ZPkWF/Tzbr+9O1zgIIygxoDT+adYZbeSLbJsmFaTHHKV5ZcjOkQgj0rAA0e75Q/mWctP4mnNoNnV6zGYTKiWTg==
@@ -2090,12 +2090,13 @@
     util "^0.12.4"
     webpack-bundle-analyzer "^4.5.0"
 
-"@sentre/farming@^1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@sentre/farming/-/farming-1.1.5.tgz#e9d9790d6615c933139ee3cda29aaefc4afed15a"
-  integrity sha512-q5wwsq+MJYRgQiF8PAMkO8vOKEYnuLgzU5mufqWGbU4eXA39fzRSxkW3wZSUDtdaIRtZz11cMk6NaaNDVJOBIg==
+"@sentre/farming@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@sentre/farming/-/farming-1.1.8.tgz#1887d60244c06bcd4e35f120bc8f0f147dc018ce"
+  integrity sha512-/VBoYNpnifhVSYzHUyHFFD6/6ZPMNS8QJU26a9GgGES/6fiipMaHWJ0zEsAVHaJrXLuq8QYsayVDivF4Y6Hk6A==
   dependencies:
     "@project-serum/anchor" "^0.24.2"
+    "@sen-use/web3" "^2.0.11"
 
 "@sentre/react-dynamic-remote-component@^0.0.6":
   version "0.0.6"
