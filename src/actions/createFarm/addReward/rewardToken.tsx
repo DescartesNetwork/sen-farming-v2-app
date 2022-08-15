@@ -1,6 +1,8 @@
-import { MintSelection } from '@sen-use/components'
+import { MintSelection, MintSymbol } from '@sen-use/components'
 import IonIcon from '@sentre/antd-ionicon'
-import { Button, Col, Input, Row, Typography } from 'antd'
+import { util } from '@sentre/senhub/dist'
+import { Button, Col, Input, Row, Space, Typography } from 'antd'
+import MintAvailable from 'components/mint/mintAvailable'
 
 import { useSPLToken } from 'hooks/useSPLToken'
 import { MINT_STYLE, Reward } from '../index'
@@ -38,6 +40,7 @@ const RewardToken = ({
           )}
         </Row>
       </Col>
+
       <Col span={12}>
         <MintSelection
           value={reward.mintAddress}
@@ -59,6 +62,17 @@ const RewardToken = ({
           }
         />
       </Col>
+      {util.isAddress(reward.mintAddress) && (
+        <Col span={24}>
+          <Typography.Text type="secondary">
+            <Space>
+              <Typography.Text type="secondary">Available:</Typography.Text>
+              <MintAvailable mintAddress={reward.mintAddress} />
+              <MintSymbol mintAddress={reward.mintAddress} />
+            </Space>
+          </Typography.Text>
+        </Col>
+      )}
     </Row>
   )
 }
