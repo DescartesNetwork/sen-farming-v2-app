@@ -137,10 +137,17 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
               label="Boost by NFT"
               content={`+ ${boostAmount} LP`}
             />
-            <ExtraTypography
-              label="Total"
-              content={`${inAmount || 0 + boostAmount} LP`}
-            />
+
+            <Row align="middle">
+              <Col flex={'auto'}>
+                <Typography.Text type="secondary">Total</Typography.Text>
+              </Col>
+              <Col>
+                <Typography.Title style={{ color: '#A0E86F' }} level={4}>{`${
+                  inAmount || 0 + boostAmount
+                } LP`}</Typography.Title>
+              </Col>
+            </Row>
           </Space>
         </Card>
       </Col>
