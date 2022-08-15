@@ -5,9 +5,10 @@ import CardRewards from './cardRewards'
 import FarmHeader from './header'
 
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+import { Fragment } from 'react'
 
 const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
-  const farmBoostingData = useFarmBoosting(farmAddress) || []
+  const farmBoostingData = useFarmBoosting(farmAddress)
 
   return (
     <Card bordered={false} style={{ height: '100%' }}>
@@ -21,13 +22,15 @@ const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
         <Col xs={24} md={12} lg={24} xl={12}>
           <CardRewards farmAddress={farmAddress} />
         </Col>
-        <Col span={24}>
-          <Divider style={{ margin: 0 }} />
-        </Col>
-        {farmBoostingData.length > 0 && (
-          <Col span={24}>
-            <BoostingNFT />
-          </Col>
+        {!!farmBoostingData.length && (
+          <Fragment>
+            <Col span={24}>
+              <Divider style={{ margin: 0 }} />
+            </Col>
+            <Col span={24}>
+              <BoostingNFT />
+            </Col>
+          </Fragment>
         )}
       </Row>
     </Card>
