@@ -40,7 +40,7 @@ export const useCreateFarm = () => {
         const endAfter = Math.floor((endAt - currentTime) / 1000)
         // Initialize farm
         let farm = web3.Keypair.generate()
-        const transaction = new web3.Transaction()
+
         const { tx: txInitializeFarm } = await farming.initializeFarm({
           inputMint: mintPubKey,
           startAfter: startAfter + 10,
@@ -48,8 +48,9 @@ export const useCreateFarm = () => {
           sendAndConfirm: false,
           farmKeypair: farm,
         })
-        transaction.add(txInitializeFarm)
+
         // Add Boosting
+        const txBoosts = new web3.Transaction()
         await Promise.all(
           boostsData.map(async ({ collection, percentage }) => {
             const { tx: txPushFarmBoostingCollection } =
@@ -59,10 +60,11 @@ export const useCreateFarm = () => {
                 coefficient: new BN(percentage),
                 sendAndConfirm: false,
               })
-            transaction.add(txPushFarmBoostingCollection)
+            txBoosts.add(txPushFarmBoostingCollection)
           }),
         )
         // Add Reward
+        const txRewards = new web3.Transaction()
         await Promise.all(
           tokenRewards.map(async ({ mintAddress, budget }) => {
             const mintDecimals = await getMintDecimals({
@@ -76,12 +78,18 @@ export const useCreateFarm = () => {
               rewardAmount,
               sendAndConfirm: false,
             })
-            transaction.add(txPushFarmReward)
+            txRewards.add(txPushFarmReward)
           }),
         )
 
-        const txId = await provider.sendAndConfirm(transaction, [farm])
-        notifySuccess('Initialize farm', `${txId}`)
+        const allTxs = [
+          { tx: txInitializeFarm, signers: [farm] },
+          { tx: txBoosts, signers: [] },
+          { tx: txRewards, signers: [] },
+        ].filter((e) => !!e.tx.instructions.length)
+
+        const txId = await provider.sendAll(allTxs)
+        notifySuccess('Initialize farm', txId[0])
       } catch (error: any) {
         notifyError(error)
       } finally {
