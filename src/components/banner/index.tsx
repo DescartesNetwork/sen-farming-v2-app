@@ -1,11 +1,15 @@
+import { util } from '@sentre/senhub/dist'
 import { Card, Col, Image, Row, Space, Typography } from 'antd'
+import { useAllFarmTotalValue } from 'hooks/useAllFarmTotalValue'
 
 import IconBanner from 'static/images/icon-banner.png'
 import './index.less'
 
+const textStyle = { color: 'inherit' }
+const style = { color: '#141413' }
+
 const Banner = () => {
-  const textStyle = { color: 'inherit' }
-  const style = { color: '#141413' }
+  const tvl = useAllFarmTotalValue()
 
   return (
     <Card
@@ -31,7 +35,7 @@ const Banner = () => {
                 Total value staked
               </Typography.Text>
               <Typography.Title level={3} style={{ ...textStyle }}>
-                $460,944.63
+                {util.numeric(tvl).format('$0,0.[00]')}
               </Typography.Title>
             </Space>
             {/* Your rewards */}
