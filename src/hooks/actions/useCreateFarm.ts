@@ -1,11 +1,12 @@
 import { utilsBN } from '@sen-use/web3/dist'
 import { useCallback, useState } from 'react'
 import { web3, BN } from '@project-serum/anchor'
-import { useGetMintDecimals } from '@sentre/senhub'
+import { useAppRoute, useGetMintDecimals } from '@sentre/senhub'
 
 import { notifyError, notifySuccess } from 'helper'
 import { BoostData } from 'actions/createFarm/boostNFT'
 import { Reward } from 'actions/createFarm'
+import configs from 'configs'
 
 type InitializeFarmProps = {
   inputMint: string
@@ -18,6 +19,7 @@ type InitializeFarmProps = {
 export const useCreateFarm = () => {
   const [loading, setLoading] = useState(false)
   const getMintDecimals = useGetMintDecimals()
+  const { to } = useAppRoute(configs.manifest.appId)
 
   const initializeFarm = useCallback(
     async ({
@@ -39,14 +41,14 @@ export const useCreateFarm = () => {
           startAfter = Math.floor((startAt - currentTime) / 1000)
         const endAfter = Math.floor((endAt - currentTime) / 1000)
         // Initialize farm
-        let farm = web3.Keypair.generate()
+        let farmKeypair = web3.Keypair.generate()
 
         const { tx: txInitializeFarm } = await farming.initializeFarm({
           inputMint: mintPubKey,
           startAfter: startAfter + 10,
           endAfter: endAfter,
           sendAndConfirm: false,
-          farmKeypair: farm,
+          farmKeypair,
         })
 
         // Add Boosting
@@ -55,7 +57,7 @@ export const useCreateFarm = () => {
           boostsData.map(async ({ collection, percentage }) => {
             const { tx: txPushFarmBoostingCollection } =
               await farming.pushFarmBoostingCollection({
-                farm: farm.publicKey,
+                farm: farmKeypair.publicKey,
                 collection: collection,
                 coefficient: new BN(percentage),
                 sendAndConfirm: false,
@@ -73,7 +75,7 @@ export const useCreateFarm = () => {
             if (!mintDecimals) throw new Error("Can't find mint decimals")
             const rewardAmount = utilsBN.decimalize(budget, mintDecimals)
             const { tx: txPushFarmReward } = await farming.pushFarmReward({
-              farm: farm.publicKey,
+              farm: farmKeypair.publicKey,
               rewardMint: mintAddress,
               rewardAmount,
               sendAndConfirm: false,
@@ -83,20 +85,24 @@ export const useCreateFarm = () => {
         )
 
         const allTxs = [
-          { tx: txInitializeFarm, signers: [farm] },
+          { tx: txInitializeFarm, signers: [farmKeypair] },
           { tx: txBoosts, signers: [] },
           { tx: txRewards, signers: [] },
-        ].filter((e) => !!e.tx.instructions.length)
+        ]
 
         const txId = await provider.sendAll(allTxs)
+
         notifySuccess('Initialize farm', txId[0])
+        setTimeout(() => {
+          to(`/${farmKeypair.publicKey}`)
+        }, 300)
       } catch (error: any) {
         notifyError(error)
       } finally {
         setLoading(false)
       }
     },
-    [getMintDecimals],
+    [getMintDecimals, to],
   )
 
   return { initializeFarm, loading }

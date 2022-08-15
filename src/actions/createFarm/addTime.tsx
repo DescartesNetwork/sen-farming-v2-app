@@ -42,7 +42,7 @@ const AddTime = ({ time, onChange }: AddTimeProps) => {
             className="date-option"
             onChange={(date) => onChange('endAt', date?.valueOf() || 0)}
             clearIcon={null}
-            value={time.endAt ? moment(time.endAt) : moment(Date.now())}
+            value={time.endAt ? moment(time.endAt) : undefined}
             showTime={{ showSecond: false }}
             placement="bottomRight"
             format={DATE_FORMAT}
