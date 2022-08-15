@@ -23,7 +23,7 @@ const TotalPendingReward = ({ farmAddress }: { farmAddress: string }) => {
     updateTotalRewards()
   }, [updateTotalRewards])
 
-  return <span>{util.numeric(totalRewards).format('$0,0.[0000]')}</span>
+  return <span>{util.numeric(totalRewards).format('$0,0.[00]')}</span>
 }
 
 export default TotalPendingReward
