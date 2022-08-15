@@ -38,6 +38,12 @@ export const useUnstake = (farmAddress: string) => {
           sendAndConfirm: false,
         })
         transaction.add(txWithdraw)
+        // Stake all
+        const { tx: txStake } = await window.senFarming.stake({
+          farm: farmAddress,
+          sendAndConfirm: false,
+        })
+        transaction.add(txStake)
 
         const provider = window.senFarming.provider
         const txId = await provider.sendAndConfirm(transaction)
