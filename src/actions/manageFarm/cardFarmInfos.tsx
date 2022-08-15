@@ -9,7 +9,7 @@ import useManageFarm from 'hooks/actions/useManageFarm'
 
 type CardFarmInfosProps = { farmAddress: string }
 const CardFarmInfos = ({ farmAddress }: CardFarmInfosProps) => {
-  const { liquidity, budget } = useManageFarm()
+  const { liquidity } = useManageFarm()
 
   return (
     <Card bordered={false}>
@@ -42,16 +42,6 @@ const CardFarmInfos = ({ farmAddress }: CardFarmInfosProps) => {
                 {util.numeric(liquidity).format('0,0.[00]')} SNTR
               </Typography.Text>
             </Space>
-          </SpaceBetween>
-        </Col>
-        {/* Budget if necessary */}
-        <Col span={24}>
-          <SpaceBetween
-            title={<Typography.Text type="secondary">Budget</Typography.Text>}
-          >
-            <Typography.Text>
-              {util.numeric(budget).format('0,0.[00]')} SNTR
-            </Typography.Text>
           </SpaceBetween>
         </Col>
         {/* NFT */}

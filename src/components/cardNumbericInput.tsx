@@ -43,7 +43,7 @@ const CardNumericInputSelectMint = ({
         </Col>
         <Col>
           <Space size={6}>
-            <Typography.Text>Available:</Typography.Text>
+            <Typography.Text type="secondary">Available:</Typography.Text>
             <Typography.Text>
               {`${util.numeric(available).format('0,0.[00]')} LPT`}
             </Typography.Text>
@@ -94,9 +94,11 @@ const CardNumbericInput = ({
     >
       <Row gutter={[16, 16]}>
         <Col span={24}>
-          <SpaceBetween title="Amount">
+          <SpaceBetween
+            title={<Typography.Text type="secondary">Amount</Typography.Text>}
+          >
             <Space size={6}>
-              <Typography.Text>Available:</Typography.Text>
+              <Typography.Text type="secondary">Available:</Typography.Text>
               <Typography.Text>
                 {`${util.numeric(currentAvailable).format('0,0.[00]')} LPT`}
               </Typography.Text>
@@ -112,6 +114,7 @@ const CardNumbericInput = ({
                 max={currentAvailable.toString()}
               />
             }
+            wrap={false}
           >
             <Button
               size="small"
