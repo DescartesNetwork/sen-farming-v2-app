@@ -1,10 +1,10 @@
 import { CSSProperties } from 'react'
 
 import { MintAvatar, MintSymbol } from '@sen-use/components'
-import IonIcon from '@sentre/antd-ionicon'
 import { Space, Typography } from 'antd'
 
 import { useFarmData } from 'hooks/farm/useFarmData'
+import FarmInfo from './farmInfo'
 
 type FarmAvatarProps = {
   farmAddress: string
@@ -30,9 +30,9 @@ const FarmAvatar = ({
           <MintSymbol mintAddress={inputMint} />
         </Typography.Text>
         {hoverable && (
-          <IonIcon
-            name="information-circle-outline"
-            className="icon-describe"
+          <FarmInfo
+            farmAddress={farmAddress}
+            inputMint={inputMint.toBase58()}
           />
         )}
       </Space>
