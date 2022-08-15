@@ -66,14 +66,20 @@ const BoostingNFT = () => {
       >
         <Row gutter={[16, 16]}>
           <Col span={24}>
-            <Space>
+            <Space align="baseline">
               <IonIcon
                 name="information-circle-outline"
                 style={{ fontSize: 18, color: '#FA8C16' }}
               />
-              <Typography.Title level={5}>
-                Are you sure to Unstake NFTs?
-              </Typography.Title>
+              <Space direction="vertical">
+                <Typography.Title level={5}>
+                  Are you sure to Unstake NFTs?
+                </Typography.Title>
+                <Typography.Text>
+                  Your staked LP will be reduced in proportion with the unstake
+                  NFTs.
+                </Typography.Text>
+              </Space>
             </Space>
           </Col>
           <Col span={24} style={{ textAlign: 'right' }}>
