@@ -1,6 +1,5 @@
-import { Card, Col, Image, Row, Space, Typography } from 'antd'
+import { Card, Col, Row, Space, Typography } from 'antd'
 
-import IconBanner from 'static/images/icon-banner.png'
 import './index.less'
 
 const Banner = () => {
@@ -46,9 +45,7 @@ const Banner = () => {
           </Space>
         </Col>
       </Row>
-      <div className="icon-banner">
-        <Image src={IconBanner} preview={false} />
-      </div>
+      <div className="icon-banner"></div>
     </Card>
   )
 }
