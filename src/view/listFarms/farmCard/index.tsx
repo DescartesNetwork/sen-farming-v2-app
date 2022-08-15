@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 
-import { Button, Card, Col, Row, Space, Tag, Typography } from 'antd'
+import { Card, Col, Row, Space, Tag, Typography } from 'antd'
 import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
 import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
@@ -47,11 +47,11 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 </Tag>
               </Col>
             )}
-            <Col span={24}>
+            {/* <Col span={24}>
               <Button type="text" style={{ marginLeft: -15 }}>
                 Go pool
               </Button>
-            </Col>
+            </Col> */}
           </Row>
         </Col>
         <Col span={24}>
@@ -83,7 +83,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
               <Space direction="vertical">
                 <Space>
                   <Typography.Text type="secondary">
-                    Your reward
+                    Your rewards
                   </Typography.Text>
                   <RewardInfo farmAddress={farmAddress} />
                 </Space>

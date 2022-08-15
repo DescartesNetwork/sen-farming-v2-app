@@ -1995,27 +1995,38 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.4.tgz"
   integrity sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==
 
-"@sen-use/app@^2.0.12":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@sen-use/app/-/app-2.0.12.tgz#9eebacb3b4c39cb463182450e8618d010d8025c0"
-  integrity sha512-lCyyEdS+7AAGsjmxHDurT/RcTLNIPMTOLDb9892Xp29Gl5uSyX1qOxofzi3R10ISZ+R6jKbKgujDvWRBIXzdTg==
+"@sen-use/app@^2.0.14":
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/@sen-use/app/-/app-2.0.14.tgz#a0dd3d0a8815ae4f989abc1754512b97133f5888"
+  integrity sha512-vh+1Pc7VXQt2vfVAS6YyXAFC7Qlg6C5T1JUIrkcFAsxXPDy8vm81KgugQNQ/q4QmPjM7IqN6HSLAgpb3HFlUOQ==
   dependencies:
     localforage "^1.10.0"
     web3.storage "^4.2.0"
 
-"@sen-use/components@^2.0.12":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@sen-use/components/-/components-2.0.12.tgz#841f792a46b88d74a7964fb072fd268d817a6f50"
-  integrity sha512-yErHEHkX1Iq8MPKkju8Un915lCh7BVCItK6bVtR8pdmyPWPtuXF5x2fI2nBb6GrMH6b/i/uhHO4UDi+bhhea9Q==
+"@sen-use/components@^2.0.14":
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/@sen-use/components/-/components-2.0.14.tgz#e0652e3b6881fa7b5b1f8ea7fa086e8080792158"
+  integrity sha512-RUtEEWhBgbiDGRwsaLTa50xI5R9pUhhoL93QG56IqArsm6wTchJV5/XXUpvMxkDQkLopKKTkLnBGBmObGuP26Q==
   dependencies:
     "@metaplex/js" "^4.12.0"
     lunr "^2.3.9"
     react-use "^17.4.0"
 
-"@sen-use/web3@^2.0.11", "@sen-use/web3@^2.0.12":
+"@sen-use/web3@^2.0.11":
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/@sen-use/web3/-/web3-2.0.12.tgz#f5f5f634aafec9fc050d6666aa8dca6bf0847f22"
   integrity sha512-ZPkWF/Tzbr+9O1zgIIygxoDT+adYZbeSLbJsmFaTHHKV5ZcjOkQgj0rAA0e75Q/mWctP4mnNoNnV6zGYTKiWTg==
+  dependencies:
+    "@project-serum/anchor" "^0.24.2"
+    "@solana/web3.js" "^1.50.0"
+    bn.js "^5.2.1"
+    bs58 "^5.0.0"
+    web3.storage "^4.2.0"
+
+"@sen-use/web3@^2.0.14":
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/@sen-use/web3/-/web3-2.0.14.tgz#357b5db7babbc46a283d5d74c6ae33217ccbbd4f"
+  integrity sha512-D/UgG/nMVymmhduwdjs8sRiv+YlmRe490c2i3LMq0lIk3RnUOmN8v47sra9OeYTWcF9wFPyUoIWY71Zwe3v/Hw==
   dependencies:
     "@project-serum/anchor" "^0.24.2"
     "@solana/web3.js" "^1.50.0"

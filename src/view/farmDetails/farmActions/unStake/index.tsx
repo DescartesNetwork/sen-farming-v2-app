@@ -11,6 +11,11 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
   const { unstake, loading } = useUnstake(farmAddress)
 
+  const onUnstake = async () => {
+    await unstake({ amount: Number(outAmount) })
+    setOutAmount('')
+  }
+
   return (
     <Row gutter={[16, 16]}>
       <Col span={24}>
@@ -30,10 +35,14 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
         <Button
           type="primary"
           block
-          style={{ background: '#FF666E', borderColor: '#FF666E' }}
+          style={{
+            background: '#FF666E',
+            borderColor: '#FF666E',
+            color: 'white',
+          }}
           disabled={!Number(outAmount)}
           loading={loading}
-          onClick={() => unstake({ amount: Number(outAmount) })}
+          onClick={onUnstake}
         >
           Unstake
         </Button>

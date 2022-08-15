@@ -7,10 +7,12 @@ import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
 
 import { useStakedData } from 'hooks/debt/useStakedData'
+import { useStakedTotalValue } from 'hooks/debt/useStakedTotalValue'
 import { useFarmData } from 'hooks/farm/useFarmData'
 
 const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
+  const stakedValue = useStakedTotalValue(farmAddress)
   const { endDate } = useFarmData(farmAddress)
 
   return (
@@ -51,11 +53,11 @@ const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
             <Space direction="vertical" size={0}>
               <SpaceVertical label="Your staked">
                 <Typography.Title level={4}>
-                  {util.numeric(stakedData.amount).format('0,0.[00]')}LP
+                  {util.numeric(stakedData.amount).format('0,0.[00]')} LP
                 </Typography.Title>
               </SpaceVertical>
               <Typography.Text type="secondary">
-                {util.numeric(stakedData.totalValue).format('$0,0.[00]')}
+                {util.numeric(stakedValue).format('$0,0.[00]')}
               </Typography.Text>
             </Space>
           </Col>

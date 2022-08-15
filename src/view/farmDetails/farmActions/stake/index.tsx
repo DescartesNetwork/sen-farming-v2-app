@@ -19,11 +19,9 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [visible, setVisible] = useState(false)
   const [selectedNFTs, setNftsSelected] = useState<string[]>([])
   const [inAmount, setInAmount] = useState<string>('')
-  const [boostAmount, setBoostAmount] = useState<number>(0)
   const farmData = useFarmData(farmAddress)
   const farmBoostingData = useFarmBoosting(farmAddress)
   const { stake, loading } = useStake(farmAddress)
-  console.log(setBoostAmount)
 
   const acceptedCollections = useMemo(
     () =>
@@ -43,9 +41,18 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
     setNftsSelected(selectedNFTs.filter((nft) => nft !== nftAddress))
   }
 
-  const onFullyStake = () => {
-    stake({ farm: farmAddress, nfts: selectedNFTs, inAmount: Number(inAmount) })
+  const onFullyStake = async () => {
+    await stake({
+      farm: farmAddress,
+      nfts: selectedNFTs,
+      inAmount: Number(inAmount),
+    })
+    setInAmount('')
   }
+
+  const boostAmount = useMemo(() => {
+    return 0
+  }, [])
 
   return (
     <Row gutter={[16, 16]} style={{ height: '100%' }}>
@@ -138,10 +145,17 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
               label="Boost by NFT"
               content={`+ ${boostAmount} LP`}
             />
-            <ExtraTypography
-              label="Total"
-              content={`${inAmount || 0 + boostAmount} LP`}
-            />
+
+            <Row align="middle">
+              <Col flex={'auto'}>
+                <Typography.Text type="secondary">Total</Typography.Text>
+              </Col>
+              <Col>
+                <Typography.Title style={{ color: '#A0E86F' }} level={4}>{`${
+                  inAmount || 0 + boostAmount
+                } LP`}</Typography.Title>
+              </Col>
+            </Row>
           </Space>
         </Card>
       </Col>
@@ -156,12 +170,11 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
           {!Number(inAmount) ? 'Enter an amount' : 'Stake'}
         </Button>
       </Col>
-      <Col span={24}>
+      {/* <Col span={24}>
         <Button type="text" style={{ color: '#a0e86f' }} block>
-          Get BTC - SNTR LP
+          Get <MintSymbol mintAddress={farmData.inputMint} />
         </Button>
-      </Col>
-
+      </Col> */}
       <Modal
         visible={visible}
         closeIcon={<IonIcon name="close-outline" />}

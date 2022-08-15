@@ -1,11 +1,11 @@
-import { utilsBN } from '@sen-use/web3/dist'
 import { useMemo } from 'react'
 import { BN } from '@project-serum/anchor'
+import { useMintDecimals } from '@sentre/senhub'
+import { utilsBN } from '@sen-use/web3'
 
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { PRECISION } from 'constant'
-import { useMintDecimals } from '@sentre/senhub/dist'
 
 export const useStakedData = (farmAddress: string) => {
   const debtData = useDebtData(farmAddress)
@@ -27,13 +27,10 @@ export const useStakedData = (farmAddress: string) => {
     const amountBN = new BN(stakedAmount)
     const amount = Number(utilsBN.undecimalize(amountBN, decimals || 0))
     // TODO: get price
-    const price = Math.random() * 10
-    const totalValue = price * amount
     const ratio = Number(stakedAmount) / Number(farmShareAmount)
     return {
       amountBN,
       amount,
-      totalValue,
       ratio,
     }
   }, [decimals, farmShareAmount, stakedAmount])

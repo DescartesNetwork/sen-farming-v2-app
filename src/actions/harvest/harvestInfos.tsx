@@ -1,6 +1,5 @@
-import { util } from '@sentre/senhub'
-
 import { Col, Row, Typography } from 'antd'
+import TotalPendingReward from 'components/debt/totalPendingReward'
 import MintAvatarPrice from 'components/mintAvatarPrice'
 import SpaceBetween from 'components/spaceBetween'
 
@@ -8,14 +7,14 @@ import { useConvertRewards } from 'hooks/useConvertRewards'
 import HarvestAmount from './harvestAmount'
 
 const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
-  const convertRewards = useConvertRewards(farmAddress, 500)
+  const convertRewards = useConvertRewards(farmAddress)
 
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
         <SpaceBetween title={<Typography.Text>Your rewards</Typography.Text>}>
           <Typography.Title level={2}>
-            ${util.numeric(2.9).format('0,0.[0000]')}
+            <TotalPendingReward farmAddress={farmAddress} />
           </Typography.Title>
         </SpaceBetween>
       </Col>
