@@ -4,7 +4,11 @@ import CardHarvest from './cardHarvest'
 import CardRewards from './cardRewards'
 import FarmHeader from './header'
 
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+
 const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
+  const farmBoostingData = useFarmBoosting(farmAddress) || []
+
   return (
     <Card bordered={false} style={{ height: '100%' }}>
       <Row gutter={[24, 24]}>
@@ -20,9 +24,11 @@ const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
         <Col span={24}>
           <Divider style={{ margin: 0 }} />
         </Col>
-        <Col span={24}>
-          <BoostingNFT />
-        </Col>
+        {farmBoostingData.length > 0 && (
+          <Col span={24}>
+            <BoostingNFT />
+          </Col>
+        )}
       </Row>
     </Card>
   )
