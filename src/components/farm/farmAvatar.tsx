@@ -2,9 +2,9 @@ import { CSSProperties } from 'react'
 
 import { MintAvatar, MintSymbol } from '@sen-use/components'
 import { Space, Typography } from 'antd'
+import FarmInfo from './farmInfo'
 
 import { useFarmData } from 'hooks/farm/useFarmData'
-import FarmInfo from './farmInfo'
 
 type FarmAvatarProps = {
   farmAddress: string

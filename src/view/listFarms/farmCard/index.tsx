@@ -13,7 +13,7 @@ import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
-  const { boostingCollection } = useFarmBoosting(farmAddress) || {}
+  const farmBoostingData = useFarmBoosting(farmAddress) || []
 
   return (
     <Card
@@ -32,7 +32,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 hoverable
               />
             </Col>
-            {boostingCollection && (
+            {farmBoostingData.length && (
               <Col>
                 <Tag
                   style={{

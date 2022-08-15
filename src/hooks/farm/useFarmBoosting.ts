@@ -5,15 +5,20 @@ import { AppState } from 'model'
 import { BoostingData } from '@sentre/farming'
 
 export const useFarmBoosting = (farmAddress: string) => {
-  const [farmBoostingData, setFarmBoostingData] = useState<BoostingData>()
+  const [farmBoostingData, setFarmBoostingData] = useState<BoostingData[]>()
   const farmBoosting = useSelector((state: AppState) => state.boosting)
 
   const getFarmBoostingData = useCallback(() => {
-    const boostingData = Object.keys(farmBoosting).filter(
+    const listBoostingData: BoostingData[] = []
+    const boostingList = Object.keys(farmBoosting).filter(
       (farmBoostingAddress) =>
         farmBoosting[farmBoostingAddress].farm.toBase58() === farmAddress,
     )
-    setFarmBoostingData(farmBoosting[boostingData[0]])
+    boostingList.map((boostingAddress) =>
+      listBoostingData.push(farmBoosting[boostingAddress]),
+    )
+    console.log('listBoostingData: ', listBoostingData)
+    setFarmBoostingData(listBoostingData)
   }, [farmAddress, farmBoosting])
 
   useEffect(() => {
