@@ -17,9 +17,7 @@ const HarvestAmount = ({ reward }: HarvestAmountProps) => {
       <Typography.Title level={5}>
         {util.numeric(mintAmount).format('0,0.[00000]')}
       </Typography.Title>
-      <Typography.Text type="secondary">
-        {util.numeric(mintAmount * price).format('$0,0.[00]')}
-      </Typography.Text>
+      <Typography.Text type="secondary">{123}</Typography.Text>
     </Space>
   )
 }

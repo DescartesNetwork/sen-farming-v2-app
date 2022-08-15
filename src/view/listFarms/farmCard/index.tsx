@@ -79,7 +79,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
               <Space direction="vertical">
                 <Space>
                   <Typography.Text type="secondary">
-                    Your reward
+                    Your rewards
                   </Typography.Text>
                   <RewardInfo farmAddress={farmAddress} />
                 </Space>

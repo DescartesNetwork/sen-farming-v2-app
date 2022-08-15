@@ -7,7 +7,7 @@ import { useConvertRewards } from 'hooks/useConvertRewards'
 import HarvestAmount from './harvestAmount'
 
 const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
-  const convertRewards = useConvertRewards(farmAddress, 500)
+  const convertRewards = useConvertRewards(farmAddress)
 
   return (
     <Row gutter={[24, 24]}>

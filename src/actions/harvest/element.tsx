@@ -3,28 +3,34 @@ import { Address } from '@project-serum/anchor'
 
 import { MintAvatar, MintSymbol } from '@sen-use/components'
 import { Col, Row, Typography } from 'antd'
+import { useConvertRewards } from 'hooks/useConvertRewards'
+import MintAmount from 'components/mint/mintAmount'
+import MintTotalValue from 'components/mint/mintTotalValue'
 
 type ElementProps = {
   farmAddress: Address
 }
 const Element = ({ farmAddress }: ElementProps) => {
-  // To-do: Get mints from redux
-  const { mintIn, mintOut } = { mintIn: '', mintOut: '' }
+  const convertRewards = useConvertRewards(farmAddress.toString())
 
   return (
     <Row gutter={[8, 8]}>
-      {[mintIn, mintOut].map((mint) => (
+      {convertRewards.map(({ amount, mint }) => (
         <Col>
           <Row gutter={[8, 8]} justify="space-between">
             <Col>
-              <MintAvatar mintAddress={mintIn} />
-              <MintSymbol mintAddress={mintOut} />
+              <MintAvatar mintAddress={mint} />
+              <MintSymbol mintAddress={mint} />
             </Col>
             <Col flex={1}>
               <Row justify="end">
                 <Col>
-                  <Typography.Text>195</Typography.Text>
-                  <Typography.Text type="secondary">($1.9)</Typography.Text>
+                  <Typography.Text>
+                    <MintAmount mintAddress={mint} amount={amount} />
+                  </Typography.Text>
+                  <Typography.Text type="secondary">
+                    (<MintTotalValue mintAddress={mint} amount={amount} />)
+                  </Typography.Text>
                 </Col>
               </Row>
             </Col>
