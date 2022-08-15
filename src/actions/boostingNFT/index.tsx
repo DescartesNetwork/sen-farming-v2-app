@@ -40,7 +40,6 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
 
   const unstateNFT = () => {
     setVisible(false)
-    if (!nftsSortByCollection) return
     // Call function unstakeNFT
     console.log('unstateNFT: ', unstakeNFT)
   }
