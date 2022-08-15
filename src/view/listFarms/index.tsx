@@ -2,11 +2,13 @@ import LazyLoad from '@sentre/react-lazyload'
 import { useSelector } from 'react-redux'
 import { useCallback, useEffect, useState } from 'react'
 
-import { Button, Col, Input, Row } from 'antd'
+import { Button, Col, Row } from 'antd'
 import FarmCard from './farmCard'
-import FilterFarms from './filterFarms'
 import Layout from 'components/layout'
 import Banner from 'components/banner'
+import SpaceBetween from 'components/spaceBetween'
+import SegmentedFarm from './segmentedFarm'
+import FilterFarm from 'actions/filterFarm'
 
 import { useAppRouter } from 'hooks/useAppRouter'
 import { AppState } from 'model'
@@ -39,19 +41,19 @@ const Farms = () => {
           <Banner />
         </Col>
         <Col span={24}>
-          <FilterFarms />
+          <SpaceBetween
+            gutter={[16, 16]}
+            style={{ flexGrow: 10 }}
+            title={<SegmentedFarm />}
+            childFlex={1}
+          >
+            <Button onClick={() => pushHistory('/create-farm')} ghost block>
+              Add farm
+            </Button>
+          </SpaceBetween>
         </Col>
         <Col span={24}>
-          <Row justify="space-between" align="middle">
-            <Col xs={20} lg={12}>
-              <Input placeholder="Search by name, address" />
-            </Col>
-            <Col>
-              <Button onClick={() => pushHistory('/create-farm')} ghost>
-                Add farm
-              </Button>
-            </Col>
-          </Row>
+          <FilterFarm />
         </Col>
         {/* List Farms */}
         <Col span={24}>
