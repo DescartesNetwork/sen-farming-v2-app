@@ -32,7 +32,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 hoverable
               />
             </Col>
-            {farmBoostingData.length && (
+            {farmBoostingData.length > 0 && (
               <Col>
                 <Tag
                   style={{

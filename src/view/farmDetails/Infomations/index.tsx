@@ -24,7 +24,7 @@ const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
         <Col span={24}>
           <Divider style={{ margin: 0 }} />
         </Col>
-        {farmBoostingData.length && (
+        {farmBoostingData.length > 0 && (
           <Col span={24}>
             <BoostingNFT />
           </Col>
