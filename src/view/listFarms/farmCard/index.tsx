@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 
 import { Button, Card, Col, Progress, Row, Space, Tag, Typography } from 'antd'
@@ -21,7 +21,18 @@ import SpaceBetween from 'components/spaceBetween'
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
   const farmBoostingData = useFarmBoosting(farmAddress)
-  const { endDate } = useFarmData(farmAddress)
+  const { endDate, startDate } = useFarmData(farmAddress)
+
+  const percentProgress = useMemo(() => {
+    if (!endDate || !startDate) return 0
+    const end = endDate.toNumber()
+    const start = startDate.toNumber()
+    const now = Date.now() / 1000
+
+    if (end < now) return 100
+
+    return ((now - start) / (end - start)) * 100
+  }, [endDate, startDate])
 
   return (
     <Card
@@ -77,7 +88,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                   </Space>
                   <Progress
                     type="circle"
-                    percent={75}
+                    percent={percentProgress}
                     showInfo={false}
                     className="end-time-progress"
                     strokeWidth={10}
