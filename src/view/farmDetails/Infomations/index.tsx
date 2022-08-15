@@ -11,10 +11,10 @@ const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
         <Col span={24}>
           <FarmHeader farmAddress={farmAddress} />
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} md={12} lg={24} xl={12}>
           <CardHarvest farmAddress={farmAddress} />
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} md={12} lg={24} xl={12}>
           <CardRewards farmAddress={farmAddress} />
         </Col>
         <Col span={24}>
