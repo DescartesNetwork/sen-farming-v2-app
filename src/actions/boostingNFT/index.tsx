@@ -5,6 +5,7 @@ import { Button, Col, Modal, Row, Space, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
 import NftSelection from './nftSelection'
+import FarmTag from 'components/farmTag'
 
 import { useDebtTreasurerAddress } from 'hooks/debt/useDebtData'
 import { useNFTsByOwnerAndCollection } from '@sen-use/components'
@@ -52,7 +53,14 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[16, 16]}>
       <Col span={24}>
-        <SpaceBetween title="Your staked NFTs">
+        <SpaceBetween
+          title={
+            <Space>
+              <Typography.Title level={5}>Staked NFTs</Typography.Title>
+              <FarmTag>+1 LP</FarmTag>
+            </Space>
+          }
+        >
           {!!nftsSortByCollection?.length && (
             <Button type="text" onClick={() => setRemoveable(!removeable)}>
               {removeable ? 'Cancel' : 'Unstake'}
