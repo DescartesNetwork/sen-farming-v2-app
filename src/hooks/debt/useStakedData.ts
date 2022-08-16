@@ -5,7 +5,7 @@ import { utilsBN } from '@sen-use/web3'
 
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmData } from 'hooks/farm/useFarmData'
-// import { PRECISION } from 'constant'
+import { PRECISION } from 'constant'
 
 export const useStakedData = (farmAddress: string) => {
   const debtData = useDebtData(farmAddress)
@@ -20,6 +20,11 @@ export const useStakedData = (farmAddress: string) => {
     // return debtData.shares.mul(PRECISION).div(debtData.leverage).toString()
   }, [debtData])
 
+  const stakedAmountNFTs = useMemo(() => {
+    if (!debtData?.leverage) return new BN(0)
+    return debtData.shares.mul(debtData.leverage.sub(PRECISION)).div(PRECISION)
+  }, [debtData])
+
   const farmShareAmount = useMemo(() => {
     return farmData.totalShares.toString()
   }, [farmData.totalShares])
@@ -27,14 +32,18 @@ export const useStakedData = (farmAddress: string) => {
   const result = useMemo(() => {
     const amountBN = new BN(stakedAmount)
     const amount = Number(utilsBN.undecimalize(amountBN, decimals || 0))
+    const amountStakedNFTs = Number(
+      utilsBN.undecimalize(stakedAmountNFTs, decimals || 0),
+    )
     // TODO: get price
     const ratio = Number(stakedAmount) / Number(farmShareAmount)
     return {
       amountBN,
       amount,
       ratio,
+      amountStakedNFTs,
     }
-  }, [decimals, farmShareAmount, stakedAmount])
+  }, [stakedAmount, decimals, stakedAmountNFTs, farmShareAmount])
 
   return result
 }

@@ -10,6 +10,7 @@ import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 import { useUnlock } from 'hooks/actions/useUnlock'
 import { useLock } from 'hooks/actions/useLock'
+import { useStakedData } from 'hooks/debt/useStakedData'
 
 import { MetadataDataType } from 'lib/metaplex'
 import { PRECISION } from 'constant'
@@ -26,6 +27,7 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const farmBoostingData = useFarmBoosting(farmAddress)
   const lockNft = useLock(farmAddress)
   const unlockNft = useUnlock(farmAddress)
+  const stakedData = useStakedData(farmAddress)
 
   const acceptedCollections = useMemo(
     () =>
@@ -70,7 +72,7 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
           title={
             <Space>
               <Typography.Title level={5}>Staked NFTs</Typography.Title>
-              <FarmTag>+1 LP</FarmTag>
+              <FarmTag>{`+ ${stakedData.amountStakedNFTs} LP`}</FarmTag>
             </Space>
           }
         >
