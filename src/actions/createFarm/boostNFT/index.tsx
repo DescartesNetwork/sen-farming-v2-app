@@ -44,7 +44,7 @@ const BoostNFT = ({ boostsData, onChange }: BoostNFTProps) => {
   }
 
   const onSwitch = (isBoost: boolean) => {
-    if (!isBoost) onChange([{ collection: '', percentage: 0 }]) // remove collection
+    if (!isBoost) onChange([]) // remove collection
     setIsBoostNFT(isBoost)
   }
 
