@@ -32,6 +32,7 @@ const TotalOwnRewards = () => {
           farmAddress={debt.farm.toBase58()}
           upset={set}
           msReload={!loaded || !totalRewards ? 300 : 5000}
+          key={debt.farm.toBase58()}
         />
       ))}
     </span>

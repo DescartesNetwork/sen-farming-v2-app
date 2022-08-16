@@ -60,7 +60,7 @@ const Farms = () => {
           <Row gutter={[24, 24]}>
             {sortedFarm.map((farmAddress) => (
               <Col xs={24} lg={12} key={farmAddress}>
-                <LazyLoad height={196}>
+                <LazyLoad height={230.05}>
                   <FarmCard farmAddress={farmAddress} />
                 </LazyLoad>
               </Col>
