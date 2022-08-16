@@ -22,10 +22,10 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
             farmAddress={farmAddress}
             textStyle={{ fontSize: 30, fontWeight: 700 }}
           />
-          <Space size={6}>
-            <Typography.Text type="secondary">End in</Typography.Text>
-            <TimeCountDown endTime={Math.floor(endDate.toNumber())} />
-          </Space>
+          <TimeCountDown
+            label="End in"
+            endTime={Math.floor(endDate.toNumber())}
+          />
         </Space>
       </Col>
 

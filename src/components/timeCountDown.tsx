@@ -28,9 +28,11 @@ const TimeTag = ({ children, style }: TimeTagProps) => {
   )
 }
 
-const TimeCountDown = memo(({ endTime }: { endTime: number }) => {
+type TimeCountDownProps = { endTime: number; label?: string }
+const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
   const startTime = Math.floor(Date.now() / 1000)
   const duration = moment.duration(endTime - startTime, 'seconds')
+  const now = Date.now()
 
   const [countDown, setCountDown] = useState({
     days: duration.days(),
@@ -40,7 +42,7 @@ const TimeCountDown = memo(({ endTime }: { endTime: number }) => {
   })
 
   const updateCountDown = useCallback(async () => {
-    if (!endTime) return
+    if (!endTime || endTime * 1000 < now) return
     const startTime = Math.floor(Date.now() / 1000)
     // TODO: startTime > endTime  (finish)
     // TODO: unlimited
@@ -50,7 +52,7 @@ const TimeCountDown = memo(({ endTime }: { endTime: number }) => {
     const minutes = duration.minutes()
     const seconds = duration.seconds()
     setCountDown({ days, hours, minutes, seconds })
-  }, [endTime])
+  }, [endTime, now])
 
   useEffect(() => {
     const interval = setInterval(() => updateCountDown(), 1000)
@@ -58,39 +60,40 @@ const TimeCountDown = memo(({ endTime }: { endTime: number }) => {
   }, [updateCountDown])
 
   if (!endTime) return <Typography.Text>Unlimited</Typography.Text>
+  if (endTime * 1000 < now)
+    return (
+      <TimeTag>
+        <Typography.Text>Finished</Typography.Text>
+      </TimeTag>
+    )
   return (
-    <Space size={4}>
-      {!!countDown.days && (
-        <Fragment>
-          <TimeTag>
-            <Typography.Text className="countdown">
-              {countDown.days}d
-            </Typography.Text>
-          </TimeTag>
-          :
-        </Fragment>
-      )}
-      <TimeTag>
-        <Typography.Text className="countdown">
-          {countDown.hours}h
-        </Typography.Text>
-      </TimeTag>
-      :
-      <TimeTag>
-        <Typography.Text className="countdown">
-          {countDown.minutes}m
-        </Typography.Text>
-      </TimeTag>
-      {!countDown.days && (
-        <Fragment>
-          :
-          <TimeTag>
-            <Typography.Text className="countdown">
-              {countDown.seconds}s
-            </Typography.Text>
-          </TimeTag>
-        </Fragment>
-      )}
+    <Space size={6}>
+      {!!label && <Typography.Text type="secondary">{label}</Typography.Text>}
+      <Space size={4}>
+        {!!countDown.days && (
+          <Fragment>
+            <TimeTag>
+              <Typography.Text>{countDown.days}d</Typography.Text>
+            </TimeTag>
+            :
+          </Fragment>
+        )}
+        <TimeTag>
+          <Typography.Text>{countDown.hours}h</Typography.Text>
+        </TimeTag>
+        :
+        <TimeTag>
+          <Typography.Text>{countDown.minutes}m</Typography.Text>
+        </TimeTag>
+        {!countDown.days && (
+          <Fragment>
+            :
+            <TimeTag>
+              <Typography.Text>{countDown.seconds}s</Typography.Text>
+            </TimeTag>
+          </Fragment>
+        )}
+      </Space>
     </Space>
   )
 })
