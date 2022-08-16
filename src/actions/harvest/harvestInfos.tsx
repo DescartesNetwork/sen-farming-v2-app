@@ -10,12 +10,9 @@ const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
   const convertRewards = useConvertRewards(farmAddress)
 
   return (
-    <Row gutter={[24, 24]}>
+    <Row gutter={[12, 12]}>
       <Col span={24}>
-        <SpaceBetween
-          title={<Typography.Text>Your rewards</Typography.Text>}
-          align="top"
-        >
+        <SpaceBetween title={<Typography.Text>Your rewards</Typography.Text>}>
           <Typography.Title level={2}>
             <TotalPendingReward farmAddress={farmAddress} />
           </Typography.Title>
