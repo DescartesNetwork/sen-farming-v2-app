@@ -1,4 +1,4 @@
-import { util } from '@sentre/senhub'
+import { useUI, util } from '@sentre/senhub'
 
 import { Card, Col, Image, Row, Space, Typography } from 'antd'
 import TotalOwnRewards from 'components/debt/totalOwnRewards'
@@ -13,6 +13,12 @@ const style = { color: '#141413' }
 
 const Banner = () => {
   const tvl = useAllFarmTotalValue()
+  const {
+    ui: { width },
+  } = useUI()
+
+  const isMobile = width < 575
+  const justifyAlign = isMobile ? 'center' : 'end'
 
   return (
     <Card
@@ -21,16 +27,13 @@ const Banner = () => {
       style={{ overflow: 'hidden' }}
       bodyStyle={{ padding: '24px 32px' }}
     >
-      <Row
-        gutter={[24, 24]}
-        style={{ position: 'relative', zIndex: 8, ...style }}
-      >
-        <Col span={24}>
+      <Row gutter={[24, 24]} style={{ ...style }} justify={justifyAlign}>
+        <Col xs={{ order: 2, span: 24 }} sm={{ order: 1, span: 24 }}>
           <Typography.Title level={2} style={{ ...textStyle }}>
             Sen Farming V2
           </Typography.Title>
         </Col>
-        <Col span={24}>
+        <Col xs={{ order: 3, span: 24 }} sm={{ order: 3, span: 24 }}>
           <Space size={64}>
             {/* Total value stake */}
             <Space direction="vertical">
@@ -52,13 +55,15 @@ const Banner = () => {
             </Space>
           </Space>
         </Col>
+        <Col xs={{ order: 1 }} sm={{ order: 4 }}>
+          <div className="icon-banner">
+            <Space>
+              <Image src={miningImg} preview={false} />
+              <AnimationBg />
+            </Space>
+          </div>
+        </Col>
       </Row>
-      <div className="icon-banner">
-        <Space>
-          <Image src={miningImg} preview={false} />
-          <AnimationBg />
-        </Space>
-      </div>
     </Card>
   )
 }
