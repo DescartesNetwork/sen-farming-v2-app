@@ -27,6 +27,7 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
       <Col span={24}>
         <Button
           type="primary"
+          size="large"
           block
           style={{
             background: '#FF666E',

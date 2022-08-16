@@ -17,7 +17,6 @@ export const useFarmBoosting = (farmAddress: string) => {
     boostingList.map((boostingAddress) =>
       listBoostingData.push(farmBoosting[boostingAddress]),
     )
-    console.log('listBoostingData: ', listBoostingData)
     setFarmBoostingData(listBoostingData)
   }, [farmAddress, farmBoosting])
 
