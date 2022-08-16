@@ -5,13 +5,8 @@ import { Button, Col, Modal, Row, Space, Spin, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
 import NftSelection from './nftSelection'
-import FarmTag from 'components/farmTag'
 
-import { useDebtData, useDebtTreasurerAddress } from 'hooks/debt/useDebtData'
-import {
-  useNFTsByOwnerAndCollection,
-  useNFTsByOwner,
-} from '@sen-use/components'
+import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 import './index.less'
@@ -20,17 +15,17 @@ import { useLock } from 'hooks/actions/useLock'
 import configs from 'configs'
 import { MetadataDataType } from 'lib/metaplex'
 import { PRECISION } from 'constant'
+import { useUnlock } from 'hooks/actions/useUnlock'
 
 const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)
-  const [visible, setVisible] = useState(false)
   const [unstakeNFT, setUnstakeNFT] = useState('')
   const [stakedNFTs, setStakedNFTs] = useState<MetadataDataType[]>()
 
-  const treasurerAddress = useDebtTreasurerAddress(farmAddress)
   const debtData = useDebtData(farmAddress)
   const farmBoostingData = useFarmBoosting(farmAddress)
-  const { lock, loading } = useLock(farmAddress)
+  const lockNft = useLock(farmAddress)
+  const unlockNft = useUnlock(farmAddress)
 
   const acceptedCollections = useMemo(
     () =>
@@ -52,24 +47,21 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   }, [debtData?.leverage, farmAddress])
 
   const onRemoveNFT = (mintAddress: string) => {
-    setVisible(true)
     setUnstakeNFT(mintAddress)
   }
 
-  const unstateNFT = () => {
-    setVisible(false)
-    // Call function unstakeNFT
-    console.log('unstateNFT: ', unstakeNFT)
-  }
+  const onCloseModal = () => setUnstakeNFT('')
 
-  const onCloseModal = () => {
-    setVisible(false)
+  const handleUnlockNft = async () => {
+    await unlockNft.unlock(unstakeNFT)
     setUnstakeNFT('')
   }
 
   useEffect(() => {
     getListNFTs()
   }, [getListNFTs])
+
+  const loading = unlockNft.loading || lockNft.loading
 
   return (
     <Row gutter={[16, 16]}>
@@ -97,14 +89,14 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
             <Col>
               <NftSelection
                 acceptedCollections={acceptedCollections}
-                onSelect={lock}
+                onSelect={lockNft.lock}
               />
             </Col>
           </Row>
         </Col>
       </Spin>
       <Modal
-        visible={visible}
+        visible={!!unstakeNFT}
         onCancel={onCloseModal}
         footer={false}
         closable={false}
@@ -135,7 +127,8 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
               <Button
                 style={{ background: '#FF666E', borderColor: '#FF666E' }}
                 type="primary"
-                onClick={unstateNFT}
+                loading={unlockNft.loading}
+                onClick={handleUnlockNft}
               >
                 Unstake
               </Button>
