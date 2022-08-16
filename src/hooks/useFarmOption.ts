@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { BN } from 'bn.js'
 import { useWalletAddress } from '@sentre/senhub'
 
 import { FARM_OPTION } from 'constant'
 import { AppState } from 'model'
-import { BN } from 'bn.js'
 
 type FarmOption = {
   label: string
@@ -12,15 +12,25 @@ type FarmOption = {
 }
 
 export const useFarmOption = () => {
+  const { boostOnly } = useSelector((state: AppState) => state.main)
   const farms = useSelector((state: AppState) => state.farms)
   const debts = useSelector((state: AppState) => state.debts)
+  const boosting = useSelector((state: AppState) => state.boosting)
   const walletAddress = useWalletAddress()
 
   const farmingOptions: FarmOption[] = useMemo(() => {
     const options: FarmOption[] = []
-    const rewardableFarms = Object.keys(farms).filter((val) =>
+    let rewardableFarms = Object.keys(farms).filter((val) =>
       farms[val].totalRewards.gt(new BN(0)),
     )
+
+    if (!!boostOnly) {
+      const boostFarm = Object.values(boosting).map((val) =>
+        val.farm.toBase58(),
+      )
+      rewardableFarms = boostFarm.filter((val) => rewardableFarms.includes(val))
+    }
+
     for (const key in FARM_OPTION) {
       let farmAmount = 0
       switch (key) {
@@ -65,7 +75,7 @@ export const useFarmOption = () => {
       options.push(option)
     }
     return options
-  }, [debts, farms, walletAddress])
+  }, [boostOnly, boosting, debts, farms, walletAddress])
 
   return { farmingOptions }
 }
