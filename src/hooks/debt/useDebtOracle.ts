@@ -9,6 +9,7 @@ export const useDebtOracle = (farmAddress: string) => {
 
   const deposit = useCallback(
     (input_mint_amount: BN) => {
+      if (!self?.leverage) return new BN(0)
       let mi_mint_out = input_mint_amount.mul(self.leverage).div(PRECISION)
       return mi_mint_out
     },

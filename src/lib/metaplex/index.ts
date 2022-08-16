@@ -19,7 +19,7 @@ class metaplexNFT {
   private _connection: Connection
 
   constructor(rpcEndpoint: string = DEFAULT_RPC_ENDPOINT) {
-    this._connection = new Connection(rpcEndpoint)
+    this._connection = new Connection(rpcEndpoint, 'confirmed')
   }
   /**
    * Get object array list NFTs belong to collections
