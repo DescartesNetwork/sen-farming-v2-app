@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 
 import IonIcon from '@sentre/antd-ionicon'
-import { Button, Col, Modal, Row, Space, Typography } from 'antd'
+import { Button, Col, Modal, Row, Space, Spin, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
 import NftSelection from './nftSelection'
@@ -13,15 +13,20 @@ import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 import './index.less'
 
+import { useLock } from 'hooks/actions/useLock'
+
 const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)
   const [visible, setVisible] = useState(false)
   const [unstakeNFT, setUnstakeNFT] = useState('')
 
   const treasurerAddress = useDebtTreasurerAddress(farmAddress)
+  console.log('treasurerAddress', treasurerAddress)
   const { nftsSortByCollection } = useNFTsByOwnerAndCollection(treasurerAddress)
   const farmBoostingData = useFarmBoosting(farmAddress)
+  const { lock, loading } = useLock(farmAddress)
 
+  console.log('nftsSortByCollection', nftsSortByCollection)
   const acceptedCollections = useMemo(
     () =>
       farmBoostingData.map((boostingData) =>
@@ -33,10 +38,6 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const onRemoveNFT = (mintAddress: string) => {
     setVisible(true)
     setUnstakeNFT(mintAddress)
-  }
-
-  const onSelect = (nftAddress: string) => {
-    console.log('StakeNFT: ', nftAddress)
   }
 
   const unstateNFT = () => {
@@ -68,25 +69,27 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
           )}
         </SpaceBetween>
       </Col>
-      <Col span={24}>
-        <Row gutter={[16, 16]}>
-          {nftsSortByCollection?.map((nft) => (
-            <Col key={nft.mint}>
-              <NFTAvatar
-                mintAddress={nft.mint}
-                removeable={removeable}
-                onRemoveNFT={onRemoveNFT}
+      <Spin spinning={loading}>
+        <Col span={24}>
+          <Row gutter={[16, 16]}>
+            {nftsSortByCollection?.map((nft) => (
+              <Col key={nft.mint}>
+                <NFTAvatar
+                  mintAddress={nft.mint}
+                  removeable={removeable}
+                  onRemoveNFT={onRemoveNFT}
+                />
+              </Col>
+            ))}
+            <Col>
+              <NftSelection
+                acceptedCollections={acceptedCollections}
+                onSelect={lock}
               />
             </Col>
-          ))}
-          <Col>
-            <NftSelection
-              acceptedCollections={acceptedCollections}
-              onSelect={onSelect}
-            />
-          </Col>
-        </Row>
-      </Col>
+          </Row>
+        </Col>
+      </Spin>
       <Modal
         visible={visible}
         onCancel={onCloseModal}

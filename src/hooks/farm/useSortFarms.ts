@@ -13,12 +13,13 @@ export const useSortFarms = (sourceFarms: string[]) => {
 
   const sortFarm = useCallback(async () => {
     if (!Object.keys(sort).length) return setSortedFarms(sourceFarms)
-    if (!!sort['liquidity'])
+    if (!!sort['liquidity']) {
       sourceFarms.sort((a, b) =>
         sort['liquidity'] === 'ADS'
           ? farmLiquidities[a] - farmLiquidities[b]
           : farmLiquidities[b] - farmLiquidities[a],
       )
+    }
 
     if (!!sort['apr'])
       sourceFarms.sort((a, b) =>

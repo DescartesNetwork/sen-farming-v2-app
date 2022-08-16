@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useWalletAddress } from '@sentre/senhub'
 
 import { AppState } from 'model'
+import BN from 'bn.js'
 
 const useFilterFarm = () => {
   const { boostOnly, farmTab } = useSelector((state: AppState) => state.main)
@@ -14,14 +15,12 @@ const useFilterFarm = () => {
 
   const filterFarm = useCallback(async () => {
     let newFilteredFarms: string[] = []
+    const rewardableFarms = Object.keys(farms).filter((val) =>
+      farms[val].totalRewards.gt(new BN(0)),
+    )
     switch (farmTab) {
-      case 'sentre': {
-        // To-do: Filter later
-        newFilteredFarms = Object.keys(farms)
-        break
-      }
       case 'staked': {
-        newFilteredFarms = Object.values(debts)
+        const stakedFarm = Object.values(debts)
           .filter(
             (val) =>
               val.authority.toBase58() === walletAddress &&
@@ -29,11 +28,23 @@ const useFilterFarm = () => {
               !val.shares.isZero(),
           )
           .map((val) => val.farm.toBase58())
+
+        newFilteredFarms = stakedFarm.filter((val) =>
+          rewardableFarms.includes(val),
+        )
         break
       }
       case 'your': {
-        newFilteredFarms = Object.keys(farms).filter(
+        newFilteredFarms = rewardableFarms.filter(
           (val) => farms[val].authority.toBase58() === walletAddress,
+        )
+        break
+      }
+      case 'finished': {
+        newFilteredFarms = rewardableFarms.filter((val) =>
+          farms[val].endDate
+            .sub(new BN(new Date().getTime() / 1000))
+            .lte(new BN(0)),
         )
         break
       }
@@ -46,7 +57,9 @@ const useFilterFarm = () => {
       const boostFarm = Object.values(boosting).map((val) =>
         val.farm.toBase58(),
       )
-      setFilteredFarm(boostFarm.filter((val) => newFilteredFarms.includes(val)))
+      return setFilteredFarm(
+        boostFarm.filter((val) => newFilteredFarms.includes(val)),
+      )
     }
     setFilteredFarm(newFilteredFarms)
   }, [boostOnly, boosting, debts, farmTab, farms, walletAddress])

@@ -8,7 +8,7 @@ import { useFarmOracle } from './useFarmOracle'
 
 export const useFarmAPR = (farmAddress: string) => {
   const [roi, setRoi] = useState(0)
-  const liquidity = useFarmLiquidity(farmAddress)
+  const liquidity = useFarmLiquidity(farmAddress) || 10 // Default 10$
   const getTotalValue = useGetTotalValue()
   const rewards = useFarmRewards(farmAddress)
   const farmOracle = useFarmOracle(farmAddress)
@@ -36,5 +36,5 @@ export const useFarmAPR = (farmAddress: string) => {
     calcAPR()
   }, [calcAPR])
 
-  return { roi }
+  return roi * 356 //APY
 }
