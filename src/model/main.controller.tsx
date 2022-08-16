@@ -16,7 +16,7 @@ export type SortType = 'liquidity' | 'apr'
 export type MainState = {
   searchKey: string
   sortType: Record<SortType, SortDirection>
-  farmTab: string
+  farmTab: FarmTab
   boostOnly: boolean
 }
 

@@ -1,15 +1,20 @@
 import { Segmented } from 'antd'
 import { useDispatch } from 'react-redux'
 
-import { useFarmOption } from 'hooks/useFarmOption'
 import { setFarmTab } from 'model/main.controller'
+import { FarmTab } from 'constant'
 
 const SegmentedFarm = () => {
   const dispatch = useDispatch()
-  const { farmingOptions } = useFarmOption()
+
   return (
     <Segmented
-      options={farmingOptions}
+      options={[
+        { value: FarmTab.All, label: FarmTab.All },
+        { value: FarmTab.Staked, label: FarmTab.Staked },
+        { value: FarmTab.Your, label: FarmTab.Your },
+        { value: FarmTab.Finished, label: FarmTab.Finished },
+      ]}
       onChange={(val) => dispatch(setFarmTab(val.toString()))}
     />
   )

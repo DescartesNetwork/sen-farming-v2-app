@@ -25,7 +25,7 @@ const TotalOwnRewards = () => {
 
   return (
     <span>
-      {util.numeric(totalRewards).format('$0,0.[00000]')}
+      {util.numeric(totalRewards).format('$0,0.[00]')}
       {/* Sum  rewards*/}
       {filteredDebts.map((debt) => (
         <RewardTracking
