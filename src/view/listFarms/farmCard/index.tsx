@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 
 import { Button, Card, Col, Progress, Row, Space, Tag, Typography } from 'antd'
@@ -6,33 +6,47 @@ import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
 import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
 import APRInfo from './APRInfo'
-
-import configs from 'configs'
-import FarmLiquidity from 'components/farm/farmLiquidity'
-import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+import SpaceBetween from 'components/spaceBetween'
+import HarvestButton from 'actions/harvest/harvestButton'
 import IonIcon from '@sentre/antd-ionicon'
 import CardTooltip from './cardTooltip'
+import FarmLiquidity from 'components/farm/farmLiquidity'
+
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 import TimeCountDown from 'components/timeCountDown'
 import { useFarmData } from 'hooks/farm/useFarmData'
+import { useGetDebtReward } from 'hooks/debt/useGetDebtReward'
 
+import configs from 'configs'
 import './index.less'
-import SpaceBetween from 'components/spaceBetween'
+import { BN } from 'bn.js'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
   const farmBoostingData = useFarmBoosting(farmAddress)
+  const getDebtReward = useGetDebtReward(farmAddress)
   const { endDate, startDate } = useFarmData(farmAddress)
+  const [debReward, setDebReward] = useState(new BN(0))
 
   const percentProgress = useMemo(() => {
     if (!endDate || !startDate) return 0
-    const end = endDate.toNumber()
-    const start = startDate.toNumber()
-    const now = Date.now() / 1000
+    const end = endDate.toNumber() * 1000
+    const start = startDate.toNumber() * 1000
+    const now = Date.now()
 
     if (end < now) return 100
 
     return ((now - start) / (end - start)) * 100
   }, [endDate, startDate])
+
+  const getDebtRewards = useCallback(async () => {
+    const debReward = await getDebtReward()
+    setDebReward(debReward)
+  }, [getDebtReward])
+
+  useEffect(() => {
+    getDebtRewards()
+  }, [getDebtRewards])
 
   return (
     <Card
@@ -66,7 +80,6 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 </Tag>
               </Col>
             )}
-
             {/* Count down */}
             <Col span={24}>
               <SpaceBetween
@@ -82,14 +95,14 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 }
               >
                 <Space>
-                  <Space size={6}>
-                    <Typography.Text type="secondary">End in</Typography.Text>
-                    <TimeCountDown endTime={Math.floor(endDate.toNumber())} />
-                  </Space>
+                  <TimeCountDown
+                    label="End in"
+                    endTime={Math.floor(endDate.toNumber())}
+                  />
                   <Progress
                     type="circle"
                     percent={percentProgress}
-                    showInfo={false}
+                    showInfo={percentProgress === 100}
                     className="end-time-progress"
                     strokeWidth={10}
                   />
@@ -143,6 +156,9 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                   <Typography.Title level={5}>
                     <TotalPendingReward farmAddress={farmAddress} />
                   </Typography.Title>
+                  {!debReward.isZero() && (
+                    <HarvestButton size="small" farmAddress={farmAddress} />
+                  )}
                 </Space>
               </CardTooltip>
             </Col>

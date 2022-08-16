@@ -27,6 +27,7 @@ const NumericInput = ({
       value={value}
       onChange={onChange}
       max={max}
+      min="0"
     />
   )
 }

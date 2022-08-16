@@ -1,16 +1,44 @@
 import { useMemo, useState } from 'react'
+import { utilsBN } from '@sen-use/web3'
+import { useMintDecimals, util } from '@sentre/senhub'
 
 import { Row, Col, Typography, Button, Space, Card } from 'antd'
 import ExtraTypography from '../extraTypography'
-
 import CardNumbericInput from 'components/cardNumbericInput'
+
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useStake } from 'hooks/actions/useStake'
+import { useDebtOracle } from 'hooks/debt/useDebtOracle'
 
 const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [inAmount, setInAmount] = useState<string>('')
   const farmData = useFarmData(farmAddress)
   const { stake, loading } = useStake(farmAddress)
+  const debtOracle = useDebtOracle(farmAddress)
+  const decimals =
+    useMintDecimals({
+      mintAddress: farmData.inputMint.toBase58(),
+    }) || 0
+
+  const yourAmountIn = useMemo(() => {
+    const inAmountNumber = Number(inAmount)
+    if (inAmountNumber === 0) return 0
+    return inAmountNumber
+  }, [inAmount])
+
+  const totalAmountIn = useMemo(() => {
+    return utilsBN.undecimalize(
+      debtOracle.deposit(utilsBN.decimalize(yourAmountIn, decimals)),
+      decimals,
+    )
+  }, [debtOracle, decimals, yourAmountIn])
+
+  const boostByNFT = useMemo(() => {
+    if (!Number(totalAmountIn)) return 0
+    return util
+      .numeric(Number(totalAmountIn) - Number(yourAmountIn))
+      .format('0,0.[000000000000]')
+  }, [totalAmountIn, yourAmountIn])
 
   const onFullyStake = async () => {
     await stake({
@@ -20,10 +48,6 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
     })
     setInAmount('')
   }
-
-  const boostAmount = useMemo(() => {
-    return 0
-  }, [])
 
   return (
     <Row gutter={[16, 16]} style={{ height: '100%' }}>
@@ -44,11 +68,11 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
           <Space size={8} direction="vertical" style={{ width: '100%' }}>
             <ExtraTypography
               label="Your stake"
-              content={`${inAmount || 0} LP`}
+              content={`${yourAmountIn || 0} LP`}
             />
             <ExtraTypography
               label="Boost by NFT"
-              content={`+ ${boostAmount} LP`}
+              content={`+ ${boostByNFT} LP`}
             />
 
             <Row align="middle">
@@ -56,9 +80,10 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
                 <Typography.Text type="secondary">Total</Typography.Text>
               </Col>
               <Col>
-                <Typography.Title style={{ color: '#A0E86F' }} level={4}>{`${
-                  inAmount || 0 + boostAmount
-                } LP`}</Typography.Title>
+                <Typography.Title
+                  style={{ color: '#A0E86F' }}
+                  level={4}
+                >{`${Number(totalAmountIn)} LP`}</Typography.Title>
               </Col>
             </Row>
           </Space>

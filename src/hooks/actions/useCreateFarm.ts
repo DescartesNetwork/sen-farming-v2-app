@@ -1,3 +1,4 @@
+import { PRECISION } from 'constant'
 import { utilsBN } from '@sen-use/web3/dist'
 import { useCallback, useState } from 'react'
 import { web3, BN } from '@project-serum/anchor'
@@ -59,7 +60,7 @@ export const useCreateFarm = () => {
               await farming.pushFarmBoostingCollection({
                 farm: farmKeypair.publicKey,
                 collection: collection,
-                coefficient: new BN(percentage),
+                coefficient: new BN((percentage / 100) * PRECISION.toNumber()),
                 sendAndConfirm: false,
               })
             txBoosts.add(txPushFarmBoostingCollection)
