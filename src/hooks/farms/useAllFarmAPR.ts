@@ -23,6 +23,7 @@ export const useAllFarmAPR = () => {
         newRoiList[farmAddress] = 0
         continue
       }
+
       const filteredRewards = Object.values(rewards).filter(
         (val) => val.farm.toBase58() === farmAddress,
       )
@@ -34,7 +35,8 @@ export const useAllFarmAPR = () => {
         const rewardAmount = await getTotalValue(rewardMint, rewardPerDay)
         totalReward += rewardAmount
       }
-      newRoiList[farmAddress] = totalReward / farmLiquidities[farmAddress]
+      newRoiList[farmAddress] =
+        (totalReward / farmLiquidities[farmAddress]) * 365
     }
 
     return setRoiList(newRoiList)
@@ -44,5 +46,5 @@ export const useAllFarmAPR = () => {
     calcAPRs()
   }, [calcAPRs])
 
-  return { roiList }
+  return roiList
 }

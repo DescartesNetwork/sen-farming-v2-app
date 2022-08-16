@@ -1,4 +1,4 @@
-import LazyLoad from '@sentre/react-lazyload'
+import LazyLoad, { forceCheck } from '@sentre/react-lazyload'
 
 import { Button, Col, Row } from 'antd'
 import FarmCard from './farmCard'
@@ -9,9 +9,10 @@ import SegmentedFarm from './segmentedFarm'
 import FilterFarm from 'actions/filterFarm'
 
 import { useAppRouter } from 'hooks/useAppRouter'
-import { useSearchedFarms } from 'hooks/farm/useSearchedFarms'
+import { useSearchedFarms } from 'hooks/farms/useSearchedFarms'
 import useFilterFarm from 'hooks/farm/useFilterFarms'
-import { useSortFarms } from 'hooks/farm/useSortFarms'
+import { useSortFarms } from 'hooks/farms/useSortFarms'
+import { useEffect } from 'react'
 
 const Farms = () => {
   const { pushHistory } = useAppRouter()
@@ -30,9 +31,12 @@ const Farms = () => {
   //   return setFilteredFarms(filteredFarms)
   // }, [farms, rewards])
 
-  // useEffect(() => {
-  //   filterFarms()
-  // }, [filterFarms])
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      forceCheck()
+    }, 300)
+    return clearTimeout(timeout)
+  }, [sortedFarm])
 
   return (
     <Layout>
