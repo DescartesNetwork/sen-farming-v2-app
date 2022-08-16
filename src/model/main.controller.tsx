@@ -27,7 +27,7 @@ export type MainState = {
 const NAME = 'main'
 const initialState: MainState = {
   searchKey: '',
-  sortType: { liquidity: SortDirection.null, apr: SortDirection.null },
+  sortType: { liquidity: SortDirection.null, apr: SortDirection.ASC },
   farmTab: FarmTab.All,
   boostOnly: false,
 }

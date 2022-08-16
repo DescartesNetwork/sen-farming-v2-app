@@ -19,10 +19,6 @@ export const useAllFarmAPR = () => {
 
     for (const farmAddress in farms) {
       const { startDate, endDate } = farms[farmAddress]
-      if (!farmLiquidities[farmAddress]) {
-        newRoiList[farmAddress] = 0
-        continue
-      }
 
       const filteredRewards = Object.values(rewards).filter(
         (val) => val.farm.toBase58() === farmAddress,
@@ -36,7 +32,7 @@ export const useAllFarmAPR = () => {
         totalReward += rewardAmount
       }
       newRoiList[farmAddress] =
-        (totalReward / farmLiquidities[farmAddress]) * 365
+        (totalReward / (farmLiquidities[farmAddress] || 10)) * 365
     }
 
     return setRoiList(newRoiList)
