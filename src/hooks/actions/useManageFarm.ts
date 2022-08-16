@@ -6,9 +6,7 @@ const useManageFarm = () => {
   const budget = 100
   const liquidity = 319649695
 
-  const confirm = useCallback(() => {
-    console.log('confirm')
-  }, [])
+  const confirm = useCallback(() => {}, [])
 
   return { visible, setVisible, confirm, budget, liquidity }
 }

@@ -1,5 +1,6 @@
 import { util } from '@sentre/senhub/dist'
 import { Card, Col, Image, Row, Space, Typography } from 'antd'
+import TotalOwnRewards from 'components/debt/totalOwnRewards'
 import { useAllFarmTotalValue } from 'hooks/useAllFarmTotalValue'
 
 import IconBanner from 'static/images/icon-banner.png'
@@ -44,7 +45,7 @@ const Banner = () => {
                 Total your rewards
               </Typography.Text>
               <Typography.Title level={3} style={{ ...textStyle }}>
-                $0
+                <TotalOwnRewards />
               </Typography.Title>
             </Space>
           </Space>
