@@ -54,7 +54,7 @@ export const useFarmOption = () => {
           farmAmount = yourFarm.length
           break
         }
-        case 'finished': {
+        case 'expired': {
           const endFarm = rewardableFarms.filter((val) =>
             farms[val].endDate
               .sub(new BN(new Date().getTime() / 1000))

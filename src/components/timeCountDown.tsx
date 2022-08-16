@@ -63,7 +63,7 @@ const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
   if (endTime * 1000 < now)
     return (
       <TimeTag>
-        <Typography.Text>Finished</Typography.Text>
+        <Typography.Text>Expired</Typography.Text>
       </TimeTag>
     )
   return (

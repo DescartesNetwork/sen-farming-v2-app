@@ -43,7 +43,7 @@ const useFilterFarm = () => {
           )
           break
         }
-        case 'finished': {
+        case 'expired': {
           newFilteredFarms = rewardableFarms.filter((val) =>
             farms[val].endDate
               .sub(new BN(new Date().getTime() / 1000))

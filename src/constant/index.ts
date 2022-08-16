@@ -9,16 +9,16 @@ export enum FarmId {
 
 export const FARM_OPTION: Record<string, string> = {
   all: 'All',
-  staked: 'Staked farm',
-  your: 'Your farm',
-  finished: 'Finished farm',
+  staked: 'Staked farms',
+  your: 'Your farms',
+  expired: 'Expired farms',
 }
 
 export enum FarmTab {
   All = 'all',
-  Staked = 'staked farm',
-  Your = 'your farm',
-  Finished = 'finished farm',
+  Staked = 'staked farms',
+  Your = 'your farms',
+  Expired = 'expired farms',
 }
 
 export const DATE_FORMAT = 'MMM DD, YYYY HH:mm'
