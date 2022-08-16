@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react'
 import { useMintDecimals } from '@sentre/senhub'
-import { web3 } from '@project-serum/anchor'
+import { web3, BN } from '@project-serum/anchor'
 
 import { notifyError, notifySuccess } from 'helper'
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmData } from 'hooks/farm/useFarmData'
+import { useDebtOracle } from 'hooks/debt/useDebtOracle'
 
 import configs from 'configs'
 
@@ -12,6 +13,7 @@ export const useUnlock = (farmAddress: string) => {
   const [loading, setLoading] = useState(false)
   const debtData = useDebtData(farmAddress)
   const farmData = useFarmData(farmAddress)
+  const debOracle = useDebtOracle(farmAddress)
   const decimals = useMintDecimals({
     mintAddress: farmData?.inputMint.toBase58(),
   })
@@ -21,6 +23,8 @@ export const useUnlock = (farmAddress: string) => {
       try {
         setLoading(true)
         const metadata = await configs.sol.metaplexNFT.getNftMetadata(nft)
+        const shareAmount = debtData?.shares || new BN(0)
+        const depositAmount = debOracle.withdraw(shareAmount)
         // Validate
         if (!decimals) throw new Error('Not find mint decimals')
         const transaction = new web3.Transaction()
@@ -33,9 +37,18 @@ export const useUnlock = (farmAddress: string) => {
           transaction.add(tx)
         }
         // Unstake
-        if (!debtData?.shares.isZero()) {
+        if (!shareAmount.isZero()) {
           const { tx } = await window.senFarming.unstake({
             farm: farmAddress,
+            sendAndConfirm: false,
+          })
+          transaction.add(tx)
+        }
+        // Withdraw
+        if (!shareAmount.isZero()) {
+          const { tx } = await window.senFarming.withdraw({
+            farm: farmAddress,
+            shares: shareAmount,
             sendAndConfirm: false,
           })
           transaction.add(tx)
@@ -49,6 +62,15 @@ export const useUnlock = (farmAddress: string) => {
           sendAndConfirm: false,
         })
         transaction.add(txUnlock)
+        // Deposit
+        if (!depositAmount.isZero()) {
+          const { tx } = await window.senFarming.deposit({
+            farm: farmAddress,
+            inAmount: depositAmount,
+            sendAndConfirm: false,
+          })
+          transaction.add(tx)
+        }
         // Stake
         const { tx: txStake } = await window.senFarming.stake({
           farm: farmAddress,
@@ -65,7 +87,7 @@ export const useUnlock = (farmAddress: string) => {
         setLoading(false)
       }
     },
-    [debtData, decimals, farmAddress],
+    [debOracle, debtData, decimals, farmAddress],
   )
 
   return { unlock, loading }
