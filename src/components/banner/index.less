@@ -1,23 +1,70 @@
-.animation-banner {
-  position: relative;
-  .token {
-    position: absolute;
-    &.token-1 {
-      width: 50px;
-      height: 50px;
-      background: #0db2d1;
-    }
-    &.token-2 {
-      width: 25px;
-      height: 25px;
-      background: #d6a473;
-    }
+@keyframes digCoin {
+  0% {
+    transform: rotate(120deg);
+  }
+  10% {
+    transform: rotate(119deg);
+  }
+  20% {
+    transform: rotate(122deg);
+  }
+  70% {
+    transform: rotate(122deg);
+  }
+  80% {
+    transform: rotate(75deg);
+  }
+  100% {
+    transform: rotate(120deg);
   }
 }
+@keyframes flipLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate3d(1, 1, 1, 0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(-35px, -40px, 0) rotate3d(5, -1, 1, 180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-70px, -80px, 0) rotate3d(10, -2, 1, 360deg);
+  }
+}
+
+@keyframes flipRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate3d(1, 1, 1, 0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(22px, -32px, 0) rotate3d(5, -1, 1, 180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(44px, -64px, 0) rotate3d(10, -2, 1, 360deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0px, 0px) scale(0.99);
+  }
+  50% {
+    transform: translateY(8px) scale(1.04);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(0.99);
+  }
+}
+
 .banner {
   background: linear-gradient(172deg, #f0ff00 0%, #58cffb 100%) !important;
   .icon-banner {
     position: absolute;
+    width: 150px;
     right: 32px;
     bottom: 8px;
     z-index: 1;
@@ -28,4 +75,78 @@
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.animation-banner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .token {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    &:not(.hammer) {
+      opacity: 0;
+    }
+    &.token-1 {
+      width: 50px;
+      height: 50px;
+      background: #0db2d1;
+      border-radius: 100%;
+      animation: flipLeft 2s 1.5s linear infinite;
+    }
+    &.token-2 {
+      width: 25px;
+      height: 25px;
+      background: #d6a473;
+      border-radius: 100%;
+      animation: flipRight 2s 1.5s linear infinite;
+    }
+
+    &.token-3 {
+      width: 35px;
+      height: 35px;
+      background: #9473d6;
+      border-radius: 100%;
+    }
+    &.hammer {
+      width: 20px;
+      height: 80px;
+      background: #650a8b;
+      left: unset;
+      right: 8px;
+      top: 50%;
+      transform: translate(0) rotate(120deg);
+      transform-origin: top right;
+      animation: digCoin 2s linear infinite;
+    }
+  }
+}
+
+.wrap-animation {
+  position: absolute;
+  display: flex;
+  transform: translateX(-50%);
+  &.mining {
+    left: 38%;
+    .item-bounce {
+      position: relative;
+      &.bounce-1 {
+        top: -100px;
+        img {
+          max-width: 65px;
+          animation: shake 3s ease-in-out 0.9s infinite normal none running;
+        }
+      }
+      &.bounce-2 {
+        top: -105px;
+        left: 50px;
+        img {
+          max-width: 55px;
+          animation: shake 3s ease-in-out 0.4s infinite normal none running;
+        }
+      }
+    }
+  }
 }

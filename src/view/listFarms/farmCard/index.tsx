@@ -1,7 +1,7 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 
-import { Card, Col, Row, Space, Tag, Typography } from 'antd'
+import { Button, Card, Col, Progress, Row, Space, Tag, Typography } from 'antd'
 import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
 import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
@@ -10,10 +10,29 @@ import APRInfo from './APRInfo'
 import configs from 'configs'
 import FarmLiquidity from 'components/farm/farmLiquidity'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+import IonIcon from '@sentre/antd-ionicon'
+import CardTooltip from './cardTooltip'
+import TimeCountDown from 'components/timeCountDown'
+import { useFarmData } from 'hooks/farm/useFarmData'
+
+import './index.less'
+import SpaceBetween from 'components/spaceBetween'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
   const farmBoostingData = useFarmBoosting(farmAddress)
+  const { endDate, startDate } = useFarmData(farmAddress)
+
+  const percentProgress = useMemo(() => {
+    if (!endDate || !startDate) return 0
+    const end = endDate.toNumber()
+    const start = startDate.toNumber()
+    const now = Date.now() / 1000
+
+    if (end < now) return 100
+
+    return ((now - start) / (end - start)) * 100
+  }, [endDate, startDate])
 
   return (
     <Card
@@ -47,27 +66,57 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                 </Tag>
               </Col>
             )}
-            {/* <Col span={24}>
-              <Button type="text" style={{ marginLeft: -15 }}>
-                Go pool
-              </Button>
-            </Col> */}
+
+            {/* Count down */}
+            <Col span={24}>
+              <SpaceBetween
+                title={
+                  <Button
+                    type="text"
+                    style={{ padding: 0, background: 'transparent' }}
+                    disabled
+                    onClick={() => {}}
+                  >
+                    Go pool <IonIcon name="open-outline" />
+                  </Button>
+                }
+              >
+                <Space>
+                  <Space size={6}>
+                    <Typography.Text type="secondary">End in</Typography.Text>
+                    <TimeCountDown endTime={Math.floor(endDate.toNumber())} />
+                  </Space>
+                  <Progress
+                    type="circle"
+                    percent={percentProgress}
+                    showInfo={false}
+                    className="end-time-progress"
+                    strokeWidth={10}
+                  />
+                </Space>
+              </SpaceBetween>
+            </Col>
           </Row>
         </Col>
         <Col span={24}>
           <Row justify="space-between">
             {/* APR */}
             <Col>
-              <Space direction="vertical">
-                <Space>
-                  <Typography.Text type="secondary">APR</Typography.Text>
-                  <APRInfo farmAddress={farmAddress} />
+              <CardTooltip tooltip={<APRInfo farmAddress={farmAddress} />}>
+                <Space direction="vertical">
+                  <Space>
+                    <Typography.Text type="secondary">APR</Typography.Text>
+                    <IonIcon
+                      name="information-circle-outline"
+                      className="icon-describe"
+                    />
+                  </Space>
+                  <Typography.Title level={5} style={{ color: '#a0e86f' }}>
+                    <FarmApr farmAddress={farmAddress} />
+                  </Typography.Title>
+                  <RewardsAvatar farmAddress={farmAddress} />
                 </Space>
-                <Typography.Title level={5} style={{ color: '#a0e86f' }}>
-                  <FarmApr farmAddress={farmAddress} />
-                </Typography.Title>
-                <RewardsAvatar farmAddress={farmAddress} />
-              </Space>
+              </CardTooltip>
             </Col>
             {/* Liquidity */}
             <Col>
@@ -80,17 +129,22 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
             </Col>
             {/* Pending rewards */}
             <Col>
-              <Space direction="vertical">
-                <Space>
-                  <Typography.Text type="secondary">
-                    Your rewards
-                  </Typography.Text>
-                  <RewardInfo farmAddress={farmAddress} />
+              <CardTooltip tooltip={<RewardInfo farmAddress={farmAddress} />}>
+                <Space direction="vertical">
+                  <Space>
+                    <Typography.Text type="secondary">
+                      Your rewards
+                    </Typography.Text>
+                    <IonIcon
+                      name="information-circle-outline"
+                      className="icon-describe"
+                    />
+                  </Space>
+                  <Typography.Title level={5}>
+                    <TotalPendingReward farmAddress={farmAddress} />
+                  </Typography.Title>
                 </Space>
-                <Typography.Title level={5}>
-                  <TotalPendingReward farmAddress={farmAddress} />
-                </Typography.Title>
-              </Space>
+              </CardTooltip>
             </Col>
           </Row>
         </Col>

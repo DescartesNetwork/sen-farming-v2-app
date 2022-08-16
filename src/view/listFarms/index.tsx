@@ -1,6 +1,4 @@
 import LazyLoad from '@sentre/react-lazyload'
-import { useSelector } from 'react-redux'
-import { useCallback, useEffect, useState } from 'react'
 
 import { Button, Col, Row } from 'antd'
 import FarmCard from './farmCard'
@@ -11,28 +9,30 @@ import SegmentedFarm from './segmentedFarm'
 import FilterFarm from 'actions/filterFarm'
 
 import { useAppRouter } from 'hooks/useAppRouter'
-import { AppState } from 'model'
+import { useSearchedFarms } from 'hooks/farm/useSearchedFarms'
+import useFilterFarm from 'hooks/farm/useFilterFarms'
+import { useSortFarms } from 'hooks/farm/useSortFarms'
 
 const Farms = () => {
-  const farms = useSelector((state: AppState) => state.farms)
-  const rewards = useSelector((state: AppState) => state.rewards)
-  const [filteredFarms, setFilteredFarms] = useState<string[]>([])
   const { pushHistory } = useAppRouter()
+  const filteredFarms = useFilterFarm()
+  const searchedFarms = useSearchedFarms(filteredFarms)
+  const sortedFarm = useSortFarms(searchedFarms)
 
   // Filter farms has rewards
-  const filterFarms = useCallback(() => {
-    const filteredFarms: string[] = []
-    for (const reward of Object.values(rewards)) {
-      const farmAddr = reward.farm.toBase58()
-      if (filteredFarms.includes(farmAddr) || !farms[farmAddr]) continue
-      filteredFarms.push(farmAddr)
-    }
-    return setFilteredFarms(filteredFarms)
-  }, [farms, rewards])
+  // const filterFarms = useCallback(() => {
+  //   const filteredFarms: string[] = []
+  //   for (const reward of Object.values(rewards)) {
+  //     const farmAddr = reward.farm.toBase58()
+  //     if (filteredFarms.includes(farmAddr) || !farms[farmAddr]) continue
+  //     filteredFarms.push(farmAddr)
+  //   }
+  //   return setFilteredFarms(filteredFarms)
+  // }, [farms, rewards])
 
-  useEffect(() => {
-    filterFarms()
-  }, [filterFarms])
+  // useEffect(() => {
+  //   filterFarms()
+  // }, [filterFarms])
 
   return (
     <Layout>
@@ -48,7 +48,7 @@ const Farms = () => {
             childFlex={1}
           >
             <Button onClick={() => pushHistory('/create-farm')} ghost block>
-              Add farm
+              New Farm
             </Button>
           </SpaceBetween>
         </Col>
@@ -58,7 +58,7 @@ const Farms = () => {
         {/* List Farms */}
         <Col span={24}>
           <Row gutter={[24, 24]}>
-            {filteredFarms.map((farmAddress) => (
+            {sortedFarm.map((farmAddress) => (
               <Col xs={24} lg={12} key={farmAddress}>
                 <LazyLoad height={196}>
                   <FarmCard farmAddress={farmAddress} />

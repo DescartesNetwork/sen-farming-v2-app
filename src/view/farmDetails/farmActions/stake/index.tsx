@@ -29,12 +29,6 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[16, 16]} style={{ height: '100%' }}>
       <Col span={24}>
-        <Typography.Text type="secondary">
-          <IonIcon name="alert-circle-outline" /> The pending reward will be
-          automatically harvested when you stake more.
-        </Typography.Text>
-      </Col>
-      <Col span={24}>
         <CardNumbericInput
           mint={farmData.inputMint.toBase58()}
           value={inAmount}

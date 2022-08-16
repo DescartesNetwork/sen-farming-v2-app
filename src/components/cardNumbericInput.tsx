@@ -45,7 +45,7 @@ const CardNumericInputSelectMint = ({
           <Space size={6}>
             <Typography.Text type="secondary">Available:</Typography.Text>
             <Typography.Text>
-              {`${util.numeric(available).format('0,0.[00]')} LPT`}
+              {`${util.numeric(available).format('0,0.[00]')} LP`}
             </Typography.Text>
 
             <Button
@@ -100,7 +100,7 @@ const CardNumbericInput = ({
             <Space size={6}>
               <Typography.Text type="secondary">Available:</Typography.Text>
               <Typography.Text>
-                {`${util.numeric(currentAvailable).format('0,0.[00]')} LPT`}
+                {`${util.numeric(currentAvailable).format('0,0.[00]')} LP`}
               </Typography.Text>
             </Space>
           </SpaceBetween>

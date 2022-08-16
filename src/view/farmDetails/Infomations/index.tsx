@@ -1,11 +1,12 @@
+import { Fragment } from 'react'
+
 import { Card, Col, Divider, Row } from 'antd'
 import BoostingNFT from 'actions/boostingNFT'
 import CardHarvest from './cardHarvest'
 import CardRewards from './cardRewards'
-import FarmHeader from './header'
+import CardHeader from './cardHeader'
 
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
-import { Fragment } from 'react'
 
 const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
   const farmBoostingData = useFarmBoosting(farmAddress)
@@ -14,7 +15,7 @@ const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
     <Card bordered={false} style={{ height: '100%' }}>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <FarmHeader farmAddress={farmAddress} />
+          <CardHeader farmAddress={farmAddress} />
         </Col>
         <Col xs={24} md={12} lg={24} xl={12}>
           <CardHarvest farmAddress={farmAddress} />

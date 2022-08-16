@@ -48,7 +48,7 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
                   amount={amount}
                   format="0,0.[00]"
                 />
-                {' /Week'}
+                {' / Week'}
               </Typography.Title>
             </SpaceBetween>
           </Col>
