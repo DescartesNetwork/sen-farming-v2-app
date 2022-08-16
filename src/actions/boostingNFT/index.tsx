@@ -8,14 +8,13 @@ import NftSelection from './nftSelection'
 
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
-
-import './index.less'
-
+import { useUnlock } from 'hooks/actions/useUnlock'
 import { useLock } from 'hooks/actions/useLock'
-import configs from 'configs'
+
 import { MetadataDataType } from 'lib/metaplex'
 import { PRECISION } from 'constant'
-import { useUnlock } from 'hooks/actions/useUnlock'
+import configs from 'configs'
+import './index.less'
 
 const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)

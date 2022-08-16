@@ -5,7 +5,7 @@ import { utilsBN } from '@sen-use/web3'
 
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmData } from 'hooks/farm/useFarmData'
-import { PRECISION } from 'constant'
+// import { PRECISION } from 'constant'
 
 export const useStakedData = (farmAddress: string) => {
   const debtData = useDebtData(farmAddress)
@@ -16,7 +16,8 @@ export const useStakedData = (farmAddress: string) => {
 
   const stakedAmount = useMemo(() => {
     if (!debtData) return '0'
-    return debtData.shares.mul(PRECISION).div(debtData.leverage).toString()
+    return debtData.shares.toString()
+    // return debtData.shares.mul(PRECISION).div(debtData.leverage).toString()
   }, [debtData])
 
   const farmShareAmount = useMemo(() => {

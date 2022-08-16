@@ -1,24 +1,19 @@
-import { useEffect, useMemo, useState } from 'react'
-import IonIcon from '@sentre/antd-ionicon'
+import { useMemo, useState } from 'react'
+import { utilsBN } from '@sen-use/web3'
+import { useMintDecimals, util } from '@sentre/senhub'
 
 import { Row, Col, Typography, Button, Space, Card } from 'antd'
 import ExtraTypography from '../extraTypography'
-
 import CardNumbericInput from 'components/cardNumbericInput'
+
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useStake } from 'hooks/actions/useStake'
-import { useStakedData } from 'hooks/debt/useStakedData'
-import { useDebtData } from 'hooks/debt/useDebtData'
-import { utilsBN } from '@sen-use/web3'
 import { useDebtOracle } from 'hooks/debt/useDebtOracle'
-import { useMintDecimals, util } from '@sentre/senhub'
 
 const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [inAmount, setInAmount] = useState<string>('')
   const farmData = useFarmData(farmAddress)
   const { stake, loading } = useStake(farmAddress)
-  const stakedData = useStakedData(farmAddress)
-  const debtData = useDebtData(farmAddress)
   const debtOracle = useDebtOracle(farmAddress)
   const decimals =
     useMintDecimals({
@@ -26,11 +21,10 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
     }) || 0
 
   const yourAmountIn = useMemo(() => {
-    const statedAmountNumber = Number(stakedData.amount)
     const inAmountNumber = Number(inAmount)
     if (inAmountNumber === 0) return 0
-    return statedAmountNumber + inAmountNumber
-  }, [inAmount, stakedData.amount])
+    return inAmountNumber
+  }, [inAmount])
 
   const totalAmountIn = useMemo(() => {
     return utilsBN.undecimalize(
@@ -44,8 +38,6 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
       .numeric(Number(totalAmountIn) - Number(yourAmountIn))
       .format('0,0.[000000000000]')
   }, [totalAmountIn, yourAmountIn])
-
-  console.log('totalAmountIn: ', Number(totalAmountIn))
 
   const onFullyStake = async () => {
     await stake({

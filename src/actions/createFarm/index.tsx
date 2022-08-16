@@ -64,7 +64,11 @@ const CreateFarm = () => {
       if (!util.isAddress(reward.mintAddress)) return 'Select reward mint'
       if (!Number(reward.budget)) return 'Enter budget amount'
     }
-  }, [mintFarm, time.endAt, tokenRewards])
+    for (const boost of boostsData) {
+      if (!util.isAddress(boost.collection)) return 'Select NFT collection'
+      if (!Number(boost.percentage)) return 'Enter NFT coefficient'
+    }
+  }, [boostsData, mintFarm, time.endAt, tokenRewards])
 
   return (
     <Row justify="center">
