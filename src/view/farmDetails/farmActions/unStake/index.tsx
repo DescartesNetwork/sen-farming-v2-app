@@ -29,14 +29,10 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
           type="primary"
           size="large"
           block
-          style={{
-            background: '#FF666E',
-            borderColor: '#FF666E',
-            color: 'white',
-          }}
           disabled={!Number(outAmount)}
           loading={loading}
           onClick={onUnstake}
+          danger
         >
           Unstake
         </Button>

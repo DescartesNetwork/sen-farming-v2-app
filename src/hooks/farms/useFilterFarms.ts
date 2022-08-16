@@ -74,7 +74,7 @@ const useFilterFarm = () => {
             return checkStakedFarm(farmAddress)
           case FarmTab.Your:
             return checkYourFarm(farmAddress)
-          case FarmTab.Finished:
+          case FarmTab.Expired:
             return checkFinishedFarm(farmAddress)
           case FarmTab.All:
             return !checkFinishedFarm(farmAddress)

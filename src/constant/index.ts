@@ -7,11 +7,18 @@ export enum FarmId {
   All = 'all',
 }
 
+export const FARM_OPTION: Record<string, string> = {
+  all: 'All',
+  staked: 'Staked farms',
+  your: 'Your farms',
+  expired: 'Expired farms',
+}
+
 export enum FarmTab {
   All = 'All',
-  Staked = 'Staked farms',
-  Your = 'Your farms',
-  Finished = 'Finished farms',
+  Staked = 'Staked Farms',
+  Your = 'Your Farms',
+  Expired = 'Expired Farms',
 }
 
 export const DATE_FORMAT = 'MMM DD, YYYY HH:mm'

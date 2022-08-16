@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import LazyLoad, { forceCheck } from '@sentre/react-lazyload'
 
 import { Button, Col, Row, Spin } from 'antd'
@@ -12,7 +13,6 @@ import { useAppRouter } from 'hooks/useAppRouter'
 import { useSearchedFarms } from 'hooks/farms/useSearchedFarms'
 import useFilterFarm from 'hooks/farms/useFilterFarms'
 import { useSortFarms } from 'hooks/farms/useSortFarms'
-import { useEffect } from 'react'
 
 const Farms = () => {
   const { pushHistory } = useAppRouter()
@@ -20,22 +20,8 @@ const Farms = () => {
   const search = useSearchedFarms(filter.filteredFarm)
   const sortedFarm = useSortFarms(search.searchedFarms)
 
-  // Filter farms has rewards
-  // const filterFarms = useCallback(() => {
-  //   const filteredFarms: string[] = []
-  //   for (const reward of Object.values(rewards)) {
-  //     const farmAddr = reward.farm.toBase58()
-  //     if (filteredFarms.includes(farmAddr) || !farms[farmAddr]) continue
-  //     filteredFarms.push(farmAddr)
-  //   }
-  //   return setFilteredFarms(filteredFarms)
-  // }, [farms, rewards])
-
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      forceCheck()
-    }, 300)
-    return clearTimeout(timeout)
+    setTimeout(() => forceCheck(), 500)
   }, [sortedFarm])
 
   return (

@@ -11,11 +11,13 @@ export const useAllFarmLiquidity = () => {
 
   const updateLiquidities = useCallback(async () => {
     const newLiquidities: Record<string, number> = {}
-    for (const farmAddress in farms) {
-      const { inputMint, totalShares } = farms[farmAddress]
-      const liquidity = await getTotalValue(inputMint.toString(), totalShares)
-      newLiquidities[farmAddress] = liquidity
-    }
+    await Promise.all(
+      Object.keys(farms).map(async (farmAddress) => {
+        const { inputMint, totalShares } = farms[farmAddress]
+        const liquidity = await getTotalValue(inputMint.toString(), totalShares)
+        newLiquidities[farmAddress] = liquidity
+      }),
+    )
     return setLiquidities(newLiquidities)
   }, [farms, getTotalValue])
 

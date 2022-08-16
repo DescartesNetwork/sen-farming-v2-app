@@ -13,11 +13,7 @@ const RedirectSwap = () => {
     )
   }
 
-  return (
-    <Button ghost onClick={onRedirectSwap}>
-      Swap
-    </Button>
-  )
+  return <Button onClick={onRedirectSwap}>Swap</Button>
 }
 
 export default RedirectSwap

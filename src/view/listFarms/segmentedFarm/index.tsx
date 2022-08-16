@@ -13,7 +13,7 @@ const SegmentedFarm = () => {
         { value: FarmTab.All, label: FarmTab.All },
         { value: FarmTab.Staked, label: FarmTab.Staked },
         { value: FarmTab.Your, label: FarmTab.Your },
-        { value: FarmTab.Finished, label: FarmTab.Finished },
+        { value: FarmTab.Expired, label: FarmTab.Expired },
       ]}
       onChange={(val) => dispatch(setFarmTab(val.toString()))}
     />

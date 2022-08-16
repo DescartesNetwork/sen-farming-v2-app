@@ -71,7 +71,7 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
               content={`${yourAmountIn || 0} LP`}
             />
             <ExtraTypography
-              label="Boost by NFT"
+              label="Boosted by NFT"
               content={`+ ${boostByNFT} LP`}
             />
 
