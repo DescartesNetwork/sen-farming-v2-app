@@ -14,6 +14,13 @@ export const FARM_OPTION: Record<string, string> = {
   your: 'Your farm',
 }
 
+export enum FarmTab {
+  All = 'all',
+  Sentre = 'sentre farm',
+  Staked = 'staked farm',
+  Your = 'your farm',
+}
+
 export const DATE_FORMAT = 'MMM DD, YYYY HH:mm'
 
 export const PRECISION = new BN(10 ** 9)
