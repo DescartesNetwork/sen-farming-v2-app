@@ -28,10 +28,14 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
 
   return (
     <Card bordered={false} style={{ background: '#2D2E2D', height: '100%' }}>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[12, 12]}>
         <Col>
-          <Typography.Text>Farm rewards</Typography.Text>
+          <SpaceBetween title={<Typography.Text>Farm rewards</Typography.Text>}>
+            {/* trick to align title */}
+            <Col span={24} style={{ height: 41 }} />
+          </SpaceBetween>
         </Col>
+
         {/* Rewards mint a */}
         {farmRewardsDaily.map(({ mint, amount, total }, idx) => (
           <Col span={24} key={mint.toBase58() + idx}>
@@ -44,7 +48,11 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
               }
               align="top"
             >
-              <Space direction="vertical" style={{ textAlign: 'right' }}>
+              <Space
+                size={0}
+                direction="vertical"
+                style={{ textAlign: 'right' }}
+              >
                 <Typography.Title level={5}>
                   <MintAmount
                     mintAddress={mint}

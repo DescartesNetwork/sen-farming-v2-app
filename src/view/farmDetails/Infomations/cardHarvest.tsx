@@ -10,7 +10,7 @@ const CardHarvest = ({ farmAddress }: { farmAddress: string }) => {
         background: 'rgba(160, 232, 111, 0.05)',
       }}
     >
-      <Row gutter={[12, 12]}>
+      <Row gutter={[24, 24]}>
         <Col span={24}>
           <HarvestInfos farmAddress={farmAddress} />
         </Col>
