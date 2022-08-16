@@ -15,10 +15,10 @@ export const FARM_OPTION: Record<string, string> = {
 }
 
 export enum FarmTab {
-  All = 'all',
-  Staked = 'staked farms',
-  Your = 'your farms',
-  Expired = 'expired farms',
+  All = 'All',
+  Staked = 'Staked Farms',
+  Your = 'Your Farms',
+  Expired = 'Expired Farms',
 }
 
 export const DATE_FORMAT = 'MMM DD, YYYY HH:mm'

@@ -20,21 +20,8 @@ const Farms = () => {
   const search = useSearchedFarms(filter.filteredFarm)
   const sortedFarm = useSortFarms(search.searchedFarms)
 
-  // Filter farms has rewards
-  // const filterFarms = useCallback(() => {
-  //   const filteredFarms: string[] = []
-  //   for (const reward of Object.values(rewards)) {
-  //     const farmAddr = reward.farm.toBase58()
-  //     if (filteredFarms.includes(farmAddr) || !farms[farmAddr]) continue
-  //     filteredFarms.push(farmAddr)
-  //   }
-  //   return setFilteredFarms(filteredFarms)
-  // }, [farms, rewards])
-
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      forceCheck()
-    }, 300)
+    const timeout = setTimeout(() => forceCheck(), 300)
     return clearTimeout(timeout)
   }, [sortedFarm])
 
