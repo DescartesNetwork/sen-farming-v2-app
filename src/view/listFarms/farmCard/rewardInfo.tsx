@@ -1,6 +1,5 @@
-import { Col, Row, Space, Typography, Tooltip } from 'antd'
+import { Col, Row, Space, Typography } from 'antd'
 import { MintAvatar, MintSymbol } from '@sen-use/components'
-import IonIcon from '@sentre/antd-ionicon'
 import SpaceBetween from 'components/spaceBetween'
 import HarvestButton from 'actions/harvest/harvestButton'
 
@@ -8,7 +7,7 @@ import MintAmount from 'components/mint/mintAmount'
 import { useConvertRewards } from 'hooks/useConvertRewards'
 import MintTotalValue from 'components/mint/mintTotalValue'
 
-const Explain = ({ farmAddress }: { farmAddress: string }) => {
+const RewardInfo = ({ farmAddress }: { farmAddress: string }) => {
   const convertRewards = useConvertRewards(farmAddress)
 
   return (
@@ -39,14 +38,6 @@ const Explain = ({ farmAddress }: { farmAddress: string }) => {
         <HarvestButton farmAddress={farmAddress} />
       </Col>
     </Row>
-  )
-}
-
-const RewardInfo = ({ farmAddress }: { farmAddress: string }) => {
-  return (
-    <Tooltip title={<Explain farmAddress={farmAddress} />}>
-      <IonIcon name="information-circle-outline" className="icon-describe" />
-    </Tooltip>
   )
 }
 

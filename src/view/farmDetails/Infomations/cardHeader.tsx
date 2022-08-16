@@ -1,18 +1,17 @@
 import { util } from '@sentre/senhub'
 
-import { Col, Row, Space, Typography } from 'antd'
+import { Col, Row, Space, Tooltip, Typography } from 'antd'
 import { FarmApr, FarmLiquidity } from 'components/farm'
 import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
+import PriceTooltip from './priceTooltip'
 
 import { useStakedData } from 'hooks/debt/useStakedData'
-import { useStakedTotalValue } from 'hooks/debt/useStakedTotalValue'
 import { useFarmData } from 'hooks/farm/useFarmData'
 
-const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
+const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
-  const stakedValue = useStakedTotalValue(farmAddress)
   const { endDate } = useFarmData(farmAddress)
 
   return (
@@ -52,17 +51,19 @@ const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
           <Col>
             <Space direction="vertical" size={0}>
               <SpaceVertical label="Your staked">
-                <Typography.Title level={4}>
-                  {util.numeric(stakedData.amount).format('0,0.[00]')} LP
-                </Typography.Title>
+                <Tooltip
+                  title={<PriceTooltip farmAddress={farmAddress} />}
+                  arrowPointAtCenter
+                >
+                  <Typography.Title level={4}>
+                    {util.numeric(stakedData.amount).format('0,0.[00]')} LP
+                  </Typography.Title>
+                </Tooltip>
               </SpaceVertical>
-              <Typography.Text type="secondary">
-                {util.numeric(stakedValue).format('$0,0.[00]')}
-              </Typography.Text>
             </Space>
           </Col>
           <Col>
-            <SpaceVertical label="Your pool share">
+            <SpaceVertical label="Your position">
               <Typography.Title level={4}>
                 {util.numeric(stakedData.ratio).format('0,0.[00]%')}
               </Typography.Title>
@@ -74,4 +75,4 @@ const FarmHeader = ({ farmAddress }: { farmAddress: string }) => {
   )
 }
 
-export default FarmHeader
+export default CardHeader

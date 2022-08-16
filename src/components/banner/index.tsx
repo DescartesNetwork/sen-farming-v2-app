@@ -1,9 +1,11 @@
-import { util } from '@sentre/senhub/dist'
+import { util } from '@sentre/senhub'
+
 import { Card, Col, Image, Row, Space, Typography } from 'antd'
 import TotalOwnRewards from 'components/debt/totalOwnRewards'
 import { useAllFarmTotalValue } from 'hooks/useAllFarmTotalValue'
 
-import IconBanner from 'static/images/icon-banner.png'
+import miningImg from 'static/images/mining.png'
+import AnimationBg from './animationBg'
 import './index.less'
 
 const textStyle = { color: 'inherit' }
@@ -24,7 +26,7 @@ const Banner = () => {
         style={{ position: 'relative', zIndex: 8, ...style }}
       >
         <Col span={24}>
-          <Typography.Title level={4} style={{ ...textStyle }}>
+          <Typography.Title level={2} style={{ ...textStyle }}>
             Sen Farming V2
           </Typography.Title>
         </Col>
@@ -33,7 +35,7 @@ const Banner = () => {
             {/* Total value stake */}
             <Space direction="vertical">
               <Typography.Text style={{ ...textStyle }}>
-                Total value staked
+                Total Value Staked
               </Typography.Text>
               <Typography.Title level={3} style={{ ...textStyle }}>
                 {util.numeric(tvl).format('$0,0.[00]')}
@@ -42,7 +44,7 @@ const Banner = () => {
             {/* Your rewards */}
             <Space direction="vertical">
               <Typography.Text style={{ ...textStyle }}>
-                Total your rewards
+                Total Your Rewards
               </Typography.Text>
               <Typography.Title level={3} style={{ ...textStyle }}>
                 <TotalOwnRewards />
@@ -52,7 +54,10 @@ const Banner = () => {
         </Col>
       </Row>
       <div className="icon-banner">
-        <Image src={IconBanner} preview={false} />
+        <Space>
+          <Image src={miningImg} preview={false} />
+          <AnimationBg />
+        </Space>
       </div>
     </Card>
   )
