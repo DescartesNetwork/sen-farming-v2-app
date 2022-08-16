@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import IonIcon from '@sentre/antd-ionicon'
 
 import { Row, Col, Typography, Button, Space, Card } from 'antd'
 import ExtraTypography from '../extraTypography'

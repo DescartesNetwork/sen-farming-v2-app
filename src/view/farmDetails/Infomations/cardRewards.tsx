@@ -32,8 +32,8 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
           <Typography.Text>Farm rewards</Typography.Text>
         </Col>
         {/* Rewards mint a */}
-        {farmRewardsDaily.map(({ mint, amount }) => (
-          <Col span={24}>
+        {farmRewardsDaily.map(({ mint, amount }, idx) => (
+          <Col span={24} key={mint.toBase58() + idx}>
             <SpaceBetween
               title={
                 <Space>
@@ -41,15 +41,26 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
                   <MintSymbol mintAddress={mint} />
                 </Space>
               }
+              align="top"
             >
-              <Typography.Title level={5}>
-                <MintAmount
-                  mintAddress={mint}
-                  amount={amount}
-                  format="0,0.[00]"
-                />
-                {' / Week'}
-              </Typography.Title>
+              <Space direction="vertical" style={{ textAlign: 'right' }}>
+                <Typography.Title level={5}>
+                  <MintAmount
+                    mintAddress={mint}
+                    amount={amount}
+                    format="0,0.[00]"
+                  />
+                </Typography.Title>
+                <Typography.Text type="secondary">
+                  <MintAmount
+                    mintAddress={mint}
+                    amount={amount}
+                    format="0,0.[00]"
+                    perDate
+                  />
+                  {' / day'}
+                </Typography.Text>
+              </Space>
             </SpaceBetween>
           </Col>
         ))}

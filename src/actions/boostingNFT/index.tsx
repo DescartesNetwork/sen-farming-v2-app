@@ -5,6 +5,7 @@ import { Button, Col, Modal, Row, Space, Spin, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
 import NftSelection from './nftSelection'
+import FarmTag from 'components/farmTag'
 
 import { useDebtData, useDebtTreasurerAddress } from 'hooks/debt/useDebtData'
 import {

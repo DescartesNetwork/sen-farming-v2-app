@@ -4,6 +4,7 @@ import { useWalletAddress } from '@sentre/senhub'
 
 import { FARM_OPTION } from 'constant'
 import { AppState } from 'model'
+import { BN } from 'bn.js'
 
 type FarmOption = {
   label: string
@@ -17,17 +18,12 @@ export const useFarmOption = () => {
 
   const farmingOptions: FarmOption[] = useMemo(() => {
     const options: FarmOption[] = []
+    const rewardableFarms = Object.keys(farms).filter((val) =>
+      farms[val].totalRewards.gt(new BN(0)),
+    )
     for (const key in FARM_OPTION) {
       let farmAmount = 0
       switch (key) {
-        case 'all': {
-          farmAmount = Object.keys(farms).length
-          break
-        }
-        case 'sentre': {
-          // To-do: Filter later
-          break
-        }
         case 'staked': {
           const yourStaking = Object.values(debts).filter(
             (val) =>
@@ -35,17 +31,30 @@ export const useFarmOption = () => {
               !!val.shares &&
               !val.shares.isZero(),
           )
-          farmAmount = yourStaking.length
+          const yourRewardableStaking = yourStaking.filter((val) =>
+            rewardableFarms.includes(val.farm.toBase58()),
+          )
+          farmAmount = yourRewardableStaking.length
           break
         }
         case 'your': {
-          const yourFarm = Object.values(farms).filter(
-            (val) => val.authority.toBase58() === walletAddress,
+          const yourFarm = rewardableFarms.filter(
+            (val) => farms[val].authority.toBase58() === walletAddress,
           )
           farmAmount = yourFarm.length
           break
         }
+        case 'finished': {
+          const endFarm = rewardableFarms.filter((val) =>
+            farms[val].endDate
+              .sub(new BN(new Date().getTime() / 1000))
+              .lte(new BN(0)),
+          )
+          farmAmount = endFarm.length
+          break
+        }
         default:
+          farmAmount = Object.keys(rewardableFarms).length
           break
       }
 
