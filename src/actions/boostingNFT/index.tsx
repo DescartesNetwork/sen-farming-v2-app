@@ -72,7 +72,9 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
           title={
             <Space>
               <Typography.Title level={5}>Staked NFTs</Typography.Title>
-              <FarmTag>{`+ ${stakedData.amountStakedNFTs} LP`}</FarmTag>
+              {!!stakedData.amountStakedNFTs && (
+                <FarmTag>{`+ ${stakedData.amountStakedNFTs} LP`}</FarmTag>
+              )}
             </Space>
           }
         >
