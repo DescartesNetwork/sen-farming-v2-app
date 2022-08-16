@@ -15,7 +15,7 @@ const conf: Record<Net, Conf> = {
    */
   devnet: {
     node: 'https://api.devnet.solana.com',
-    senFarmingProgram: '4fPn4MWiAdAWd5vqjRnCxqEsFJgWoK3mim21G82ZHPD3',
+    senFarmingProgram: '6LaxnmWdYUAJvBJ4a1R8rrsvCRtaY7b43zKiNAU2k3Nx',
     metaplexNFT: new metaplexNFT(rpc),
   },
 
@@ -24,7 +24,7 @@ const conf: Record<Net, Conf> = {
    */
   testnet: {
     node: 'https://api.testnet.solana.com',
-    senFarmingProgram: '4fPn4MWiAdAWd5vqjRnCxqEsFJgWoK3mim21G82ZHPD3',
+    senFarmingProgram: '6LaxnmWdYUAJvBJ4a1R8rrsvCRtaY7b43zKiNAU2k3Nx',
     metaplexNFT: new metaplexNFT(rpc),
   },
 
@@ -33,7 +33,7 @@ const conf: Record<Net, Conf> = {
    */
   mainnet: {
     node: 'https://api.mainnet-beta.solana.com',
-    senFarmingProgram: '4fPn4MWiAdAWd5vqjRnCxqEsFJgWoK3mim21G82ZHPD3',
+    senFarmingProgram: '6LaxnmWdYUAJvBJ4a1R8rrsvCRtaY7b43zKiNAU2k3Nx',
     metaplexNFT: new metaplexNFT(rpc),
   },
 }

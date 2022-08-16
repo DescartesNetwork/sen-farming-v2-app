@@ -5,12 +5,10 @@ import { useMintDecimals } from '@sentre/senhub'
 
 import { notifyError, notifySuccess } from 'helper'
 import { useFarmData } from 'hooks/farm/useFarmData'
-import { useDebtOracle } from 'hooks/debt/useDebtOracle'
 
 export const useUnstake = (farmAddress: string) => {
   const [loading, setLoading] = useState(false)
   const farmData = useFarmData(farmAddress)
-  const { deposit } = useDebtOracle(farmAddress)
 
   const decimals = useMintDecimals({
     mintAddress: farmData?.inputMint.toBase58(),
@@ -23,7 +21,6 @@ export const useUnstake = (farmAddress: string) => {
         // Validate
         if (!decimals) throw new Error('Not find mint decimals')
         const amountBN = utilsBN.decimalize(amount, decimals)
-
         const transaction = new web3.Transaction()
         // Unstake all
         const { tx: txUnstake } = await window.senFarming.unstake({
@@ -34,7 +31,7 @@ export const useUnstake = (farmAddress: string) => {
         // Withdraw
         const { tx: txWithdraw } = await window.senFarming.withdraw({
           farm: farmAddress,
-          shares: deposit(amountBN),
+          shares: amountBN,
           sendAndConfirm: false,
         })
         transaction.add(txWithdraw)
@@ -54,7 +51,7 @@ export const useUnstake = (farmAddress: string) => {
         setLoading(false)
       }
     },
-    [deposit, decimals, farmAddress],
+    [decimals, farmAddress],
   )
 
   return { unstake, loading }

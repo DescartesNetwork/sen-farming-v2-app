@@ -1,15 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { sortDirection } from 'actions/filterFarm/sortFarm'
 import { FarmTab } from 'constant'
 
 /**
  * Interface & Utility
  */
 
+export enum SortDirection {
+  ASC = 'ASC',
+  DESC = 'DESC',
+  null = 'null',
+}
+export type SortType = 'liquidity' | 'apr'
+
 export type MainState = {
   searchKey: string
-  sort: Record<string, sortDirection>
+  sortType: Record<SortType, SortDirection>
   farmTab: string
   boostOnly: boolean
 }
@@ -21,7 +27,7 @@ export type MainState = {
 const NAME = 'main'
 const initialState: MainState = {
   searchKey: '',
-  sort: {},
+  sortType: { liquidity: SortDirection.null, apr: SortDirection.null },
   farmTab: FarmTab.All,
   boostOnly: false,
 }
@@ -39,8 +45,8 @@ export const setSearchKey = createAsyncThunk(
 
 export const setSort = createAsyncThunk(
   `${NAME}/setSort`,
-  async (sort: Record<string, string>) => {
-    return { sort }
+  async (sortType: Record<SortType, SortDirection>) => {
+    return { sortType }
   },
 )
 
