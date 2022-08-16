@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDebounce } from 'react-use'
 import { useWalletAddress } from '@sentre/senhub'
@@ -13,6 +13,7 @@ const useFilterFarm = () => {
   const boosting = useSelector((state: AppState) => state.boosting)
   const debts = useSelector((state: AppState) => state.debts)
   const [filteredFarm, setFilteredFarm] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
   const walletAddress = useWalletAddress()
 
   const checkActiveFarm = useCallback(
@@ -82,7 +83,8 @@ const useFilterFarm = () => {
         }
       },
     )
-    return setFilteredFarm(newFilteredFarms)
+    setFilteredFarm(newFilteredFarms)
+    return setLoading(false)
   }, [
     boostOnly,
     checkActiveFarm,
@@ -94,8 +96,11 @@ const useFilterFarm = () => {
     farms,
   ])
   useDebounce(filterFarm, 300, [filterFarm])
+  useEffect(() => {
+    setLoading(true)
+  }, [filterFarm])
 
-  return filteredFarm
+  return { loading, filteredFarm }
 }
 
 export default useFilterFarm
