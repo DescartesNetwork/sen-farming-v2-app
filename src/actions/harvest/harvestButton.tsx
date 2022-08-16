@@ -2,8 +2,18 @@ import { MouseEvent } from 'react'
 
 import { Button } from 'antd'
 import { useHarvest } from 'hooks/actions/useHarvest'
+import { SizeType } from 'antd/lib/config-provider/SizeContext'
 
-const HarvestButton = ({ farmAddress }: { farmAddress: string }) => {
+type HarvestButtonProps = {
+  farmAddress: string
+  size?: SizeType
+  disabled?: boolean
+}
+const HarvestButton = ({
+  farmAddress,
+  size = 'middle',
+  disabled = false,
+}: HarvestButtonProps) => {
   const { loading, harvest } = useHarvest(farmAddress)
 
   // stopPropagation() to stop propagation to parent elements.
@@ -13,7 +23,14 @@ const HarvestButton = ({ farmAddress }: { farmAddress: string }) => {
   }
 
   return (
-    <Button loading={loading} onClick={onHarvest} block type="primary">
+    <Button
+      size={size}
+      loading={loading}
+      onClick={onHarvest}
+      block
+      type="primary"
+      disabled={disabled}
+    >
       Harvest
     </Button>
   )
