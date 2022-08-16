@@ -24,7 +24,9 @@ export const useLock = (farmAddress: string) => {
         setLoading(true)
         const metadata = await configs.sol.metaplexNFT.getNftMetadata(nft)
         const shareAmount = debtData?.shares || new BN(0)
-        const depositAmount = debOracle.withdraw(shareAmount)
+        const depositAmount = shareAmount.isZero()
+          ? new BN(0)
+          : debOracle.withdraw(shareAmount)
         // Validate
         if (!decimals) throw new Error('Not find mint decimals')
         const transaction = new web3.Transaction()

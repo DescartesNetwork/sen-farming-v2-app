@@ -5,17 +5,19 @@ import { Button, Col, Modal, Row, Space, Spin, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
 import NftSelection from './nftSelection'
+import FarmTag from 'components/farmTag'
 
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 import { useUnlock } from 'hooks/actions/useUnlock'
 import { useLock } from 'hooks/actions/useLock'
+import { useStakedData } from 'hooks/debt/useStakedData'
 
 import { MetadataDataType } from 'lib/metaplex'
 import { PRECISION } from 'constant'
 import configs from 'configs'
+
 import './index.less'
-import FarmTag from 'components/farmTag'
 
 const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)
@@ -26,6 +28,7 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const farmBoostingData = useFarmBoosting(farmAddress)
   const lockNft = useLock(farmAddress)
   const unlockNft = useUnlock(farmAddress)
+  const stakedData = useStakedData(farmAddress)
 
   const acceptedCollections = useMemo(
     () =>
@@ -70,7 +73,9 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
           title={
             <Space>
               <Typography.Title level={5}>Staked NFTs</Typography.Title>
-              <FarmTag>+1 LP</FarmTag>
+              {!!stakedNFTs?.length && (
+                <FarmTag>{`+ ${stakedData.amountStakedNFTs} LP`}</FarmTag>
+              )}
             </Space>
           }
         >
