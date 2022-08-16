@@ -15,12 +15,9 @@ export const useFarmAPR = (farmAddress: string) => {
 
   const calcAPR = useCallback(async () => {
     if (!liquidity) return setRoi(0)
-    const filteredRewards = Object.values(rewards).filter(
-      (val) => val.farm.toBase58() === farmAddress,
-    )
 
     let totalReward = 0
-    for (const reward of filteredRewards) {
+    for (const reward of rewards) {
       const { rewardMint, totalRewards } = reward
       const rewardPerDay = totalRewards
         .mul(new BN(86400))
@@ -30,7 +27,7 @@ export const useFarmAPR = (farmAddress: string) => {
     }
     const roi = totalReward / liquidity
     return setRoi(roi)
-  }, [farmAddress, farmOracle, getTotalValue, liquidity, rewards])
+  }, [farmOracle, getTotalValue, liquidity, rewards])
 
   useEffect(() => {
     calcAPR()
