@@ -27,7 +27,7 @@ const FarmActions = ({ farmAddress }: { farmAddress: string }) => {
       <Row gutter={[16, 16]} style={{ height: '100%' }}>
         <Col span={24}>
           <Tabs
-            defaultActiveKey="stake"
+            defaultActiveKey="Stake"
             activeKey={farmAction}
             style={{ width: '100%', height: '100%' }}
             onChange={setFarmAction}
