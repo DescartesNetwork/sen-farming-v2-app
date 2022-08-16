@@ -34,6 +34,7 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   }, [debtOracle, decimals, yourAmountIn])
 
   const boostByNFT = useMemo(() => {
+    if (!Number(totalAmountIn)) return 0
     return util
       .numeric(Number(totalAmountIn) - Number(yourAmountIn))
       .format('0,0.[000000000000]')
