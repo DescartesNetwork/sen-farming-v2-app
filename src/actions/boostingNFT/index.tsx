@@ -15,6 +15,7 @@ import { MetadataDataType } from 'lib/metaplex'
 import { PRECISION } from 'constant'
 import configs from 'configs'
 import './index.less'
+import FarmTag from 'components/farmTag'
 
 const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)
@@ -65,7 +66,14 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[16, 16]}>
       <Col span={24}>
-        <SpaceBetween title="Your staked NFTs">
+        <SpaceBetween
+          title={
+            <Space>
+              <Typography.Title level={5}>Staked NFTs</Typography.Title>
+              <FarmTag>+1 LP</FarmTag>
+            </Space>
+          }
+        >
           {!!stakedNFTs?.length && (
             <Button type="text" onClick={() => setRemoveable(!removeable)}>
               {removeable ? 'Cancel' : 'Unstake'}

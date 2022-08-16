@@ -15,12 +15,13 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
   const farmRewardsDaily = useMemo(() => {
     return rewards.map((reward) => {
       const secondPerWeek = 60 * 60 * 24 * 7
-      const amountPerDay = reward.totalRewards
+      const amountPerWeek = reward.totalRewards
         .mul(new BN(secondPerWeek))
         .div(farmOracle.get_lifetime())
       return {
         mint: reward.rewardMint,
-        amount: amountPerDay,
+        amount: amountPerWeek,
+        total: reward.totalRewards,
       }
     })
   }, [farmOracle, rewards])
@@ -32,7 +33,7 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
           <Typography.Text>Farm rewards</Typography.Text>
         </Col>
         {/* Rewards mint a */}
-        {farmRewardsDaily.map(({ mint, amount }, idx) => (
+        {farmRewardsDaily.map(({ mint, amount, total }, idx) => (
           <Col span={24} key={mint.toBase58() + idx}>
             <SpaceBetween
               title={
@@ -47,7 +48,7 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
                 <Typography.Title level={5}>
                   <MintAmount
                     mintAddress={mint}
-                    amount={amount}
+                    amount={total}
                     format="0,0.[00]"
                   />
                 </Typography.Title>
@@ -58,7 +59,7 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
                     format="0,0.[00]"
                     perDate
                   />
-                  {' / day'}
+                  {' / Week'}
                 </Typography.Text>
               </Space>
             </SpaceBetween>
