@@ -22,7 +22,9 @@ export const useStakedData = (farmAddress: string) => {
 
   const stakedAmountNFTs = useMemo(() => {
     if (!debtData?.leverage) return new BN(0)
-    return debtData.shares.mul(debtData.leverage.sub(PRECISION)).div(PRECISION)
+    const amountIn = debtData.shares.div(debtData.leverage)
+    const percentBoost = debtData.leverage.sub(PRECISION)
+    return amountIn.mul(percentBoost)
   }, [debtData])
 
   const farmShareAmount = useMemo(() => {
