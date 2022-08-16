@@ -52,7 +52,11 @@ const useFilterFarm = () => {
           break
         }
         default:
-          newFilteredFarms = Object.keys(farms)
+          newFilteredFarms = Object.keys(farms).filter((val) =>
+            farms[val].endDate
+              .sub(new BN(new Date().getTime() / 1000))
+              .gte(new BN(0)),
+          )
           break
       }
 

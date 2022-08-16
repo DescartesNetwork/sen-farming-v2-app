@@ -64,7 +64,11 @@ export const useFarmOption = () => {
           break
         }
         default:
-          farmAmount = Object.keys(rewardableFarms).length
+          farmAmount = rewardableFarms.filter((val) =>
+            farms[val].endDate
+              .sub(new BN(new Date().getTime() / 1000))
+              .gte(new BN(0)),
+          ).length
           break
       }
 
