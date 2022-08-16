@@ -1,20 +1,38 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import IonIcon from '@sentre/antd-ionicon'
-import { Button, Col, Modal, Row, Space, Typography } from 'antd'
+import { Button, Col, Modal, Row, Space, Spin, Typography } from 'antd'
 import NFTAvatar from 'components/nftAvatar'
 import SpaceBetween from 'components/spaceBetween'
+import NftSelection from './nftSelection'
 
-const BoostingNFT = () => {
+import { useDebtTreasurerAddress } from 'hooks/debt/useDebtData'
+import { useNFTsByOwnerAndCollection } from '@sen-use/components'
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+
+import './index.less'
+
+import { useLock } from 'hooks/actions/useLock'
+
+const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
   const [removeable, setRemoveable] = useState(false)
   const [visible, setVisible] = useState(false)
   const [unstakeNFT, setUnstakeNFT] = useState('')
 
-  const [stakedNFTs, setStakedNFTs] = useState<string[]>([
-    'E3XvnyR46WV3W3Sv7nXAzPoN4LJLNmL84aUinN39WsXX',
-    'FDbqKkB9P1crrmxFTiKFvYHKphrXzAyXLdfh77KetT6P',
-    'FeHKuGmqXS7BKQcC2hpX6as19unm7foUBrSgTsZLKTTs',
-  ])
+  const treasurerAddress = useDebtTreasurerAddress(farmAddress)
+  console.log('treasurerAddress', treasurerAddress)
+  const { nftsSortByCollection } = useNFTsByOwnerAndCollection(treasurerAddress)
+  const farmBoostingData = useFarmBoosting(farmAddress)
+  const { lock, loading } = useLock(farmAddress)
+
+  console.log('nftsSortByCollection', nftsSortByCollection)
+  const acceptedCollections = useMemo(
+    () =>
+      farmBoostingData.map((boostingData) =>
+        boostingData.boostingCollection.toBase58(),
+      ),
+    [farmBoostingData],
+  )
 
   const onRemoveNFT = (mintAddress: string) => {
     setVisible(true)
@@ -22,11 +40,9 @@ const BoostingNFT = () => {
   }
 
   const unstateNFT = () => {
-    const nextStakedNFTs = stakedNFTs.filter(
-      (nftAddress) => nftAddress !== unstakeNFT,
-    )
     setVisible(false)
-    setStakedNFTs(nextStakedNFTs)
+    // Call function unstakeNFT
+    console.log('unstateNFT: ', unstakeNFT)
   }
 
   const onCloseModal = () => {
@@ -38,26 +54,34 @@ const BoostingNFT = () => {
     <Row gutter={[16, 16]}>
       <Col span={24}>
         <SpaceBetween title="Your staked NFTs">
-          {stakedNFTs.length > 0 && (
+          {!!nftsSortByCollection?.length && (
             <Button type="text" onClick={() => setRemoveable(!removeable)}>
               {removeable ? 'Cancel' : 'Unstake'}
             </Button>
           )}
         </SpaceBetween>
       </Col>
-      <Col span={24}>
-        <Row gutter={[16, 16]}>
-          {stakedNFTs.map((nftAddress) => (
-            <Col key={nftAddress}>
-              <NFTAvatar
-                mintAddress={nftAddress}
-                removeable={removeable}
-                onRemoveNFT={onRemoveNFT}
+      <Spin spinning={loading}>
+        <Col span={24}>
+          <Row gutter={[16, 16]}>
+            {nftsSortByCollection?.map((nft) => (
+              <Col key={nft.mint}>
+                <NFTAvatar
+                  mintAddress={nft.mint}
+                  removeable={removeable}
+                  onRemoveNFT={onRemoveNFT}
+                />
+              </Col>
+            ))}
+            <Col>
+              <NftSelection
+                acceptedCollections={acceptedCollections}
+                onSelect={lock}
               />
             </Col>
-          ))}
-        </Row>
-      </Col>
+          </Row>
+        </Col>
+      </Spin>
       <Modal
         visible={visible}
         onCancel={onCloseModal}
