@@ -67,7 +67,7 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
           {/* Own Shares */}
           <Col>
             <Space direction="vertical" size={0}>
-              <SpaceVertical label="Your staked">
+              <SpaceVertical label="You staked">
                 <Tooltip
                   title={<PriceTooltip farmAddress={farmAddress} />}
                   arrowPointAtCenter
