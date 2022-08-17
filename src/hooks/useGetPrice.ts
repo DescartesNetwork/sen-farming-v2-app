@@ -3,6 +3,8 @@ import { tokenProvider, useGetMintDecimals, util } from '@sentre/senhub'
 import { Address, BN } from '@project-serum/anchor'
 import { utilsBN } from '@sen-use/web3/dist'
 
+const ERRORS: Record<string, boolean> = {}
+
 export const useGetTotalValue = () => {
   const getMintDecimals = useGetMintDecimals()
   const getPrice = useGetPrice()
@@ -30,12 +32,14 @@ export const useGetTotalValue = () => {
 export const useGetPrice = () => {
   const getPrice = useCallback(
     async (mintAddress: Address): Promise<number> => {
+      if (ERRORS[mintAddress.toString()]) return 0
       try {
         const token = await tokenProvider.findByAddress(mintAddress)
         const ticket = token?.extensions?.coingeckoId
         const cgkData = await util.fetchCGK(ticket)
         return cgkData.price
       } catch (error) {
+        ERRORS[mintAddress.toString()] = true
         return 0
       }
     },
