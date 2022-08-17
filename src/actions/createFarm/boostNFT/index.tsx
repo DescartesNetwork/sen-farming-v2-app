@@ -56,7 +56,7 @@ const BoostNFT = ({ boostsData, onChange }: BoostNFTProps) => {
       <Col span={24}>
         <Row gutter={[8, 8]}>
           <Col flex="auto">
-            <Typography.Title level={5}>Boosted by NFT</Typography.Title>
+            <Typography.Title level={5}>Boost by NFT</Typography.Title>
           </Col>
           <Col>
             <Switch size="small" onChange={onSwitch} />
