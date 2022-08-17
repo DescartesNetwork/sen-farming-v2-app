@@ -1,6 +1,6 @@
 import { Space, Typography } from 'antd'
 import MintAmount from 'components/mint/mintAmount'
-import MintPrice from 'components/mint/mintPrice'
+import MintTotalValue from 'components/mint/mintTotalValue'
 
 import { PendingRewardData } from 'hooks/useConvertRewards'
 
@@ -16,7 +16,7 @@ const HarvestAmount = ({ reward }: HarvestAmountProps) => {
         />
       </Typography.Title>
       <Typography.Text type="secondary">
-        <MintPrice mintAddress={reward.mint} />
+        <MintTotalValue mintAddress={reward.mint} amount={reward.amount} />
       </Typography.Text>
     </Space>
   )
