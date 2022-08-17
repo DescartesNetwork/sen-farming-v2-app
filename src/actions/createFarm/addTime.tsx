@@ -30,7 +30,7 @@ const AddTime = ({ time, onChange }: AddTimeProps) => {
             showTime={{ showSecond: false }}
             placement="bottomRight"
             format={DATE_FORMAT}
-            disabledDate={(current) => current < moment().endOf('day')}
+            disabledDate={(current) => current < moment().startOf('day')}
           />
         </Space>
       </Col>
