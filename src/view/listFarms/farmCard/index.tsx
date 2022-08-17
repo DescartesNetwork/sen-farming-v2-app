@@ -1,7 +1,8 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { useAppRoute } from '@sentre/senhub'
+import { BN } from 'bn.js'
 
-import { Button, Card, Col, Progress, Row, Space, Tag, Typography } from 'antd'
+import { Button, Card, Col, Progress, Row, Space, Typography } from 'antd'
 import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
 import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
@@ -11,6 +12,7 @@ import HarvestButton from 'actions/harvest/harvestButton'
 import IonIcon from '@sentre/antd-ionicon'
 import CardTooltip from './cardTooltip'
 import FarmLiquidity from 'components/farm/farmLiquidity'
+import FarmTag from 'components/farmTag'
 
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 import TimeCountDown from 'components/timeCountDown'
@@ -19,8 +21,6 @@ import { useGetDebtReward } from 'hooks/debt/useGetDebtReward'
 
 import configs from 'configs'
 import './index.less'
-import { BN } from 'bn.js'
-import FarmTag from 'components/farmTag'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
