@@ -81,30 +81,30 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
             {/* Count down */}
             <Col span={24}>
               <SpaceBetween
-                title={
-                  <Button
-                    type="text"
-                    style={{ padding: 0, background: 'transparent' }}
-                    disabled
-                    onClick={() => {}}
-                  >
-                    How to get it? <IonIcon name="open-outline" />
-                  </Button>
+                floatContent={
+                  <Space>
+                    <TimeCountDown
+                      label="End in"
+                      endTime={Math.floor(endDate.toNumber())}
+                    />
+                    <Progress
+                      type="circle"
+                      percent={percentProgress}
+                      showInfo={percentProgress === 100}
+                      className="end-time-progress"
+                      strokeWidth={10}
+                    />
+                  </Space>
                 }
               >
-                <Space>
-                  <TimeCountDown
-                    label="End in"
-                    endTime={Math.floor(endDate.toNumber())}
-                  />
-                  <Progress
-                    type="circle"
-                    percent={percentProgress}
-                    showInfo={percentProgress === 100}
-                    className="end-time-progress"
-                    strokeWidth={10}
-                  />
-                </Space>
+                <Button
+                  type="text"
+                  style={{ padding: 0, background: 'transparent' }}
+                  disabled
+                  onClick={() => {}}
+                >
+                  How to get it? <IonIcon name="open-outline" />
+                </Button>
               </SpaceBetween>
             </Col>
           </Row>

@@ -29,16 +29,12 @@ const CardNumericInputSelectMint = ({
     >
       <Row gutter={[8, 8]} justify="end">
         <Col span={24}>
-          <SpaceBetween
-            title={
-              <NumericInput
-                value={value}
-                onChange={onChange}
-                max={(available || 0).toString()}
-              />
-            }
-          >
-            <MintSelection />
+          <SpaceBetween floatContent={<MintSelection />}>
+            <NumericInput
+              value={value}
+              onChange={onChange}
+              max={(available || 0).toString()}
+            />
           </SpaceBetween>
         </Col>
         <Col>
@@ -95,35 +91,37 @@ const CardNumbericInput = ({
       <Row gutter={[16, 16]}>
         <Col span={24}>
           <SpaceBetween
-            title={<Typography.Text type="secondary">Amount</Typography.Text>}
+            floatContent={
+              <Space size={6}>
+                <Typography.Text type="secondary">Available:</Typography.Text>
+                <Typography.Text>
+                  {`${util.numeric(currentAvailable).format('0,0.[00]')} LP`}
+                </Typography.Text>
+              </Space>
+            }
           >
-            <Space size={6}>
-              <Typography.Text type="secondary">Available:</Typography.Text>
-              <Typography.Text>
-                {`${util.numeric(currentAvailable).format('0,0.[00]')} LP`}
-              </Typography.Text>
-            </Space>
+            <Typography.Text type="secondary">Amount</Typography.Text>
           </SpaceBetween>
         </Col>
         <Col span={24}>
           <SpaceBetween
-            title={
-              <NumericInput
-                value={value}
-                onChange={onChange}
-                max={currentAvailable.toString()}
-              />
+            floatContent={
+              <Button
+                size="small"
+                type="text"
+                style={{ color: '#C6F1A9' }}
+                onClick={() => onChange(currentAvailable.toString())}
+              >
+                MAX
+              </Button>
             }
             wrap={false}
           >
-            <Button
-              size="small"
-              type="text"
-              style={{ color: '#C6F1A9' }}
-              onClick={() => onChange(currentAvailable.toString())}
-            >
-              MAX
-            </Button>
+            <NumericInput
+              value={value}
+              onChange={onChange}
+              max={currentAvailable.toString()}
+            />
           </SpaceBetween>
         </Col>
       </Row>

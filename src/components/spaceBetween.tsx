@@ -3,7 +3,7 @@ import { CSSProperties, ReactNode } from 'react'
 import { Col, ColProps, Row, RowProps } from 'antd'
 
 type SpaceBetweenProps = {
-  title?: ReactNode
+  floatContent?: ReactNode
   children?: ReactNode
   align?: RowProps['align']
   wrap?: boolean
@@ -13,7 +13,7 @@ type SpaceBetweenProps = {
 }
 
 const SpaceBetween = ({
-  title,
+  floatContent,
   children,
   align = 'middle',
   wrap = true,
@@ -22,12 +22,10 @@ const SpaceBetween = ({
   childFlex,
 }: SpaceBetweenProps) => (
   <Row gutter={gutter} align={align} wrap={wrap}>
-    {!!title && (
-      <Col flex="auto" style={{ ...style }}>
-        {title}
-      </Col>
-    )}
-    <Col flex={childFlex}>{children}</Col>
+    <Col flex="auto" style={{ ...style }}>
+      {children}
+    </Col>
+    {!!floatContent && <Col flex={childFlex}>{floatContent}</Col>}
   </Row>
 )
 

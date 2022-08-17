@@ -21,23 +21,23 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
       <Col span={24}>
         <Space style={{ width: '100%' }} direction="vertical" size={12}>
           <SpaceBetween
-            title={
-              <FarmAvatar
-                farmAddress={farmAddress}
-                textStyle={{ fontSize: 30, fontWeight: 700 }}
-                hoverable
-              />
+            floatContent={
+              <FarmTag
+                type="primary"
+                bordered={false}
+                opacity={0.1}
+                radius={8}
+                style={{ padding: '1px 8px' }}
+              >
+                ⚡ Boost
+              </FarmTag>
             }
           >
-            <FarmTag
-              type="primary"
-              bordered={false}
-              opacity={0.1}
-              radius={8}
-              style={{ padding: '1px 8px' }}
-            >
-              ⚡ Boost
-            </FarmTag>
+            <FarmAvatar
+              farmAddress={farmAddress}
+              textStyle={{ fontSize: 30, fontWeight: 700 }}
+              hoverable
+            />
           </SpaceBetween>
           <TimeCountDown
             label="End in"

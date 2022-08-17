@@ -16,32 +16,34 @@ const CardFarmInfos = ({ farmAddress }: CardFarmInfosProps) => {
       <Row gutter={[16, 16]}>
         {/* Farm avatar */}
         <Col span={24}>
-          <SpaceBetween
-            title={
-              <FarmAvatar
-                farmAddress={farmAddress}
-                size={32}
-                textStyle={{ fontSize: 16, fontWeight: 700 }}
-              />
-            }
-          >
-            <ExploreAddress address={farmAddress} />
+          <SpaceBetween floatContent={<ExploreAddress address={farmAddress} />}>
+            <FarmAvatar
+              farmAddress={farmAddress}
+              size={32}
+              textStyle={{ fontSize: 16, fontWeight: 700 }}
+            />
           </SpaceBetween>
         </Col>
         {/* Reward */}
         <Col span={24}>
           <SpaceBetween
-            title={<Typography.Text type="secondary">Rewards</Typography.Text>}
+            floatContent={
+              <Space
+                style={{ textAlign: 'right' }}
+                direction="vertical"
+                size={4}
+              >
+                <Typography.Text>
+                  {util.numeric(liquidity).format('0,0.[00]')} SNTR
+                </Typography.Text>
+                <Typography.Text>
+                  {util.numeric(liquidity).format('0,0.[00]')} SNTR
+                </Typography.Text>
+              </Space>
+            }
             align="top"
           >
-            <Space style={{ textAlign: 'right' }} direction="vertical" size={4}>
-              <Typography.Text>
-                {util.numeric(liquidity).format('0,0.[00]')} SNTR
-              </Typography.Text>
-              <Typography.Text>
-                {util.numeric(liquidity).format('0,0.[00]')} SNTR
-              </Typography.Text>
-            </Space>
+            <Typography.Text type="secondary">Rewards</Typography.Text>
           </SpaceBetween>
         </Col>
         {/* NFT */}
@@ -49,10 +51,14 @@ const CardFarmInfos = ({ farmAddress }: CardFarmInfosProps) => {
           <Row gutter={[4, 4]}>
             {/* Boost state */}
             <Col span={24}>
-              <SpaceBetween title="Boost by NFT">
-                <Typography.Text style={{ color: '#A0E86F' }}>
-                  Enable
-                </Typography.Text>
+              <SpaceBetween
+                floatContent={
+                  <Typography.Text style={{ color: '#A0E86F' }}>
+                    Enable
+                  </Typography.Text>
+                }
+              >
+                <Typography.Text>Boosted by NFT</Typography.Text>
               </SpaceBetween>
             </Col>
             <Col span={24} /> {/* Safe space */}

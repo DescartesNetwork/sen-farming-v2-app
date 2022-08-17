@@ -12,23 +12,23 @@ const HarvestInfos = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[12, 12]}>
       <Col span={24}>
-        <SpaceBetween title={<Typography.Text>Your rewards</Typography.Text>}>
-          <Typography.Title level={2}>
-            <TotalPendingReward farmAddress={farmAddress} />
-          </Typography.Title>
+        <SpaceBetween
+          floatContent={
+            <Typography.Title level={2}>
+              <TotalPendingReward farmAddress={farmAddress} />
+            </Typography.Title>
+          }
+        >
+          <Typography.Text>Your rewards</Typography.Text>
         </SpaceBetween>
       </Col>
       {convertRewards.map((reward, idx) => (
         <Col span={24} key={reward.mint + idx}>
-          <SpaceBetween
-            title={
-              <MintAvatarPrice
-                mintAddress={reward.mint}
-                style={{ fontSize: 16 }}
-              />
-            }
-          >
-            <HarvestAmount reward={reward} />
+          <SpaceBetween floatContent={<HarvestAmount reward={reward} />}>
+            <MintAvatarPrice
+              mintAddress={reward.mint}
+              style={{ fontSize: 16 }}
+            />
           </SpaceBetween>
         </Col>
       ))}
