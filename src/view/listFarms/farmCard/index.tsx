@@ -63,25 +63,43 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
       <Row gutter={[20, 20]}>
         <Col span={24}>
           <Row gutter={[8, 8]} align="middle">
-            <Col flex="auto">
-              <FarmAvatar
-                farmAddress={farmAddress}
-                textStyle={{ fontSize: 20, fontWeight: 700 }}
-              />
+            <Col span={24}>
+              <SpaceBetween
+                floatContent={
+                  <Space>
+                    {/* Upcomming farm */}
+                    {now.lt(startDate) && (
+                      <FarmTag
+                        type="warning"
+                        bordered={false}
+                        opacity={0.1}
+                        radius={8}
+                        style={{ padding: '1px 8px' }}
+                      >
+                        <IonIcon name="alarm-outline" /> Upcomming
+                      </FarmTag>
+                    )}
+                    {/* Boosted farm */}
+                    {!!farmBoostingData.length && (
+                      <FarmTag
+                        type="primary"
+                        bordered={false}
+                        opacity={0.1}
+                        radius={8}
+                        style={{ padding: '1px 8px' }}
+                      >
+                        ⚡ Boost
+                      </FarmTag>
+                    )}
+                  </Space>
+                }
+              >
+                <FarmAvatar
+                  farmAddress={farmAddress}
+                  textStyle={{ fontSize: 20, fontWeight: 700 }}
+                />
+              </SpaceBetween>
             </Col>
-            {!!farmBoostingData.length && (
-              <Col>
-                <FarmTag
-                  type="primary"
-                  bordered={false}
-                  opacity={0.1}
-                  radius={8}
-                  style={{ padding: '1px 8px' }}
-                >
-                  ⚡ Boost
-                </FarmTag>
-              </Col>
-            )}
             {/* Count down */}
             <Col span={24}>
               <SpaceBetween

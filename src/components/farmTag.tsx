@@ -1,15 +1,16 @@
-import { CSSProperties, useMemo } from 'react'
+import { CSSProperties, ReactNode, useMemo } from 'react'
 
 import { Tag } from 'antd'
 
 const FARM_TAG_COLOR = {
   primary: '#a0e86f',
+  warning: '#f0ff00',
 }
 
 type FarmTagProps = {
-  type?: 'primary'
+  type?: 'primary' | 'warning'
   radius?: number
-  children: string
+  children: ReactNode
   bordered?: boolean
   opacity?: CSSProperties['opacity']
   style?: CSSProperties
