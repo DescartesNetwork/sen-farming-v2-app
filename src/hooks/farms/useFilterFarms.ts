@@ -63,7 +63,7 @@ const useFilterFarm = () => {
     [farms],
   )
 
-  const checkUpcommingFarm = useCallback(
+  const checkUpcomingFarm = useCallback(
     (farmAddress: string) => {
       return Date.now() / 1000 < farms[farmAddress].startDate.toNumber()
     },
@@ -83,8 +83,8 @@ const useFilterFarm = () => {
             return checkYourFarm(farmAddress)
           case FarmTab.Expired:
             return checkFinishedFarm(farmAddress)
-          case FarmTab.Upcomming:
-            return checkUpcommingFarm(farmAddress)
+          case FarmTab.Upcoming:
+            return checkUpcomingFarm(farmAddress)
           case FarmTab.All:
             return !checkFinishedFarm(farmAddress)
           default:
@@ -100,7 +100,7 @@ const useFilterFarm = () => {
     checkBoostFarm,
     checkFinishedFarm,
     checkStakedFarm,
-    checkUpcommingFarm,
+    checkUpcomingFarm,
     checkYourFarm,
     farmTab,
     farms,

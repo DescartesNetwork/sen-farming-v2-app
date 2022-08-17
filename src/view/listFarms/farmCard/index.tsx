@@ -76,7 +76,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                         radius={8}
                         style={{ padding: '1px 8px' }}
                       >
-                        <IonIcon name="alarm-outline" /> Upcomming
+                        <IonIcon name="alarm-outline" /> Upcoming
                       </FarmTag>
                     )}
                     {/* Boosted farm */}
@@ -139,7 +139,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                         }
                   }
                 >
-                  How to get it? <IonIcon name="open-outline" />
+                  Go to Pool <IonIcon name="open-outline" />
                 </Button>
               </SpaceBetween>
             </Col>
@@ -168,7 +168,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
             {/* Liquidity */}
             <Col>
               <Space direction="vertical">
-                <Typography.Text type="secondary">Liquidity</Typography.Text>
+                <Typography.Text type="secondary">TVL</Typography.Text>
                 <Typography.Text>
                   <FarmLiquidity farmAddress={farmAddress} />
                 </Typography.Text>
