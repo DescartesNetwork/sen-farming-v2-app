@@ -1,30 +1,63 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, useMemo } from 'react'
 
 import { Tag } from 'antd'
 
 const FARM_TAG_COLOR = {
-  primary: '#A0E86F',
+  primary: '#a0e86f',
 }
 
 type FarmTagProps = {
   type?: 'primary'
-  style?: CSSProperties
   radius?: number
   children: string
+  bordered?: boolean
+  opacity?: CSSProperties['opacity']
+  style?: CSSProperties
+  color?: string
 }
 const FarmTag = ({
   type = 'primary',
   style,
   radius = 6,
   children,
+  bordered = true,
+  opacity = 0,
+  color,
 }: FarmTagProps) => {
+  const tagColor = color ? color : FARM_TAG_COLOR[type]
+  const borderStyle = bordered
+    ? { border: `1px solid ${tagColor}` }
+    : { border: 'none' }
+
+  const rbgToHex = (rgb: string) => {
+    const [r, g, b] = rgb.split(',')
+    return `#${1 << 24}${Number(r) << 16}${Number(g) << 8}${b}`
+  }
+
+  const hextToRgba = (hex: string, opacity: CSSProperties['opacity']) => {
+    const nextHex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    if (!nextHex) return hex
+    const rgbStr = new Array(3)
+      .fill('')
+      .map((_, idx) => parseInt(nextHex[idx + 1], 16))
+    return `rgb(${rgbStr.join(',')}, ${opacity})`
+  }
+
+  const background = useMemo(() => {
+    let background = 'transpanrent'
+    if (tagColor.startsWith('rgb')) background = rbgToHex(tagColor)
+    if (tagColor.startsWith('#')) background = hextToRgba(tagColor, opacity)
+    return { background }
+  }, [opacity, tagColor])
+
   return (
     <Tag
       style={{
-        color: FARM_TAG_COLOR[type],
-        background: 'transparent',
-        borderColor: FARM_TAG_COLOR[type],
+        color: tagColor,
+        borderColor: tagColor,
         borderRadius: radius,
+        ...background,
+        ...borderStyle,
         ...style,
       }}
     >

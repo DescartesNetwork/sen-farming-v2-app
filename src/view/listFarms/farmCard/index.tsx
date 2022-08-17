@@ -20,6 +20,7 @@ import { useGetDebtReward } from 'hooks/debt/useGetDebtReward'
 import configs from 'configs'
 import './index.less'
 import { BN } from 'bn.js'
+import FarmTag from 'components/farmTag'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
@@ -67,17 +68,15 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
             </Col>
             {!!farmBoostingData.length && (
               <Col>
-                <Tag
-                  style={{
-                    color: '#A0E86F',
-                    background: 'rgba(160, 232, 111, 0.1)',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '1px 8px',
-                  }}
+                <FarmTag
+                  type="primary"
+                  bordered={false}
+                  opacity={0.1}
+                  radius={8}
+                  style={{ padding: '1px 8px' }}
                 >
                   ⚡ Boost
-                </Tag>
+                </FarmTag>
               </Col>
             )}
             {/* Count down */}
