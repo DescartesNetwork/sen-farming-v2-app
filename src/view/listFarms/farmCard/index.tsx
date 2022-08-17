@@ -90,7 +90,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                     {now.lt(startDate) ? (
                       <TimeCountDown
                         label={'Start in'}
-                        endTime={endDate.toNumber()}
+                        endTime={startDate.toNumber()}
                       />
                     ) : (
                       <TimeCountDown
