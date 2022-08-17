@@ -3,8 +3,9 @@ import { utilsBN } from '@sen-use/web3'
 import { useMintDecimals, util } from '@sentre/senhub'
 
 import { Row, Col, Typography, Button, Space, Card } from 'antd'
-import ExtraTypography from '../extraTypography'
 import CardNumbericInput from 'components/cardNumbericInput'
+import SpaceBetween from 'components/spaceBetween'
+import { MintSymbol } from '@sen-use/components'
 
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useStake } from 'hooks/actions/useStake'
@@ -66,26 +67,50 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
           bordered={false}
         >
           <Space size={8} direction="vertical" style={{ width: '100%' }}>
-            <ExtraTypography
-              label="Your stake"
-              content={`${yourAmountIn || 0} LP`}
-            />
-            <ExtraTypography
-              label="Boosted by NFT"
-              content={`+ ${boostByNFT} LP`}
-            />
-
-            <Row align="middle">
-              <Col flex={'auto'}>
-                <Typography.Text type="secondary">Total</Typography.Text>
-              </Col>
-              <Col>
-                <Typography.Title
-                  style={{ color: '#A0E86F' }}
-                  level={4}
-                >{`${Number(totalAmountIn)} LP`}</Typography.Title>
-              </Col>
-            </Row>
+            {/* Your stake */}
+            <SpaceBetween
+              floatContent={
+                <Space size={6}>
+                  <Typography.Title level={5}>
+                    {yourAmountIn || 0}
+                  </Typography.Title>
+                  <Typography.Title level={5}>
+                    <MintSymbol mintAddress={farmData.inputMint.toBase58()} />
+                  </Typography.Title>
+                </Space>
+              }
+            >
+              <Typography.Text type="secondary">Your stake</Typography.Text>
+            </SpaceBetween>
+            {/* Boosted by NFT */}
+            <SpaceBetween
+              floatContent={
+                <Space size={6}>
+                  <Typography.Title level={5}>+{boostByNFT}</Typography.Title>
+                  <Typography.Title level={5}>
+                    <MintSymbol mintAddress={farmData.inputMint.toBase58()} />
+                  </Typography.Title>
+                </Space>
+              }
+            >
+              <Typography.Text type="secondary">Boosted by NFT</Typography.Text>
+            </SpaceBetween>
+            {/* Total staked */}
+            <SpaceBetween
+              floatContent={
+                <Space size={6}>
+                  <Typography.Title
+                    style={{ color: '#A0E86F' }}
+                    level={4}
+                  >{`${Number(totalAmountIn)}`}</Typography.Title>
+                  <Typography.Title level={5}>
+                    <MintSymbol mintAddress={farmData.inputMint.toBase58()} />
+                  </Typography.Title>
+                </Space>
+              }
+            >
+              <Typography.Text type="secondary">Total</Typography.Text>
+            </SpaceBetween>
           </Space>
         </Card>
       </Col>

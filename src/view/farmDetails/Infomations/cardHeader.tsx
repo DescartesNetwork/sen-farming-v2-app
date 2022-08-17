@@ -10,6 +10,7 @@ import PriceTooltip from './priceTooltip'
 import IonIcon from '@sentre/antd-ionicon'
 import FarmTag from 'components/farmTag'
 import SpaceBetween from 'components/spaceBetween'
+import { MintSymbol } from '@sen-use/components'
 
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
@@ -17,7 +18,7 @@ import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
-  const { endDate, startDate } = useFarmData(farmAddress)
+  const { endDate, startDate, inputMint } = useFarmData(farmAddress)
   const farmBoostingData = useFarmBoosting(farmAddress)
 
   const now = new BN(Date.now() / 1000)
@@ -94,9 +95,14 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
                   title={<PriceTooltip farmAddress={farmAddress} />}
                   arrowPointAtCenter
                 >
-                  <Typography.Title level={4}>
-                    {util.numeric(stakedData.amount).format('0,0.[00]')} LP
-                  </Typography.Title>
+                  <Space size={6}>
+                    <Typography.Title level={4}>
+                      {util.numeric(stakedData.amount).format('0,0.[00]')}
+                    </Typography.Title>
+                    <Typography.Title level={4}>
+                      <MintSymbol mintAddress={inputMint.toBase58()} />
+                    </Typography.Title>
+                  </Space>
                 </Tooltip>
               </SpaceVertical>
             </Space>
