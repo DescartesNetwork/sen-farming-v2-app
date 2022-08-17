@@ -63,7 +63,6 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
               <FarmAvatar
                 farmAddress={farmAddress}
                 textStyle={{ fontSize: 20, fontWeight: 700 }}
-                hoverable
               />
             </Col>
             {!!farmBoostingData.length && (
@@ -89,7 +88,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                     disabled
                     onClick={() => {}}
                   >
-                    Go pool <IonIcon name="open-outline" />
+                    How to get it? <IonIcon name="open-outline" />
                   </Button>
                 }
               >

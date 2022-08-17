@@ -19,31 +19,31 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
-        <SpaceBetween
-          title={
-            <Space direction="vertical" size={12}>
+        <Space style={{ width: '100%' }} direction="vertical" size={12}>
+          <SpaceBetween
+            title={
               <FarmAvatar
                 farmAddress={farmAddress}
                 textStyle={{ fontSize: 30, fontWeight: 700 }}
+                hoverable
               />
-              <TimeCountDown
-                label="End in"
-                endTime={Math.floor(endDate.toNumber())}
-              />
-            </Space>
-          }
-          align="top"
-        >
-          <FarmTag
-            type="primary"
-            bordered={false}
-            opacity={0.1}
-            radius={8}
-            style={{ padding: '1px 8px' }}
+            }
           >
-            ⚡ Boost
-          </FarmTag>
-        </SpaceBetween>
+            <FarmTag
+              type="primary"
+              bordered={false}
+              opacity={0.1}
+              radius={8}
+              style={{ padding: '1px 8px' }}
+            >
+              ⚡ Boost
+            </FarmTag>
+          </SpaceBetween>
+          <TimeCountDown
+            label="End in"
+            endTime={Math.floor(endDate.toNumber())}
+          />
+        </Space>
       </Col>
 
       <Col span={24}>
