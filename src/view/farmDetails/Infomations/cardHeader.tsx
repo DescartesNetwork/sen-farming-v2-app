@@ -12,10 +12,12 @@ import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import SpaceBetween from 'components/spaceBetween'
 import FarmTag from 'components/farmTag'
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
   const { endDate, startDate } = useFarmData(farmAddress)
+  const farmBoostingData = useFarmBoosting(farmAddress)
 
   const now = new BN(Date.now() / 1000)
 
@@ -25,15 +27,17 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
         <Space style={{ width: '100%' }} direction="vertical" size={12}>
           <SpaceBetween
             floatContent={
-              <FarmTag
-                type="primary"
-                bordered={false}
-                opacity={0.1}
-                radius={8}
-                style={{ padding: '1px 8px' }}
-              >
-                ⚡ Boost
-              </FarmTag>
+              !!farmBoostingData.length && (
+                <FarmTag
+                  type="primary"
+                  bordered={false}
+                  opacity={0.1}
+                  radius={8}
+                  style={{ padding: '1px 8px' }}
+                >
+                  ⚡ Boost
+                </FarmTag>
+              )
             }
           >
             <FarmAvatar
