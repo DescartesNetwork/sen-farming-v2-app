@@ -10,22 +10,19 @@ type MintAmountProps = {
   mintAddress: Address
   amount: BN
   format?: string
-  perDate?: boolean
 }
 const MintAmount = ({
   mintAddress,
   amount,
   format = '0,0.[0000]',
-  perDate = false,
 }: MintAmountProps) => {
   const [amountUi, setAmountUi] = useState('0')
   const decimals = useMintDecimals({ mintAddress: mintAddress.toString() })
-  const dateRatio = perDate ? 7 : 1
 
   const updateAmount = useCallback(() => {
     const amountUi = utilsBN.undecimalize(amount, decimals || DEFAULT_DECIMALS)
-    setAmountUi(util.numeric(Number(amountUi) / dateRatio).format(format))
-  }, [amount, dateRatio, decimals, format])
+    setAmountUi(util.numeric(amountUi).format(format))
+  }, [amount, decimals, format])
   useDebounce(updateAmount, 300, [updateAmount])
 
   return <span>{amountUi}</span>
