@@ -37,7 +37,7 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
                     radius={8}
                     style={{ padding: '1px 8px' }}
                   >
-                    <IonIcon name="alarm-outline" /> Upcomming
+                    <IonIcon name="alarm-outline" /> Upcoming
                   </FarmTag>
                 )}
                 {!!farmBoostingData.length && (
