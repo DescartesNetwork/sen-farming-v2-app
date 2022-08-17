@@ -16,6 +16,8 @@ type CardRewardsProps = {
   bordered?: boolean
   gutter?: RowProps['gutter']
   titleHeight?: number
+  size?: number
+  align?: RowProps['align']
 }
 const CardRewards = ({
   farmAddress,
@@ -25,6 +27,8 @@ const CardRewards = ({
   bordered = false,
   gutter = [12, 12],
   titleHeight = 41,
+  size = 24,
+  align = 'top',
 }: CardRewardsProps) => {
   const farmOracle = useFarmOracle(farmAddress)
   const rewards = useFarmRewards(farmAddress)
@@ -63,11 +67,11 @@ const CardRewards = ({
             <SpaceBetween
               title={
                 <Space>
-                  <MintAvatar size={24} mintAddress={mint} />
+                  <MintAvatar size={size} mintAddress={mint} />
                   <MintSymbol mintAddress={mint} />
                 </Space>
               }
-              align="top"
+              align={align}
             >
               <Space
                 size={0}

@@ -1,16 +1,15 @@
 import { CSSProperties, ReactNode } from 'react'
 
-import { Col, Row } from 'antd'
-import { Gutter } from 'antd/lib/grid/row'
+import { Col, ColProps, Row, RowProps } from 'antd'
 
 type SpaceBetweenProps = {
   title?: ReactNode
   children?: ReactNode
-  align?: 'top' | 'middle' | 'bottom' | 'stretch'
+  align?: RowProps['align']
   wrap?: boolean
-  gutter?: Gutter | [Gutter, Gutter]
+  gutter?: RowProps['gutter']
   style?: CSSProperties
-  childFlex?: number | 'none' | 'auto' | string
+  childFlex?: ColProps['flex']
 }
 
 const SpaceBetween = ({
