@@ -1,4 +1,5 @@
 import { util } from '@sentre/senhub'
+import { BN } from '@project-serum/anchor'
 
 import { Col, Row, Space, Tooltip, Typography } from 'antd'
 import { FarmApr, FarmLiquidity } from 'components/farm'
@@ -11,38 +12,45 @@ import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import SpaceBetween from 'components/spaceBetween'
 import FarmTag from 'components/farmTag'
+import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
-  const { endDate } = useFarmData(farmAddress)
+  const { endDate, startDate } = useFarmData(farmAddress)
+  const farmBoostingData = useFarmBoosting(farmAddress)
+
+  const now = new BN(Date.now() / 1000)
 
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
         <Space style={{ width: '100%' }} direction="vertical" size={12}>
           <SpaceBetween
-            title={
-              <FarmAvatar
-                farmAddress={farmAddress}
-                textStyle={{ fontSize: 30, fontWeight: 700 }}
-                hoverable
-              />
+            floatContent={
+              !!farmBoostingData.length && (
+                <FarmTag
+                  type="primary"
+                  bordered={false}
+                  opacity={0.1}
+                  radius={8}
+                  style={{ padding: '1px 8px' }}
+                >
+                  ⚡ Boost
+                </FarmTag>
+              )
             }
           >
-            <FarmTag
-              type="primary"
-              bordered={false}
-              opacity={0.1}
-              radius={8}
-              style={{ padding: '1px 8px' }}
-            >
-              ⚡ Boost
-            </FarmTag>
+            <FarmAvatar
+              farmAddress={farmAddress}
+              textStyle={{ fontSize: 30, fontWeight: 700 }}
+              hoverable
+            />
           </SpaceBetween>
-          <TimeCountDown
-            label="End in"
-            endTime={Math.floor(endDate.toNumber())}
-          />
+          {now.lt(startDate) ? (
+            <TimeCountDown label={'Start in'} endTime={startDate.toNumber()} />
+          ) : (
+            <TimeCountDown label={'End in'} endTime={endDate.toNumber()} />
+          )}
         </Space>
       </Col>
 

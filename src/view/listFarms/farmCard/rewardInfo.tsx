@@ -23,19 +23,20 @@ const RewardInfo = ({ farmAddress }: { farmAddress: string }) => {
             {convertRewards.map(({ mint, amount }) => (
               <SpaceBetween
                 key={mint}
-                title={
-                  <Space>
-                    <MintAvatar mintAddress={mint} />
-                    <MintSymbol mintAddress={mint} />
-                  </Space>
+                floatContent={
+                  <Typography.Title level={5}>
+                    <MintAmount mintAddress={mint} amount={amount} />{' '}
+                    <span style={{ color: '#A1A1A1' }}>
+                      (<MintTotalValue mintAddress={mint} amount={amount} />)
+                    </span>
+                  </Typography.Title>
                 }
+                gutter={[24, 24]}
               >
-                <Typography.Title level={5}>
-                  <MintAmount mintAddress={mint} amount={amount} />{' '}
-                  <span style={{ color: '#A1A1A1' }}>
-                    (<MintTotalValue mintAddress={mint} amount={amount} />)
-                  </span>
-                </Typography.Title>
+                <Space>
+                  <MintAvatar mintAddress={mint} />
+                  <MintSymbol mintAddress={mint} />
+                </Space>
               </SpaceBetween>
             ))}
           </Space>

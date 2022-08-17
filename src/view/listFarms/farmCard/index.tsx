@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { useAppRoute } from '@sentre/senhub'
-import { BN } from 'bn.js'
+import { BN } from '@project-serum/anchor'
 
 import { Button, Card, Col, Progress, Row, Space, Typography } from 'antd'
 import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
@@ -21,6 +21,7 @@ import { useGetDebtReward } from 'hooks/debt/useGetDebtReward'
 
 import configs from 'configs'
 import './index.less'
+import { FARM_GET_TOKENS } from 'constant/farm'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
@@ -48,6 +49,9 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   useEffect(() => {
     getDebtRewards()
   }, [getDebtRewards])
+
+  const now = new BN(Date.now() / 1000)
+  const getToken = FARM_GET_TOKENS[farmAddress]
 
   return (
     <Card
@@ -81,30 +85,44 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
             {/* Count down */}
             <Col span={24}>
               <SpaceBetween
-                title={
-                  <Button
-                    type="text"
-                    style={{ padding: 0, background: 'transparent' }}
-                    disabled
-                    onClick={() => {}}
-                  >
-                    How to get it? <IonIcon name="open-outline" />
-                  </Button>
+                floatContent={
+                  <Space>
+                    {now.lt(startDate) ? (
+                      <TimeCountDown
+                        label={'Start in'}
+                        endTime={endDate.toNumber()}
+                      />
+                    ) : (
+                      <TimeCountDown
+                        label={'End in'}
+                        endTime={endDate.toNumber()}
+                      />
+                    )}
+                    <Progress
+                      type="circle"
+                      percent={percentProgress}
+                      showInfo={percentProgress === 100}
+                      className="end-time-progress"
+                      strokeWidth={10}
+                    />
+                  </Space>
                 }
               >
-                <Space>
-                  <TimeCountDown
-                    label="End in"
-                    endTime={Math.floor(endDate.toNumber())}
-                  />
-                  <Progress
-                    type="circle"
-                    percent={percentProgress}
-                    showInfo={percentProgress === 100}
-                    className="end-time-progress"
-                    strokeWidth={10}
-                  />
-                </Space>
+                <Button
+                  type="text"
+                  style={{ padding: 0, background: 'transparent' }}
+                  disabled={!getToken}
+                  onClick={
+                    !getToken
+                      ? () => {}
+                      : (e) => {
+                          window.open(`${getToken.url}`)
+                          e.stopPropagation()
+                        }
+                  }
+                >
+                  How to get it? <IonIcon name="open-outline" />
+                </Button>
               </SpaceBetween>
             </Col>
           </Row>

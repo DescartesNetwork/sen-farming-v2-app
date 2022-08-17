@@ -31,28 +31,27 @@ const TimeTag = ({ children, style }: TimeTagProps) => {
 type TimeCountDownProps = { endTime: number; label?: string }
 const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
   const startTime = Math.floor(Date.now() / 1000)
+  const currentTime = Date.now() / 1000
   const duration = moment.duration(endTime - startTime, 'seconds')
-  const now = Date.now()
 
   const [countDown, setCountDown] = useState({
-    days: duration.days(),
+    days: Math.floor(duration.asDays()),
     hours: duration.hours(),
     minutes: duration.minutes(),
     seconds: duration.seconds(),
   })
 
   const updateCountDown = useCallback(async () => {
-    if (!endTime || endTime * 1000 < now) return
+    if (!endTime || endTime * 1000 < currentTime) return
     const startTime = Math.floor(Date.now() / 1000)
-    // TODO: startTime > endTime  (finish)
-    // TODO: unlimited
+
     const duration = moment.duration(endTime - startTime, 'seconds')
-    const days = duration.days()
+    const days = Math.floor(duration.asDays())
     const hours = duration.hours()
     const minutes = duration.minutes()
     const seconds = duration.seconds()
     setCountDown({ days, hours, minutes, seconds })
-  }, [endTime, now])
+  }, [endTime, currentTime])
 
   useEffect(() => {
     const interval = setInterval(() => updateCountDown(), 1000)
@@ -60,12 +59,13 @@ const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
   }, [updateCountDown])
 
   if (!endTime) return <Typography.Text>Unlimited</Typography.Text>
-  if (endTime * 1000 < now)
+  if (endTime * 1000 < currentTime)
     return (
       <TimeTag>
         <Typography.Text>Expired</Typography.Text>
       </TimeTag>
     )
+
   return (
     <Space size={6}>
       {!!label && <Typography.Text type="secondary">{label}</Typography.Text>}

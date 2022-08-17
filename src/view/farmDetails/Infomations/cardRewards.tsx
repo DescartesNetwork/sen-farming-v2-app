@@ -55,9 +55,15 @@ const CardRewards = ({
     >
       <Row gutter={gutter}>
         <Col>
-          <SpaceBetween title={<Typography.Text>Farm rewards</Typography.Text>}>
-            {/* trick to align title */}
-            <Col span={24} style={{ height: titleHeight }} />
+          <SpaceBetween
+            floatContent={
+              <Col
+                span={24}
+                style={{ height: titleHeight }}
+              /> /* trick to align title */
+            }
+          >
+            <Typography.Text>Farm rewards</Typography.Text>
           </SpaceBetween>
         </Col>
 
@@ -65,35 +71,35 @@ const CardRewards = ({
         {farmRewardsDaily.map(({ mint, amount, total }, idx) => (
           <Col span={24} key={mint.toBase58() + idx}>
             <SpaceBetween
-              title={
-                <Space>
-                  <MintAvatar size={size} mintAddress={mint} />
-                  <MintSymbol mintAddress={mint} />
+              floatContent={
+                <Space
+                  size={0}
+                  direction="vertical"
+                  style={{ textAlign: 'right' }}
+                >
+                  <Typography.Title level={5}>
+                    <MintAmount
+                      mintAddress={mint}
+                      amount={total}
+                      format="0,0.[00]"
+                    />
+                  </Typography.Title>
+                  <Typography.Text type="secondary">
+                    <MintAmount
+                      mintAddress={mint}
+                      amount={amount}
+                      format="0,0.[00]"
+                      perDate
+                    />
+                    {' / Week'}
+                  </Typography.Text>
                 </Space>
               }
               align={align}
             >
-              <Space
-                size={0}
-                direction="vertical"
-                style={{ textAlign: 'right' }}
-              >
-                <Typography.Title level={5}>
-                  <MintAmount
-                    mintAddress={mint}
-                    amount={total}
-                    format="0,0.[00]"
-                  />
-                </Typography.Title>
-                <Typography.Text type="secondary">
-                  <MintAmount
-                    mintAddress={mint}
-                    amount={amount}
-                    format="0,0.[00]"
-                    perDate
-                  />
-                  {' / Week'}
-                </Typography.Text>
+              <Space>
+                <MintAvatar size={size} mintAddress={mint} />
+                <MintSymbol mintAddress={mint} />
               </Space>
             </SpaceBetween>
           </Col>

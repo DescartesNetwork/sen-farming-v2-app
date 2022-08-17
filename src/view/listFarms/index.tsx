@@ -34,12 +34,14 @@ const Farms = () => {
           <SpaceBetween
             gutter={[16, 16]}
             style={{ flexGrow: 10 }}
-            title={<SegmentedFarm />}
             childFlex={1}
+            floatContent={
+              <Button onClick={() => pushHistory('/create-farm')} ghost block>
+                New Farm
+              </Button>
+            }
           >
-            <Button onClick={() => pushHistory('/create-farm')} ghost block>
-              New Farm
-            </Button>
+            <SegmentedFarm />
           </SpaceBetween>
         </Col>
         <Col span={24}>

@@ -70,20 +70,20 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
     <Row gutter={[16, 16]}>
       <Col span={24}>
         <SpaceBetween
-          title={
-            <Space>
-              <Typography.Title level={5}>Staked NFTs</Typography.Title>
-              {!!stakedNFTs?.length && (
-                <FarmTag>{`+ ${stakedData.amountStakedNFTs} LP`}</FarmTag>
-              )}
-            </Space>
+          floatContent={
+            !!stakedNFTs?.length && (
+              <Button type="text" onClick={() => setRemoveable(!removeable)}>
+                {removeable ? 'Cancel' : 'Unstake'}
+              </Button>
+            )
           }
         >
-          {!!stakedNFTs?.length && (
-            <Button type="text" onClick={() => setRemoveable(!removeable)}>
-              {removeable ? 'Cancel' : 'Unstake'}
-            </Button>
-          )}
+          <Space>
+            <Typography.Title level={5}>Staked NFTs</Typography.Title>
+            {!!stakedNFTs?.length && (
+              <FarmTag>{`+ ${stakedData.amountStakedNFTs} LP`}</FarmTag>
+            )}
+          </Space>
         </SpaceBetween>
       </Col>
       <Spin spinning={loading}>
