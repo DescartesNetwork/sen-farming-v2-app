@@ -19,6 +19,7 @@ export enum FarmTab {
   Staked = 'Staked Farms',
   Your = 'Your Farms',
   Expired = 'Expired Farms',
+  Upcomming = 'Upcomming Farms',
 }
 
 export const DATE_FORMAT = 'MMM DD, YYYY HH:mm'

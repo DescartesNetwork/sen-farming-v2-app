@@ -16,6 +16,7 @@ const SegmentedFarm = () => {
         { value: FarmTab.Staked, label: FarmTab.Staked },
         { value: FarmTab.Your, label: FarmTab.Your },
         { value: FarmTab.Expired, label: FarmTab.Expired },
+        { value: FarmTab.Upcomming, label: FarmTab.Upcomming },
       ]}
       value={farmTab}
       onChange={(val) => dispatch(setFarmTab(val.toString()))}
