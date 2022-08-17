@@ -38,7 +38,7 @@ const Banner = () => {
             {/* Total value stake */}
             <Space direction="vertical">
               <Typography.Text style={{ ...textStyle }}>
-                Total Value Staked
+                Total Value Locked
               </Typography.Text>
               <Typography.Title level={3} style={{ ...textStyle }}>
                 {util.numeric(tvl).format('$0,0.[00]')}

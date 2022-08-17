@@ -72,7 +72,7 @@ export const useFilterFarms = () => {
             return checkYourFarm(farms[farmAddress], walletAddress)
           case FarmTab.Expired:
             return checkFinishedFarm(farmData)
-          case FarmTab.Upcomming:
+          case FarmTab.Upcoming:
             return checkUpcomingFarm(farmData)
           case FarmTab.All:
             return !checkFinishedFarm(farmData)

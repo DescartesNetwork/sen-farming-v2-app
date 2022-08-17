@@ -57,6 +57,7 @@ const FarmTag = ({
         color: tagColor,
         borderColor: tagColor,
         borderRadius: radius,
+        marginRight: 0,
         ...background,
         ...borderStyle,
         ...style,

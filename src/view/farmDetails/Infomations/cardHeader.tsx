@@ -7,13 +7,13 @@ import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceVertical from 'components/spaceVertical'
 import TimeCountDown from 'components/timeCountDown'
 import PriceTooltip from './priceTooltip'
+import IonIcon from '@sentre/antd-ionicon'
+import FarmTag from 'components/farmTag'
+import SpaceBetween from 'components/spaceBetween'
 
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
-import SpaceBetween from 'components/spaceBetween'
-import FarmTag from 'components/farmTag'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
-import IonIcon from '@sentre/antd-ionicon'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
@@ -37,7 +37,7 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
                     radius={8}
                     style={{ padding: '1px 8px' }}
                   >
-                    <IonIcon name="alarm-outline" /> Upcomming
+                    <IonIcon name="alarm-outline" /> Upcoming
                   </FarmTag>
                 )}
                 {!!farmBoostingData.length && (
@@ -80,7 +80,7 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
           </Col>
           {/* Farm Liquidity */}
           <Col>
-            <SpaceVertical label="Liquidity">
+            <SpaceVertical label="TVL">
               <Typography.Title level={4}>
                 <FarmLiquidity farmAddress={farmAddress} />
               </Typography.Title>

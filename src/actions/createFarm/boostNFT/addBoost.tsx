@@ -17,7 +17,7 @@ const AddBoost = ({ index, onDelete, boosData, onChange }: AddBoostProps) => {
       <Col span={24}>
         <Row align="middle">
           <Col flex="auto">
-            <Typography.Text>Collection NFT #{index + 1}</Typography.Text>
+            <Typography.Text>NFT Collection #{index + 1}</Typography.Text>
           </Col>
           {index !== 0 && (
             <Col>
