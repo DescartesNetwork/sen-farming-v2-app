@@ -1,7 +1,8 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { useAppRoute } from '@sentre/senhub'
+import { BN } from 'bn.js'
 
-import { Button, Card, Col, Progress, Row, Space, Tag, Typography } from 'antd'
+import { Button, Card, Col, Progress, Row, Space, Typography } from 'antd'
 import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
 import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
@@ -11,6 +12,7 @@ import HarvestButton from 'actions/harvest/harvestButton'
 import IonIcon from '@sentre/antd-ionicon'
 import CardTooltip from './cardTooltip'
 import FarmLiquidity from 'components/farm/farmLiquidity'
+import FarmTag from 'components/farmTag'
 
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 import TimeCountDown from 'components/timeCountDown'
@@ -19,7 +21,6 @@ import { useGetDebtReward } from 'hooks/debt/useGetDebtReward'
 
 import configs from 'configs'
 import './index.less'
-import { BN } from 'bn.js'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
@@ -62,22 +63,19 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
               <FarmAvatar
                 farmAddress={farmAddress}
                 textStyle={{ fontSize: 20, fontWeight: 700 }}
-                hoverable
               />
             </Col>
             {!!farmBoostingData.length && (
               <Col>
-                <Tag
-                  style={{
-                    color: '#A0E86F',
-                    background: 'rgba(160, 232, 111, 0.1)',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '1px 8px',
-                  }}
+                <FarmTag
+                  type="primary"
+                  bordered={false}
+                  opacity={0.1}
+                  radius={8}
+                  style={{ padding: '1px 8px' }}
                 >
                   ⚡ Boost
-                </Tag>
+                </FarmTag>
               </Col>
             )}
             {/* Count down */}
@@ -90,7 +88,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                     disabled
                     onClick={() => {}}
                   >
-                    Go pool <IonIcon name="open-outline" />
+                    How to get it? <IonIcon name="open-outline" />
                   </Button>
                 }
               >

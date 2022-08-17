@@ -47,7 +47,7 @@ const Banner = () => {
             {/* Your rewards */}
             <Space direction="vertical">
               <Typography.Text style={{ ...textStyle }}>
-                Total Your Rewards
+                Your Total Rewards
               </Typography.Text>
               <Typography.Title level={3} style={{ ...textStyle }}>
                 <TotalOwnRewards />

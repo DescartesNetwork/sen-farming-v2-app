@@ -1,14 +1,31 @@
-import { useMemo } from 'react'
+import { CSSProperties, useMemo } from 'react'
 import { BN } from '@project-serum/anchor'
 
-import { Card, Col, Row, Space, Typography } from 'antd'
+import { Card, Col, Row, RowProps, Space, Typography } from 'antd'
 import { MintAvatar, MintSymbol } from '@sen-use/components'
 import SpaceBetween from 'components/spaceBetween'
 import MintAmount from 'components/mint/mintAmount'
 import { useFarmRewards } from 'hooks/farm/useFarmRewards'
 import { useFarmOracle } from 'hooks/farm/useFarmOracle'
 
-const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
+type CardRewardsProps = {
+  farmAddress: string
+  background?: string
+  style?: CSSProperties
+  bodyStyle?: CSSProperties
+  bordered?: boolean
+  gutter?: RowProps['gutter']
+  titleHeight?: number
+}
+const CardRewards = ({
+  farmAddress,
+  background = '#2D2E2D',
+  style,
+  bodyStyle,
+  bordered = false,
+  gutter = [12, 12],
+  titleHeight = 41,
+}: CardRewardsProps) => {
   const farmOracle = useFarmOracle(farmAddress)
   const rewards = useFarmRewards(farmAddress)
 
@@ -27,12 +44,16 @@ const CardRewards = ({ farmAddress }: { farmAddress: string }) => {
   }, [farmOracle, rewards])
 
   return (
-    <Card bordered={false} style={{ background: '#2D2E2D', height: '100%' }}>
-      <Row gutter={[12, 12]}>
+    <Card
+      bordered={bordered}
+      style={{ height: '100%', background, ...style }}
+      bodyStyle={{ ...bodyStyle }}
+    >
+      <Row gutter={gutter}>
         <Col>
           <SpaceBetween title={<Typography.Text>Farm rewards</Typography.Text>}>
             {/* trick to align title */}
-            <Col span={24} style={{ height: 41 }} />
+            <Col span={24} style={{ height: titleHeight }} />
           </SpaceBetween>
         </Col>
 

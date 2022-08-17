@@ -9,6 +9,8 @@ import PriceTooltip from './priceTooltip'
 
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
+import SpaceBetween from 'components/spaceBetween'
+import FarmTag from 'components/farmTag'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
@@ -16,12 +18,27 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
 
   return (
     <Row gutter={[24, 24]}>
-      <Col>
-        <Space direction="vertical" size={12}>
-          <FarmAvatar
-            farmAddress={farmAddress}
-            textStyle={{ fontSize: 30, fontWeight: 700 }}
-          />
+      <Col span={24}>
+        <Space style={{ width: '100%' }} direction="vertical" size={12}>
+          <SpaceBetween
+            title={
+              <FarmAvatar
+                farmAddress={farmAddress}
+                textStyle={{ fontSize: 30, fontWeight: 700 }}
+                hoverable
+              />
+            }
+          >
+            <FarmTag
+              type="primary"
+              bordered={false}
+              opacity={0.1}
+              radius={8}
+              style={{ padding: '1px 8px' }}
+            >
+              ⚡ Boost
+            </FarmTag>
+          </SpaceBetween>
           <TimeCountDown
             label="End in"
             endTime={Math.floor(endDate.toNumber())}
@@ -50,7 +67,7 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
           {/* Own Shares */}
           <Col>
             <Space direction="vertical" size={0}>
-              <SpaceVertical label="Your staked">
+              <SpaceVertical label="You staked">
                 <Tooltip
                   title={<PriceTooltip farmAddress={farmAddress} />}
                   arrowPointAtCenter
