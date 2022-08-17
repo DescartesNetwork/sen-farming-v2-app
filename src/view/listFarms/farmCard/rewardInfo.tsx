@@ -31,6 +31,7 @@ const RewardInfo = ({ farmAddress }: { farmAddress: string }) => {
                     </span>
                   </Typography.Title>
                 }
+                gutter={[24, 24]}
               >
                 <Space>
                   <MintAvatar mintAddress={mint} />
