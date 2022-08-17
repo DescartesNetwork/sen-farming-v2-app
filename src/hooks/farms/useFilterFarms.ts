@@ -86,10 +86,7 @@ const useFilterFarm = () => {
           case FarmTab.Upcomming:
             return checkUpcommingFarm(farmAddress)
           case FarmTab.All:
-            return (
-              !checkFinishedFarm(farmAddress) &&
-              !checkUpcommingFarm(farmAddress)
-            )
+            return !checkFinishedFarm(farmAddress)
           default:
             return false
         }
