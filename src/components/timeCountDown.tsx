@@ -54,7 +54,7 @@ const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
   }, [endTime, currentTime])
 
   useEffect(() => {
-    const interval = setInterval(() => updateCountDown(), 1000 * 60)
+    const interval = setInterval(() => updateCountDown(), 1000)
     return () => clearInterval(interval)
   }, [updateCountDown])
 
@@ -65,7 +65,7 @@ const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
         <Typography.Text>Expired</Typography.Text>
       </TimeTag>
     )
-  console.log('countDown', countDown)
+
   return (
     <Space size={6}>
       {!!label && <Typography.Text type="secondary">{label}</Typography.Text>}
