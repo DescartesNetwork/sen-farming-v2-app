@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { util } from '@sentre/senhub'
 
 import { Button, Card, Col, Row, Space, Typography } from 'antd'
 import { MintSelection } from '@sen-use/components'
@@ -10,7 +11,6 @@ import { useAppRouter } from 'hooks/useAppRouter'
 import { useCreateFarm } from 'hooks/actions/useCreateFarm'
 
 import './index.less'
-import { util } from '@sentre/senhub/dist'
 
 export const MINT_STYLE = {
   padding: '4px 12px',

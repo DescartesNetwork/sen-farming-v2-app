@@ -4,6 +4,8 @@ import { Button, Col, Row, Switch, Typography } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
 import AddBoost from './addBoost'
 
+export const EMPTY_COLLECTION = { collection: '', percentage: 0 }
+
 export type BoostData = {
   collection: string
   percentage: number
@@ -16,9 +18,9 @@ type BoostNFTProps = {
 
 const Explanation = () => (
   <Typography.Text className="caption" type="secondary">
-    Enable <span style={{ color: '#A0E86F' }}>Boost</span> means that you will
-    allow users to use NFTs to increase their contribution. You need to set the
-    corresponding plus percentage for each NFT collection.
+    Enabling <span style={{ color: '#A0E86F' }}>Boost</span> means you allow
+    users to lock their NFTs to earn extra rewards. You need to set a boost rate
+    for every NFT collection you will use as Boosters.
   </Typography.Text>
 )
 
@@ -27,7 +29,7 @@ const BoostNFT = ({ boostsData, onChange }: BoostNFTProps) => {
 
   const onAddBoost = () => {
     const nextReward = [...boostsData]
-    nextReward.push({ collection: '', percentage: 0 })
+    nextReward.push(EMPTY_COLLECTION)
     return onChange(nextReward)
   }
 
@@ -44,6 +46,7 @@ const BoostNFT = ({ boostsData, onChange }: BoostNFTProps) => {
   }
 
   const onSwitch = (isBoost: boolean) => {
+    onChange([EMPTY_COLLECTION])
     if (!isBoost) onChange([]) // remove collection
     setIsBoostNFT(isBoost)
   }
