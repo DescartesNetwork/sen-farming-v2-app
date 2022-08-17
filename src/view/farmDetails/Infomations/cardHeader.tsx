@@ -1,4 +1,5 @@
 import { util } from '@sentre/senhub'
+import { BN } from '@project-serum/anchor'
 
 import { Col, Row, Space, Tooltip, Typography } from 'antd'
 import { FarmApr, FarmLiquidity } from 'components/farm'
@@ -14,7 +15,9 @@ import FarmTag from 'components/farmTag'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
-  const { endDate } = useFarmData(farmAddress)
+  const { endDate, startDate } = useFarmData(farmAddress)
+
+  const now = new BN(Date.now() / 1000)
 
   return (
     <Row gutter={[24, 24]}>
@@ -39,10 +42,11 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
               hoverable
             />
           </SpaceBetween>
-          <TimeCountDown
-            label="End in"
-            endTime={Math.floor(endDate.toNumber())}
-          />
+          {now.lt(startDate) ? (
+            <TimeCountDown label={'Start in'} endTime={startDate.toNumber()} />
+          ) : (
+            <TimeCountDown label={'End in'} endTime={endDate.toNumber()} />
+          )}
         </Space>
       </Col>
 

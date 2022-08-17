@@ -49,6 +49,8 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
     getDebtRewards()
   }, [getDebtRewards])
 
+  const now = new BN(Date.now() / 1000)
+
   return (
     <Card
       bodyStyle={{ padding: '20px 16px' }}
@@ -83,10 +85,17 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
               <SpaceBetween
                 floatContent={
                   <Space>
-                    <TimeCountDown
-                      label="End in"
-                      endTime={Math.floor(endDate.toNumber())}
-                    />
+                    {now.lt(startDate) ? (
+                      <TimeCountDown
+                        label={'Start in'}
+                        endTime={endDate.toNumber()}
+                      />
+                    ) : (
+                      <TimeCountDown
+                        label={'End in'}
+                        endTime={endDate.toNumber()}
+                      />
+                    )}
                     <Progress
                       type="circle"
                       percent={percentProgress}

@@ -27,7 +27,7 @@ export const useConvertRewards = (
   }, [getDebtReward])
 
   useEffect(() => {
-    if (intervalTime && !debData?.shares.isZero()) {
+    if (intervalTime && debData?.shares.gt(new BN(0))) {
       const interval = setInterval(() => updateReward(), intervalTime)
       return () => clearInterval(interval)
     } else {
