@@ -80,7 +80,7 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
           </Col>
           {/* Farm Liquidity */}
           <Col>
-            <SpaceVertical label="Liquidity">
+            <SpaceVertical label="TVL">
               <Typography.Title level={4}>
                 <FarmLiquidity farmAddress={farmAddress} />
               </Typography.Title>

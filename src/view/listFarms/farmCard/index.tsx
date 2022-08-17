@@ -168,7 +168,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
             {/* Liquidity */}
             <Col>
               <Space direction="vertical">
-                <Typography.Text type="secondary">Liquidity</Typography.Text>
+                <Typography.Text type="secondary">TVL</Typography.Text>
                 <Typography.Text>
                   <FarmLiquidity farmAddress={farmAddress} />
                 </Typography.Text>

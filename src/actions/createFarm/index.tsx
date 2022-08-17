@@ -76,7 +76,7 @@ const CreateFarm = () => {
         <Card bordered={false}>
           <Row gutter={[32, 32]}>
             <Col span={24}>
-              <Typography.Title level={4}>Add Farm</Typography.Title>
+              <Typography.Title level={4}>New Farm</Typography.Title>
             </Col>
             <Col span={24}>
               <Space direction="vertical" style={{ width: '100%' }}>
