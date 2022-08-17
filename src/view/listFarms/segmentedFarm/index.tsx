@@ -1,10 +1,12 @@
 import { Segmented } from 'antd'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setFarmTab } from 'model/main.controller'
 import { FarmTab } from 'constant'
+import { AppState } from 'model'
 
 const SegmentedFarm = () => {
+  const farmTab = useSelector((state: AppState) => state.main.farmTab)
   const dispatch = useDispatch()
 
   return (
@@ -15,6 +17,7 @@ const SegmentedFarm = () => {
         { value: FarmTab.Your, label: FarmTab.Your },
         { value: FarmTab.Expired, label: FarmTab.Expired },
       ]}
+      value={farmTab}
       onChange={(val) => dispatch(setFarmTab(val.toString()))}
     />
   )
