@@ -13,6 +13,7 @@ import { useFarmData } from 'hooks/farm/useFarmData'
 import SpaceBetween from 'components/spaceBetween'
 import FarmTag from 'components/farmTag'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+import IonIcon from '@sentre/antd-ionicon'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
@@ -27,17 +28,30 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
         <Space style={{ width: '100%' }} direction="vertical" size={12}>
           <SpaceBetween
             floatContent={
-              !!farmBoostingData.length && (
-                <FarmTag
-                  type="primary"
-                  bordered={false}
-                  opacity={0.1}
-                  radius={8}
-                  style={{ padding: '1px 8px' }}
-                >
-                  ⚡ Boost
-                </FarmTag>
-              )
+              <Space>
+                {now.lt(startDate) && (
+                  <FarmTag
+                    type="warning"
+                    bordered={false}
+                    opacity={0.1}
+                    radius={8}
+                    style={{ padding: '1px 8px' }}
+                  >
+                    <IonIcon name="alarm-outline" /> Upcomming
+                  </FarmTag>
+                )}
+                {!!farmBoostingData.length && (
+                  <FarmTag
+                    type="primary"
+                    bordered={false}
+                    opacity={0.1}
+                    radius={8}
+                    style={{ padding: '1px 8px' }}
+                  >
+                    ⚡ Boost
+                  </FarmTag>
+                )}
+              </Space>
             }
           >
             <FarmAvatar
