@@ -12,6 +12,8 @@ const APRInfo = ({ farmAddress }: { farmAddress: string }) => {
           farmAddress={farmAddress}
           gutter={[8, 8]}
           titleHeight={0}
+          size={32}
+          align="middle"
         />
       </Col>
       <Col span={24}>
