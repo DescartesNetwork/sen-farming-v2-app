@@ -1,21 +1,14 @@
-import { useEffect } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import { useUI } from '@sentre/senhub'
 
 import CreateFarm from 'actions/createFarm'
 import ListFarms from './listFarms'
 import FarmDetails from './farmDetails'
 
 import { useAppRouter } from 'hooks/useAppRouter'
-
 import './index.less'
-const View = () => {
-  const { setBackground } = useUI()
-  const { appRoute } = useAppRouter()
 
-  useEffect(() => {
-    setBackground({ light: '#141413', dark: '#141413' })
-  }, [setBackground])
+export const View = () => {
+  const { appRoute } = useAppRouter()
 
   return (
     <Switch>
@@ -28,5 +21,3 @@ const View = () => {
     </Switch>
   )
 }
-
-export default View

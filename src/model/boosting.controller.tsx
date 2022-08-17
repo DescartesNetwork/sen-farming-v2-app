@@ -33,6 +33,14 @@ export const upsetBoosting = createAsyncThunk<
   return { [address]: data }
 })
 
+export const getBoosts = createAsyncThunk<BoostingState, void, { state: any }>(
+  `${NAME}/getBoosts`,
+  async (_, { getState }) => {
+    const { boosting } = getState()
+    return boosting
+  },
+)
+
 const slice = createSlice({
   name: NAME,
   initialState,

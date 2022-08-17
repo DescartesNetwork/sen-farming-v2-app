@@ -32,7 +32,7 @@ const Watcher = (props: UseWatcherProps) => {
     try {
       GLOBAL_WATCHER[name] = true
       setLoadingInfo({ ...GLOBAL_WATCHER, [name]: true })
-      const accountInfos = await accountClient.all()
+      const accountInfos = await accountClient.all(filter)
       const bulk: any = {}
       for (const info of accountInfos) {
         bulk[info.publicKey.toBase58()] = info.account
@@ -44,7 +44,7 @@ const Watcher = (props: UseWatcherProps) => {
       GLOBAL_WATCHER[name] = false
       setLoadingInfo({ ...GLOBAL_WATCHER, [name]: false })
     }
-  }, [accountClient, init, name, setLoadingInfo])
+  }, [accountClient, filter, init, name, setLoadingInfo])
 
   const watchData = useCallback(async () => {
     if (watchId) return

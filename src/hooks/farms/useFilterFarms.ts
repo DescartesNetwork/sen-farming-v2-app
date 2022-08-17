@@ -1,116 +1,93 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useDebounce } from 'react-use'
+import { useDispatch } from 'react-redux'
+import { useCallback } from 'react'
 import { useWalletAddress } from '@sentre/senhub'
+import { FarmData } from '@sentre/farming'
 
-import { AppState } from 'model'
+import { FarmState, getFarms } from 'model/farms.controller'
+import { getRewards, RewardState } from 'model/rewards.controller'
+import { DebtState, getDebts } from 'model/debts.controller'
+import { BoostingState, getBoosts } from 'model/boosting.controller'
+import { AppDispatch } from 'model'
 import { FarmTab } from 'constant'
 
-const useFilterFarm = () => {
-  const { boostOnly, farmTab } = useSelector((state: AppState) => state.main)
-  const farms = useSelector((state: AppState) => state.farms)
-  const rewards = useSelector((state: AppState) => state.rewards)
-  const boosting = useSelector((state: AppState) => state.boosting)
-  const debts = useSelector((state: AppState) => state.debts)
-  const [filteredFarm, setFilteredFarm] = useState<string[]>([])
-  const [loading, setLoading] = useState(false)
+function checkActiveFarm(farmAddress: string, rewards: RewardState) {
+  for (const reward of Object.values(rewards)) {
+    if (reward.farm.toBase58() === farmAddress) return true
+  }
+  return false
+}
+
+function checkStakedFarm(
+  farmAddress: string,
+  walletAddress: string,
+  debts: DebtState,
+) {
+  for (const debt of Object.values(debts)) {
+    if (debt.authority.toBase58() !== walletAddress) continue
+    if (debt.farm.toBase58() !== farmAddress) continue
+    return !debt.shares.isZero()
+  }
+  return false
+}
+
+function checkYourFarm(farmData: FarmData, walletAddress: string) {
+  return farmData.authority.toBase58() === walletAddress
+}
+
+function checkBoostFarm(farmAddress: string, boosts: BoostingState) {
+  for (const boostingData of Object.values(boosts)) {
+    if (boostingData.farm.toBase58() === farmAddress) return true
+  }
+  return false
+}
+
+function checkFinishedFarm(farmData: FarmData) {
+  return new Date().getTime() / 1000 > farmData.endDate.toNumber()
+}
+
+function checkUpcomingFarm(farmData: FarmData) {
+  return Date.now() / 1000 < farmData.startDate.toNumber()
+}
+
+export const useFilterFarms = () => {
+  const dispatch = useDispatch<AppDispatch>()
   const walletAddress = useWalletAddress()
 
-  const checkActiveFarm = useCallback(
-    (farmAddress: string) => {
-      for (const reward of Object.values(rewards)) {
-        if (reward.farm.toBase58() === farmAddress) return true
-      }
-      return false
-    },
-    [rewards],
-  )
+  const filterFarms = useCallback(
+    async (boostOnly: boolean, farmTab: FarmTab) => {
+      let farms = await dispatch(getFarms()).unwrap()
+      const debts = await dispatch(getDebts()).unwrap()
+      const boosting = await dispatch(getBoosts()).unwrap()
+      const rewards = await dispatch(getRewards()).unwrap()
 
-  const checkStakedFarm = useCallback(
-    (farmAddress: string) => {
-      for (const debt of Object.values(debts)) {
-        if (debt.authority.toBase58() !== walletAddress) continue
-        if (debt.farm.toBase58() !== farmAddress) continue
-        return !debt.shares.isZero()
-      }
-      return false
-    },
-    [debts, walletAddress],
-  )
-
-  const checkYourFarm = useCallback(
-    (farmAddress: string) => {
-      const farmData = farms[farmAddress]
-      return farmData.authority.toBase58() === walletAddress
-    },
-    [farms, walletAddress],
-  )
-
-  const checkBoostFarm = useCallback(
-    (farmAddress: string) => {
-      for (const boostingData of Object.values(boosting)) {
-        if (boostingData.farm.toBase58() === farmAddress) return true
-      }
-      return false
-    },
-    [boosting],
-  )
-
-  const checkFinishedFarm = useCallback(
-    (farmAddress: string) => {
-      return new Date().getTime() / 1000 > farms[farmAddress].endDate.toNumber()
-    },
-    [farms],
-  )
-
-  const checkUpcommingFarm = useCallback(
-    (farmAddress: string) => {
-      return Date.now() / 1000 < farms[farmAddress].startDate.toNumber()
-    },
-    [farms],
-  )
-
-  const filterFarm = useCallback(async () => {
-    let newFilteredFarms: string[] = Object.keys(farms).filter(
-      (farmAddress) => {
-        if (!checkActiveFarm(farmAddress)) return false
-        if (boostOnly && !checkBoostFarm(farmAddress)) return false
+      let filteredFarms: string[] = Object.keys(farms).filter((farmAddress) => {
+        const farmData = farms[farmAddress]
+        if (!checkActiveFarm(farmAddress, rewards)) return false
+        if (boostOnly && !checkBoostFarm(farmAddress, boosting)) return false
         // todo check boost
         switch (farmTab) {
           case FarmTab.Staked:
-            return checkStakedFarm(farmAddress)
+            return checkStakedFarm(farmAddress, walletAddress, debts)
           case FarmTab.Your:
-            return checkYourFarm(farmAddress)
+            return checkYourFarm(farms[farmAddress], walletAddress)
           case FarmTab.Expired:
-            return checkFinishedFarm(farmAddress)
+            return checkFinishedFarm(farmData)
           case FarmTab.Upcomming:
-            return checkUpcommingFarm(farmAddress)
+            return checkUpcomingFarm(farmData)
           case FarmTab.All:
-            return !checkFinishedFarm(farmAddress)
+            return !checkFinishedFarm(farmData)
           default:
             return false
         }
-      },
-    )
-    setFilteredFarm(newFilteredFarms)
-    return setLoading(false)
-  }, [
-    boostOnly,
-    checkActiveFarm,
-    checkBoostFarm,
-    checkFinishedFarm,
-    checkStakedFarm,
-    checkUpcommingFarm,
-    checkYourFarm,
-    farmTab,
-    farms,
-  ])
-  useDebounce(filterFarm, 300, [filterFarm])
-  useEffect(() => {
-    setLoading(true)
-  }, [filterFarm])
+      })
+      const filteredFarmsState: FarmState = {}
+      for (const farmAddress of filteredFarms) {
+        filteredFarmsState[farmAddress] = farms[farmAddress]
+      }
+      return filteredFarmsState
+    },
+    [dispatch, walletAddress],
+  )
 
-  return { loading, filteredFarm }
+  return filterFarms
 }
-
-export default useFilterFarm
