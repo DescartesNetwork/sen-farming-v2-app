@@ -89,7 +89,6 @@ const CardRewards = ({
                       mintAddress={mint}
                       amount={amount}
                       format="0,0.[00]"
-                      perDate
                     />
                     {' / Week'}
                   </Typography.Text>
