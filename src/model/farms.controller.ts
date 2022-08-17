@@ -28,6 +28,25 @@ export const upsetFarm = createAsyncThunk<
   return { [address]: data }
 })
 
+export const getFarm = createAsyncThunk<
+  FarmState,
+  { address: string },
+  { state: any }
+>(`${NAME}/getFarm`, async ({ address }, { getState }) => {
+  const {
+    farms: { [address]: data },
+  } = getState()
+  return { [address]: data }
+})
+
+export const getFarms = createAsyncThunk<FarmState, void, { state: any }>(
+  `${NAME}/getFarms`,
+  async (_, { getState }) => {
+    const { farms } = getState()
+    return farms
+  },
+)
+
 /**
  * Usual procedure
  */
