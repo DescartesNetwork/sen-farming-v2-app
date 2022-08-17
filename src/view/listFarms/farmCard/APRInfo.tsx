@@ -1,4 +1,5 @@
 import { Col, Row, Typography, Divider } from 'antd'
+import GroupMintSymbol from 'components/groupMintSymbol'
 import CardRewards from 'view/farmDetails/Infomations/cardRewards'
 
 const APRInfo = ({ farmAddress }: { farmAddress: string }) => {
@@ -18,9 +19,9 @@ const APRInfo = ({ farmAddress }: { farmAddress: string }) => {
       </Col>
       <Col span={24}>
         <Typography.Text>
-          To get SNTR and ZET rewards, you need to join the pool by
-          participating in the liquidity offering. Rewards will be distributed
-          weekly.
+          To get <GroupMintSymbol farmAddress={farmAddress} />
+          rewards, you need to join the pool by participating in the liquidity
+          offering. Rewards will be distributed weekly.
         </Typography.Text>
       </Col>
     </Row>
