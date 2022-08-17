@@ -1,8 +1,4 @@
-import { useEffect } from 'react'
-import LazyLoad, { forceCheck } from '@sentre/react-lazyload'
-
-import { Button, Col, Row, Spin } from 'antd'
-import FarmCard from './farmCard'
+import { Button, Col, Row } from 'antd'
 import Layout from 'components/layout'
 import Banner from 'components/banner'
 import SpaceBetween from 'components/spaceBetween'
@@ -10,19 +6,10 @@ import SegmentedFarm from './segmentedFarm'
 import FilterFarm from 'actions/filterFarm'
 
 import { useAppRouter } from 'hooks/useAppRouter'
-import { useSearchedFarms } from 'hooks/farms/useSearchedFarms'
-import useFilterFarm from 'hooks/farms/useFilterFarms'
-import { useSortFarms } from 'hooks/farms/useSortFarms'
+import { ListFarms } from './listFarm'
 
 const Farms = () => {
   const { pushHistory } = useAppRouter()
-  const filter = useFilterFarm()
-  const search = useSearchedFarms(filter.filteredFarm)
-  const sortedFarm = useSortFarms(search.searchedFarms)
-
-  useEffect(() => {
-    setTimeout(() => forceCheck(), 500)
-  }, [sortedFarm])
 
   return (
     <Layout>
@@ -47,23 +34,8 @@ const Farms = () => {
         <Col span={24}>
           <FilterFarm />
         </Col>
-        {/* List Farms */}
-
         <Col span={24}>
-          <Spin
-            spinning={search.loading || filter.loading}
-            style={{ minHeight: 200 }}
-          >
-            <Row gutter={[24, 24]}>
-              {sortedFarm.map((farmAddress) => (
-                <Col xs={24} lg={12} key={farmAddress}>
-                  <LazyLoad height={230.05}>
-                    <FarmCard farmAddress={farmAddress} />
-                  </LazyLoad>
-                </Col>
-              ))}
-            </Row>
-          </Spin>
+          <ListFarms />
         </Col>
       </Row>
     </Layout>

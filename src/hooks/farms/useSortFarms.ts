@@ -1,41 +1,43 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 
-import { useAllFarmLiquidity } from './useAllFarmLiquidity'
-import { useAllFarmAPR } from './useAllFarmAPR'
-import { AppState } from 'model'
-import { SortDirection } from 'model/main.controller'
+import { useGetAllFarmLiquidity } from './useGetAllFarmLiquidity'
+import { useGetAllFarmApr } from './useGetAllFarmApr'
 
-export const useSortFarms = (sourceFarms: string[]) => {
-  const sortType = useSelector((state: AppState) => state.main.sortType)
-  const [sortedFarms, setSortedFarms] = useState<string[]>([])
-  const farmLiquidities = useAllFarmLiquidity()
-  const roiList = useAllFarmAPR()
+import { AppDispatch } from 'model'
+import { getRewards } from 'model/rewards.controller'
+import { SortDirection, SortType } from 'model/main.controller'
+import { FarmState } from 'model/farms.controller'
 
-  const sortFarm = useCallback(async () => {
-    const nextFarms = [...sourceFarms]
-    if (!Object.keys(sortType).length) return setSortedFarms(sourceFarms)
-    if (sortType.liquidity !== SortDirection.null) {
-      nextFarms.sort((a, b) =>
-        sortType.liquidity === SortDirection.ASC
-          ? farmLiquidities[b] - farmLiquidities[a]
-          : farmLiquidities[a] - farmLiquidities[b],
-      )
-    }
+export const useSortFarms = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const getAllFarmLiquidity = useGetAllFarmLiquidity()
+  const getAllFarmApr = useGetAllFarmApr()
 
-    if (sortType.apr !== SortDirection.null)
-      nextFarms.sort((a, b) =>
-        sortType.apr === SortDirection.ASC
-          ? roiList[b] - roiList[a]
-          : roiList[a] - roiList[b],
-      )
+  const sortFarms = useCallback(
+    async (farms: FarmState, sortType: Record<SortType, SortDirection>) => {
+      let listFarms = Object.keys(farms)
+      if (sortType.liquidity !== SortDirection.null) {
+        const allLiquidity = await getAllFarmLiquidity(farms)
+        listFarms = listFarms.sort((a, b) =>
+          sortType.liquidity === SortDirection.ASC
+            ? allLiquidity[b] - allLiquidity[a]
+            : allLiquidity[a] - allLiquidity[b],
+        )
+      }
+      if (sortType.apr !== SortDirection.null) {
+        const rewards = await dispatch(getRewards()).unwrap()
+        const allApr = await getAllFarmApr(farms, rewards)
+        listFarms = listFarms.sort((a, b) =>
+          sortType.apr === SortDirection.ASC
+            ? allApr[b] - allApr[a]
+            : allApr[a] - allApr[b],
+        )
+      }
+      return listFarms
+    },
+    [dispatch, getAllFarmApr, getAllFarmLiquidity],
+  )
 
-    return setSortedFarms(nextFarms)
-  }, [farmLiquidities, roiList, sortType, sourceFarms])
-
-  useEffect(() => {
-    sortFarm()
-  }, [sortFarm])
-
-  return sortedFarms
+  return sortFarms
 }

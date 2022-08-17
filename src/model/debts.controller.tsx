@@ -33,6 +33,14 @@ export const upsetDebt = createAsyncThunk<
   return { [address]: data }
 })
 
+export const getDebts = createAsyncThunk<DebtState, void, { state: any }>(
+  `${NAME}/getDebts`,
+  async (_, { getState }) => {
+    const { debts } = getState()
+    return debts
+  },
+)
+
 const slice = createSlice({
   name: NAME,
   initialState,

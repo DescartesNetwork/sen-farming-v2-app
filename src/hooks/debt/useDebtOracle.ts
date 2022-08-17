@@ -18,6 +18,7 @@ export const useDebtOracle = (farmAddress: string) => {
 
   const withdraw = useCallback(
     (mi_mint_amount: BN) => {
+      if (!self?.leverage) return new BN(0)
       let input_mint_out = mi_mint_amount.mul(PRECISION).div(self.leverage)
       return input_mint_out
     },
@@ -55,6 +56,8 @@ export const useDebtOracle = (farmAddress: string) => {
       current_emission_rate: BN,
       current_compensation: BN,
     ) => {
+      if (!self?.debtAmount) return new BN(0)
+
       let bi_passed_time = new BN(time_passed)
       let bi_current_emission_rate = new BN(current_emission_rate)
       let bi_current_compensation = new BN(current_compensation)
