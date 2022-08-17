@@ -37,6 +37,7 @@ const IconSort = ({ type }: IconSortProps) => {
 const SortFarm = () => {
   const dispatch = useDispatch()
   const sortType = useSelector((state: AppState) => state.main.sortType)
+  const boostOnly = useSelector((state: AppState) => state.main.boostOnly)
 
   return (
     <Row gutter={[16, 16]} align="middle">
@@ -93,7 +94,11 @@ const SortFarm = () => {
             <Typography.Text style={{ userSelect: 'none' }}>
               Boost only
             </Typography.Text>
-            <Switch size="small" onChange={() => dispatch(switchBoostOnly())} />
+            <Switch
+              size="small"
+              checked={boostOnly}
+              onChange={() => dispatch(switchBoostOnly())}
+            />
           </Space>
         </label>
       </Col>

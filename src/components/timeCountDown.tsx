@@ -42,8 +42,7 @@ const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
   })
 
   const updateCountDown = useCallback(async () => {
-    if (!endTime || endTime * 1000 < currentTime) return
-    const startTime = Math.floor(Date.now() / 1000)
+    if (!endTime || endTime < currentTime) return
 
     const duration = moment.duration(endTime - startTime, 'seconds')
     const days = Math.floor(duration.asDays())
@@ -51,7 +50,7 @@ const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
     const minutes = duration.minutes()
     const seconds = duration.seconds()
     setCountDown({ days, hours, minutes, seconds })
-  }, [endTime, currentTime])
+  }, [endTime, currentTime, startTime])
 
   useEffect(() => {
     const interval = setInterval(() => updateCountDown(), 1000)
@@ -59,7 +58,7 @@ const TimeCountDown = memo(({ endTime, label }: TimeCountDownProps) => {
   }, [updateCountDown])
 
   if (!endTime) return <Typography.Text>Unlimited</Typography.Text>
-  if (endTime * 1000 < currentTime)
+  if (endTime < currentTime)
     return (
       <TimeTag>
         <Typography.Text>Expired</Typography.Text>
