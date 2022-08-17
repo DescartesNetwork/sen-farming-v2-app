@@ -10,17 +10,19 @@ const SegmentedFarm = () => {
   const dispatch = useDispatch()
 
   return (
-    <Segmented
-      options={[
-        { value: FarmTab.All, label: FarmTab.All },
-        { value: FarmTab.Staked, label: FarmTab.Staked },
-        { value: FarmTab.Your, label: FarmTab.Your },
-        { value: FarmTab.Expired, label: FarmTab.Expired },
-        { value: FarmTab.Upcoming, label: FarmTab.Upcoming },
-      ]}
-      value={farmTab}
-      onChange={(val) => dispatch(setFarmTab(val.toString()))}
-    />
+    <div style={{ overflowX: 'auto' }}>
+      <Segmented
+        options={[
+          { value: FarmTab.All, label: FarmTab.All },
+          { value: FarmTab.Staked, label: FarmTab.Staked },
+          { value: FarmTab.Your, label: FarmTab.Your },
+          { value: FarmTab.Expired, label: FarmTab.Expired },
+          { value: FarmTab.Upcoming, label: FarmTab.Upcoming },
+        ]}
+        value={farmTab}
+        onChange={(val) => dispatch(setFarmTab(val.toString()))}
+      />
+    </div>
   )
 }
 

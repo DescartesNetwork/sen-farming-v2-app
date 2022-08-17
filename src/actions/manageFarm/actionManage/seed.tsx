@@ -5,7 +5,7 @@ const Seed = () => {
   return (
     <Row gutter={[16, 16]}>
       <Col span={24}>
-        <CardNumbericInput value="" onChange={() => {}} selectMint />
+        <CardNumbericInput value="" onChange={() => {}} />
       </Col>
       <Col span={24}>
         <Button size="large" type="primary" block>
