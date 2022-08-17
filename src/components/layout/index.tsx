@@ -7,9 +7,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <Row justify="center">
-      <Col xs={24} style={{ maxWidth: 1140 }}>
-        {children}
-      </Col>
+      <Col style={{ maxWidth: 1140, width: '100%' }}>{children}</Col>
     </Row>
   )
 }
