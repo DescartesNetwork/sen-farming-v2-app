@@ -154,9 +154,9 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
             <Col>
               <Space direction="vertical">
                 <Typography.Text type="secondary">TVL</Typography.Text>
-                <Typography.Text>
+                <Typography.Title level={5}>
                   <FarmLiquidity farmAddress={farmAddress} />
-                </Typography.Text>
+                </Typography.Title>
               </Space>
             </Col>
             {/* Pending rewards */}

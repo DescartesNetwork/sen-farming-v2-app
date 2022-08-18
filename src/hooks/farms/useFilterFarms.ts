@@ -41,7 +41,7 @@ function checkBoostFarm(farmAddress: string, boosts: BoostingState) {
   return false
 }
 
-function checkFinishedFarm(farmData: FarmData) {
+export function checkFinishedFarm(farmData: FarmData) {
   return new Date().getTime() / 1000 > farmData.endDate.toNumber()
 }
 
