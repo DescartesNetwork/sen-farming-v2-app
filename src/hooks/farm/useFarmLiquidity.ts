@@ -1,5 +1,5 @@
-import { useGetTotalValue } from '@sen-use/app'
 import { useCallback, useEffect, useState } from 'react'
+import { useGetTotalValue } from '@sen-use/app'
 import { useFarmData } from './useFarmData'
 
 export const useFarmLiquidity = (farmAddress: string) => {
