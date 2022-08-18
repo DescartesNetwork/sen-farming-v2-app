@@ -1769,7 +1769,7 @@
     "@solana/spl-token" "^0.1.8"
     "@solana/web3.js" "^1.31.0"
 
-"@metaplex/js@^4.12.0":
+"@metaplex/js@4.12.0", "@metaplex/js@^4.12.0":
   version "4.12.0"
   resolved "https://registry.npmjs.org/@metaplex/js/-/js-4.12.0.tgz"
   integrity sha512-rIUTMXo5gIXFIZt08AEHyqH4oVoLL2dMYiNePQluw9pydesRym4jDayJ5POxEmKmyc6KGqVKw/YWUIivmUY5zg==
@@ -1995,18 +1995,19 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.4.tgz"
   integrity sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==
 
-"@sen-use/app@^2.0.14":
-  version "2.0.14"
-  resolved "https://registry.yarnpkg.com/@sen-use/app/-/app-2.0.14.tgz#a0dd3d0a8815ae4f989abc1754512b97133f5888"
-  integrity sha512-vh+1Pc7VXQt2vfVAS6YyXAFC7Qlg6C5T1JUIrkcFAsxXPDy8vm81KgugQNQ/q4QmPjM7IqN6HSLAgpb3HFlUOQ==
+"@sen-use/app@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@sen-use/app/-/app-3.0.2.tgz#18f6a21edb97840ad79905ce48fb9e8fa0ae7819"
+  integrity sha512-nyxHKzIPOoO26DYUGTlhVJzzXR2vK/79CUQIwy6KcYhH1S6R+H1hhlX+XpPSw4O+8XlIOJjqCrgXFI1r9XIQkg==
   dependencies:
     localforage "^1.10.0"
+    react-use "^17.4.0"
     web3.storage "^4.2.0"
 
-"@sen-use/components@^2.0.14":
-  version "2.0.14"
-  resolved "https://registry.yarnpkg.com/@sen-use/components/-/components-2.0.14.tgz#e0652e3b6881fa7b5b1f8ea7fa086e8080792158"
-  integrity sha512-RUtEEWhBgbiDGRwsaLTa50xI5R9pUhhoL93QG56IqArsm6wTchJV5/XXUpvMxkDQkLopKKTkLnBGBmObGuP26Q==
+"@sen-use/components@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@sen-use/components/-/components-3.0.2.tgz#def3b6daebfecabf982fbd13dd90c76c57e3a33e"
+  integrity sha512-gAF37YKOySa+a2mzsPZ0Hobg29BviW+SVKpuetRgMDpQDh9NNHumDdp+GlUmt7PGXBy0oQElBNId2mrtFd1eHQ==
   dependencies:
     "@metaplex/js" "^4.12.0"
     lunr "^2.3.9"
@@ -2023,10 +2024,10 @@
     bs58 "^5.0.0"
     web3.storage "^4.2.0"
 
-"@sen-use/web3@^2.0.14":
-  version "2.0.14"
-  resolved "https://registry.yarnpkg.com/@sen-use/web3/-/web3-2.0.14.tgz#357b5db7babbc46a283d5d74c6ae33217ccbbd4f"
-  integrity sha512-D/UgG/nMVymmhduwdjs8sRiv+YlmRe490c2i3LMq0lIk3RnUOmN8v47sra9OeYTWcF9wFPyUoIWY71Zwe3v/Hw==
+"@sen-use/web3@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@sen-use/web3/-/web3-3.0.2.tgz#1d8dc8960b13a36dbee2713fcf1629df26ea7347"
+  integrity sha512-XfdZgCDBqgMqqeGPO1fOHq5ssqODaPb9MmQfbBZ0fY01JJ32U02cNV+MZ5lE4nN2/lzcn81Yu/gFj7z2Ejht8w==
   dependencies:
     "@project-serum/anchor" "^0.24.2"
     "@solana/web3.js" "^1.50.0"
@@ -2053,6 +2054,13 @@
   version "1.0.37"
   resolved "https://registry.npmjs.org/@sentre/antd-ionicon/-/antd-ionicon-1.0.37.tgz"
   integrity sha512-TdZCXj4EmnI/CKvJ+K/yvRcF9ZPRGMsCSAj6yKY9bnTHDHa7Ka4rVpX+ugMNegIdhcBIQmErtKauqzSZtkRXVg==
+  dependencies:
+    react-helmet "^6.1.0"
+
+"@sentre/antd-ionicon@^1.0.38":
+  version "1.0.38"
+  resolved "https://registry.yarnpkg.com/@sentre/antd-ionicon/-/antd-ionicon-1.0.38.tgz#45149ee0599d8e06e41a0b322853995e818c1039"
+  integrity sha512-gCeS27E3DFIUS35E1r0DHzsEYGnBE6rIA86XnbtNJQwZNBjWlCpXsD0UA5WxYF/0lgY+cTh+L+/1kjZiwOslrg==
   dependencies:
     react-helmet "^6.1.0"
 
@@ -2101,10 +2109,10 @@
     util "^0.12.4"
     webpack-bundle-analyzer "^4.5.0"
 
-"@sentre/farming@^1.1.8":
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/@sentre/farming/-/farming-1.1.8.tgz#1887d60244c06bcd4e35f120bc8f0f147dc018ce"
-  integrity sha512-/VBoYNpnifhVSYzHUyHFFD6/6ZPMNS8QJU26a9GgGES/6fiipMaHWJ0zEsAVHaJrXLuq8QYsayVDivF4Y6Hk6A==
+"@sentre/farming@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@sentre/farming/-/farming-2.0.1.tgz#c2e0ef8568c80fa304d379570eb7c072cdf58222"
+  integrity sha512-fxkSaLQdD+jUt0Z0CaIekM+pP02EkEm41oex+A6XVivHYACMZQgD64nRLBGlt6n4s9MI992ekzaFnjmx88n87A==
   dependencies:
     "@project-serum/anchor" "^0.24.2"
     "@sen-use/web3" "^2.0.11"
@@ -2121,18 +2129,19 @@
   resolved "https://registry.npmjs.org/@sentre/react-lazyload/-/react-lazyload-3.2.2.tgz"
   integrity sha512-NKJhz9G8pModoZJaLMziRJtd582pFHbIydNXwRI72ECkjqbc7XIgBX+8kssrUtRxK2rW9VVQnGKDpmyZ8iSIyw==
 
-"@sentre/senhub@^3.2.8":
-  version "3.2.8"
-  resolved "https://registry.npmjs.org/@sentre/senhub/-/senhub-3.2.8.tgz"
-  integrity sha512-cJ1YXpn7NyxC6bmm9RzekohtLhxT0cHPuwaPceMoyYqoWlQcV57L7V2MBrTLQiqvvVZDn7Ut78g0jTtW1A9SjQ==
+"@sentre/senhub@^3.2.10":
+  version "3.2.12"
+  resolved "https://registry.yarnpkg.com/@sentre/senhub/-/senhub-3.2.12.tgz#abda72b686854bd3cba5d4abf30a60cf908e8ffa"
+  integrity sha512-me6X/P7LuSPsYDmNLIS+DDWEtMq6mhSaqpQ4Nu6HcS38lw7eioTM2+T2myMYtqnEjQvOeTRsZAT4/1NOz6icKw==
   dependencies:
     "@dnd-kit/core" "^4.0.1"
     "@dnd-kit/sortable" "^5.0.0"
+    "@metaplex/js" "4.12.0"
     "@project-serum/anchor" "^0.24.2"
     "@project-serum/sol-wallet-adapter" "^0.2.6"
     "@reduxjs/toolkit" "^1.8.0"
     "@senswap/sen-js" "^1.4.0"
-    "@sentre/antd-ionicon" "^1.0.37"
+    "@sentre/antd-ionicon" "^1.0.38"
     "@sentre/connector" "^0.0.57"
     "@sentre/react-dynamic-remote-component" "^0.0.6"
     "@sentre/react-lazyload" "^3.2.2"

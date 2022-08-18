@@ -1,7 +1,7 @@
 import { useDebounce } from 'react-use'
 import { useCallback, useState } from 'react'
 
-import { useGetTotalValue } from 'hooks/useGetPrice'
+import { useGetTotalValue } from '@sen-use/app'
 import { useSelector } from 'react-redux'
 import { AppState } from 'model'
 

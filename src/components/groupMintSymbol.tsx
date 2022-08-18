@@ -1,6 +1,6 @@
 import { Fragment, useMemo } from 'react'
 
-import { MintSymbol } from '@sen-use/components'
+import { MintSymbol } from '@sen-use/app'
 import { useFarmRewards } from 'hooks/farm/useFarmRewards'
 
 type GroupMintSymbolProps = {

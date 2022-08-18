@@ -1,8 +1,8 @@
-import { useAccountBalanceByMintAddress } from '@sen-use/app'
-import { MintSymbol } from '@sen-use/components'
+import { MintSymbol } from '@sen-use/app'
 import { util } from '@sentre/senhub'
 
 import { Card, Space, Row, Col, Typography, Button } from 'antd'
+import { useAccountBalanceByMintAddress } from 'hooks/useAccountBalance'
 import { useMemo } from 'react'
 import NumericInput from './numericInput'
 import SpaceBetween from './spaceBetween'

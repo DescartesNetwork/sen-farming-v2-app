@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Address } from '@project-serum/anchor'
-import { useAccountBalanceByMintAddress } from '@sen-use/app/dist'
-import MintAmount from './mintAmount'
+import { MintAmount } from '@sen-use/app'
+import { useAccountBalanceByMintAddress } from 'hooks/useAccountBalance'
 
 const MintAvailable = ({
   mintAddress,
@@ -12,7 +12,7 @@ const MintAvailable = ({
 }) => {
   const { amount } = useAccountBalanceByMintAddress(mintAddress.toString())
   return (
-    <MintAmount mintAddress={mintAddress} amount={amount} format={format} />
+    <MintAmount mintAddress={mintAddress} amount={amount} formatter={format} />
   )
 }
 

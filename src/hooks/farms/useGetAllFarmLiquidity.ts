@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { useGetTotalValue } from 'hooks/useGetPrice'
+import { useGetTotalValue } from '@sen-use/app'
 import { FarmState } from 'model/farms.controller'
 
 export const useGetAllFarmLiquidity = () => {

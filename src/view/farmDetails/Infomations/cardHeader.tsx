@@ -10,7 +10,7 @@ import PriceTooltip from './priceTooltip'
 import IonIcon from '@sentre/antd-ionicon'
 import FarmTag from 'components/farmTag'
 import SpaceBetween from 'components/spaceBetween'
-import { MintSymbol } from '@sen-use/components'
+import { MintSymbol } from '@sen-use/app'
 
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'

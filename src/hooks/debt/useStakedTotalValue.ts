@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useDebounce } from 'react-use'
 
-import { useGetTotalValue } from 'hooks/useGetPrice'
+import { useGetTotalValue } from '@sen-use/app'
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 

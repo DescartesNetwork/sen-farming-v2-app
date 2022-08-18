@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { util } from '@sentre/senhub'
 
 import { useConvertRewards } from 'hooks/useConvertRewards'
-import { useGetTotalValue } from 'hooks/useGetPrice'
+import { useGetTotalValue } from '@sen-use/app'
 
 const TotalPendingReward = ({ farmAddress }: { farmAddress: string }) => {
   const [totalRewards, setTotalRewards] = useState(0)

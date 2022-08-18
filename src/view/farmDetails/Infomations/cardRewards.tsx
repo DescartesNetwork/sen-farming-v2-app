@@ -2,9 +2,9 @@ import { CSSProperties, useMemo } from 'react'
 import { BN } from '@project-serum/anchor'
 
 import { Card, Col, Row, RowProps, Space, Typography } from 'antd'
-import { MintAvatar, MintSymbol } from '@sen-use/components'
+import { MintAvatar, MintSymbol, MintAmount } from '@sen-use/app'
 import SpaceBetween from 'components/spaceBetween'
-import MintAmount from 'components/mint/mintAmount'
+
 import { useFarmRewards } from 'hooks/farm/useFarmRewards'
 import { useFarmOracle } from 'hooks/farm/useFarmOracle'
 
@@ -81,14 +81,14 @@ const CardRewards = ({
                     <MintAmount
                       mintAddress={mint}
                       amount={total}
-                      format="0,0.[00]"
+                      formatter="0,0.[00]"
                     />
                   </Typography.Title>
                   <Typography.Text type="secondary">
                     <MintAmount
                       mintAddress={mint}
                       amount={amount}
-                      format="0,0.[00]"
+                      formatter="0,0.[00]"
                     />
                     {' / Week'}
                   </Typography.Text>
