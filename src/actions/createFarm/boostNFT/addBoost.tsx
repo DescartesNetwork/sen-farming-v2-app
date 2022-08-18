@@ -5,13 +5,16 @@ import ModalNftCollection from './modalNftCollection'
 import { BoostData } from './index'
 
 type AddBoostProps = {
-  boosData: BoostData
+  boostData: BoostData
   index: number
   onDelete: (index: number) => void
   onChange: (index: number, value: Partial<BoostData>) => void
 }
 
-const AddBoost = ({ index, onDelete, boosData, onChange }: AddBoostProps) => {
+const AddBoost = ({ index, onDelete, boostData, onChange }: AddBoostProps) => {
+  // set value zero to undefined to show placeholder
+  const value = !!boostData.percentage ? boostData.percentage : undefined
+
   return (
     <Row gutter={[8, 8]}>
       <Col span={24}>
@@ -32,20 +35,20 @@ const AddBoost = ({ index, onDelete, boosData, onChange }: AddBoostProps) => {
       </Col>
       <Col span={12}>
         <ModalNftCollection
-          mintAddress={boosData.collection}
+          mintAddress={boostData.collection}
           onSelect={(collection) =>
-            onChange(index, { ...boosData, collection })
+            onChange(index, { ...boostData, collection })
           }
         />
       </Col>
       <Col span={12} className="boost-nft">
         <InputNumber
-          value={boosData.percentage}
+          value={value}
           style={{ height: 40 }}
-          placeholder="Enter percentage"
+          placeholder="Enter boost rate"
           name="budget"
           onChange={(percentage) =>
-            onChange(index, { ...boosData, percentage })
+            onChange(index, { ...boostData, percentage })
           }
         />
       </Col>
