@@ -1,4 +1,5 @@
-import { useGetTotalValue } from '@sen-use/app'
+import { useGetTotalValue } from 'hooks/useGetPrice'
+
 import { useCallback, useEffect, useState } from 'react'
 import { useFarmData } from './useFarmData'
 
