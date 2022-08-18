@@ -1,13 +1,20 @@
+import { util } from '@sentre/senhub'
 import { useParams } from 'react-router-dom'
 
 import { Col, Row } from 'antd'
 import FarmInfo from './Infomations'
 import FarmActions from './farmActions'
 import Layout from 'components/layout'
+import NotFound from './notFound'
 import FarmDetailsHeader from './farmDetailsHeader'
+
+import { useFarmData } from 'hooks/farm/useFarmData'
 
 const FarmDetails = () => {
   const { farmAddress } = useParams<{ farmAddress: string }>()
+  const farmData = useFarmData(farmAddress)
+
+  if (!util.isAddress(farmAddress) || !farmData) return <NotFound />
 
   return (
     <Layout>

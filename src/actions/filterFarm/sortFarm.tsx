@@ -92,7 +92,7 @@ const SortFarm = () => {
         <label style={{ cursor: 'pointer' }}>
           <Space size={6}>
             <Typography.Text style={{ userSelect: 'none' }}>
-              Boost only
+              Boosted Only
             </Typography.Text>
             <Switch
               size="small"

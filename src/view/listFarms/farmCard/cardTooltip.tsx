@@ -1,13 +1,17 @@
 import { ReactNode } from 'react'
 
-import { Tooltip } from 'antd'
+import { Tooltip, TooltipProps } from 'antd'
 
 type CardTooltipProps = {
   children: ReactNode
   tooltip?: ReactNode
-}
-const CardTooltip = ({ children, tooltip }: CardTooltipProps) => {
-  return <Tooltip title={tooltip}>{children}</Tooltip>
+} & TooltipProps
+const CardTooltip = ({ children, tooltip, ...rest }: CardTooltipProps) => {
+  return (
+    <Tooltip title={tooltip} {...rest}>
+      {children}
+    </Tooltip>
+  )
 }
 
 export default CardTooltip
