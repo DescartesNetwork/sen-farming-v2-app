@@ -25,7 +25,7 @@ const HowToGetIt = ({ farmAddress }: GetTokenProps) => {
   }
 
   return (
-    <Row gutter={[16, 16]} style={{ width: 300, padding: 8 }}>
+    <Row gutter={[16, 16]} style={{ maxWidth: 350, padding: 8 }}>
       {Object.keys(getToken).map((key) => {
         const data = getToken[key]
         return (
@@ -34,7 +34,7 @@ const HowToGetIt = ({ farmAddress }: GetTokenProps) => {
               floatContent={
                 data.recommend && (
                   <FarmTag>
-                    <IonIcon name="medal-outline" /> Recommend
+                    <IonIcon name="medal-outline" /> Recommended
                   </FarmTag>
                 )
               }
@@ -66,15 +66,17 @@ const GetToken = ({ farmAddress }: GetTokenProps) => {
       tooltip={<HowToGetIt farmAddress={farmAddress} />}
       visible={farmToken ? undefined : false}
     >
-      <Button
-        onClick={(e) => e.stopPropagation()}
-        type="text"
-        style={{ padding: 0, background: 'transparent' }}
-        disabled={!farmToken}
-      >
-        Get tokens to stake
-        <IonIcon name="open-outline" />
-      </Button>
+      <Space>
+        <Button
+          onClick={(e) => e.stopPropagation()}
+          type="text"
+          style={{ padding: 0, background: 'transparent' }}
+          disabled={!farmToken}
+        >
+          Get tokens to stake
+        </Button>
+        <IonIcon style={{ fontSize: 16 }} name="information-circle-outline" />
+      </Space>
     </CardTooltip>
   )
 }

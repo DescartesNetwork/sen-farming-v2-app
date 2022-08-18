@@ -26,8 +26,7 @@ const GroupMintSymbol = ({
         const splitChar = mintRewards.length === 2 ? lastSeparator : separator
         return (
           <Fragment key={mint}>
-            {idx > 0 && `${splitChar} `}
-            <MintSymbol mintAddress={mint} />
+            {idx > 0 && ` ${splitChar} `} <MintSymbol mintAddress={mint} />
           </Fragment>
         )
       })}
