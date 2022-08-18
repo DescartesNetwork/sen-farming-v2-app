@@ -68,12 +68,12 @@ const BoostNFT = ({ boostsData, onChange }: BoostNFTProps) => {
       </Col>
 
       {isBoostNFT &&
-        boostsData.map((boosData, index) => (
+        boostsData.map((boostData, index) => (
           <Col span={24} key={index}>
             <AddBoost
               onDelete={onDelete}
               index={index}
-              boosData={boosData}
+              boostData={boostData}
               onChange={onChangeBoost}
             />
           </Col>
