@@ -5,7 +5,7 @@ import { useMintDecimals, util } from '@sentre/senhub'
 import { Row, Col, Typography, Button, Space, Card } from 'antd'
 import CardNumbericInput from 'components/cardNumbericInput'
 import SpaceBetween from 'components/spaceBetween'
-import { MintSymbol } from '@sen-use/components'
+import { MintSymbol } from '@sen-use/app'
 
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useStake } from 'hooks/actions/useStake'

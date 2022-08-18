@@ -1,4 +1,4 @@
-import { MintSelection, MintSymbol } from '@sen-use/components'
+import { MintSelection, MintSymbol } from '@sen-use/app'
 import IonIcon from '@sentre/antd-ionicon'
 import { util } from '@sentre/senhub/dist'
 import { Button, Col, Input, Row, Space, Typography } from 'antd'

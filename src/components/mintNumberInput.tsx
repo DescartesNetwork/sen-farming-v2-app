@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { util } from '@sentre/senhub'
-import { useAccountBalanceByMintAddress } from '@sen-use/app'
 
 import { Card, Space, Row, Col, Typography, InputNumber, Button } from 'antd'
+import { useAccountBalanceByMintAddress } from 'hooks/useAccountBalance'
 
 type MintNumberInputProps = {
   mint?: string

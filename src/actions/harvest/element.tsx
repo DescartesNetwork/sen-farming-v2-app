@@ -1,11 +1,14 @@
-import React from 'react'
 import { Address } from '@project-serum/anchor'
 
-import { MintAvatar, MintSymbol } from '@sen-use/components'
+import {
+  MintAvatar,
+  MintSymbol,
+  MintAmount,
+  MintTotalValue,
+} from '@sen-use/app'
 import { Col, Row, Typography } from 'antd'
+
 import { useConvertRewards } from 'hooks/useConvertRewards'
-import MintAmount from 'components/mint/mintAmount'
-import MintTotalValue from 'components/mint/mintTotalValue'
 
 type ElementProps = {
   farmAddress: Address

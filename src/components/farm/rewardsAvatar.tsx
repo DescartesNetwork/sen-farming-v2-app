@@ -1,5 +1,5 @@
 import { Space } from 'antd'
-import { MintAvatar } from '@sen-use/components'
+import { MintAvatar } from '@sen-use/app'
 
 import { useFarmRewards } from 'hooks/farm/useFarmRewards'
 

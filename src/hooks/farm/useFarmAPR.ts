@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import BN from 'bn.js'
 
-import { useGetTotalValue } from 'hooks/useGetPrice'
+import { useGetTotalValue } from '@sen-use/app'
 import { useFarmLiquidity } from './useFarmLiquidity'
 import { useFarmRewards } from './useFarmRewards'
 import { useFarmOracle } from './useFarmOracle'

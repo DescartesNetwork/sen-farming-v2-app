@@ -4,7 +4,7 @@ import { BN } from '@project-serum/anchor'
 import { RewardState } from 'model/rewards.controller'
 import { FarmState } from 'model/farms.controller'
 import { useGetAllFarmLiquidity } from './useGetAllFarmLiquidity'
-import { useGetTotalValue } from 'hooks/useGetPrice'
+import { useGetTotalValue } from '@sen-use/app'
 
 export const useGetAllFarmApr = () => {
   const getAllFarmLiquidity = useGetAllFarmLiquidity()

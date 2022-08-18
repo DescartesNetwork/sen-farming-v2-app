@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { util } from '@sentre/senhub'
 
 import { Button, Card, Col, Row, Space, Typography } from 'antd'
-import { MintSelection } from '@sen-use/components'
+import { MintSelection } from '@sen-use/app'
 import AddReward from './addReward'
 import AddTime, { Time } from './addTime'
 import BoostNFT, { BoostData } from './boostNFT'

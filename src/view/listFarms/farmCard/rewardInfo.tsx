@@ -1,8 +1,11 @@
 import { Card, Col, Row, Space, Typography } from 'antd'
-import { MintAvatar, MintSymbol } from '@sen-use/components'
+import {
+  MintAvatar,
+  MintSymbol,
+  MintAmount,
+  MintTotalValue,
+} from '@sen-use/app'
 import SpaceBetween from 'components/spaceBetween'
-import MintAmount from 'components/mint/mintAmount'
-import MintTotalValue from 'components/mint/mintTotalValue'
 
 import { useConvertRewards } from 'hooks/useConvertRewards'
 

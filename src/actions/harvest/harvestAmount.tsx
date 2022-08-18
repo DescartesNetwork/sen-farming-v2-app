@@ -1,6 +1,5 @@
+import { MintAmount, MintTotalValue } from '@sen-use/app/dist'
 import { Space, Typography } from 'antd'
-import MintAmount from 'components/mint/mintAmount'
-import MintTotalValue from 'components/mint/mintTotalValue'
 
 import { PendingRewardData } from 'hooks/useConvertRewards'
 
@@ -12,7 +11,7 @@ const HarvestAmount = ({ reward }: HarvestAmountProps) => {
         <MintAmount
           mintAddress={reward.mint}
           amount={reward.amount}
-          format="0,0.[00000]"
+          formatter="0,0.[00000]"
         />
       </Typography.Title>
       <Typography.Text type="secondary">

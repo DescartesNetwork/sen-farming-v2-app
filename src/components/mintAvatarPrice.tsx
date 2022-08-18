@@ -1,10 +1,7 @@
-import { MintAvatar, MintSymbol } from '@sen-use/components'
-import { util } from '@sentre/senhub'
+import { CSSProperties } from 'react'
+import { MintAvatar, MintPrice, MintSymbol } from '@sen-use/app'
 
 import { Space, Typography } from 'antd'
-
-import { usePrice } from 'hooks/useGetPrice'
-import { CSSProperties } from 'react'
 
 type MintAvatarPriceProps = {
   mintAddress: string
@@ -16,8 +13,6 @@ const MintAvatarPrice = ({
   size = 32,
   style,
 }: MintAvatarPriceProps) => {
-  const price = usePrice(mintAddress)
-
   return (
     <Space>
       <MintAvatar mintAddress={mintAddress} size={size} />
@@ -26,7 +21,7 @@ const MintAvatarPrice = ({
           <MintSymbol mintAddress={mintAddress} />
         </Typography.Text>
         <Typography.Text type="secondary">
-          ${util.numeric(price).format('0,0.[00]')}
+          <MintPrice mintAddress={mintAddress} format="0,0.[00]" />
         </Typography.Text>
       </Space>
     </Space>

@@ -4,7 +4,7 @@ import { useWalletAddress, util } from '@sentre/senhub'
 import { useMap, useThrottle } from 'react-use'
 
 import { useConvertRewards } from 'hooks/useConvertRewards'
-import { useGetTotalValue } from 'hooks/useGetPrice'
+import { useGetTotalValue } from '@sen-use/app'
 import { AppState } from 'model'
 
 const TotalOwnRewards = () => {
