@@ -17,7 +17,7 @@ const APRInfo = ({ farmAddress }: { farmAddress: string }) => {
         />
       </Col>
       <Col span={24}>
-        <Divider style={{ margin: 4 }} />
+        <Divider style={{ margin: 4, borderColor: '#727272' }} />
       </Col>
       <Col span={24}>
         <Typography.Text>

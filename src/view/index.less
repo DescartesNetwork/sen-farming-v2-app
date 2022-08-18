@@ -1,6 +1,8 @@
+@import 'static/styles/common/vars.less';
+
 .icon-describe {
   font-size: 14px !important;
-  color: #a1a1a1 !important;
+  color: @DARK40 !important;
   cursor: pointer;
 }
 
@@ -8,10 +10,9 @@
   .sen_farming_v2-segmented-item {
     &-selected {
       box-shadow: none !important;
-      background: rgba(160, 232, 111, 0.1) !important;
       border-radius: 8px;
       border: none;
-      color: #a0e86f !important;
+      color: @PRIMARY100 !important;
     }
   }
 }
@@ -20,20 +21,29 @@
   animation: transformBoxShadow 3s linear infinite;
 }
 
+.sen_farming_v2-tooltip {
+  &-arrow-content {
+    --antd-arrow-background-color: #434342 !important;
+  }
+  &-inner {
+    background-color: #434342 !important;
+  }
+}
+
 @keyframes transformBoxShadow {
   0% {
-    box-shadow: -4px -4px 16px 0 #f0ff005c, 4px 4px 16px 0 #58cffb73;
+    box-shadow: -4px -4px 16px 0 #a9ea7d8a, 4px 4px 16px 0 #58cffb8a;
   }
   25% {
-    box-shadow: 4px -4px 16px 0 #f0ff005c, -4px 4px 16px 0 #58cffb73;
+    box-shadow: 4px -4px 16px 0 #a9ea7d8a, -4px 4px 16px 0 #58cffb8a;
   }
   50% {
-    box-shadow: 4px 4px 16px 0 #f0ff005c, -4px -4px 16px 0 #58cffb73;
+    box-shadow: 4px 4px 16px 0 #a9ea7d8a, -4px -4px 16px 0 #58cffb8a;
   }
   75% {
-    box-shadow: -4px 4px 16px 0 #f0ff005c, 4px -4px 16px 0 #58cffb73;
+    box-shadow: -4px 4px 16px 0 #a9ea7d8a, 4px -4px 16px 0 #58cffb8a;
   }
   100% {
-    box-shadow: -4px -4px 16px 0 #f0ff005c, 4px 4px 16px 0 #58cffb73;
+    box-shadow: -4px -4px 16px 0 #a9ea7d8a, 4px 4px 16px 0 #58cffb8a;
   }
 }
