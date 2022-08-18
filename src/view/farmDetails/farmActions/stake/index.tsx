@@ -10,6 +10,7 @@ import { MintSymbol } from '@sen-use/app'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useStake } from 'hooks/actions/useStake'
 import { useDebtOracle } from 'hooks/debt/useDebtOracle'
+import { checkFinishedFarm } from 'hooks/farms/useFilterFarms'
 
 const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [inAmount, setInAmount] = useState<string>('')
@@ -40,6 +41,11 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
       .numeric(Number(totalAmountIn) - Number(yourAmountIn))
       .format('0,0.[000000000000]')
   }, [totalAmountIn, yourAmountIn])
+
+  const disabled = useMemo(
+    () => !Number(inAmount) || checkFinishedFarm(farmData),
+    [farmData, inAmount],
+  )
 
   const onFullyStake = async () => {
     await stake({
@@ -119,18 +125,13 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
           size="large"
           type="primary"
           block
-          disabled={!Number(inAmount)}
+          disabled={disabled}
           loading={loading}
           onClick={onFullyStake}
         >
           {!Number(inAmount) ? 'Enter an amount' : 'Stake'}
         </Button>
       </Col>
-      {/* <Col span={24}>
-        <Button type="text" style={{ color: '#a0e86f' }} block>
-          Get <MintSymbol mintAddress={farmData.inputMint} />
-        </Button>
-      </Col> */}
     </Row>
   )
 }
