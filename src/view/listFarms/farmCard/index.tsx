@@ -2,7 +2,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { useAppRoute } from '@sentre/senhub'
 import { BN } from '@project-serum/anchor'
 
-import { Button, Card, Col, Progress, Row, Space, Typography } from 'antd'
+import { Card, Col, Progress, Row, Space, Typography } from 'antd'
 import { RewardsAvatar, FarmApr, FarmAvatar } from 'components/farm'
 import TotalPendingReward from 'components/debt/totalPendingReward'
 import RewardInfo from './rewardInfo'
@@ -13,15 +13,15 @@ import IonIcon from '@sentre/antd-ionicon'
 import CardTooltip from './cardTooltip'
 import FarmLiquidity from 'components/farm/farmLiquidity'
 import FarmTag from 'components/farmTag'
+import GetToken from './getToken'
 
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 import TimeCountDown from 'components/timeCountDown'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useGetDebtReward } from 'hooks/debt/useGetDebtReward'
-
 import configs from 'configs'
+
 import './index.less'
-import { FARM_GET_TOKENS } from 'constant/farm'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
@@ -51,7 +51,6 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   }, [getDebtRewards])
 
   const now = new BN(Date.now() / 1000)
-  const getToken = FARM_GET_TOKENS[farmAddress]
 
   return (
     <Card
@@ -67,7 +66,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
               <SpaceBetween
                 floatContent={
                   <Space>
-                    {/* Upcomming farm */}
+                    {/* Upcoming farm */}
                     {now.lt(startDate) && (
                       <FarmTag
                         type="warning"
@@ -126,21 +125,7 @@ const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
                   </Space>
                 }
               >
-                <Button
-                  type="text"
-                  style={{ padding: 0, background: 'transparent' }}
-                  disabled={!getToken}
-                  onClick={
-                    !getToken
-                      ? () => {}
-                      : (e) => {
-                          window.open(`${getToken.url}`)
-                          e.stopPropagation()
-                        }
-                  }
-                >
-                  Go to Pool <IonIcon name="open-outline" />
-                </Button>
+                <GetToken farmAddress={farmAddress} />
               </SpaceBetween>
             </Col>
           </Row>
