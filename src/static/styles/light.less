@@ -21,15 +21,15 @@
 
 // Typography
 @font-family: 'Nunito', sans-serif;
-@text-color: #f3f3f3;
-@text-color-secondary: #a1a1a1;
-@heading-color: #f3f3f3;
+@text-color: @DARK05;
+@text-color-secondary: @DARK40;
+@heading-color: @DARK05;
 @disabled-color: @NEUTRAL40;
 @typography-title-margin-top: 0px;
 @typography-title-margin-bottom: 0px;
 
 // Border
-@btn-primary-color: #141413;
+@btn-primary-color: @DARK100;
 @btn-default-color: @PRIMARY;
 @border-radius-base: 8px;
 @border-color-base: @NEUTRAL20;
@@ -47,7 +47,7 @@
 // Card
 @card-radius: @border-radius-base + 4;
 @card-actions-background: @NEUTRAL05;
-@card-background: #232423;
+@card-background: @DARK95;
 @card-shadow: @LIGHT_SHADOW2;
 
 // Modal
@@ -55,9 +55,9 @@
 @modal-content-bg: @NEUTRAL05;
 @modal-footer-bg: @NEUTRAL05;
 @modal-footer-padding-horizontal: 24px;
-@modal-header-bg: #232423;
+@modal-header-bg: @DARK95;
 @modal-header-border-color-split: transparent;
-@modal-content-bg: #141413;
+@modal-content-bg: @DARK100;
 // Drawer
 @drawer-bg: @NEUTRAL05;
 
@@ -69,18 +69,18 @@
 @btn-text-shadow: unset;
 @btn-default-border: @NEUTRAL20;
 @btn-default-ghost-color: @PRIMARY;
-@btn-default-ghost-border: #f3f3f3;
-@btn-disable-color: #727272;
-@btn-disable-bg: #232423;
-@btn-disable-border: #434342;
+@btn-default-ghost-border: @DARK05;
+@btn-disable-color: @DARK60;
+@btn-disable-bg: @DARK95;
+@btn-disable-border: @DARK80;
 
 // Input
 @input-placeholder-color: @NEUTRAL60;
-@input-bg: #080807;
+@input-bg: @BACKGROUND_INPUT_DARK;
 @input-height-lg: @height-lg + 2;
 @input-border-color: transparent;
 // Divider
-@divider-color: #434342;
+@divider-color: @DARK80;
 @divider-orientation-margin: 0;
 
 // Checkbox
@@ -89,9 +89,9 @@
 //Segment
 @segmented-hover-bg: transparent;
 @segmented-bg: transparent;
-@segmented-selected-bg: #2f372b;
-@segmented-label-color: #7a7b85;
-@segmented-label-hover-color: #7a7b85;
+@segmented-selected-bg: color(~`('@{PRIMARY100}1a') `);
+@segmented-label-color: @DARK40;
+@segmented-label-hover-color: color(~`('@{PRIMARY100}4d') `);
 
 //Table
 @table-row-hover-bg: transparent;
@@ -101,7 +101,7 @@
 
 // Progress
 @progress-default-color: @primary-color;
-@progress-remaining-color: #5b5c65;
+@progress-remaining-color: @DARK80;
 
 // Tooltip
 @tooltip-max-width: 380px;
@@ -111,27 +111,15 @@
   background: unset;
 }
 
-.account-item {
-  background-color: #fff !important;
-}
-
-.close-account {
-  background: #ededeb;
-}
-
-.card-cleanup {
-  background: #ffffff !important;
-}
-
 .nft-element-collapse-custom-collapse {
   .sen_assets-collapse-header {
-    background: white;
+    background: @WHITE;
     border-radius: 12px !important;
   }
 }
 
 .sen_farming_v2-card-bordered {
   &.upload-box {
-    border: 1px dashed #4e4f5c !important;
+    border: 1px dashed @NEUTRAL80 !important;
   }
 }
