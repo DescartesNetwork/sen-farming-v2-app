@@ -28,8 +28,9 @@ export const useStakedData = (farmAddress: string) => {
   }, [debtData])
 
   const farmShareAmount = useMemo(() => {
+    if (!farmData) return '0'
     return farmData.totalShares.toString()
-  }, [farmData.totalShares])
+  }, [farmData])
 
   const result = useMemo(() => {
     const amountBN = new BN(stakedAmount)

@@ -21,7 +21,7 @@ const MintAvatarPrice = ({
           <MintSymbol mintAddress={mintAddress} />
         </Typography.Text>
         <Typography.Text type="secondary">
-          <MintPrice mintAddress={mintAddress} format="0,0.[000]" />
+          <MintPrice mintAddress={mintAddress} />
         </Typography.Text>
       </Space>
     </Space>
