@@ -1,5 +1,3 @@
-import GATE_ICON from 'static/images/gate-icon.png'
-
 export type FARM_TOKEN = {
   url: string
   description: string
@@ -30,7 +28,7 @@ export const FARM_GET_TOKENS: Record<string, { [x: string]: FARM_TOKEN }> = {
     gate: {
       url: 'https://www.gate.io/vi/trade/SNTR_USDT',
       description: 'Buy on Gate.io',
-      icon: GATE_ICON,
+      icon: 'https://www.gate.io/favicon.ico?v=2.0',
     },
   },
 }
