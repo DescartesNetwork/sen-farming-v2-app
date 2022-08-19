@@ -1,19 +1,20 @@
-import { MouseEvent } from 'react'
+import React, { MouseEvent } from 'react'
 
-import { Avatar, Button, Col, Row, Space, Typography } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
-import SpaceBetween from 'components/spaceBetween'
-import CardTooltip from './cardTooltip'
+import { Avatar, Col, Row, Space, Typography } from 'antd'
 import FarmTag from 'components/farmTag'
+import SpaceBetween from 'components/spaceBetween'
 
 import { FARM_GET_TOKENS } from 'constant/farm'
+import { useFarmData } from 'hooks/farm/useFarmData'
 
-type GetTokenProps = {
+type ListTokenRecommendProps = {
   farmAddress: string
 }
 
-const HowToGetIt = ({ farmAddress }: GetTokenProps) => {
-  const getToken = FARM_GET_TOKENS[farmAddress]
+const ListTokenRecommend = ({ farmAddress }: ListTokenRecommendProps) => {
+  const farmData = useFarmData(farmAddress)
+  const getToken = FARM_GET_TOKENS[farmData.inputMint.toBase58()]
 
   if (!getToken)
     return <Typography.Text type="secondary">No Data.</Typography.Text>
@@ -62,27 +63,4 @@ const HowToGetIt = ({ farmAddress }: GetTokenProps) => {
   )
 }
 
-const GetToken = ({ farmAddress }: GetTokenProps) => {
-  const farmToken = FARM_GET_TOKENS[farmAddress]
-
-  return (
-    <CardTooltip
-      tooltip={<HowToGetIt farmAddress={farmAddress} />}
-      visible={farmToken ? undefined : false}
-    >
-      <Space>
-        <Button
-          onClick={(e) => e.stopPropagation()}
-          type="text"
-          style={{ padding: 0, background: 'transparent' }}
-          disabled={!farmToken}
-        >
-          Get tokens to stake
-        </Button>
-        <IonIcon style={{ fontSize: 16 }} name="information-circle-outline" />
-      </Space>
-    </CardTooltip>
-  )
-}
-
-export default GetToken
+export default ListTokenRecommend
