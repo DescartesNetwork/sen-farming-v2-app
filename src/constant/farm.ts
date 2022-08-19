@@ -27,7 +27,7 @@ export const FARM_GET_TOKENS: Record<string, { [x: string]: FARM_TOKEN }> = {
     },
     glitterfinance: {
       url: 'https://bridge.glitterfinance.org/',
-      description: 'Go to Glitter finance',
+      description: 'Bridge on Glitter Finances',
       icon: 'https://bridge.glitterfinance.org/static/media/circles-anim.f512ffe5.svg',
       recommend: true,
     },

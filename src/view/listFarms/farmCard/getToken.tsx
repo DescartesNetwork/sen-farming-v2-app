@@ -25,7 +25,11 @@ const HowToGetIt = ({ farmAddress }: GetTokenProps) => {
   }
 
   return (
-    <Row gutter={[16, 16]} style={{ maxWidth: 350, padding: 8 }}>
+    <Row
+      gutter={[16, 16]}
+      style={{ maxWidth: 350, padding: 8 }}
+      onClick={(e) => e.stopPropagation()}
+    >
       {Object.keys(getToken).map((key) => {
         const data = getToken[key]
         return (
