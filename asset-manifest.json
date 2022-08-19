@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.fa692d19.js",
+    "main.js": "/static/js/main.65c9d323.js",
     "sen_farming_v2.js": "/index.js",
     "static/js/src_bootstrap_tsx.5da5d46c.chunk.js": "/static/js/src_bootstrap_tsx.5da5d46c.chunk.js",
     "static/js/node_modules_babel_runtime_helpers_esm_defineProperty_js.aaead82c.chunk.js": "/static/js/node_modules_babel_runtime_helpers_esm_defineProperty_js.aaead82c.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/node_modules_react-router-dom_esm_react-router-dom_js-_d6f00.4af96bdc.chunk.js": "/static/js/node_modules_react-router-dom_esm_react-router-dom_js-_d6f00.4af96bdc.chunk.js",
     "static/js/node_modules_react_index_js.993277c0.chunk.js": "/static/js/node_modules_react_index_js.993277c0.chunk.js",
     "static/css/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.aa1452fe.chunk.css": "/static/css/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.aa1452fe.chunk.css",
-    "static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.c05e3b43.chunk.js": "/static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.c05e3b43.chunk.js",
+    "static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.45832bfe.chunk.js": "/static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.45832bfe.chunk.js",
     "static/js/vendors-node_modules_react-dom_index_js.4d8336fe.chunk.js": "/static/js/vendors-node_modules_react-dom_index_js.4d8336fe.chunk.js",
     "static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive.f16b9afc.chunk.js": "/static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive.f16b9afc.chunk.js",
     "static/js/node_modules_web-vitals_dist_web-vitals_js.367df3ef.chunk.js": "/static/js/node_modules_web-vitals_dist_web-vitals_js.367df3ef.chunk.js",
@@ -62,7 +62,7 @@
     "index.html": "/index.html",
     "static/media/README.md": "/static/media/README.dd3222bdab290f263138.md",
     "static.app.tsx": "/sen_farming_v2-asset-senhub.json",
-    "main.fa692d19.js.map": "/static/js/main.fa692d19.js.map",
+    "main.65c9d323.js.map": "/static/js/main.65c9d323.js.map",
     "index.js.map": "/index.js.map",
     "src_bootstrap_tsx.5da5d46c.chunk.js.map": "/static/js/src_bootstrap_tsx.5da5d46c.chunk.js.map",
     "node_modules_babel_runtime_helpers_esm_defineProperty_js.aaead82c.chunk.js.map": "/static/js/node_modules_babel_runtime_helpers_esm_defineProperty_js.aaead82c.chunk.js.map",
@@ -72,7 +72,7 @@
     "node_modules_react-router-dom_esm_react-router-dom_js-_d6f00.4af96bdc.chunk.js.map": "/static/js/node_modules_react-router-dom_esm_react-router-dom_js-_d6f00.4af96bdc.chunk.js.map",
     "node_modules_react_index_js.993277c0.chunk.js.map": "/static/js/node_modules_react_index_js.993277c0.chunk.js.map",
     "node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.aa1452fe.chunk.css.map": "/static/css/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.aa1452fe.chunk.css.map",
-    "node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.c05e3b43.chunk.js.map": "/static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.c05e3b43.chunk.js.map",
+    "node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.45832bfe.chunk.js.map": "/static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive-src_bootstrap_app_tsx-sr-df7690.45832bfe.chunk.js.map",
     "vendors-node_modules_react-dom_index_js.4d8336fe.chunk.js.map": "/static/js/vendors-node_modules_react-dom_index_js.4d8336fe.chunk.js.map",
     "node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive.f16b9afc.chunk.js.map": "/static/js/node_modules_sentre_senhub_dist_components_pageLoader_lazy_recursive.f16b9afc.chunk.js.map",
     "node_modules_web-vitals_dist_web-vitals_js.367df3ef.chunk.js.map": "/static/js/node_modules_web-vitals_dist_web-vitals_js.367df3ef.chunk.js.map",
@@ -87,6 +87,6 @@
     "vendors-node_modules_sen-use_app_dist_components_mint_mintAmount_js-node_modules_sen-use_app_-4c96a4.827378d4.chunk.js.map": "/static/js/vendors-node_modules_sen-use_app_dist_components_mint_mintAmount_js-node_modules_sen-use_app_-4c96a4.827378d4.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.fa692d19.js"
+    "static/js/main.65c9d323.js"
   ]
 }
