@@ -13,15 +13,15 @@ import IonIcon from '@sentre/antd-ionicon'
 import CardTooltip from './cardTooltip'
 import FarmLiquidity from 'components/farm/farmLiquidity'
 import FarmTag from 'components/farmTag'
+import RecommendToGetToken from 'actions/recommedGetToken'
+import TimeCountDown from 'components/timeCountDown'
 
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
-import TimeCountDown from 'components/timeCountDown'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useGetDebtReward } from 'hooks/debt/useGetDebtReward'
 import configs from 'configs'
 
 import './index.less'
-import RecommendToGetToken from 'actions/recommedGetToken'
 
 const FarmCard = ({ farmAddress }: { farmAddress: string }) => {
   const { to } = useAppRoute(configs.manifest.appId)
