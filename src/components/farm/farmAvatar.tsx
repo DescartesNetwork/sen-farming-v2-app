@@ -29,12 +29,7 @@ const FarmAvatar = ({
         <Typography.Text style={{ ...textStyle }}>
           <MintSymbol mintAddress={inputMint} />
         </Typography.Text>
-        {hoverable && (
-          <FarmInfo
-            farmAddress={farmAddress}
-            inputMint={inputMint.toBase58()}
-          />
-        )}
+        {hoverable && <FarmInfo farmAddress={farmAddress} />}
       </Space>
     </Space>
   )
