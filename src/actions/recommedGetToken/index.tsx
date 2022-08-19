@@ -18,7 +18,7 @@ const RecommendToGetToken = ({ farmAddress }: RecommendToGetTokenProps) => {
       tooltip={<ListTokenRecommend farmAddress={farmAddress} />}
       visible={farmToken ? undefined : false}
     >
-      <Space>
+      <Space className="space-middle-icon">
         <Button
           onClick={(e) => e.stopPropagation()}
           type="text"
