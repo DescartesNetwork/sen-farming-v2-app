@@ -1,13 +1,26 @@
 import { Fragment, MouseEvent, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { util } from '@sentre/senhub'
+import moment from 'moment'
 
-import { Row, Col, Space, Typography, Tooltip, Button, Modal } from 'antd'
+import {
+  Row,
+  Col,
+  Space,
+  Typography,
+  Tooltip,
+  Button,
+  Modal,
+  Divider,
+} from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
+import SpaceBetween from 'components/spaceBetween'
+
+import { useFarmData } from 'hooks/farm/useFarmData'
+import { DATE_FORMAT } from 'constant'
 
 export type FarmInfoProps = {
-  farmAddress?: string
-  inputMint?: string
+  farmAddress: string
 }
 
 export type FarmInfoItemProps = {
@@ -56,18 +69,9 @@ const FarmInfoItem = ({ title = '', address = '' }: FarmInfoItemProps) => {
   )
 }
 
-const FarmInfo = ({ farmAddress = '', inputMint = '' }: FarmInfoProps) => {
+const FarmInfo = ({ farmAddress }: FarmInfoProps) => {
   const [visible, setVisible] = useState(false)
-
-  const showFarmInfo = (e: MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
-    setVisible(true)
-  }
-
-  const onCloseModal = (e: MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
-    setVisible(false)
-  }
+  const farmData = useFarmData(farmAddress)
 
   return (
     <Fragment>
@@ -79,7 +83,7 @@ const FarmInfo = ({ farmAddress = '', inputMint = '' }: FarmInfoProps) => {
           padding: 0,
           background: 'transparent',
         }}
-        onClick={showFarmInfo}
+        onClick={() => setVisible(true)}
         icon={
           <IonIcon
             name="information-circle-outline"
@@ -89,16 +93,46 @@ const FarmInfo = ({ farmAddress = '', inputMint = '' }: FarmInfoProps) => {
       />
       <Modal
         visible={visible}
-        onCancel={onCloseModal}
+        onCancel={() => setVisible(false)}
         footer={false}
         closable={false}
       >
         <Row gutter={[8, 8]}>
           <Col span={24}>
-            <FarmInfoItem title="Farming Address:" address={farmAddress} />
+            <FarmInfoItem title="Farm Address:" address={farmAddress} />
           </Col>
           <Col span={24}>
-            <FarmInfoItem title="Staking mint address:" address={inputMint} />
+            <FarmInfoItem
+              title="Staked Mint Address:"
+              address={farmData.inputMint.toBase58()}
+            />
+          </Col>
+          <Col span={24}>
+            <Divider style={{ margin: '12px 0' }} />
+          </Col>
+          {/* Start date */}
+          <Col span={24}>
+            <SpaceBetween
+              floatContent={
+                <Typography.Text>
+                  {moment(farmData.startDate.toNumber()).format(DATE_FORMAT)}
+                </Typography.Text>
+              }
+            >
+              <Typography.Text type="secondary">Start Date</Typography.Text>
+            </SpaceBetween>
+          </Col>
+          {/* End date */}
+          <Col span={24}>
+            <SpaceBetween
+              floatContent={
+                <Typography.Text>
+                  {moment(farmData.endDate.toNumber()).format(DATE_FORMAT)}
+                </Typography.Text>
+              }
+            >
+              <Typography.Text type="secondary">End Date</Typography.Text>
+            </SpaceBetween>
           </Col>
         </Row>
       </Modal>

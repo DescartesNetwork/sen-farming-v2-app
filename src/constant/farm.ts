@@ -26,7 +26,7 @@ export const FARM_GET_TOKENS: Record<string, { [x: string]: FARM_TOKEN }> = {
       recommend: true,
     },
     gate: {
-      url: 'https://www.gate.io/vi/trade/SNTR_USDT',
+      url: 'https://www.gate.io/trade/SNTR_USDT',
       description: 'Buy on Gate.io',
       icon: 'https://www.gate.io/favicon.ico?v=2.0',
     },
