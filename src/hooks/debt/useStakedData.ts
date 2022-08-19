@@ -45,8 +45,15 @@ export const useStakedData = (farmAddress: string) => {
       amount,
       ratio,
       amountStakedNFTs,
+      inputMint: farmData?.inputMint.toBase58(),
     }
-  }, [stakedAmount, decimals, stakedAmountNFTs, farmShareAmount])
+  }, [
+    stakedAmount,
+    decimals,
+    stakedAmountNFTs,
+    farmShareAmount,
+    farmData?.inputMint,
+  ])
 
   return result
 }

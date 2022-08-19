@@ -22,6 +22,7 @@ const UnStake = ({ farmAddress }: { farmAddress: string }) => {
           available={stakedData.amount}
           value={outAmount}
           onChange={setOutAmount}
+          mint={stakedData.inputMint}
         />
       </Col>
       <Col span={24}>
