@@ -2,8 +2,8 @@ import { Fragment, useState } from 'react'
 import { useWalletAddress, util } from '@sentre/senhub'
 
 import { Card, Col, Row, Segmented, Tabs } from 'antd'
-import Stake from './stake'
-import UnStake from './unStake'
+import Stake from 'actions/stake'
+import UnStake from 'actions/unStake'
 import TransferOwner from 'actions/transferOwner'
 
 import { useFarmData } from 'hooks/farm/useFarmData'
