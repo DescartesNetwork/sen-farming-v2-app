@@ -1,4 +1,4 @@
-import { useUI, util } from '@sentre/senhub'
+import { Infix, useInfix, util } from '@sentre/senhub'
 
 import { Card, Col, Image, Row, Space, Typography } from 'antd'
 import TotalOwnRewards from 'components/debt/totalOwnRewards'
@@ -13,11 +13,9 @@ const style = { color: '#141413' }
 
 const Banner = () => {
   const tvl = useAllFarmTotalValue()
-  const {
-    ui: { width },
-  } = useUI()
+  const infix = useInfix()
 
-  const isMobile = width < 575
+  const isMobile = infix < Infix.sm
   const justifyAlign = isMobile ? 'center' : 'end'
 
   return (
