@@ -28,7 +28,7 @@ const ListTokenRecommend = ({ farmAddress }: ListTokenRecommendProps) => {
   return (
     <Row
       gutter={[16, 16]}
-      style={{ maxWidth: 350, padding: 8 }}
+      style={{ maxWidth: 380, padding: 8 }}
       onClick={(e) => e.stopPropagation()}
     >
       {Object.keys(getToken).map((key) => {
@@ -43,6 +43,7 @@ const ListTokenRecommend = ({ farmAddress }: ListTokenRecommendProps) => {
                   </FarmTag>
                 )
               }
+              gutter={[12, 12]}
             >
               <Space>
                 <Avatar src={data.icon} size={24} shape="square" />

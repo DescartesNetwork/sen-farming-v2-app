@@ -31,4 +31,21 @@ export const FARM_GET_TOKENS: Record<string, { [x: string]: FARM_TOKEN }> = {
       icon: 'https://www.gate.io/favicon.ico?v=2.0',
     },
   },
+  H2yaxdyK6bzUgse1QZTFPaiMif8DeQ2xRjdQomk21PA7: {
+    balansol: {
+      url: 'https://hub.sentre.io/app/balansol/details?pool=AzPdQteHNWLvgRtFQX2N9K2U14M7rwub4VjEeKhaSbuh&autoInstall=true',
+      description: 'Swap on Balansol',
+      icon: 'https://descartesnetwork.github.io/balansol/static/asset/logo.f98afe9edf28d217.png',
+      recommend: true,
+    },
+  },
+  // not support number at the first character
+  '8zzV8kkfv9amN3UA3g4fKtDzd79td2krc3VMy5CZo275': {
+    balansol: {
+      url: 'https://hub.sentre.io/app/balansol/details?pool=2gtDG2iYam6z4eCjx9yfBD7ayRXQGTDymjqQLiHqr7Z6&autoInstall=true',
+      description: 'Swap on Balansol',
+      icon: 'https://descartesnetwork.github.io/balansol/static/asset/logo.f98afe9edf28d217.png',
+      recommend: true,
+    },
+  },
 }

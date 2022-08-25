@@ -18,7 +18,7 @@ const RecommendToGetToken = ({ farmAddress }: RecommendToGetTokenProps) => {
       tooltip={<ListTokenRecommend farmAddress={farmAddress} />}
       visible={farmToken ? undefined : false}
     >
-      <Space className="space-middle-icon">
+      <Space size={4}>
         <Button
           onClick={(e) => e.stopPropagation()}
           type="text"
@@ -27,7 +27,17 @@ const RecommendToGetToken = ({ farmAddress }: RecommendToGetTokenProps) => {
         >
           Get tokens to stake
         </Button>
-        <IonIcon style={{ fontSize: 16 }} name="information-circle-outline" />
+        <Button
+          type="text"
+          size="small"
+          icon={
+            <IonIcon
+              style={{ fontSize: 16 }}
+              name="information-circle-outline"
+            />
+          }
+          disabled={!farmToken}
+        />
       </Space>
     </CardTooltip>
   )
