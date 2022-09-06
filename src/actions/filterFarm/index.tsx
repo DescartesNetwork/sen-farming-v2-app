@@ -2,6 +2,8 @@ import { Col, Row } from 'antd'
 import SearchFarm from './searchFarm'
 import SortFarm from './sortFarm'
 
+import './index.less'
+
 const FilterFarm = () => {
   return (
     <Row gutter={[24, 24]}>
