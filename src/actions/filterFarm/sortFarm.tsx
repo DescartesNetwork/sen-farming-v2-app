@@ -12,25 +12,34 @@ const ICON_COLOR = {
   null: { up: '#727272', down: '#727272' },
 }
 
-type IconSortProps = { type: SortDirection }
-const IconSort = ({ type }: IconSortProps) => {
+type IconSortProps = {
+  type: SortDirection
+  onClick?: (type: SortDirection) => void
+}
+const IconSort = ({ type, onClick = () => {} }: IconSortProps) => {
   const iconColor = ICON_COLOR[type]
 
   return (
-    <Row style={{ flexDirection: 'column' }}>
-      <Col style={{ height: 10 }}>
-        <IonIcon
-          style={{ fontSize: 12, color: iconColor.up }}
-          name="caret-up-outline"
-        />
-      </Col>
-      <Col>
-        <IonIcon
-          style={{ fontSize: 12, color: iconColor.down }}
-          name="caret-down-outline"
-        />
-      </Col>
-    </Row>
+    <Space className="btn-sort-direction" direction="vertical" size={0}>
+      <Button
+        type="text"
+        size="small"
+        style={{
+          color: iconColor.up,
+        }}
+        icon={<IonIcon style={{ fontSize: 12 }} name="caret-up-outline" />}
+        onClick={() => onClick(SortDirection.DESC)}
+      />
+      <Button
+        type="text"
+        size="small"
+        style={{
+          color: iconColor.down,
+        }}
+        icon={<IonIcon style={{ fontSize: 12 }} name="caret-down-outline" />}
+        onClick={() => onClick(SortDirection.ASC)}
+      />
+    </Space>
   )
 }
 
@@ -39,52 +48,67 @@ const SortFarm = () => {
   const sortType = useSelector((state: AppState) => state.main.sortType)
   const boostOnly = useSelector((state: AppState) => state.main.boostOnly)
 
+  const onSortLiquidity = (type?: SortDirection) => {
+    if (type === sortType.liquidity) return
+
+    let direction = SortDirection.ASC
+    if (sortType.liquidity !== SortDirection.DESC)
+      direction = SortDirection.DESC
+    if (!!type) direction = type
+
+    dispatch(
+      setSort({
+        liquidity: direction,
+        apr: SortDirection.null,
+      }),
+    )
+  }
+
+  const onSortApr = (type?: SortDirection) => {
+    if (type === sortType.apr) return
+
+    let direction = SortDirection.ASC
+    if (sortType.apr !== SortDirection.DESC) direction = SortDirection.DESC
+    if (!!type) direction = type
+
+    dispatch(
+      setSort({
+        liquidity: SortDirection.null,
+        apr: direction,
+      }),
+    )
+  }
+
   return (
     <Row gutter={[16, 16]} align="middle">
       <Col>
         <Space size={6}>
           <Typography.Text type="secondary">Sort by:</Typography.Text>
-          <Space>
+          <Space className="space-middle-icon">
             <Button
               type="text"
               size="small"
               style={{ padding: 0, background: 'transparent' }}
-              onClick={() => {
-                const direction =
-                  sortType.liquidity === SortDirection.ASC
-                    ? SortDirection.DESC
-                    : SortDirection.ASC
-                dispatch(
-                  setSort({
-                    liquidity: direction,
-                    apr: SortDirection.null,
-                  }),
-                )
-              }}
+              onClick={() => onSortLiquidity()}
             >
               Liquidity
             </Button>
-            <IconSort type={sortType.liquidity} />
+            <IconSort
+              onClick={(type) => onSortLiquidity(type)}
+              type={sortType.liquidity}
+            />
           </Space>
           <Divider type="vertical" style={{ margin: 0 }} />
-          <Space>
+          <Space className="space-middle-icon">
             <Button
               type="text"
               size="small"
               style={{ padding: 0, background: 'transparent' }}
-              onClick={() => {
-                const direction =
-                  sortType.apr === SortDirection.ASC
-                    ? SortDirection.DESC
-                    : SortDirection.ASC
-                dispatch(
-                  setSort({ liquidity: SortDirection.null, apr: direction }),
-                )
-              }}
+              onClick={() => onSortApr()}
             >
               APR
             </Button>
-            <IconSort type={sortType.apr} />
+            <IconSort onClick={(type) => onSortApr(type)} type={sortType.apr} />
           </Space>
         </Space>
       </Col>
