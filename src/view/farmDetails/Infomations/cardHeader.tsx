@@ -1,7 +1,7 @@
 import { util } from '@sentre/senhub'
 import { BN } from '@project-serum/anchor'
 
-import { Col, Row, Space, Tooltip, Typography } from 'antd'
+import { Col, Progress, Row, Space, Tooltip, Typography } from 'antd'
 import { FarmApr, FarmLiquidity } from 'components/farm'
 import FarmAvatar from 'components/farm/farmAvatar'
 import SpaceVertical from 'components/spaceVertical'
@@ -15,6 +15,7 @@ import { MintSymbol } from '@sen-use/app'
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
+import { useMemo } from 'react'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
@@ -22,6 +23,17 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const farmBoostingData = useFarmBoosting(farmAddress)
 
   const now = new BN(Date.now() / 1000)
+
+  const percentProgress = useMemo(() => {
+    if (!endDate || !startDate) return 0
+    const end = endDate.toNumber() * 1000
+    const start = startDate.toNumber() * 1000
+    const now = Date.now()
+
+    if (end < now) return 100
+
+    return ((now - start) / (end - start)) * 100
+  }, [endDate, startDate])
 
   return (
     <Row gutter={[24, 24]}>
@@ -61,11 +73,24 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
               hoverable
             />
           </SpaceBetween>
-          {now.lt(startDate) ? (
-            <TimeCountDown label={'Start in'} endTime={startDate.toNumber()} />
-          ) : (
-            <TimeCountDown label={'End in'} endTime={endDate.toNumber()} />
-          )}
+          <Space>
+            {now.lt(startDate) ? (
+              <TimeCountDown
+                label={'Start in'}
+                endTime={startDate.toNumber()}
+              />
+            ) : (
+              <TimeCountDown label={'End in'} endTime={endDate.toNumber()} />
+            )}
+
+            <Progress
+              type="circle"
+              percent={percentProgress}
+              showInfo={percentProgress === 100}
+              className="end-time-progress"
+              strokeWidth={10}
+            />
+          </Space>
         </Space>
       </Col>
 
