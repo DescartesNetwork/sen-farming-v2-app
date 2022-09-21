@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { util } from '@sentre/senhub'
 import { BN } from '@project-serum/anchor'
 
@@ -15,7 +16,6 @@ import { MintSymbol } from '@sen-use/app'
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
-import { useMemo } from 'react'
 
 const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
   const stakedData = useStakedData(farmAddress)
