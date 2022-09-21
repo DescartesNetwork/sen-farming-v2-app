@@ -27,14 +27,21 @@ const ListTokenRecommend = ({ farmAddress }: ListTokenRecommendProps) => {
 
   return (
     <Row
-      gutter={[16, 16]}
-      style={{ maxWidth: 380, padding: 8 }}
+      gutter={[16, 0]}
+      style={{ maxWidth: 380 }}
       onClick={(e) => e.stopPropagation()}
     >
       {Object.keys(getToken).map((key) => {
         const data = getToken[key]
         return (
-          <Col span={24}>
+          <Col
+            className="recommend-get-tokens"
+            span={24}
+            onClick={(e) => {
+              onGetToken(data.url, e)
+            }}
+            style={{ paddingTop: 8, paddingBottom: 8 }}
+          >
             <SpaceBetween
               floatContent={
                 data.recommend && (
@@ -47,12 +54,7 @@ const ListTokenRecommend = ({ farmAddress }: ListTokenRecommendProps) => {
             >
               <Space>
                 <Avatar src={data.icon} size={24} shape="square" />
-                <Typography.Text
-                  className="get-token"
-                  onClick={(e) => {
-                    onGetToken(data.url, e)
-                  }}
-                >
+                <Typography.Text className="get-token">
                   {data.description}
                 </Typography.Text>
               </Space>

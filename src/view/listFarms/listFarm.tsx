@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { Col, Row, Spin } from 'antd'
+import { Col, Empty, Row, Spin } from 'antd'
 import LazyLoad, { forceCheck } from '@sentre/react-lazyload'
 import FarmCard from './farmCard'
 
@@ -48,13 +48,19 @@ export const ListFarms = () => {
   return (
     <Spin spinning={loading} style={{ minHeight: 200 }}>
       <Row gutter={[24, 24]}>
-        {displayFarms.map((farmAddress) => (
-          <Col xs={24} lg={12} key={farmAddress}>
-            <LazyLoad height={230.05}>
-              <FarmCard farmAddress={farmAddress} />
-            </LazyLoad>
+        {!!displayFarms.length ? (
+          displayFarms.map((farmAddress) => (
+            <Col xs={24} lg={12} key={farmAddress}>
+              <LazyLoad height={230.05}>
+                <FarmCard farmAddress={farmAddress} />
+              </LazyLoad>
+            </Col>
+          ))
+        ) : (
+          <Col span={24} style={{ textAlign: 'center' }}>
+            <Empty className="ico-empty" />
           </Col>
-        ))}
+        )}
       </Row>
     </Spin>
   )

@@ -20,12 +20,6 @@ const FarmDetailsHeader = () => {
           Back
         </Button>
       </Col>
-      {/* <Col>
-        <Space>
-          <ManageFarm farmAddress={farmAddress} />
-          <RedirectSwap />
-        </Space>
-      </Col> */}
     </Row>
   )
 }

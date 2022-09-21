@@ -6,6 +6,8 @@ import CardTooltip from 'view/listFarms/farmCard/cardTooltip'
 import { FARM_GET_TOKENS } from 'constant/farm'
 import ListTokenRecommend from './listTokenRecommend'
 
+import './index.less'
+
 type RecommendToGetTokenProps = {
   farmAddress: string
 }
