@@ -1,34 +1,39 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
+import { Button, Card, Col, Row, Space, Typography } from 'antd'
+import { AvatarNFT } from '@sen-use/components'
 import IonIcon from '@sentre/antd-ionicon'
-import { Button, Col, Modal, Row, Space, Spin, Typography } from 'antd'
-import NFTAvatar from 'components/nftAvatar'
-import SpaceBetween from 'components/spaceBetween'
+import NFTInfo from './nftInfo'
 import NftSelection from './nftSelection'
-import FarmTag from 'components/farmTag'
+import NFTToolTipInfo from 'components/nftToolTipInfo'
 
-import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
-import { useUnlock } from 'hooks/actions/useUnlock'
-import { useLock } from 'hooks/actions/useLock'
-import { useStakedData } from 'hooks/debt/useStakedData'
-
-import { MetadataDataType } from 'lib/metaplex'
-import { PRECISION } from 'constant'
-import configs from 'configs'
 
 import './index.less'
 
-const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
-  const [removeable, setRemoveable] = useState(false)
-  const [unstakeNFT, setUnstakeNFT] = useState('')
-  const [stakedNFTs, setStakedNFTs] = useState<MetadataDataType[]>()
+type BoostingNFTProps = {
+  farmAddress: string
+  selectedNFTs: string[]
+  setSelectedNFTs: (value: string[]) => void
+}
 
-  const debtData = useDebtData(farmAddress)
+const BoostingNFT = (props: BoostingNFTProps) => {
+  const { farmAddress, selectedNFTs, setSelectedNFTs } = props
   const farmBoostingData = useFarmBoosting(farmAddress)
-  const lockNft = useLock(farmAddress)
-  const unlockNft = useUnlock(farmAddress)
-  const stakedData = useStakedData(farmAddress)
+
+  const onSelectNFT = (mintAddress: string) => {
+    const nextNTF = [...selectedNFTs]
+    nextNTF.push(mintAddress)
+    return setSelectedNFTs(nextNTF)
+  }
+
+  const onDelete = (mintAddress: string) => {
+    const nextNTF = [...selectedNFTs]
+    const index = nextNTF.findIndex((mint) => mint === mintAddress)
+    if (index === -1) return
+    nextNTF.splice(index, 1)
+    return setSelectedNFTs(nextNTF)
+  }
 
   const acceptedCollections = useMemo(
     () =>
@@ -38,116 +43,50 @@ const BoostingNFT = ({ farmAddress }: { farmAddress: string }) => {
     [farmBoostingData],
   )
 
-  const getListNFTs = useCallback(async () => {
-    if (!debtData?.leverage || debtData.leverage.eq(PRECISION))
-      return setStakedNFTs([])
-    const PDAs = await window.senFarming.deriveAllPDAs({ farm: farmAddress })
-    const nfts = await configs.sol.metaplexNFT.findDataByOwner(
-      PDAs.debtTreasurer.toBase58(),
-    )
-
-    return setStakedNFTs(nfts)
-  }, [debtData?.leverage, farmAddress])
-
-  const onRemoveNFT = (mintAddress: string) => {
-    setUnstakeNFT(mintAddress)
-  }
-
-  const onCloseModal = () => setUnstakeNFT('')
-
-  const handleUnlockNft = async () => {
-    await unlockNft.unlock(unstakeNFT)
-    setUnstakeNFT('')
-  }
-
-  useEffect(() => {
-    getListNFTs()
-  }, [getListNFTs])
-
-  const loading = unlockNft.loading || lockNft.loading
-
   return (
-    <Row gutter={[16, 16]}>
+    <Row gutter={[8, 8]}>
       <Col span={24}>
-        <SpaceBetween
-          floatContent={
-            !!stakedNFTs?.length && (
-              <Button type="text" onClick={() => setRemoveable(!removeable)}>
-                {removeable ? 'Cancel' : 'Unstake'}
-              </Button>
-            )
-          }
-        >
-          <Space>
-            <Typography.Title level={5}>Staked NFTs</Typography.Title>
-            {!!stakedNFTs?.length && (
-              <FarmTag>{`+ ${stakedData.amountStakedNFTs} LP`}</FarmTag>
-            )}
-          </Space>
-        </SpaceBetween>
+        <Space className="space-middle-icon">
+          <Typography.Text> Use NFTs to increase LP</Typography.Text>
+          <NFTInfo farmAddress={farmAddress} />
+        </Space>
       </Col>
-      <Spin spinning={loading}>
-        <Col span={24}>
-          <Row gutter={[16, 16]}>
-            {stakedNFTs?.map((nft) => (
-              <Col key={nft.mint}>
-                <NFTAvatar
-                  mintAddress={nft.mint}
-                  removeable={removeable}
-                  onRemoveNFT={onRemoveNFT}
-                />
-              </Col>
-            ))}
-            <Col>
-              <NftSelection
-                acceptedCollections={acceptedCollections}
-                onSelect={lockNft.lock}
-              />
-            </Col>
-          </Row>
-        </Col>
-      </Spin>
-      <Modal
-        visible={!!unstakeNFT}
-        onCancel={onCloseModal}
-        footer={false}
-        closable={false}
-      >
+      <Col span={24}>
         <Row gutter={[16, 16]}>
-          <Col span={24}>
-            <Space align="baseline">
-              <IonIcon
-                name="information-circle-outline"
-                style={{ fontSize: 18, color: '#FA8C16' }}
-              />
-              <Space direction="vertical">
-                <Typography.Title level={5}>
-                  Are you sure to Unstake NFTs?
-                </Typography.Title>
-                <Typography.Text>
-                  Your staked LP will be reduced in proportion with the unstake
-                  NFTs.
-                </Typography.Text>
-              </Space>
-            </Space>
+          <Col>
+            <NftSelection
+              acceptedCollections={acceptedCollections}
+              onSelect={onSelectNFT}
+              selectedNFTs={selectedNFTs}
+            />
           </Col>
-          <Col span={24} style={{ textAlign: 'right' }}>
-            <Space>
-              <Button ghost onClick={onCloseModal}>
-                Cancel
-              </Button>
-              <Button
-                style={{ background: '#FF666E', borderColor: '#FF666E' }}
-                type="primary"
-                loading={unlockNft.loading}
-                onClick={handleUnlockNft}
+          {selectedNFTs.map((mintAddress) => (
+            <Col key={mintAddress}>
+              <NFTToolTipInfo
+                farmAddress={farmAddress}
+                mintAddress={mintAddress}
               >
-                Unstake
-              </Button>
-            </Space>
-          </Col>
+                <Card className="upload-box card-nft-image-only">
+                  <div className="nft-image">
+                    <AvatarNFT
+                      mintAddress={mintAddress}
+                      size={64}
+                      style={{ borderRadius: 8, marginTop: -1 }}
+                    />
+                  </div>
+
+                  <Button
+                    type="text"
+                    className="icon-delete-nft"
+                    onClick={() => onDelete(mintAddress)}
+                    icon={<IonIcon name="trash-outline" />}
+                  />
+                </Card>
+              </NFTToolTipInfo>
+            </Col>
+          ))}
         </Row>
-      </Modal>
+      </Col>
     </Row>
   )
 }

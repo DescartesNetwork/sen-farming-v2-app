@@ -6,7 +6,7 @@ import './index.less'
 
 const FilterFarm = () => {
   return (
-    <Row gutter={[24, 24]}>
+    <Row gutter={[24, 24]} align="middle">
       <Col xs={24} md={8}>
         <SearchFarm />
       </Col>
