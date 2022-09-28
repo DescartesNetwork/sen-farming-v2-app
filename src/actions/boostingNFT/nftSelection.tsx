@@ -7,9 +7,14 @@ import { Modal, Row, Col, Typography, Card, Button } from 'antd'
 export type NftSelectionProps = {
   acceptedCollections: string[]
   onSelect: (mintAddress: string) => void
+  selectedNFTs: string[]
 }
 
-const NftSelection = ({ acceptedCollections, onSelect }: NftSelectionProps) => {
+const NftSelection = ({
+  acceptedCollections,
+  onSelect,
+  selectedNFTs,
+}: NftSelectionProps) => {
   const [visible, setVisible] = useState(false)
 
   const onSelectNFT = (nftAddress: string) => {
@@ -46,6 +51,7 @@ const NftSelection = ({ acceptedCollections, onSelect }: NftSelectionProps) => {
             <ModalContentListNFTs
               onSelect={onSelectNFT}
               collectionAddress={acceptedCollections}
+              selectedNFTs={selectedNFTs}
             />
           </Col>
         </Row>

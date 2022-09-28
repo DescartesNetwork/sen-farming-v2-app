@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 
 import { Card, Col, Divider, Row } from 'antd'
-import BoostingNFT from 'actions/boostingNFT'
+import UnstakeNFT from 'actions/unStakeNFT'
 import CardHarvest from './cardHarvest'
 import CardRewards from './cardRewards'
 import CardHeader from './cardHeader'
@@ -29,7 +29,7 @@ const FarmInfomations = ({ farmAddress }: { farmAddress: string }) => {
               <Divider style={{ margin: 0 }} />
             </Col>
             <Col span={24}>
-              <BoostingNFT farmAddress={farmAddress} />
+              <UnstakeNFT farmAddress={farmAddress} />
             </Col>
           </Fragment>
         )}

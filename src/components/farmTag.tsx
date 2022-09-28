@@ -45,7 +45,7 @@ const FarmTag = ({
   }
 
   const background = useMemo(() => {
-    let background = 'transpanrent'
+    let background = 'transparent'
     if (tagColor.startsWith('rgb')) background = rbgToHex(tagColor)
     if (tagColor.startsWith('#')) background = hextToRgba(tagColor, opacity)
     return { background }

@@ -15,7 +15,7 @@ const FarmDetailsHeader = () => {
           onClick={() => {
             pushHistory('/farms')
           }}
-          style={{ padding: 0, background: 'trasparent' }}
+          style={{ padding: 0 }}
         >
           Back
         </Button>

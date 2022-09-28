@@ -120,13 +120,27 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
                   title={<PriceTooltip farmAddress={farmAddress} />}
                   arrowPointAtCenter
                 >
-                  <Space size={6}>
-                    <Typography.Title level={4}>
-                      {util.numeric(stakedData.amount).format('0,0.[00]')}
-                    </Typography.Title>
-                    <Typography.Title level={4}>
-                      <MintSymbol mintAddress={inputMint.toBase58()} />
-                    </Typography.Title>
+                  <Space direction="vertical">
+                    <Space size={6}>
+                      <Typography.Title level={4}>
+                        {util.numeric(stakedData.amount).format('0,0.[00]')}
+                      </Typography.Title>
+                      <Typography.Title level={4}>
+                        <MintSymbol mintAddress={inputMint.toBase58()} />
+                      </Typography.Title>
+                    </Space>
+                    <FarmTag
+                      radius={8}
+                      style={{ padding: '1px 8px' }}
+                      bordered={false}
+                      opacity={0.1}
+                      type="primary"
+                    >
+                      {util
+                        .numeric(stakedData.amountStakedNFTs)
+                        .format('0,0.[00]')}{' '}
+                      <MintSymbol mintAddress={inputMint.toBase58()} /> Boosted
+                    </FarmTag>
                   </Space>
                 </Tooltip>
               </SpaceVertical>
