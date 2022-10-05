@@ -39,6 +39,14 @@ export const FARM_GET_TOKENS: Record<string, { [x: string]: FARM_TOKEN }> = {
       recommend: true,
     },
   },
+  G3zNkbv4AUVS3NdvCp9HeYNEF7DBWHKskXXfdUrMARK9: {
+    balansol: {
+      url: 'https://hub.sentre.io/app/balansol/details?pool=CT2QmamF6kBBDVbkg8WkvF5gnq6q8mDranPi21tdGeeL&autoInstall=true',
+      description: 'Deposit on Balansol',
+      icon: 'https://descartesnetwork.github.io/balansol/static/asset/logo.f98afe9edf28d217.png',
+      recommend: true,
+    },
+  },
   // not support number at the first character
   '8zzV8kkfv9amN3UA3g4fKtDzd79td2krc3VMy5CZo275': {
     balansol: {
