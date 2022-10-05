@@ -2,8 +2,6 @@ import { MintSymbol } from '@sen-use/app'
 import { util } from '@sentre/senhub'
 
 import { Card, Space, Row, Col, Typography, Button } from 'antd'
-import { useAccountBalanceByMintAddress } from 'hooks/useAccountBalance'
-import { useMemo } from 'react'
 import NumericInput from './numericInput'
 import SpaceBetween from './spaceBetween'
 
@@ -18,15 +16,8 @@ const CardNumbericInput = ({
   mint = '',
   value,
   onChange,
-  available,
+  available = 0,
 }: CardNumbericInputProps) => {
-  const { balance } = useAccountBalanceByMintAddress(mint)
-
-  const currentAvailable = useMemo(
-    () => available || balance,
-    [available, balance],
-  )
-
   return (
     <Card
       bodyStyle={{ padding: 12 }}
@@ -40,7 +31,7 @@ const CardNumbericInput = ({
               <Space size={6}>
                 <Typography.Text type="secondary">Available:</Typography.Text>
                 <Typography.Text>
-                  {`${util.numeric(currentAvailable).format('0,0.[00]')}`}
+                  {`${util.numeric(available).format('0,0.[00]')}`}
                 </Typography.Text>
                 <MintSymbol mintAddress={mint} />
               </Space>
@@ -56,7 +47,7 @@ const CardNumbericInput = ({
                 size="small"
                 type="text"
                 style={{ color: '#C6F1A9' }}
-                onClick={() => onChange(currentAvailable.toString())}
+                onClick={() => onChange(available.toString())}
               >
                 MAX
               </Button>
@@ -66,7 +57,7 @@ const CardNumbericInput = ({
             <NumericInput
               value={value}
               onChange={onChange}
-              max={currentAvailable.toString()}
+              max={available.toString()}
             />
           </SpaceBetween>
         </Col>

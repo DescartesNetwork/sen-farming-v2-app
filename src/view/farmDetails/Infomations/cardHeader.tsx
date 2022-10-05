@@ -129,21 +129,22 @@ const CardHeader = ({ farmAddress }: { farmAddress: string }) => {
                         <MintSymbol mintAddress={inputMint.toBase58()} />
                       </Typography.Title>
                     </Space>
-                    {!!farmBoostingData.length && (
-                      <FarmTag
-                        radius={8}
-                        style={{ padding: '1px 8px' }}
-                        bordered={false}
-                        opacity={0.1}
-                        type="primary"
-                      >
-                        {util
-                          .numeric(stakedData.amountStakedNFTs)
-                          .format('0,0.[00]')}{' '}
-                        <MintSymbol mintAddress={inputMint.toBase58()} />{' '}
-                        Boosted
-                      </FarmTag>
-                    )}
+                    {!!farmBoostingData.length &&
+                      !!stakedData.amountStakedNFTs && (
+                        <FarmTag
+                          radius={8}
+                          style={{ padding: '1px 8px' }}
+                          bordered={false}
+                          opacity={0.1}
+                          type="primary"
+                        >
+                          {util
+                            .numeric(stakedData.amountStakedNFTs)
+                            .format('0,0.[00]')}{' '}
+                          <MintSymbol mintAddress={inputMint.toBase58()} />{' '}
+                          Boosted
+                        </FarmTag>
+                      )}
                   </Space>
                 </Tooltip>
               </SpaceVertical>

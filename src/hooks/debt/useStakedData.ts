@@ -22,10 +22,11 @@ export const useStakedData = (farmAddress: string) => {
 
   const stakedAmountNFTs = useMemo(() => {
     if (!debtData?.leverage) return new BN(0)
-    return debtData.shares
-      .div(debtData.leverage)
-      .mul(debtData.leverage.sub(PRECISION))
+    if (debtData.leverage.eq(PRECISION)) return new BN(0)
+    return debtData.shares.mul(PRECISION).div(debtData.leverage)
   }, [debtData])
+
+  console.log(stakedAmountNFTs.toString(), 'stakedAmountNFTs')
 
   const farmShareAmount = useMemo(() => {
     if (!farmData) return '0'
@@ -35,9 +36,7 @@ export const useStakedData = (farmAddress: string) => {
   const result = useMemo(() => {
     const amountBN = new BN(stakedAmount)
     const amount = Number(utilsBN.undecimalize(amountBN, decimals || 0))
-    const amountStakedNFTs = Number(
-      utilsBN.undecimalize(stakedAmountNFTs, decimals || 0),
-    )
+    const amountStakedNFTs = Number(utilsBN.undecimalize(stakedAmountNFTs, 9))
     // TODO: get price
     const ratio = Number(stakedAmount) / Number(farmShareAmount)
     return {
