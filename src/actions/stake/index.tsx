@@ -7,6 +7,7 @@ import { Row, Col, Typography, Button, Space, Card, Tooltip } from 'antd'
 import CardNumbericInput from 'components/cardNumbericInput'
 import SpaceBetween from 'components/spaceBetween'
 import { MintSymbol } from '@sen-use/app'
+import IonIcon from '@sentre/antd-ionicon'
 import BoostingNFT from 'actions/boostingNFT'
 
 import { useFarmData } from 'hooks/farm/useFarmData'
@@ -19,7 +20,6 @@ import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 
 import { PRECISION } from 'constant'
 import { FARM_GET_TOKENS } from 'constant/farm'
-import IonIcon from '@sentre/antd-ionicon'
 import { useAccountBalanceByMintAddress } from 'hooks/useAccountBalance'
 
 const Stake = ({ farmAddress }: { farmAddress: string }) => {
@@ -78,15 +78,14 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const totalBoostRate = displayBoosted.add(boostRate)
 
   const boostByNFT = useMemo(() => {
-    if (!Number(yourAmountIn) || !debtData) return new BN(0)
+    if (!Number(yourAmountIn)) return new BN(0)
     return stakedAmount
       .add(utilsBN.decimalize(yourAmountIn, decimals))
       .mul(totalBoostRate)
       .div(PRECISION)
-  }, [debtData, decimals, stakedAmount, totalBoostRate, yourAmountIn])
+  }, [decimals, stakedAmount, totalBoostRate, yourAmountIn])
 
   const totalAmountIn = useMemo(() => {
-    if (!debtData) return '0'
     return utilsBN.undecimalize(
       utilsBN
         .decimalize(yourAmountIn, decimals)
@@ -95,7 +94,7 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
 
       decimals,
     )
-  }, [boostByNFT, debtData, decimals, stakedAmount, yourAmountIn])
+  }, [boostByNFT, decimals, stakedAmount, yourAmountIn])
 
   const disabled = useMemo(
     () => !Number(inAmount) || checkFinishedFarm(farmData),
