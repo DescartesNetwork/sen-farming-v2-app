@@ -1,25 +1,36 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { utilsBN } from '@sen-use/web3'
 
 import { Row, Col, Button } from 'antd'
+import CardNumbericInput from 'components/cardNumbericInput'
+
 import { useUnstake } from 'hooks/actions/useUnstake'
 import { useStakedData } from 'hooks/debt/useStakedData'
-import CardNumbericInput from 'components/cardNumbericInput'
+import { useDebtData } from 'hooks/debt/useDebtData'
+import { PRECISION } from 'constant'
 
 const UnStake = ({ farmAddress }: { farmAddress: string }) => {
   const [outAmount, setOutAmount] = useState<string>('')
   const stakedData = useStakedData(farmAddress)
   const { unstake, loading } = useUnstake(farmAddress)
+  const debtData = useDebtData(farmAddress)
 
   const onUnstake = async () => {
     await unstake({ amount: Number(outAmount) })
     setOutAmount('')
   }
 
+  const available = useMemo(() => {
+    if (!debtData) return 0
+    const total = debtData.shares.mul(PRECISION).div(debtData.leverage)
+    return Number(utilsBN.undecimalize(total, 9))
+  }, [debtData])
+
   return (
     <Row gutter={[16, 16]}>
       <Col span={24}>
         <CardNumbericInput
-          available={stakedData.amount}
+          available={available}
           value={outAmount}
           onChange={setOutAmount}
           mint={stakedData.inputMint}
