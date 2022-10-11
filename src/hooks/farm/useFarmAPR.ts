@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import BN from 'bn.js'
+import { BN } from '@project-serum/anchor'
 
 import { useGetTotalValue } from '@sen-use/app'
 import { useFarmLiquidity } from './useFarmLiquidity'
