@@ -17,7 +17,7 @@ export const AppLoader: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (loaded) return
-    const provider = getAnchorProvider(rpc, address, window.sentre.wallet)
+    const provider = getAnchorProvider(rpc, address, window.sentre.solana)
     const senFarming = new SenFarmingProgram(provider, senFarmingProgram)
     window.senFarming = senFarming
     setLoaded(true)

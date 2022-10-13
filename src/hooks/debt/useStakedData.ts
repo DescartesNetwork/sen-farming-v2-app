@@ -26,8 +26,6 @@ export const useStakedData = (farmAddress: string) => {
     return debtData.shares.mul(PRECISION).div(debtData.leverage)
   }, [debtData])
 
-  console.log(stakedAmountNFTs.toString(), 'stakedAmountNFTs')
-
   const farmShareAmount = useMemo(() => {
     if (!farmData) return '0'
     return farmData.totalShares.toString()

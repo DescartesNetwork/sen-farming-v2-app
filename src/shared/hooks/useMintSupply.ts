@@ -1,5 +1,5 @@
 import { useMintData } from '@sentre/senhub'
-import BN from 'bn.js'
+import { BN } from '@project-serum/anchor'
 
 /**
  * Get token's total supply. This hook needs MintProvider for working.
