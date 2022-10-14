@@ -49,7 +49,7 @@ const FarmInfoItem = ({ title = '', address = '' }: FarmInfoItemProps) => {
         <Typography.Text>{address} </Typography.Text>
       </Col>
       <Col span={2}>
-        <Tooltip title="Copied" visible={copied}>
+        <Tooltip title="Copied" open={copied}>
           <CopyToClipboard text={address}>
             <Button
               style={{
