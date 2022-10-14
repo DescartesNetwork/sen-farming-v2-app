@@ -22,7 +22,7 @@ const ExploreAddress = ({ address }: ExploreAddressProps) => {
         {util.shortenAddress(address)}
       </Typography.Text>
       {/* Copy address */}
-      <Tooltip title="Copied" visible={copied}>
+      <Tooltip title="Copied" open={copied}>
         <CopyToClipboard text={address}>
           <Button
             style={{
