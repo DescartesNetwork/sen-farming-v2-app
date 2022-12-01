@@ -20,7 +20,7 @@ import { useFarmBoosting } from 'hooks/farm/useFarmBoosting'
 import { PRECISION } from 'constant'
 import { FARM_GET_TOKENS } from 'constant/farm'
 import IonIcon from '@sentre/antd-ionicon'
-import { useAccountBalanceByMintAddress } from 'hooks/useAccountBalance'
+import { useWrapAccountBalance } from 'hooks/useWrapAccountBalance'
 
 const Stake = ({ farmAddress }: { farmAddress: string }) => {
   const [inAmount, setInAmount] = useState<string>('')
@@ -37,9 +37,7 @@ const Stake = ({ farmAddress }: { farmAddress: string }) => {
     }) || 0
   const getToken = FARM_GET_TOKENS[farmData.inputMint.toBase58()]
   const farmBoostingData = useFarmBoosting(farmAddress)
-  const { balance } = useAccountBalanceByMintAddress(
-    farmData.inputMint.toBase58(),
-  )
+  const { balance } = useWrapAccountBalance(farmData.inputMint.toBase58())
 
   const onGetToken = () => {
     if (!getToken) return

@@ -11,6 +11,7 @@
     "@sentre/farming": "^2.0.1",
     "@sentre/react-lazyload": "^3.2.2",
     "@sentre/senhub": "^4.1.1",
+    "@solana/spl-token-v3": "npm:@solana/spl-token@0.3.5",
     "antd": "^4.23.1",
     "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.1.0",

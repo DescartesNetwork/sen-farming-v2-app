@@ -1,6 +1,13 @@
-import { BN } from '@project-serum/anchor'
+import { BN, web3 } from '@project-serum/anchor'
 import { DataLoader, util } from '@sentre/senhub'
 import { account } from '@senswap/sen-js'
+import {
+  createAssociatedTokenAccountInstruction,
+  createCloseAccountInstruction,
+  getAssociatedTokenAddress,
+  NATIVE_MINT,
+} from '@solana/spl-token-v3'
+
 import configs from 'configs'
 
 const {
@@ -39,4 +46,34 @@ export const getMetaData = async (mintAddress: string) => {
 
 export const current_timestamp = async () => {
   return new BN(new Date().getTime() / 1000)
+}
+
+export const createATAIx = async (wallet: web3.PublicKey) => {
+  const ATA = await getAssociatedTokenAddress(NATIVE_MINT, wallet)
+
+  return createAssociatedTokenAccountInstruction(
+    wallet,
+    ATA,
+    wallet,
+    NATIVE_MINT,
+  )
+}
+
+export const createWrapSolIx = async (
+  amount: number | bigint,
+  wallet: web3.PublicKey,
+) => {
+  const ATA = await getAssociatedTokenAddress(NATIVE_MINT, wallet)
+
+  return web3.SystemProgram.transfer({
+    fromPubkey: wallet,
+    toPubkey: ATA,
+    lamports: amount,
+  })
+}
+
+export const createUnWrapSolIx = async (wallet: web3.PublicKey) => {
+  const ATA = await getAssociatedTokenAddress(NATIVE_MINT, wallet)
+
+  return createCloseAccountInstruction(ATA, wallet, wallet)
 }
