@@ -6,9 +6,9 @@ import { utilsBN } from '@sen-use/web3'
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useLock } from './useLock'
-
+import { useWrapAndUnwrapSolIfNeed } from 'hooks/useWrapAndUnwrapSolIfNeed'
 import { notifyError } from 'helper'
-import { PRECISION } from 'constant'
+import { PRECISION, SOL_DECIMALS } from 'constant'
 
 type StakeProps = {
   farm: string
@@ -23,6 +23,8 @@ export const useStake = (farmAddress: string) => {
   const decimals = useMintDecimals({
     mintAddress: farmData?.inputMint.toBase58(),
   })
+  const { createWrapSolTxIfNeed } = useWrapAndUnwrapSolIfNeed()
+
   const onLockNFT = useLock(farmAddress)
 
   const stake = useCallback(
@@ -75,6 +77,11 @@ export const useStake = (farmAddress: string) => {
 
         // Deposit + Stake
         const txDepositStake = new web3.Transaction()
+        // Wrapsol if need
+        const wrapSolTx = await createWrapSolTxIfNeed(
+          farmData?.inputMint.toBase58(),
+          utilsBN.undecimalize(amountBN.add(oldAmount), SOL_DECIMALS),
+        )
         const { tx: txDeposit } = await window.senFarming.deposit({
           farm: farmAddress,
           inAmount: amountBN.add(oldAmount),
@@ -84,6 +91,8 @@ export const useStake = (farmAddress: string) => {
           farm: farmAddress,
           sendAndConfirm: false,
         })
+
+        if (wrapSolTx) txDepositStake.add(wrapSolTx)
         txDepositStake.add(txDeposit)
         txDepositStake.add(txStake)
         listTxs.push(txDepositStake)
@@ -104,7 +113,14 @@ export const useStake = (farmAddress: string) => {
         setLoading(false)
       }
     },
-    [debtData, decimals, farmAddress, onLockNFT],
+    [
+      createWrapSolTxIfNeed,
+      debtData,
+      decimals,
+      farmAddress,
+      farmData?.inputMint,
+      onLockNFT,
+    ],
   )
 
   return { stake, loading }

@@ -25,3 +25,5 @@ export enum FarmTab {
 export const DATE_FORMAT = 'MMM DD, YYYY HH:mm'
 
 export const PRECISION = new BN(10 ** 9)
+
+export const SOL_DECIMALS = 9

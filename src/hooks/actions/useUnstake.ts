@@ -6,12 +6,14 @@ import { useMintDecimals } from '@sentre/senhub'
 import { notifyError, notifySuccess } from 'helper'
 import { useFarmData } from 'hooks/farm/useFarmData'
 import { useDebtData } from 'hooks/debt/useDebtData'
+import { useWrapAndUnwrapSolIfNeed } from 'hooks/useWrapAndUnwrapSolIfNeed'
 import { PRECISION } from 'constant'
 
 export const useUnstake = (farmAddress: string) => {
   const [loading, setLoading] = useState(false)
   const farmData = useFarmData(farmAddress)
   const debtData = useDebtData(farmAddress)
+  const { createUnWrapSolTxIfNeed } = useWrapAndUnwrapSolIfNeed()
 
   const decimals = useMintDecimals({
     mintAddress: farmData?.inputMint.toBase58(),
@@ -44,6 +46,12 @@ export const useUnstake = (farmAddress: string) => {
           sendAndConfirm: false,
         })
         transaction.add(txWithdraw)
+
+        // UnWrapsol
+        const wrapSolTx = await createUnWrapSolTxIfNeed(
+          farmData?.inputMint.toBase58(),
+        )
+        if (wrapSolTx) transaction.add(wrapSolTx)
         // Stake all
         const { tx: txStake } = await window.senFarming.stake({
           farm: farmAddress,
@@ -60,7 +68,13 @@ export const useUnstake = (farmAddress: string) => {
         setLoading(false)
       }
     },
-    [debtData, decimals, farmAddress],
+    [
+      createUnWrapSolTxIfNeed,
+      debtData,
+      decimals,
+      farmAddress,
+      farmData?.inputMint,
+    ],
   )
 
   return { unstake, loading }
