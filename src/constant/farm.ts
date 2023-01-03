@@ -56,4 +56,17 @@ export const FARM_GET_TOKENS: Record<string, { [x: string]: FARM_TOKEN }> = {
       recommend: true,
     },
   },
+  FsPncBfeDV3Uv9g6yyx1NnKidvUeCaAiT2NtBAPy17xg: {
+    penguin: {
+      url: 'https://app.png.fi/swap/SOL_XGLI',
+      description: 'Swap on PENGUIN Finance',
+      icon: 'https://app.png.fi/favicon.ico',
+      recommend: true,
+    },
+    balansol: {
+      url: 'https://hub.sentre.io/app/balansol/swap?bid_mint=So11111111111111111111111111111111111111112&ask_mint=FsPncBfeDV3Uv9g6yyx1NnKidvUeCaAiT2NtBAPy17xg&autoInstall=true',
+      description: 'Swap on Balansol',
+      icon: 'https://descartesnetwork.github.io/balansol/static/asset/logo.f98afe9edf28d217.png',
+    },
+  },
 }
