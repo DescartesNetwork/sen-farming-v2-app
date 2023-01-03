@@ -14,6 +14,7 @@ type RecommendToGetTokenProps = {
 const RecommendToGetToken = ({ farmAddress }: RecommendToGetTokenProps) => {
   const farmData = useFarmData(farmAddress)
   const farmToken = FARM_GET_TOKENS[farmData.inputMint.toBase58()]
+
   return (
     <CardTooltip
       tooltip={<ListTokenRecommend farmAddress={farmAddress} />}
