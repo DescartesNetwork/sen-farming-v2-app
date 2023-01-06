@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { utilsBN } from '@sen-use/web3'
+import { useMintDecimals } from '@sentre/senhub'
 
 import { Row, Col, Button } from 'antd'
 import CardNumbericInput from 'components/cardNumbericInput'
@@ -8,7 +9,6 @@ import { useUnstake } from 'hooks/actions/useUnstake'
 import { useStakedData } from 'hooks/debt/useStakedData'
 import { useDebtData } from 'hooks/debt/useDebtData'
 import { PRECISION } from 'constant'
-import { useMintDecimals } from '@sentre/senhub/dist'
 
 const UnStake = ({ farmAddress }: { farmAddress: string }) => {
   const [outAmount, setOutAmount] = useState<string>('')
