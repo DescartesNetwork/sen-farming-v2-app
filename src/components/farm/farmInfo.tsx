@@ -115,7 +115,9 @@ const FarmInfo = ({ farmAddress }: FarmInfoProps) => {
             <SpaceBetween
               floatContent={
                 <Typography.Text>
-                  {moment(farmData.startDate.toNumber()).format(DATE_FORMAT)}
+                  {moment(farmData.startDate.toNumber() * 1000).format(
+                    DATE_FORMAT,
+                  )}
                 </Typography.Text>
               }
             >
@@ -127,7 +129,9 @@ const FarmInfo = ({ farmAddress }: FarmInfoProps) => {
             <SpaceBetween
               floatContent={
                 <Typography.Text>
-                  {moment(farmData.endDate.toNumber()).format(DATE_FORMAT)}
+                  {moment(farmData.endDate.toNumber() * 1000).format(
+                    DATE_FORMAT,
+                  )}
                 </Typography.Text>
               }
             >
